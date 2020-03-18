@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>ItSingular</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+
+<script>
+	$(":input").inputmask();
+	$("#telCorporativo").inputmask({
+		"mask" : "(999) 999-9999"
+	});
+</script>
+
+
+
+
+</head>
+
+<body>
+	<a href="#"><img src="/img/itsingular.jpg"></a>
+	<div th:each="m : ${msg}">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<span th:text="${m}"></span>
+	</div>
+
+	<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
+		<div th:case="'Success'" class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Sucesso!</strong> Requisição criada com sucesso
+		</div>
+		<div th:case="'Failed'" class="alert alert-danger">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Falha!</strong> Houve algum problema na abertura de
+			requisição
+		</div>
+	</div>
+
+	<div class="container my-5">
+		<h3 align="center" style="margin-left: -100px">Requisição de
+			Vagas</h3>
+		<BR /> <BR />
+		<div class="card">
+
+			<div class="card-body">
+				<div class="col-md-10">
+					<form th:action="@{/requisicao/addRequisicao}"
+						th:object="${requisicao}" method="post">
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="nomeSolicitante" class="col-form-label">Solicitante</label>
+								<input type="text" th:field="*{nomeSolicitante}"
+									class="form-control" id="nomeSolicitante"
+									placeholder="Solicitante"><span
+									th:if="${#fields.hasErrors('nomeSolicitante')}"
+									th:errors="*{nomeSolicitante}" class="text-danger"></span>
+
+							</div>
+							<div class="form-group col-md-6">
+								<label for="dataSolicitacao" class="col-form-label">Data
+									Solicitação</label> <input type="date" th:field="*{dataSolicitacao}"
+									class="form-control" id="dataSolicitacao"
+									placeholder="Data Solicitação"><span
+									th:if="${#fields.hasErrors('dataSolicitacao')}"
+									th:errors="*{dataSolicitacao}" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="cliente" class="col-form-label">Cliente</label> <input
+									type="text" th:field="*{cliente}" class="form-control"
+									id="cliente" placeholder="Cliente"> <span
+									th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="ramoAtividade" class="col-form-label">Ramo
+									Atividade</label> <input type="text" th:field="*{ramoAtividade}"
+									class="form-control" id="ramoAtividade"
+									placeholder="Ramo de Atividade"> <span
+									th:if="${#fields.hasErrors('ramoAtividade')}"
+									th:errors="*{ramoAtividade}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="pessoaContato" class="col-form-label">Pessoa
+									Contato</label> <input type="text" th:field="*{pessoaContato}"
+									class="form-control" id="pessoaContato"
+									placeholder="Pessoa Contato"> <span
+									th:if="${#fields.hasErrors('pessoaContato')}"
+									th:errors="*{pessoaContato}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="cargo" class="col-form-label">Cargo</label> <input
+									type="text" th:field="*{cargo}" class="form-control" id="cargo"
+									placeholder="Cargo"> <span
+									th:if="${#fields.hasErrors('cargo')}" th:errors="*{cargo}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="endereco" class="col-form-label">Endereço</label> <input
+									type="text" th:field="*{endereco}" class="form-control"
+									id="endereco" placeholder="Endereço"> <span
+									th:if="${#fields.hasErrors('endereco')}"
+									th:errors="*{endereco}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="regiao" class="col-form-label">Região</label> <input
+									type="text" th:field="*{regiao}" class="form-control"
+									id="ramoAtividade" placeholder="Região"> <span
+									th:if="${#fields.hasErrors('regiao')}" th:errors="*{regiao}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="telCorporativo" class="col-form-label">Telefone
+									Corporativo</label> <input type="text" th:field="*{telCorporativo}"
+									class="form-control" id="telCorporativo"
+									data-inputmask="'mask': '(99)9999-9999'" maxlength="13"
+									placeholder="Telefone Corporativo"> <span
+									th:if="${#fields.hasErrors('telCorporativo')}"
+									th:errors="*{telCorporativo}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="telCelular" class="col-form-label">Telefone
+									Celular</label> <input type="text" th:field="*{telCelular}"
+									class="form-control" id="telCelular" maxlength="14"
+									data-inputmask="'mask': '(99)99999-9999'"
+									placeholder="Telefone Celular"> <span
+									th:if="${#fields.hasErrors('telCelular')}"
+									th:errors="*{telCelular}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="email" class="col-form-label">E-mail</label> <input
+									type="text" th:field="*{email}" class="form-control" id="email"
+									data-inputmask="'alias': 'email'"> <span
+									th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+									class="text-danger"></span>
+							</div>
+						</div>
+						<div>
+							<h3 align="center" style="margin-left: 30px">Dados da Vaga</h3>
+							<BR /> <BR />
+						</div>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label for="perfil" class="col-form-label">Perfil</label> <input
+									type="text" th:field="*{perfil}" class="form-control"
+									id="perfil" placeholder="Perfil"><span
+									th:if="${#fields.hasErrors('perfil')}" th:errors="*{perfil}"
+									class="text-danger"></span>
+
+							</div>
+							<div class="form-group col-md-4">
+								<label for="regiaoAtuacao" class="col-form-label">Região
+									de Atuação</label> <input type="text" th:field="*{regiaoAtuacao}"
+									class="form-control" id="regiaoAtuacao"
+									placeholder="Região de Atuação"><span
+									th:if="${#fields.hasErrors('regiaoAtuacao')}"
+									th:errors="*{regiaoAtuacao}" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="vagas" class="col-form-label">Nº de Vagas</label> <input
+									type="text" th:field="*{vagas}" class="form-control" id="vagas"
+									placeholder="Vagas"> <span
+									th:if="${#fields.hasErrors('vagas')}" th:errors="*{vagas}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="formaContratacao" class="col-form-label">Contratação</label>
+								<select class="form-control" th:field="*{formaContratacao}">
+									<option th:value="'CLT'" th:text="CLT"></option>
+									<option th:value="'PJ'" th:text="PJ"></option>
+									<option th:value="'Flex'" th:text="Flex"></option>
+									<option th:value="'Cooperativa'" th:text="Cooperativa"></option>
+								</select> <span th:if="${#fields.hasErrors('formaContratacao')}"
+									th:errors="*{formaContratacao}" class="text-danger"></span>
+
+							</div>
+							<div class="form-group col-md-3">
+								<label for="valor" class="col-form-label">Valor</label> <input
+									type="text" th:field="*{valor}"
+									data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+									class="form-control" id="previsaoInicio" placeholder="Valor"><span
+									th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"
+									class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-2">
+								<label for="por" class="col-form-label">Por</label> <select
+									class="form-control" th:field="*{por}">
+									<option th:value="'Hora'" th:text="Hora"></option>
+									<option th:value="'Mes'" th:text="Mês"></option>
+									<option th:value="'Projeto'" th:text="Projeto"></option>
+								</select> <span th:if="${#fields.hasErrors('por')}" th:errors="*{por}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="horaAberta" class="col-form-label">Hora
+									Aberta</label> <select class="form-control" th:field="*{horaAberta}">
+									<option th:value="'S'" th:text="Sim"></option>
+									<option th:value="'N'" th:text="Não"></option>
+								</select> <span th:if="${#fields.hasErrors('horaAberta')}"
+									th:errors="*{horaAberta}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="quantidadeMinimaHoras" class="col-form-label">Quantidade
+									Mínima Horas/Mês</label> <input type="number"
+									th:field="*{quantidadeMinimaHoras}" class="form-control"
+									id="quantidadeMinimaHoras"
+									placeholder="Quantidade Mínima Horas/Mês"><span
+									th:if="${#fields.hasErrors('quantidadeMinimaHoras')}"
+									th:errors="*{quantidadeMinimaHoras}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="cargaHoraria" class="col-form-label">Carga
+									Horária</label> <input type="text" th:field="*{cargaHoraria}"
+									class="form-control" id="cargaHoraria"
+									placeholder="Carga Horária"><span
+									th:if="${#fields.hasErrors('cargaHoraria')}"
+									th:errors="*{cargaHoraria}" class="text-danger"></span>
+
+							</div>
+							<div class="form-group col-md-3">
+								<label for="previsaoInicio" class="col-form-label">Previsão
+									de Início</label> <input type="date" th:field="*{previsaoInicio}"
+									class="form-control" id="previsaoInicio"
+									placeholder="Previsão de Início"><span
+									th:if="${#fields.hasErrors('previsaoInicio')}"
+									th:errors="*{previsaoInicio}" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="duracaoContrato" class="col-form-label">Duração
+									Contrato</label> <input type="text" th:field="*{duracaoContrato}"
+									class="form-control" id="duracaoContrato"
+									placeholder="Duração Contrato"> <span
+									th:if="${#fields.hasErrors('duracaoContrato')}"
+									th:errors="*{duracaoContrato}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="renovacao" class="col-form-label">Chances de
+									Renovação?</label> <select class="form-control" th:field="*{renovacao}">
+									<option th:value="'A'" th:text="Alta"></option>
+									<option th:value="'B'" th:text="Baixa"></option>
+									<option th:value="'I'" th:text="Inexistente"></option>
+								</select> <span th:if="${#fields.hasErrors('renovacao')}"
+									th:errors="*{renovacao}" class="text-danger"></span>
+							</div>
+						</div>
+						<div>
+							<h3 align="center" style="margin-left: 30px">Processo
+								Seletivo</h3>
+							<BR /> <BR />
+						</div>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label for="rhProcesso" class="col-form-label">RH</label> <select
+									class="form-control" th:field="*{rhProcesso}"
+									multiple="multiple">
+									<option th:value="'1'" th:text="ENTREVISTA-PRESENCIAL"></option>
+									<option th:value="'2'" th:text="ENTREVISTA-REMOTA"></option>
+									<option th:value="'3'" th:text="CONFERIR-DADOS"></option>
+									<option th:value="'4'" th:text="APLICAÇÃO-TESTES"></option>
+								</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
+									th:errors="*{rhProcesso}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="solicitanteProcesso" class="col-form-label">Solicitante</label>
+								<select class="form-control" th:field="*{solicitanteProcesso}"
+									multiple="multiple">
+									<option th:value="'1'" th:text="ENTREVISTA-PRESENCIAL"></option>
+									<option th:value="'2'" th:text="ENTREVISTA-REMOTA"></option>
+									<option th:value="'3'" th:text="CONFERIR-DADOS"></option>
+									<option th:value="'4'" th:text="APLICAÇÃO-TESTES"></option>
+								</select> <span th:if="${#fields.hasErrors('solicitanteProcesso')}"
+									th:errors="*{solicitanteProcesso}" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="clienteProcesso" class="col-form-label">Cliente</label>
+								<select class="form-control" th:field="*{clienteProcesso}"
+									multiple="multiple">
+									<option th:value="'1'" th:text="ENTREVISTA-PRESENCIAL"></option>
+									<option th:value="'2'" th:text="ENTREVISTA-REMOTA"></option>
+									<option th:value="'3'" th:text="CONFERIR-DADOS"></option>
+									<option th:value="'4'" th:text="APLICAÇÃO-TESTES"></option>
+								</select> <span th:if="${#fields.hasErrors('clienteProcesso')}"
+									th:errors="*{clienteProcesso}" class="text-danger"></span>
+							</div>
+						</div>
+						<div>
+							<h3 align="center" style="margin-left: 30px">Testes</h3>
+							<BR /> <BR />
+						</div>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label for="quaisTestes" class="col-form-label">Quais</label> <select
+									class="form-control" th:field="*{quaisTestes}"
+									multiple="multiple">
+									<option th:value="'1'" th:text="ADT"></option>
+									<option th:value="'2'" th:text="FTP"></option>
+									<option th:value="'3'" th:text="RAC-LÓGICO"></option>
+									<option th:value="'4'" th:text="REDAÇÃO"></option>
+									<option th:value="'5'" th:text="TÉCNICO"></option>
+									<option th:value="'6'" th:text="OUTROS"></option>
+								</select> <span th:if="${#fields.hasErrors('quaisTestes')}"
+									th:errors="*{quaisTestes}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="localAplicacao" class="col-form-label">Local
+									de Aplicação</label> <input type="text" th:field="*{localAplicacao}"
+									class="form-control" id="duracaoContrato"
+									placeholder="Local Aplicação"> <span
+									th:if="${#fields.hasErrors('localAplicacao')}"
+									th:errors="*{localAplicacao}" class="text-danger"></span>
+							</div>
+						</div>
+						<div>
+							<h3 align="center" style="margin-left: 30px">Atividades e Funções dos candidatos</h3>
+							<BR /> <BR />
+						</div>
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="observacao" class="col-form-label">Observação</label> 
+								<input type="textarea" th:field="*{observacao}"
+									class="form-control" id="duracaoContrato"> <span
+									th:if="${#fields.hasErrors('observacao')}"
+									th:errors="*{observacao}" class="text-danger"></span>
+							</div>
+						</div>
+
+						<HR style="color: black" />
+
+						<div class="col-md-6">
+							<input type="submit" class="btn btn-primary"
+								value="Confirmar Requisição">
+						</div>
+
+						<div class="form-group col-md-8"></div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
