@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.model.Requisicao;
+import com.br.itsingular.repository.RequisicaoServices;
 import com.br.itsingular.services.IRequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
@@ -18,7 +19,7 @@ import com.br.itsingular.utils.Utils;
 public class RequisicaoController {
 
 	@Autowired
-	private IRequisicaoServices requisicaoServices;
+	private RequisicaoServices requisicaoServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main(Requisicao requisicao) {
