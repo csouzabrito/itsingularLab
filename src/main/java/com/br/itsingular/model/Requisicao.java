@@ -132,10 +132,15 @@ public class Requisicao implements Serializable {
 	@NotNull(message = "Campo obrigatório")
 	private String localAplicacao;
 
-	public Requisicao() {
-	}
+	@Column(name = "observacao")
+	@NotNull(message = "Campo obrigatório")
+	private String observacao;
+
+	
+	public Requisicao() {}
 
 	/**
+	 * @param id
 	 * @param nomeSolicitante
 	 * @param dataSolicitacao
 	 * @param cliente
@@ -164,8 +169,9 @@ public class Requisicao implements Serializable {
 	 * @param clienteProcesso
 	 * @param quaisTestes
 	 * @param localAplicacao
+	 * @param observacao
 	 */
-	public Requisicao(@NotBlank(message = "Campo obrigatório") String nomeSolicitante,
+	public Requisicao(long id, @NotBlank(message = "Campo obrigatório") String nomeSolicitante,
 			@NotBlank(message = "Campo obrigatório") String dataSolicitacao,
 			@NotBlank(message = "Campo obrigatório") String cliente,
 			@NotBlank(message = "Campo obrigatório") String ramoAtividade,
@@ -188,8 +194,10 @@ public class Requisicao implements Serializable {
 			@NotNull(message = "Campo obrigatório") Integer[] solicitanteProcesso,
 			@NotNull(message = "Campo obrigatório") Integer[] clienteProcesso,
 			@NotNull(message = "Campo obrigatório") Integer[] quaisTestes,
-			@NotNull(message = "Campo obrigatório") String localAplicacao) {
+			@NotNull(message = "Campo obrigatório") String localAplicacao,
+			@NotNull(message = "Campo obrigatório") String observacao) {
 		super();
+		this.id = id;
 		this.nomeSolicitante = nomeSolicitante;
 		this.dataSolicitacao = dataSolicitacao;
 		this.cliente = cliente;
@@ -218,11 +226,9 @@ public class Requisicao implements Serializable {
 		this.clienteProcesso = clienteProcesso;
 		this.quaisTestes = quaisTestes;
 		this.localAplicacao = localAplicacao;
+		this.observacao = observacao;
 	}
 
-
-
-	
 	/**
 	 * @return the id
 	 */
@@ -238,12 +244,14 @@ public class Requisicao implements Serializable {
 		this.id = id;
 	}
 
+
 	/**
 	 * @return the nomeSolicitante
 	 */
 	public String getNomeSolicitante() {
 		return nomeSolicitante;
 	}
+
 
 	/**
 	 * @param nomeSolicitante the nomeSolicitante to set
@@ -252,12 +260,14 @@ public class Requisicao implements Serializable {
 		this.nomeSolicitante = nomeSolicitante;
 	}
 
+
 	/**
 	 * @return the dataSolicitacao
 	 */
 	public String getDataSolicitacao() {
 		return dataSolicitacao;
 	}
+
 
 	/**
 	 * @param dataSolicitacao the dataSolicitacao to set
@@ -266,12 +276,14 @@ public class Requisicao implements Serializable {
 		this.dataSolicitacao = dataSolicitacao;
 	}
 
+
 	/**
 	 * @return the cliente
 	 */
 	public String getCliente() {
 		return cliente;
 	}
+
 
 	/**
 	 * @param cliente the cliente to set
@@ -280,12 +292,14 @@ public class Requisicao implements Serializable {
 		this.cliente = cliente;
 	}
 
+
 	/**
 	 * @return the ramoAtividade
 	 */
 	public String getRamoAtividade() {
 		return ramoAtividade;
 	}
+
 
 	/**
 	 * @param ramoAtividade the ramoAtividade to set
@@ -294,12 +308,14 @@ public class Requisicao implements Serializable {
 		this.ramoAtividade = ramoAtividade;
 	}
 
+
 	/**
 	 * @return the endereco
 	 */
 	public String getEndereco() {
 		return endereco;
 	}
+
 
 	/**
 	 * @param endereco the endereco to set
@@ -308,12 +324,14 @@ public class Requisicao implements Serializable {
 		this.endereco = endereco;
 	}
 
+
 	/**
 	 * @return the regiao
 	 */
 	public String getRegiao() {
 		return regiao;
 	}
+
 
 	/**
 	 * @param regiao the regiao to set
@@ -322,12 +340,14 @@ public class Requisicao implements Serializable {
 		this.regiao = regiao;
 	}
 
+
 	/**
 	 * @return the pessoaContato
 	 */
 	public String getPessoaContato() {
 		return pessoaContato;
 	}
+
 
 	/**
 	 * @param pessoaContato the pessoaContato to set
@@ -336,12 +356,14 @@ public class Requisicao implements Serializable {
 		this.pessoaContato = pessoaContato;
 	}
 
+
 	/**
 	 * @return the cargo
 	 */
 	public String getCargo() {
 		return cargo;
 	}
+
 
 	/**
 	 * @param cargo the cargo to set
@@ -350,12 +372,14 @@ public class Requisicao implements Serializable {
 		this.cargo = cargo;
 	}
 
+
 	/**
 	 * @return the telCorporativo
 	 */
 	public String getTelCorporativo() {
 		return telCorporativo;
 	}
+
 
 	/**
 	 * @param telCorporativo the telCorporativo to set
@@ -364,12 +388,14 @@ public class Requisicao implements Serializable {
 		this.telCorporativo = telCorporativo;
 	}
 
+
 	/**
 	 * @return the telCelular
 	 */
 	public String getTelCelular() {
 		return telCelular;
 	}
+
 
 	/**
 	 * @param telCelular the telCelular to set
@@ -378,12 +404,14 @@ public class Requisicao implements Serializable {
 		this.telCelular = telCelular;
 	}
 
+
 	/**
 	 * @return the email
 	 */
 	public String getEmail() {
 		return email;
 	}
+
 
 	/**
 	 * @param email the email to set
@@ -392,13 +420,6 @@ public class Requisicao implements Serializable {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "Requisicao [id=" + id + ", nomeSolicitante=" + nomeSolicitante + ", dataSolicitacao=" + dataSolicitacao
-				+ ", cliente=" + cliente + ", ramoAtividade=" + ramoAtividade + ", endereco=" + endereco + ", regiao="
-				+ regiao + ", pessoaContato=" + pessoaContato + ", cargo=" + cargo + ", telCorporativo="
-				+ telCorporativo + ", telCelular=" + telCelular + ", email=" + email + "]";
-	}
 
 	/**
 	 * @return the perfil
@@ -407,12 +428,14 @@ public class Requisicao implements Serializable {
 		return perfil;
 	}
 
+
 	/**
 	 * @param perfil the perfil to set
 	 */
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
+
 
 	/**
 	 * @return the regiaoAtuacao
@@ -421,12 +444,14 @@ public class Requisicao implements Serializable {
 		return regiaoAtuacao;
 	}
 
+
 	/**
 	 * @param regiaoAtuacao the regiaoAtuacao to set
 	 */
 	public void setRegiaoAtuacao(String regiaoAtuacao) {
 		this.regiaoAtuacao = regiaoAtuacao;
 	}
+
 
 	/**
 	 * @return the vagas
@@ -435,12 +460,14 @@ public class Requisicao implements Serializable {
 		return vagas;
 	}
 
+
 	/**
 	 * @param vagas the vagas to set
 	 */
 	public void setVagas(String vagas) {
 		this.vagas = vagas;
 	}
+
 
 	/**
 	 * @return the cargaHoraria
@@ -449,12 +476,14 @@ public class Requisicao implements Serializable {
 		return cargaHoraria;
 	}
 
+
 	/**
 	 * @param cargaHoraria the cargaHoraria to set
 	 */
 	public void setCargaHoraria(String cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
+
 
 	/**
 	 * @return the previsaoInicio
@@ -463,12 +492,14 @@ public class Requisicao implements Serializable {
 		return previsaoInicio;
 	}
 
+
 	/**
 	 * @param previsaoInicio the previsaoInicio to set
 	 */
 	public void setPrevisaoInicio(String previsaoInicio) {
 		this.previsaoInicio = previsaoInicio;
 	}
+
 
 	/**
 	 * @return the duracaoContrato
@@ -477,12 +508,14 @@ public class Requisicao implements Serializable {
 		return duracaoContrato;
 	}
 
+
 	/**
 	 * @param duracaoContrato the duracaoContrato to set
 	 */
 	public void setDuracaoContrato(String duracaoContrato) {
 		this.duracaoContrato = duracaoContrato;
 	}
+
 
 	/**
 	 * @return the renovacao
@@ -491,12 +524,14 @@ public class Requisicao implements Serializable {
 		return renovacao;
 	}
 
+
 	/**
 	 * @param renovacao the renovacao to set
 	 */
 	public void setRenovacao(String renovacao) {
 		this.renovacao = renovacao;
 	}
+
 
 	/**
 	 * @return the formaContratacao
@@ -505,12 +540,14 @@ public class Requisicao implements Serializable {
 		return formaContratacao;
 	}
 
+
 	/**
 	 * @param formaContratacao the formaContratacao to set
 	 */
 	public void setFormaContratacao(String formaContratacao) {
 		this.formaContratacao = formaContratacao;
 	}
+
 
 	/**
 	 * @return the valor
@@ -519,12 +556,14 @@ public class Requisicao implements Serializable {
 		return valor;
 	}
 
+
 	/**
 	 * @param valor the valor to set
 	 */
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+
 
 	/**
 	 * @return the por
@@ -533,12 +572,14 @@ public class Requisicao implements Serializable {
 		return por;
 	}
 
+
 	/**
 	 * @param por the por to set
 	 */
 	public void setPor(String por) {
 		this.por = por;
 	}
+
 
 	/**
 	 * @return the horaAberta
@@ -547,6 +588,7 @@ public class Requisicao implements Serializable {
 		return horaAberta;
 	}
 
+
 	/**
 	 * @param horaAberta the horaAberta to set
 	 */
@@ -554,12 +596,14 @@ public class Requisicao implements Serializable {
 		this.horaAberta = horaAberta;
 	}
 
+
 	/**
 	 * @return the quantidadeMinimaHoras
 	 */
 	public Integer getQuantidadeMinimaHoras() {
 		return quantidadeMinimaHoras;
 	}
+
 
 	/**
 	 * @param quantidadeMinimaHoras the quantidadeMinimaHoras to set
@@ -617,14 +661,12 @@ public class Requisicao implements Serializable {
 	}
 
 
-
 	/**
 	 * @return the quaisTestes
 	 */
 	public Integer[] getQuaisTestes() {
 		return quaisTestes;
 	}
-
 
 
 	/**
@@ -635,14 +677,12 @@ public class Requisicao implements Serializable {
 	}
 
 
-
 	/**
 	 * @return the localAplicacao
 	 */
 	public String getLocalAplicacao() {
 		return localAplicacao;
 	}
-
 
 
 	/**
@@ -653,5 +693,18 @@ public class Requisicao implements Serializable {
 	}
 
 
+	/**
+	 * @return the observacao
+	 */
+	public String getObservacao() {
+		return observacao;
+	}
 
+
+	/**
+	 * @param observacao the observacao to set
+	 */
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
 }
