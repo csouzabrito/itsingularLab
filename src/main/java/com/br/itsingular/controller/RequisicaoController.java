@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.model.Requisicao;
 import com.br.itsingular.repository.RequisicaoServices;
-import com.br.itsingular.services.IRequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
 @Controller
@@ -32,12 +31,12 @@ public class RequisicaoController {
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
 	public ModelAndView add(@Valid Requisicao requisicao, BindingResult result) {
-
+		
 		if (result.hasErrors()) {
 			return main(null);
 		}
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
-		if (!Utils.isEmptyOrNull(requisicaoServices.save(requisicao))) {
+		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("requisicao", new Requisicao());
 			return modelAndView;

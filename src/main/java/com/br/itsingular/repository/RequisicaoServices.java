@@ -22,6 +22,17 @@ public class RequisicaoServices {
 	@Autowired
 	private IRequisicaoServices services;
 	
+	public Requisicao salvarRequisicao(Requisicao requisicao ) {
+		try {
+			
+			return this.services.save(requisicao);
+			
+		} catch (RuntimeException e) {
+			throw e;
+		}
+	}
+	
+	@Deprecated
 	public Requisicao save(Requisicao requisicao ) {
 		try {
 			if(!Utils.isEmptyOrNull((Entity) requisicao)) {

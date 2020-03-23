@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -102,6 +102,8 @@ public class Requisicao implements Serializable {
 	
 	@NotNull(message = "Campo obrigatório")
 	private String localAplicacao;
+	
+	private String observacao;
 
 	public Requisicao() {
 	}
@@ -621,6 +623,14 @@ public class Requisicao implements Serializable {
 	 */
 	public void setLocalAplicacao(String localAplicacao) {
 		this.localAplicacao = localAplicacao;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 

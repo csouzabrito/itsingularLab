@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>ItSingular</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST" th:action="@{/comercial/salvar}" th:object="${pessoa}">
+	  
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">ITSingular</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/titulos/novo}">Cadastrar Pessoa</a></li>
+					<li><a th:href="@{/titulos/}">Pesquisar Fatura</a></li>
+					<li><a th:href="@{/grafico-mensal/grafico}">Gráfico Mensal de Faturas</a></li>
+				</ul>
+			</div>
+		</nav>
+
+
+		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<div class="panel-heading">
+    		  		<div class="clearfix">
+			    		<h1 class="panel-title tgo-titulo-panel">Registrar Comercial</h1>
+    	     		</div>	
+    			</div>
+  			</div>
+	  
+	  <div class="panel-body">
+	  
+	  		<!-- <input type="hidden" th:field="*{codigo}"/>
+	   -->
+				<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					<label for="descricao" class="col-sm-2 control-label">Nome</label>
+					<div class="col-sm-4"> 
+						<input type="text" class="form-control" id="nome" th:field="*{nome}"/>
+					</div>
+				</div>
+				<div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+					<label for="valor" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-2">   
+						<input type="text" class="form-control js-currency" data-inputmask="'alias': 'email'" id="valor" th:field="*{email}"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Registrar</button>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</form>
+</section>	
+</html>
