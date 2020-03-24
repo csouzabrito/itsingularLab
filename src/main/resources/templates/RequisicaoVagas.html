@@ -280,18 +280,18 @@
 						<div class="row">
 							<div class="form-group col-md-4">
 								<label for="rhProcesso" class="col-form-label">RH</label> <select
-									class="form-control" th:field="*{rhProcesso}" 
+									class="form-control" th:field="*{rhProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}" 
+										th:value="${tipoProcessoSeletivo}"
 										th:text="${descricaoProcessoSeletivo}"></option>
 								</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
 									th:errors="*{rhProcesso}" class="text-danger"></span>
 							</div>
 							<div class="form-group col-md-4">
 								<label for="solicitanteProcesso" class="col-form-label">Solicitante</label>
-								<select class="form-control" th:field="*{solicitanteProcesso}" 
+								<select class="form-control" th:field="*{solicitanteProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
@@ -303,7 +303,7 @@
 
 							<div class="form-group col-md-4">
 								<label for="clienteProcesso" class="col-form-label">Cliente</label>
-								<select class="form-control" th:field="*{clienteProcesso}" 
+								<select class="form-control" th:field="*{clienteProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
@@ -353,12 +353,49 @@
 						</div>
 						<HR style="color: black" />
 						<div>
-							<h3 align="center" style="margin-left: 30px">Atividades e
-								Funções dos candidatos</h3>
+							<h3 align="center" style="margin-left: 30px">Requisitos</h3>
 							<BR />
 						</div>
-						<div class="row"></div>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label for="requisitoObrigatorio" class="col-form-label">Obrigatório?</label>
+								<select class="form-control"
+									th:field="*{requisitoObrigatorio}">
+									<option
+										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
+										th:value="${tipoProcessoSeletivo}"
+										th:text="${descricaoProcessoSeletivo}"></option>
+								</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
+									th:errors="*{rhProcesso}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="requisitoConhecimento" class="col-form-label">Conhecimento
+									em</label> <select class="form-control"
+									th:field="*{requisitoConhecimento}" >
+									<option
+										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
+										th:value="${tipoProcessoSeletivo}"
+										th:text="${descricaoProcessoSeletivo}"></option>
+								</select> <span th:if="${#fields.hasErrors('solicitanteProcesso')}"
+									th:errors="*{solicitanteProcesso}" class="text-danger"></span>
+							</div>
 
+							<div class="form-group col-md-4">
+								<label for="requisitoTempo" class="col-form-label">Tempo
+									Experiência</label> <select class="form-control"
+									th:field="*{requisitoTempo}">
+									<option
+										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
+										th:value="${tipoProcessoSeletivo}"
+										th:text="${descricaoProcessoSeletivo}"></option>
+								</select> <span th:if="${#fields.hasErrors('clienteProcesso')}"
+									th:errors="*{clienteProcesso}" class="text-danger"></span>
+							</div>
+
+							<div class="col-md-12" style="text-align: right">
+								<a href=""></a> type="submit" class="btn btn-primary" value="Add"  >
+							</div>
+						</div>
 						<HR style="color: black" />
 
 						<div class="form-group col-md-12" style="text-align: center">
