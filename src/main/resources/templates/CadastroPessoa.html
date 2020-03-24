@@ -34,7 +34,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></scri
 
 <script type="text/javascript">
     $("#telefone").mask("(00) 0000-0000");
@@ -64,7 +64,14 @@
 	<div class="container my-5">
 		<h3 align="center" style="margin-left: -100px">Cadastro Comercial</h3>
 		<BR /> <BR />
-
+	
+	
+	<nav class="navbar navbar-default">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/requisicao/abrir}">Requisição de vagas</a></li>
+				</ul>
+			</nav>
+	
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-heading">
@@ -74,10 +81,8 @@
 				</div>
 			</div>
 
-
 			<div class="panel-body">
-				<form th:action="@{/comercial/salvar}" th:object="${pessoa}"
-					method="POST">
+				<form th:action="@{/comercial/salvar}" th:object="${pessoa}" method="POST">
 
 					<div class="row">
 						<div class="form-group col-md-3">
