@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.model.Requisicao;
-import com.br.itsingular.repository.RequisicaoServices;
+import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
 @Controller

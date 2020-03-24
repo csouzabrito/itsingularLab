@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.br.itsingular.repository;
+package com.br.itsingular.services;
 
 import javax.persistence.Entity;
 
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.model.Requisicao;
-import com.br.itsingular.services.IRequisicaoServices;
+import com.br.itsingular.repository.IRequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
 /**
