@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.br.itsingular.controller.repository;
+package com.br.itsingular.repository;
 
 import javax.persistence.Entity;
 
