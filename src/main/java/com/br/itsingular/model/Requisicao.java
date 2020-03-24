@@ -148,7 +148,7 @@ public class Requisicao implements Serializable {
 	@Column(name = "requisitoTempo")
 	@NotNull(message = "Campo obrigatório")
 	private Integer requisitoTempo;
-	
+
 		
 	public Requisicao() {}
 
