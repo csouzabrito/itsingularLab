@@ -149,9 +149,9 @@ public class Requisicao implements Serializable {
 	@NotNull(message = "Campo obrigatório")
 	private Integer requisitoTempo;
 	
-	
-	
+		
 	public Requisicao() {}
+
 
 	/**
 	 * @param id
@@ -252,12 +252,11 @@ public class Requisicao implements Serializable {
 		this.requisitoTempo = requisitoTempo;
 	}
 
-
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNomeSolicitante() {
@@ -428,6 +427,7 @@ public class Requisicao implements Serializable {
 	public void setLocalAplicacao(String localAplicacao) {
 		this.localAplicacao = localAplicacao;
 	}
+
 	public String getObservacao() {
 		return observacao;
 	}
