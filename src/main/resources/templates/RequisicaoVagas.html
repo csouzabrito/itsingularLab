@@ -65,11 +65,17 @@
 			Vagas</h3>
 		<BR />
 		<div class="card">
-
 			<div class="card-body">
 				<div class="col-md-10">
 					<form th:action="@{/requisicao/addRequisicao}"
 						th:object="${requisicao}" method="post">
+
+						<nav class="navbar navbar-default">
+							<ul class="nav navbar-nav">
+								<li><a th:href="@{/comercial/cadastro}">Cadastrar Comercial</a></li>
+							</ul>
+						</nav>
+
 						<div class="row">
 							<div class="form-group col-md-6">
 								<label for="nomeSolicitante" class="col-form-label">Solicitante</label>
