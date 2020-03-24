@@ -2,7 +2,7 @@ package com.br.itsingular.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import com.br.itsingular.services.PessoaService;
 public class ComercialController {
 	
 	@Autowired
-	private PessoaService pesssoaService;
+	private PessoaService pesssoaService;	
 	
 	
 	@RequestMapping("/cadastro")
@@ -29,18 +29,19 @@ public class ComercialController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Validated Pessoa pessoa, Errors errors, RedirectAttributes attributes ){
-		if(errors.hasErrors()){
-			return "CadastroPessoa";
+	public ModelAndView salvar(@Validated Pessoa pessoa, BindingResult result, RedirectAttributes attributes  ){
+		if(result.hasErrors()){
+			return new ModelAndView("CadastroPessoa") ;
 		}
 		
 		try{
+			ModelAndView modelAndView = new ModelAndView("CadastroPessoa");
 			this.pesssoaService.salvar(pessoa);
-			attributes.addFlashAttribute("mensagem", "Pessoa cadastrada com Sucesso");
-			return "redirect:/comercial/cadastro";
+			modelAndView.addObject("message","Success");
+			modelAndView.addObject("pessoa", new Pessoa());
+			return modelAndView;
 		}catch(IllegalArgumentException e){
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return "CadastroPessoa";
+			throw new RuntimeException("Erro ao registrar o comercial");
 		}
 	}
 	
