@@ -135,9 +135,9 @@ public class Requisicao implements Serializable {
 	@Column(name = "observacao")
 	@NotNull(message = "Campo obrigatório")
 	private String observacao;
-
 	
 	public Requisicao() {}
+
 
 	/**
 	 * @param id
@@ -232,7 +232,7 @@ public class Requisicao implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -240,7 +240,7 @@ public class Requisicao implements Serializable {
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -691,7 +691,6 @@ public class Requisicao implements Serializable {
 	public void setLocalAplicacao(String localAplicacao) {
 		this.localAplicacao = localAplicacao;
 	}
-
 
 	/**
 	 * @return the observacao

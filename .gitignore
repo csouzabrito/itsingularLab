@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 target/
 build/
 out/
 dist/
 **/logs
+=======
+/c:
+/target
+.factorypath
+>>>>>>> feature/cadastro-comercial

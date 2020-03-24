@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.model.Requisicao;
-import com.br.itsingular.services.IRequisicaoServices;
+import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
 @Controller
@@ -18,7 +18,7 @@ import com.br.itsingular.utils.Utils;
 public class RequisicaoController {
 
 	@Autowired
-	private IRequisicaoServices requisicaoServices;
+	private RequisicaoServices requisicaoServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main(Requisicao requisicao) {
@@ -31,12 +31,12 @@ public class RequisicaoController {
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
 	public ModelAndView add(@Valid Requisicao requisicao, BindingResult result) {
-
+		
 		if (result.hasErrors()) {
 			return main(null);
 		}
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
-		if (!Utils.isEmptyOrNull(requisicaoServices.save(requisicao))) {
+		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("requisicao", new Requisicao());
 			return modelAndView;
