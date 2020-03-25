@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+
+<title>ItSingular</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+
+<script>
+	$(":input").inputmask();
+	$("#telCorporativo").inputmask({
+		"mask" : "(999) 999-9999"
+	});
+</script>
+</head>
+
+<section>
+
+	<a href="#"><img src="/img/itsingular.jpg"></a>
+	<h3 align="center" style="margin-left: -100px">Informações Comercial</h3>
+	<BR />
+	<div class="panel-body">
+
+			<div class="table-responsive">
+			<input type="hidden" th:field="*{email}" />
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">Data Solicitação</th>
+							<th class="text-center">Cliente</th>
+							<th class="text-center col-md-2">Cargo</th>
+							<th class="text-center">Ramo Atividade</th>
+							<th class="text-center">Email</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="requisicao: ${requisicoes}">
+							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}">1</td>
+							<td class="text-center" th:text="${{requisicao.cliente}}"></td>
+							<td class="text-center" th:text="${{requisicao.cargo}}"></td>
+							<td class="text-center" th:text="${{requisicao.ramoAtividade}}|"></td>
+							<td class="text-center" th:text="${{email}}|"></td>
+						</tr>
+
+						<tr>
+							<td class="text-center col-md-2" colspan="6"
+								th:if="${#lists.isEmpty(requisicoes)}">Requisição não encontrada</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</div>
+</section>
+</html>
