@@ -44,6 +44,4 @@ public class ComercialController {
 			throw new RuntimeException("Erro ao registrar o comercial");
 		}
 	}
-	
-	
 }

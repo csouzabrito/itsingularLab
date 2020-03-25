@@ -3,149 +3,112 @@ package com.br.itsingular.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "SOLICITA_REQUISICAO")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "SOLICITA_REQUISICAO")
 public class Requisicao implements Serializable {
 
 	private static final long serialVersionUID = 5409745091354579153L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private String id;
 
-
-	@Column(name = "nomeSolicitante")
+	
 	@NotBlank(message = "Campo obrigatório")
 	private String nomeSolicitante;
 
-	@Column(name="dataSolicitacao")
 	@NotBlank(message = "Campo obrigatório")
 	private String dataSolicitacao;
 
-	@Column(name = "cliente")
 	@NotBlank(message = "Campo obrigatório")
 	private String cliente;
 
-	@Column(name = "ramoAtividade")
 	@NotBlank(message = "Campo obrigatório")
 	private String ramoAtividade;
 
-	@Column(name = "endereco")
 	@NotBlank(message = "Campo obrigatório")
 	private String endereco;
 
-	@Column(name = "regiao")
 	@NotBlank(message = "Campo obrigatório")
 	private String regiao;
 
-	@Column(name = "pessoaContato")
 	@NotBlank(message = "Campo obrigatório")
 	private String pessoaContato;
 
-	@Column(name = "cargo")
 	@NotBlank(message = "Campo obrigatório")
 	private String cargo;
 
-	@Column(name = "telCorporativo")
 	private String telCorporativo;
 
-	@Column(name = "telCelular")
 	@NotBlank(message = "Campo obrigatório")
 	private String telCelular;
 
-	@Column(name = "email")
 	@NotBlank(message = "Campo obrigatório")
 	@Email
 	private String email;
 
-	@Column(name = "perfil")
 	@NotBlank(message = "Campo obrigatório")
 	private String perfil;
 
-	@Column(name = "regiaoAtuacao")
 	@NotBlank(message = "Campo obrigatório")
 	private String regiaoAtuacao;
 
-	@Column(name = "vagas")
 	@NotBlank(message = "Campo obrigatório")
 	private String vagas;
 
-	@Column(name = "cargaHoraria")
 	@NotBlank(message = "Campo obrigatório")
 	private String cargaHoraria;
 
-	@Column(name = "previsaoInicio")
 	@NotBlank(message = "Campo obrigatório")
 	private String previsaoInicio;
 
-	@Column(name = "duracaoContrato")
 	@NotBlank(message = "Campo obrigatório")
 	private String duracaoContrato;
 
-	@Column(name = "renovacao")
 	private String renovacao;
 
-	@Column(name = "formaContratacao")
 	private String formaContratacao;
 
-	@Column(name = "valor")
 	@NotBlank(message = "Campo obrigatório")
 	private String valor;
 
-	@Column(name = "por")
 	private String por;
 
-	@Column(name = "horaAberta")
 	@NotBlank(message = "Campo obrigatórioo")
 	private String horaAberta;
 
-	@Column(name = "quantidadeMinimaHoras")
 	@NotNull(message = "Campo obrigatório")
 	private Integer quantidadeMinimaHoras;
 	
-	@Column(name = "rhProcesso")
 	@NotNull(message = "Campo obrigatório")
 	private Integer[] rhProcesso;
 	
-	@Column(name = "solicitanteProcesso")
 	@NotNull(message = "Campo obrigatório")
 	private Integer[] solicitanteProcesso;
 	
-	@Column(name = "clienteProcesso")
 	@NotNull(message = "Campo obrigatório")
 	private Integer[] clienteProcesso;
 	
-	@Column(name = "quaisTestes")
 	@NotNull(message = "Campo obrigatório")
 	private Integer[] quaisTestes;
 	
-	@Column(name = "localAplicacao")
 	@NotNull(message = "Campo obrigatório")
 	private String localAplicacao;
 
-	@Column(name = "observacao")
 	@NotNull(message = "Campo obrigatório")
 	private String observacao;
 
-	@Column(name = "requisitoObrigatorio")
 	@NotNull(message = "Campo obrigatório")
 	private Integer requisitoObrigatorio;
 	
-	@Column(name = "requisitoConhecimento")
 	@NotNull(message = "Campo obrigatório")
 	private Integer requisitoConhecimento;
 
-	@Column(name = "requisitoTempo")
 	@NotNull(message = "Campo obrigatório")
 	private Integer requisitoTempo;
 
@@ -188,7 +151,7 @@ public class Requisicao implements Serializable {
 	 * @param requisitoConhecimento
 	 * @param requisitoTempo
 	 */
-	public Requisicao(long id, @NotBlank(message = "Campo obrigatório") String nomeSolicitante,
+	public Requisicao(String id, @NotBlank(message = "Campo obrigatório") String nomeSolicitante,
 			@NotBlank(message = "Campo obrigatório") String dataSolicitacao,
 			@NotBlank(message = "Campo obrigatório") String cliente,
 			@NotBlank(message = "Campo obrigatório") String ramoAtividade,
@@ -252,11 +215,18 @@ public class Requisicao implements Serializable {
 		this.requisitoTempo = requisitoTempo;
 	}
 
-	public Long getId() {
+	/**
+	 * @return the id
+	 */
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNomeSolicitante() {
