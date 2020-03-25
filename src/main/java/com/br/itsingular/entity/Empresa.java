@@ -1,4 +1,4 @@
-package com.br.itsingular.model;
+package com.br.itsingular.entity;
 
 import java.io.Serializable;
 
