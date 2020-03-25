@@ -1,11 +1,9 @@
 package com.br.itsingular.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,15 +12,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "PESSOA")
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "PESSOA")
 public class Pessoa {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String telefone;
