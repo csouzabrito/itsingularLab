@@ -17,7 +17,7 @@ public enum TipoContratacao {
 	
 	private String tipoContratacao;
 		
-	TipoContratacao(String tipoContratacao) {
+	private TipoContratacao(String tipoContratacao) {
 		this.tipoContratacao = tipoContratacao;
 	}
 	public String getTipoContratacao() {
