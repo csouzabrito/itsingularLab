@@ -89,7 +89,7 @@ public class Empresa implements Serializable {
 	* @param telCorporativo
 	* @param telCelular
 	* @param emailContato
-	* @param emailFinanceiro
+	* @param emailFinanceiro - teste
 	 */
 	public Empresa(long id, @NotBlank(message = "Campo obrigatório") String razaoSocial,
 			@NotBlank(message = "Campo obrigatório") String cnpj,
