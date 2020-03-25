@@ -3,6 +3,7 @@ package com.br.itsingular.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,6 +28,7 @@ public class Pessoa {
 	private String telefone;
 	
 	@NotBlank(message = "Campo obrigatório")
+	@Email
 	private String email;
 	
 	@NotBlank(message = "Campo obrigatório")
