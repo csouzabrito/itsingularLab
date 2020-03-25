@@ -13,4 +13,4 @@ import com.br.itsingular.entity.Requisicao;
  *
  */
 @Repository
-public interface RequisicaoRepository extends MongoRepository<Requisicao, Long> {}
+public interface RequisicaoRepository extends MongoRepository<Requisicao, String> {}
