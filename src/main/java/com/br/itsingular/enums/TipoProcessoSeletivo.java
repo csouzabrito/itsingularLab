@@ -9,28 +9,22 @@ package com.br.itsingular.enums;
  */
 public enum TipoProcessoSeletivo {
 
-	ENTREVISTA_PRESENCIAL(1,"ENTREVISTA-PRESENCIAL"),
-	ENTREVISTA_REMOTA(2,"ENTREVISTA-REMOTA"),
-	CONFERIR_DADOS(3,"CONFERIR-DADOS"),
-	APLICACAO_TESTES(4,"APLICAÇÃO-TESTES");
+	ENTREVISTA_PRESENCIAL("1"),
+	ENTREVISTA_REMOTA("2"),
+	CONFERIR_DADOS("3"),
+	APLICACAO_TESTES("4");
 	
-	private Integer tipoProcessoSeletivo;
-	private String descricaoProcessoSeletivo;
+	private String tipoProcessoSeletivo;
 	
-	TipoProcessoSeletivo(Integer tipoProcessoSeletivo, String descricaoProcessoSeletivo){
+	private TipoProcessoSeletivo(String tipoProcessoSeletivo){
 		this.tipoProcessoSeletivo = tipoProcessoSeletivo;
-		this.descricaoProcessoSeletivo = descricaoProcessoSeletivo;
+	
 	}
-	public Integer getTipoProcessoSeletivo() {
+	public String getTipoProcessoSeletivo() {
 		return tipoProcessoSeletivo;
 	}
-	public void setTipoProcessoSeletivo(Integer tipoProcessoSeletivo) {
+	public void setTipoProcessoSeletivo(String tipoProcessoSeletivo) {
 		this.tipoProcessoSeletivo = tipoProcessoSeletivo;
 	}
-	public String getDescricaoProcessoSeletivo() {
-		return descricaoProcessoSeletivo;
-	}
-	public void setDescricaoProcessoSeletivo(String descricaoProcessoSeletivo) {
-		this.descricaoProcessoSeletivo = descricaoProcessoSeletivo;
-	}
+	
 }

@@ -15,7 +15,7 @@ public enum TipoProjeto {
 		
 	private String tipoProjeto;
 
-	TipoProjeto(String tipoProjeto){
+	private TipoProjeto(String tipoProjeto){
 		this.tipoProjeto = tipoProjeto;
 	}
 	public String getTipoProjeto() {

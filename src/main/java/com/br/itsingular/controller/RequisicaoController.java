@@ -1,5 +1,8 @@
 package com.br.itsingular.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.br.itsingular.model.Requisicao;
+import com.br.itsingular.entity.Requisicao;
+import com.br.itsingular.entity.Requisitos;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
@@ -23,14 +27,14 @@ public class RequisicaoController {
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main(Requisicao requisicao) {
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
-		if(!Utils.isEmptyOrNull(requisicao)) {
+		if(!Utils.isEmptyOrNull(requisicao)) { 
 			requisicao = new Requisicao();
 		}	
 		return modelAndView;
 	}
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
-	public ModelAndView add(@Valid Requisicao requisicao, BindingResult result) {
+	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return main(null);
@@ -43,6 +47,19 @@ public class RequisicaoController {
 		}
 		modelAndView.addObject("error","error");
 		return modelAndView;
+	}
+	
+	@RequestMapping(path = "/addRequisitos")
+	public ModelAndView addRequisitos(Requisicao req) {
 		
+		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");				
+		
+		List<Requisitos> listRequisitos = new ArrayList<>();
+		
+		listRequisitos.add(new Requisitos());
+		modelAndView.addObject("listRequisitos", listRequisitos);
+		
+		modelAndView.addObject("error","error");
+		return modelAndView;
 	}
 }
