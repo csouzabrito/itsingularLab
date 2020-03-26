@@ -11,6 +11,9 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+<link rel="stylesheet" href="/css/main.css">
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -42,7 +45,16 @@
 </head>
 <body>
 
-	<a href="#"><img src="/img/itsingular.jpg"></a>
+	<div>
+		<a href="#"><img src="/img/itsingular.jpg"></a>
+		<div class="label-session-user">
+		  <form th:action="@{/login/logout}" method="POST">
+			<div class="form-group col-md-4" style="text-align: center">
+				<button type="submit" class="btn btn-primary glyphicon glyphicon-off" value="Sair"></button>
+			</div>
+		 </form>	
+	</div>
+	</div>
 	<div th:each="m : ${msg}">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<span th:text="${m}"></span>
@@ -71,9 +83,18 @@
 						th:object="${requisicao}" method="post">
 
 						<nav class="navbar navbar-default">
-							<ul class="nav navbar-nav">
-								<li><a th:href="@{/comercial/cadastro}">Cadastrar Comercial</a></li>
-							</ul>
+							<div class="container-fluid">
+								<div class="navbar-header">
+									<div class="navbar-brand">
+										<div th:if="${session.containsKey('name')}"
+											th:text="${session.name}"></div>
+									</div>
+								</div>
+								<ul class="nav navbar-nav">
+									<li class="active"><a th:href="@{/comercial/cadastro}">Cadastrar
+											Comercial</a></li>
+								</ul>
+							</div>
 						</nav>
 
 						<div class="row">
@@ -286,18 +307,18 @@
 						<div class="row">
 							<div class="form-group col-md-4">
 								<label for="rhProcesso" class="col-form-label">RH</label> <select
-									class="form-control" th:field="*{rhProcesso}" 
+									class="form-control" th:field="*{rhProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}" 
+										th:value="${tipoProcessoSeletivo}"
 										th:text="${descricaoProcessoSeletivo}"></option>
 								</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
 									th:errors="*{rhProcesso}" class="text-danger"></span>
 							</div>
 							<div class="form-group col-md-4">
 								<label for="solicitanteProcesso" class="col-form-label">Solicitante</label>
-								<select class="form-control" th:field="*{solicitanteProcesso}" 
+								<select class="form-control" th:field="*{solicitanteProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
@@ -309,7 +330,7 @@
 
 							<div class="form-group col-md-4">
 								<label for="clienteProcesso" class="col-form-label">Cliente</label>
-								<select class="form-control" th:field="*{clienteProcesso}" 
+								<select class="form-control" th:field="*{clienteProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
