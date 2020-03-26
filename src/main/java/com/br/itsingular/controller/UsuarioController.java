@@ -19,7 +19,12 @@ public class UsuarioController {
 	private LoginService service;
 	
 	@PostMapping("/registrar")
-	public Login save(@Validated @RequestBody final Login login){
-		return this.service.salvarUsuario(login);
+	public Login save( final Login login){
+		Login l = Login.builder()
+				.name("itSingular")
+				.username("itsingular@it.com.br")
+				.password("1234").build();
+			
+		return this.service.salvarUsuario(l);
 	}
 }
