@@ -4,14 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.br.itsingular.enums.TipoProcessoSeletivo;
+import com.br.itsingular.enums.TipoQualificacaoTestes;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -120,36 +127,44 @@ public class Requisicao implements Serializable {
 	
 	@Column(name = "rhProcesso")
 	@NotNull(message = "Campo obrigatório")
-	private String[] rhProcesso;
+	@ElementCollection(targetClass = TipoProcessoSeletivo.class)
+	@Enumerated(EnumType.STRING)
+	private List<TipoProcessoSeletivo> rhProcesso;
 	
 	@Column(name = "solicitanteProcesso")
 	@NotNull(message = "Campo obrigatório")
-	private String[] solicitanteProcesso;
+	@ElementCollection(targetClass = TipoProcessoSeletivo.class)
+	@Enumerated(EnumType.STRING)
+	private List<TipoProcessoSeletivo> solicitanteProcesso;
 	
 	@Column(name = "clienteProcesso")
 	@NotNull(message = "Campo obrigatório")
-	private String[] clienteProcesso;
+	@ElementCollection(targetClass = TipoProcessoSeletivo.class)
+	@Enumerated(EnumType.STRING)
+	private List<TipoProcessoSeletivo> clienteProcesso;
 	
 	@Column(name = "quaisTestes")
 	@NotNull(message = "Campo obrigatório")
-	private String[] quaisTestes;
+	@ElementCollection(targetClass = TipoQualificacaoTestes.class)
+	@Enumerated(EnumType.STRING)
+	private List<TipoQualificacaoTestes> quaisTestes;
 	
 	@Column(name = "localAplicacao")
 	@NotNull(message = "Campo obrigatório")
 	private String localAplicacao;
 
 	@Column(name = "observacao")
-	@NotNull(message = "Campo obrigatório")
+	@NotBlank(message = "Campo obrigatório")
 	private String observacao;
 
-	@Column(name = "requisitoObrigatorio")
-	private Integer requisitoObrigatorio;
+	@Transient
+	private String requisitoObrigatorio;
 	
-	@Column(name = "requisitoConhecimento")
-	private Integer requisitoConhecimento;
+	@Transient
+	private String requisitoConhecimento;
 
-	@Column(name = "requisitoTempo")
-	private Integer requisitoTempo;
+	@Transient
+	private String requisitoTempo;
 	
 	@OneToMany(mappedBy = "requisicao")
 	private List<Requisitos> requisitos;

@@ -286,11 +286,11 @@
 						<div class="row">
 							<div class="form-group col-md-4">
 								<label for="rhProcesso" class="col-form-label">RH</label> <select
-									class="form-control" th:field="*{rhProcesso}"
+									class="form-control" th:field="*{rhProcesso}" th:value="${rhProcesso}"
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}"
+										th:value="${descricaoProcessoSeletivo}"
 										th:text="${descricaoProcessoSeletivo}"></option>
 								</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
 									th:errors="*{rhProcesso}" class="text-danger"></span>
@@ -301,7 +301,7 @@
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}"
+										th:value="${descricaoProcessoSeletivo}"
 										th:text="${descricaoProcessoSeletivo}"></option>
 								</select> <span th:if="${#fields.hasErrors('solicitanteProcesso')}"
 									th:errors="*{solicitanteProcesso}" class="text-danger"></span>
@@ -313,7 +313,7 @@
 									multiple="multiple">
 									<option
 										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}"
+										th:value="${descricaoProcessoSeletivo}"
 										th:text="${descricaoProcessoSeletivo}"></option>
 								</select> <span th:if="${#fields.hasErrors('clienteProcesso')}"
 									th:errors="*{clienteProcesso}" class="text-danger"></span>
@@ -331,7 +331,7 @@
 									th:field="*{localAplicacao}">
 									<option
 										th:each="descricaoLocalAplicacaoTestes : ${T(com.br.itsingular.enums.TipoLocalAplicacaoTestes).values()}"
-										th:value="${tipoLocalAplicacaoTestes}"
+										th:value="${descricaoLocalAplicacaoTestes}"
 										th:text="${descricaoLocalAplicacaoTestes}"></option>
 								</select> <span th:if="${#fields.hasErrors('localAplicacao')}"
 									th:errors="*{localAplicacao}" class="text-danger"></span>
@@ -342,7 +342,7 @@
 									multiple="multiple">
 									<option
 										th:each="descricaoQualificacaoTestes : ${T(com.br.itsingular.enums.TipoQualificacaoTestes).values()}"
-										th:value="${tipoQualificacaoTestes}"
+										th:value="${descricaoQualificacaoTestes}"
 										th:text="${descricaoQualificacaoTestes}"></option>
 								</select> <span th:if="${#fields.hasErrors('quaisTestes')}"
 									th:errors="*{quaisTestes}" class="text-danger"></span>
@@ -368,9 +368,9 @@
 								<select class="form-control"
 									th:field="*{requisitoObrigatorio}">
 									<option
-										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}"
-										th:text="${descricaoProcessoSeletivo}"></option>
+										th:each="descricaoTipoRequisito : ${T(com.br.itsingular.enums.TipoRequisito).values()}"
+										th:value="${descricaoTipoRequisito}"
+										th:text="${descricaoTipoRequisito}"></option>
 								</select> <span th:if="${#fields.hasErrors('requisitoObrigatorio')}"
 									th:errors="*{requisitoObrigatorio}" class="text-danger"></span>
 							</div>
@@ -378,28 +378,31 @@
 								<label for="requisitoConhecimento" class="col-form-label">Conhecimento
 									em</label> <select class="form-control"
 									th:field="*{requisitoConhecimento}" >
-									<option
-										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}"
-										th:text="${descricaoProcessoSeletivo}"></option>
+									<option th:value="1">Java</option>
+									<option th:value="2">.Net</option>
+									<option th:value="3">Kotlin</option>
+									<option th:value="4">Cobol</option>
+									<option th:value="5">C++</option>
+									<option th:value="6">C#</option>
+									<option th:value="7">AWB</option>
 								</select> <span th:if="${#fields.hasErrors('requisitoConhecimento')}"
 									th:errors="*{requisitoConhecimento}" class="text-danger"></span>
 							</div>
 
 							<div class="form-group col-md-4">
 								<label for="requisitoTempo" class="col-form-label">Tempo
-									Experiência</label> <select class="form-control"
+									Experiência (Ano)</label> <select class="form-control"
 									th:field="*{requisitoTempo}">
 									<option
-										th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-										th:value="${tipoProcessoSeletivo}"
-										th:text="${descricaoProcessoSeletivo}"></option>
+										th:each="descricaoTempo : ${T(com.br.itsingular.enums.Tempo).values()}"
+										th:value="${descricaoTempo}"
+										th:text="${descricaoTempo}"></option>
 								</select> <span th:if="${#fields.hasErrors('requisitoTempo')}"
 									th:errors="*{requisitoTempo}" class="text-danger"></span>
 							</div>
 
 							<div class="col-md-12" style="text-align: right">
-								<a href=""></a> type="submit" class="btn btn-primary" value="Add"  >
+								<a th:href="@{#}" href="/add" onclick="$(#form).submit();">view</a>
 							</div>
 						</div>
 						<HR style="color: black" />

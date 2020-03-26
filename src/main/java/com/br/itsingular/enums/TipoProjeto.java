@@ -9,19 +9,31 @@ package com.br.itsingular.enums;
  */
 public enum TipoProjeto {
 
-	HORA("HORA"),
-	MES("MES"),
-	PROJETO("PROJETO");
+	HORA(1,"HORA"),
+	MES(2,"MES"),
+	PROJETO(3,"PROJETO");
 		
-	private String tipoProjeto;
-
-	private TipoProjeto(String tipoProjeto){
+	private Integer tipoProjeto;
+	private String descricaoTipoProjeto;
+	
+	private TipoProjeto(Integer tipoProjeto, String descricaoTipoProjeto){
 		this.tipoProjeto = tipoProjeto;
 	}
-	public String getTipoProjeto() {
+
+	public Integer getTipoProjeto() {
 		return tipoProjeto;
 	}
-	public void setTipoProjeto(String tipoProjeto) {
+
+	public void setTipoProjeto(Integer tipoProjeto) {
 		this.tipoProjeto = tipoProjeto;
 	}
+
+	public String getDescricaoTipoProjeto() {
+		return descricaoTipoProjeto;
+	}
+
+	public void setDescricaoTipoProjeto(String descricaoTipoProjeto) {
+		this.descricaoTipoProjeto = descricaoTipoProjeto;
+	}
+
 }

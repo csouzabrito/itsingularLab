@@ -9,20 +9,33 @@ package com.br.itsingular.enums;
  */
 public enum TipoRenovacao {
 
-	ALTA("ALTA"),
-	BAIXA("BAIXA"),
-	INEXISTENTE("INEXISTENTE");
+	ALTA(1,"ALTA"),
+	BAIXA(2,"BAIXA"),
+	INEXISTENTE(3,"INEXISTENTE");
 	
-	private String tipoRenovacao;
+	private Integer tipoRenovacao;
+	private String descricaoTipoRenovacao;
 
-	private TipoRenovacao(String tipoRenovacao) {
+	private TipoRenovacao(Integer tipoRenovacao, String descricaoTipoRenovacao) {
 		this.tipoRenovacao = tipoRenovacao;
+		this.descricaoTipoRenovacao = descricaoTipoRenovacao;
 		
-	}	
-	public String getTipoRenovacao() {
+	}
+
+	public Integer getTipoRenovacao() {
 		return tipoRenovacao;
 	}
-	public void setTipoRenovacao(String tipoRenovacao) {
+
+	public void setTipoRenovacao(Integer tipoRenovacao) {
 		this.tipoRenovacao = tipoRenovacao;
+	}
+
+	public String getDescricaoTipoRenovacao() {
+		return descricaoTipoRenovacao;
+	}
+
+	public void setDescricaoTipoRenovacao(String descricaoTipoRenovacao) {
+		this.descricaoTipoRenovacao = descricaoTipoRenovacao;
 	}	
+	
 }

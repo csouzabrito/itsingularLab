@@ -9,20 +9,31 @@ package com.br.itsingular.enums;
  */
 public enum TipoRequisito {
 
-	OBRIGATÓRIO("1"),
-	DESEJÁVEL("2");
+	OBRIGATÓRIO(1, "OBRIGATÓRIO"),
+	DESEJÁVEL(2 , "DESEJÁVEL");
 	
-	private String tipoRequisito;
+	private Integer tipoRequisito;
+	private String descricaoTipoRequisito;
 
-	private TipoRequisito(String tipoRequisito){
+	private TipoRequisito(Integer tipoRequisito , String descricaoTipoRequisito){
 		this.tipoRequisito = tipoRequisito;
+		this.descricaoTipoRequisito = descricaoTipoRequisito;
 	}
-	
-	public String getTipoRequisito() {
+
+	public Integer getTipoRequisito() {
 		return tipoRequisito;
 	}
 
-	public void setTipoRequisito(String tipoRequisito) {
+	public void setTipoRequisito(Integer tipoRequisito) {
 		this.tipoRequisito = tipoRequisito;
 	}
+
+	public String getDescricaoTipoRequisito() {
+		return descricaoTipoRequisito;
+	}
+
+	public void setDescricaoTipoRequisito(String descricaoTipoRequisito) {
+		this.descricaoTipoRequisito = descricaoTipoRequisito;
+	}
+	
 }
