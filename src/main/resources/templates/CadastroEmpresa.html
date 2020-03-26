@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>ItSingular</title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+
+<script>
+	$(":input").inputmask();
+	$("#telCorporativo").inputmask({
+		"mask" : "(999) 999-9999"
+	});
+</script>
+
+
+
+
+</head>
+
+<body>
+	<a href="#"><img src="/img/itsingular.jpg"></a>
+	<div th:each="m : ${msg}">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<span th:text="${m}"></span>
+	</div>
+
+	<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
+		<div th:case="'Success'" class="alert alert-success">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Sucesso!</strong> Empresa criada com sucesso!
+		</div>
+		<div th:case="'Failed'" class="alert alert-danger">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Falha!</strong> Houve algum problema no cadastro da Empresa.
+		</div>
+	</div>
+
+	<div class="container my-5">
+		<h3 align="center" style="margin-left: -100px">Cadastro de Empresa</h3>
+		<BR /> <BR />
+		<div class="card">
+
+			<div class="card-body">
+				<div class="col-md-10">
+					<form th:action="@{/empresa/addEmpresa}"
+						th:object="${empresa}" method="post">
+							<div class="form-group col-md-6">
+								<label for="razaoSocial" class="col-form-label">Razão Social</label>
+								<input type="text" th:field="*{razaoSocial}"
+									class="form-control" id="razaoSocial"
+									placeholder="Razão Social"><span
+									th:if="${#fields.hasErrors('razaoSocial')}"
+									th:errors="*{razaoSocial}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="fantasia" class="col-form-label">Nome Fantasia</label>
+								<input type="text" th:field="*{fantasia}"
+									class="form-control" id="fantasia"
+									placeholder="Nome Fantasia"><span
+									th:if="${#fields.hasErrors('fantasia')}"
+									th:errors="*{fantasia}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="cnpj" class="col-form-label">CNPJ</label>
+								<input type="text" th:field="*{cnpj}"
+									class="form-control" id="cnpj"
+									placeholder="CNPJ"><span
+									th:if="${#fields.hasErrors('cnpj')}"
+									th:errors="*{cnpj}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="ramoAtividade" class="col-form-label">Ramo de atividade</label>
+								<input type="text" th:field="*{ramoAtividade}"
+									class="form-control" id="ramoAtividade"
+									placeholder="Ramo de Atividade"><span
+									th:if="${#fields.hasErrors('ramoAtividade')}"
+									th:errors="*{ramoAtividade}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="endereco" class="col-form-label">Endereço</label>
+								<input type="text" th:field="*{endereco}"
+									class="form-control" id="endereco"
+									placeholder="Endereço"><span
+									th:if="${#fields.hasErrors('endereco')}"
+									th:errors="*{endereco}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="pessoaContato" class="col-form-label">Pessoa Contato</label>
+								<input type="text" th:field="*{pessoaContato}"
+									class="form-control" id="pessoaContato"
+									placeholder="Pessoa de Contato"><span
+									th:if="${#fields.hasErrors('pessoaContato')}"
+									th:errors="*{pessoaContato}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="cargo" class="col-form-label">Cargo</label>
+								<input type="text" th:field="*{cargo}"
+									class="form-control" id="cargo"
+									placeholder="Cargo"><span
+									th:if="${#fields.hasErrors('cargo')}"
+									th:errors="*{cargo}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="telCelular" class="col-form-label">Telefone de contato</label>
+								<input type="text" th:field="*{telCelular}"
+									class="form-control" id="telCelular"
+									placeholder="Telefone de contato"><span
+									th:if="${#fields.hasErrors('telCelular')}"
+									th:errors="*{telCelular}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="emailContato" class="col-form-label">Email de contato</label>
+								<input type="text" th:field="*{emailContato}"
+									class="form-control" id="emailContato"
+									placeholder="Email de contato"><span
+									th:if="${#fields.hasErrors('emailContato')}"
+									th:errors="*{emailContato}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="emailFinanceiro" class="col-form-label">Email financeiro</label>
+								<input type="text" th:field="*{emailFinanceiro}"
+									class="form-control" id="emailFinanceiro"
+									placeholder="Email financeiro"><span
+									th:if="${#fields.hasErrors('emailFinanceiro')}"
+									th:errors="*{emailFinanceiro}" class="text-danger"></span>
+							</div>
+							
+						<div class="form-group col-md-8"></div>
+						
+						<HR style="color: black" />
+
+						<div class="form-group col-md-12" style="text-align: center">
+							<input type="submit" class="btn btn-primary"
+								value="Cadastrar">
+						</div>
+						
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

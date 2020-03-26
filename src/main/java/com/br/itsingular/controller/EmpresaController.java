@@ -22,7 +22,7 @@ public class EmpresaController {
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main(Empresa Empresa) {
-		ModelAndView modelAndView = new ModelAndView("Empresa");
+		ModelAndView modelAndView = new ModelAndView("CadastroEmpresa");
 		if(!Utils.isEmptyOrNull(Empresa)) {
 			Empresa = new Empresa();
 		}	
@@ -35,8 +35,25 @@ public class EmpresaController {
 		if (result.hasErrors()) {
 			return main(null);
 		}
-		ModelAndView modelAndView = new ModelAndView("EmpresaVagas");
+		ModelAndView modelAndView = new ModelAndView("CadastroEmpresa");
 		if (!Utils.isEmptyOrNull(EmpresaServices.save(Empresa))) {
+			modelAndView.addObject("message","Success");
+			modelAndView.addObject("Empresa", new Empresa());
+			return modelAndView;
+		}
+		modelAndView.addObject("error","error");
+		return modelAndView;
+		
+	}
+	
+	@RequestMapping(path = "/findEmpresa", method = RequestMethod.GET)
+	public ModelAndView find(@Valid Empresa Empresa, BindingResult result) {
+
+		if (result.hasErrors()) {
+			return main(null);
+		}
+		ModelAndView modelAndView = new ModelAndView("ConsultaEmpresa");
+		if (!Utils.isEmptyOrNull(EmpresaServices.findAll())) {
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("Empresa", new Empresa());
 			return modelAndView;
