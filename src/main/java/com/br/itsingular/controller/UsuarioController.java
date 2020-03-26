@@ -12,7 +12,7 @@ import com.br.itsingular.services.LoginService;
 
 @Controller
 @RequestMapping(value = "/usuarios")
-public class Usuario {
+public class UsuarioController {
 
 	
 	@Autowired
