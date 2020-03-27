@@ -32,4 +32,15 @@ public class EmpresaServices {
 		}
 		return null;
 	}
+	
+	public Requisicao find(Empresa empresa) {
+		try {
+			if(!Utils.isEmptyOrNull((Entity) empresa)) {
+				return  services.find(empresa);
+			}		
+		} catch (RuntimeException e) {
+			throw e;
+		}
+		return null;
+	}
 }
