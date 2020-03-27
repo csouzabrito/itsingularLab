@@ -7,12 +7,12 @@
 </head>
 <div th:insert="Header.html"></div>
 <script>
-$(function() {
-	// Sidebar toggle behavior
-	$('#sidebarCollapse').on('click', function() {
-		$('#sidebar, #content').toggleClass('active');
+	$(function() {
+		// Sidebar toggle behavior
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
 	});
-});
 </script>
 <body>
 	<div class="d-flex">
@@ -55,7 +55,7 @@ $(function() {
 				<h3 align="center">Requisição de Vagas</h3>
 				<BR />
 
-				<div class="col-md-12">
+				<div class="col-md-11">
 					<form th:action="@{/requisicao/addRequisicao}"
 						th:object="${requisicao}" method="post">
 
@@ -324,8 +324,7 @@ $(function() {
 									<label for="rhProcesso" class="col-form-label"
 										style="margin-left: 1px">RH</label> <select
 										class="form-control" th:field="*{rhProcesso}"
-										th:value="${rhProcesso}" multiple="multiple"
-										style="height: 200px">
+										th:value="${rhProcesso}" multiple="multiple">
 										<option
 											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
 											th:value="${descricaoProcessoSeletivo}"
@@ -424,13 +423,11 @@ $(function() {
 								</div>
 							</div>
 							<div class="row">
-								<BR />
-								<div class="form-group col-md-6">
-									<label for="requisitoObrigatorio" class="col-form-label"
-										style="margin-left: 1px">Escolha conhecimento
-										obrigatório</label> <select class="form-control"
-										th:field="*{requisitoObrigatorio}" multiple="multiple"
-										style="height: 200px;">
+								<BR /> 
+								<div class=" form-group col-md-6">
+									<label for="requisitoObrigatorio" style="margin-left: 1px">Escolha
+										conhecimento obrigatório</label> <select class="form-control"
+										th:field="*{requisitoObrigatorio}" multiple="multiple">
 										<option th:value="1">Java</option>
 										<option th:value="2">.Net</option>
 										<option th:value="3">Kotlin</option>
@@ -441,11 +438,11 @@ $(function() {
 									</select> <span th:if="${#fields.hasErrors('requisitoObrigatorio')}"
 										th:errors="*{requisitoObrigatorio}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-6">
+								<div class=" form-group col-md-6">
 									<label for="requisitoConhecimento" class="col-form-label"
 										style="margin-left: 1px">Escolha conhecimento
-										Desejável </label> <select class="form-control" multiple="multiple"
-										style="height: 200px;" th:field="*{requisitoConhecimento}">
+										Desejável </label> <select class="form-control"
+										multiple="multiple" th:field="*{requisitoConhecimento}">
 										<option th:value="1">Java</option>
 										<option th:value="2">.Net</option>
 										<option th:value="3">Kotlin</option>
