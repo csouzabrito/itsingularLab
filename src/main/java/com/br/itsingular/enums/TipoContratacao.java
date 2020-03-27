@@ -9,21 +9,34 @@ package com.br.itsingular.enums;
  */
 public enum TipoContratacao {
 
-	CLT("CLT"), 
-	PJ("PJ"), 
-	FLEX("FLEX"), 
-	IBRATI("IBRATI"),
-	COOPERATIVA("Cooperativa"); 
+	CLT(1,"CLT"), 
+	PJ(2,"PJ"), 
+	FLEX(3,"FLEX"), 
+	IBRATI(4,"IBRATI"),
+	COOPERATIVA(5,"COOPERATIVA"); 
 	
-	private String tipoContratacao;
-		
-	private TipoContratacao(String tipoContratacao) {
+	private Integer tipoContratacao;
+	private String descricaoTipoContratacao;	
+	
+	private TipoContratacao(Integer tipoContratacao, String descricaoTipoContratacao) {
 		this.tipoContratacao = tipoContratacao;
+		this.descricaoTipoContratacao = descricaoTipoContratacao;
 	}
-	public String getTipoContratacao() {
+
+	public Integer getTipoContratacao() {
 		return tipoContratacao;
 	}
-	public void setTipoContratacao(String tipoContratacao) {
+
+	public void setTipoContratacao(Integer tipoContratacao) {
 		this.tipoContratacao = tipoContratacao;
 	}
+
+	public String getDescricaoTipoContratacao() {
+		return descricaoTipoContratacao;
+	}
+
+	public void setDescricaoTipoContratacao(String descricaoTipoContratacao) {
+		this.descricaoTipoContratacao = descricaoTipoContratacao;
+	}
+
 }

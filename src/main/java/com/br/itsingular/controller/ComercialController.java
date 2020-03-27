@@ -1,15 +1,18 @@
 package com.br.itsingular.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.br.itsingular.entity.Pessoa;
+import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.PessoaService;
 
 
@@ -18,7 +21,7 @@ import com.br.itsingular.services.PessoaService;
 public class ComercialController {
 	
 	@Autowired
-	private PessoaService pesssoaService;	
+	private PessoaService pesssoaService;
 	
 	
 	@RequestMapping("/cadastro")
@@ -29,7 +32,7 @@ public class ComercialController {
 	}
 	
 	@PostMapping("/salvar")
-	public ModelAndView salvar(@Validated Pessoa pessoa, BindingResult result, RedirectAttributes attributes  ){
+	public ModelAndView salvar(@Validated Pessoa pessoa, BindingResult result){
 		if(result.hasErrors()){
 			return new ModelAndView("CadastroPessoa") ;
 		}
@@ -43,5 +46,16 @@ public class ComercialController {
 		}catch(IllegalArgumentException e){
 			throw new RuntimeException("Erro ao registrar o comercial");
 		}
+	}
+	
+	
+	@GetMapping("/informacoes/{email}")
+	public ModelAndView listarInfo(@ModelAttribute("email") final String filtro){
+		
+		List<Requisicao> requisicoes = this.pesssoaService.getInfoByFilter(filtro);
+		
+		ModelAndView view = new ModelAndView("ViewComercial");
+		view.addObject("requisicoes", requisicoes) ;
+		return view;
 	}
 }

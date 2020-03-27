@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<div th:insert="Header.html"></div>
+<body>
+<div th:replace="Menu :: menu">...</div>
+
+<section>
+
+	<a href="#"><img src="/img/itsingular.jpg"></a>
+	<h3 align="center" style="margin-left: -100px">Informações Comercial</h3>
+	<BR />
+	<div class="panel-body">
+
+			<div class="table-responsive">
+			<input type="hidden" th:field="*{email}" />
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">Data Solicitação</th>
+							<th class="text-center">Cliente</th>
+							<th class="text-center col-md-2">Cargo</th>
+							<th class="text-center">Ramo Atividade</th>
+							<th class="text-center">Email</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="requisicao: ${requisicoes}">
+							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}">1</td>
+							<td class="text-center" th:text="${{requisicao.cliente}}"></td>
+							<td class="text-center" th:text="${{requisicao.cargo}}"></td>
+							<td class="text-center" th:text="${{requisicao.ramoAtividade}}|"></td>
+							<td class="text-center" th:text="${{email}}|"></td>
+						</tr>
+
+						<tr>
+							<td class="text-center col-md-2" colspan="6"
+								th:if="${#lists.isEmpty(requisicoes)}">Requisição não encontrada</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</div>
+</section>
+</html>

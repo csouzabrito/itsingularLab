@@ -1,48 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>ItSingular</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></scri
-
-<script type="text/javascript">
-    $("#telefone").mask("(00) 0000-0000");
-    </script>
-
-
 </head>
-
+<div th:insert="Header.html"></div>
+<body>
+	<div th:replace="Menu :: menu">...</div>
 <body>
 	<a href="#"><img src="/img/itsingular.jpg"></a>
 	<div th:each="m : ${msg}">
@@ -64,14 +29,7 @@
 	<div class="container my-5">
 		<h3 align="center" style="margin-left: -100px">Cadastro Comercial</h3>
 		<BR /> <BR />
-	
-	
-	<nav class="navbar navbar-default">
-				<ul class="nav navbar-nav">
-					<li><a th:href="@{/requisicao/abrir}">Requisição de vagas</a></li>
-				</ul>
-			</nav>
-	
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-heading">
@@ -82,7 +40,8 @@
 			</div>
 
 			<div class="panel-body">
-				<form th:action="@{/comercial/salvar}" th:object="${pessoa}" method="POST">
+				<form th:action="@{/comercial/salvar}" th:object="${pessoa}"
+					method="POST">
 
 					<div class="row">
 						<div class="form-group col-md-3">

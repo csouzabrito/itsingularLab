@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.br.itsingular.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -13,4 +10,4 @@ import com.br.itsingular.entity.Empresa;
  *
  */
 @Repository
-public interface EmpresaRepository extends MongoRepository<Empresa, Long> {}
+public interface EmpresaRepository extends MongoRepository<Empresa, String> {}

@@ -3,6 +3,7 @@ package com.br.itsingular.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.entity.Empresa;
-import com.br.itsingular.repository.EmpresaRepository;
+import com.br.itsingular.services.EmpresaServices;
 import com.br.itsingular.utils.Utils;
 
 @Controller
@@ -18,25 +19,25 @@ import com.br.itsingular.utils.Utils;
 public class EmpresaController {
 
 	@Autowired
-	private EmpresaRepository EmpresaServices;
+	private EmpresaServices empresaServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
-	public ModelAndView main(Empresa Empresa) {
-		ModelAndView modelAndView = new ModelAndView("CadastroEmpresa");
-		if(!Utils.isEmptyOrNull(Empresa)) {
-			Empresa = new Empresa();
+	public ModelAndView main(Empresa empresa) {
+		ModelAndView modelAndView = new ModelAndView("Empresa");
+		if(!Utils.isEmptyOrNull(empresa)) {
+			empresa = new Empresa();
 		}	
 		return modelAndView;
 	}
 	
 	@RequestMapping(path = "/addEmpresa", method = RequestMethod.POST)
-	public ModelAndView add(@Valid Empresa Empresa, BindingResult result) {
+	public ModelAndView add(@Valid Empresa empresa, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return main(null);
 		}
-		ModelAndView modelAndView = new ModelAndView("CadastroEmpresa");
-		if (!Utils.isEmptyOrNull(EmpresaServices.save(Empresa))) {
+		ModelAndView modelAndView = new ModelAndView("Empresa");
+		if (!Utils.isEmptyOrNull(empresaServices.save(empresa))) {
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("Empresa", new Empresa());
 			return modelAndView;
@@ -47,13 +48,14 @@ public class EmpresaController {
 	}
 	
 	@RequestMapping(path = "/findEmpresa", method = RequestMethod.GET)
-	public ModelAndView find(@Valid Empresa Empresa, BindingResult result) {
+	public ModelAndView list(BindingResult result) {
 
 		if (result.hasErrors()) {
 			return main(null);
 		}
 		ModelAndView modelAndView = new ModelAndView("ConsultaEmpresa");
-		if (!Utils.isEmptyOrNull(EmpresaServices.findAll())) {
+		Page<Empresa> list = empresaServices.list();
+		if (!Utils.isEmptyOrNull(list.getContent())) {
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("Empresa", new Empresa());
 			return modelAndView;
