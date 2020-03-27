@@ -1,8 +1,9 @@
 package com.br.itsingular.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.entity.Requisicao;
-import com.br.itsingular.entity.Requisitos;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
@@ -21,15 +21,24 @@ import com.br.itsingular.utils.Utils;
 @RequestMapping(value = "/requisicao")
 public class RequisicaoController {
 
+	private HttpServletRequest req;
+	
 	@Autowired
 	private RequisicaoServices requisicaoServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
-	public ModelAndView main(Requisicao requisicao) {
+	public ModelAndView main(HttpServletRequest request, Requisicao requisicao) {
+		request.getSession().setAttribute("nomeSolicitante", "ITSINGULAR@ITSINGULAR.COM.BR");
+		req = request;
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
 		if(!Utils.isEmptyOrNull(requisicao)) { 
 			requisicao = new Requisicao();
-		}	
+			
+			requisicao.setNomeSolicitante(request.getSession().getAttribute("nomeSolicitante").toString());
+			requisicao.setDataSolicitacao(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+			modelAndView.addObject("requisicao", requisicao);
+		}
+		
 		return modelAndView;
 	}
 	
@@ -37,7 +46,7 @@ public class RequisicaoController {
 	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
 		
 		if (result.hasErrors()) {
-			return main(null);
+			return main(req,null);
 		}
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
@@ -45,20 +54,6 @@ public class RequisicaoController {
 			modelAndView.addObject("requisicao", new Requisicao());
 			return modelAndView;
 		}
-		modelAndView.addObject("error","error");
-		return modelAndView;
-	}
-	
-	@RequestMapping(path = "/addRequisitos")
-	public ModelAndView addRequisitos(Requisicao req) {
-		
-		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");				
-		
-		List<Requisitos> listRequisitos = new ArrayList<>();
-		
-		listRequisitos.add(new Requisitos());
-		modelAndView.addObject("listRequisitos", listRequisitos);
-		
 		modelAndView.addObject("error","error");
 		return modelAndView;
 	}

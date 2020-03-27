@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.br.itsingular.model.Empresa;
+import com.br.itsingular.entity.Empresa;
 import com.br.itsingular.repository.EmpresaRepository;
 import com.br.itsingular.utils.Utils;
 

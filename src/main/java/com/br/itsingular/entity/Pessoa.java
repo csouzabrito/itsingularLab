@@ -1,8 +1,7 @@
 package com.br.itsingular.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,13 +19,13 @@ import lombok.Setter;
 public class Pessoa {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String telefone;
 	
 	@NotBlank(message = "Campo obrigatório")
+	@Email
 	private String email;
 	
 	@NotBlank(message = "Campo obrigatório")

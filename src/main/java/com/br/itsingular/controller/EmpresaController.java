@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.br.itsingular.model.Empresa;
+import com.br.itsingular.entity.Empresa;
 import com.br.itsingular.services.EmpresaServices;
 import com.br.itsingular.utils.Utils;
 
