@@ -5,7 +5,7 @@
 
 <div th:insert="Header.html"></div>
 <div th:fragment="menu">
-	<div class="vertical-nav bg-white" id="sidebar">
+	<div class="vertical-nav bg-white active" id="sidebar">
 		<div class="py-4 px-3 mb-4 bg-light">
 			<div class="media d-flex align-items-center">
 				<img
@@ -24,21 +24,42 @@
 
 		<ul class="nav flex-column bg-white mb-0">
 			<li class="nav-item"><a href="#"
-				class="nav-link text-dark font-italic bg-light"> <i
+				class="nav-link text-dark font-italic"> <i
 					class="fa fa-th-large mr-3 text-primary fa-fw"></i> Home
 			</a></li>
-			<li class="nav-item"><a href="#" th:href="@{/comercial/cadastro}"
+			<li class="nav-item"><a href="#"
+				th:href="@{/comercial/cadastro}"
 				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastrar Comercial
+					class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastrar
+					Comercial
 			</a></li>
 			<li class="nav-item"><a href="#" th:href="@{/empresa/abrir}"
 				class="nav-link text-dark font-italic"> <i
-					class="fa fa-cubes mr-3 text-primary fa-fw"></i> Cadastro Empresas
+					class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastro
+					Empresas
 			</a></li>
 			<li class="nav-item"><a href="#" th:href="@{/requisicao/abrir}"
 				class="nav-link text-dark font-italic"> <i
-					class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Requisição de Vagas
+					class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
+					Requisição de Vagas
 			</a></li>
+			<li class="active"><a href="#homeSubmenu"
+			 
+				data-toggle="collapse" aria-expanded="false"
+				class="nav-link text-dark font-italic"> <i
+					class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Configurações
+			</a>
+				<ul class="collapse list-unstyled" id="homeSubmenu">
+					<li class="nav-link text-dark font-italic">
+						<a href="#" th:href="@{/cadastrarCursos/listar}" class="nav-link text-dark font-italic"><i
+							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastrar Cursos</a></li>
+					<li class="nav-link text-dark font-italic">
+						<a href="#" class="nav-link text-dark font-italic"><i
+							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastro XXXX</a></li>
+					<li class="nav-link text-dark font-italic">
+						<a href="#" class="nav-link text-dark font-italic"><i
+							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastro YYYY</a></li>
+				</ul></li>
 		</ul>
 	</div>
 	<!-- End vertical navbar -->

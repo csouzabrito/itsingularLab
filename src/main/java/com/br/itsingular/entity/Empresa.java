@@ -17,12 +17,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @Table(name = "EMPRESA")
 public class Empresa implements Serializable {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1764081334527695609L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
