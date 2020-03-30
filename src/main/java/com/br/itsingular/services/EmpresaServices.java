@@ -3,16 +3,14 @@
  */
 package com.br.itsingular.services;
 
-import javax.persistence.Entity;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.br.itsingular.dto.EmpresaDTO;
 import com.br.itsingular.entity.Empresa;
 import com.br.itsingular.repository.EmpresaRepository;
-import com.br.itsingular.utils.Utils;
 
 /**
  * @author guilherme
@@ -25,14 +23,7 @@ public class EmpresaServices {
 	private EmpresaRepository repository;
 	
 	public Empresa save(Empresa empresa) {
-		try {
-			if(!Utils.isEmptyOrNull((Entity) empresa)) {
-				return  repository.save(empresa);
-			}		
-		} catch (RuntimeException e) {
-			throw e;
-		}
-		return null;
+		return  repository.save(empresa);
 	}
 	
 	public Page<Empresa> list() {
@@ -42,4 +33,20 @@ public class EmpresaServices {
 		}
 		return lista;
 	}
+
+	public Page<Empresa> getInfoByFilter(final String filtro) {
+		
+		Page<Empresa> empresas = null; // = repository.;  PAREI AQUI- nao acho o metodo que busca com parametro cnpj
+		
+		return empresas;
+	}
+	
+	public EmpresaDTO findEmpresa(EmpresaDTO request) {
+		
+//		List<Empresa> return = this.repository.findAll(request);
+		
+		return new EmpresaDTO();
+		
+	}
+
 }
