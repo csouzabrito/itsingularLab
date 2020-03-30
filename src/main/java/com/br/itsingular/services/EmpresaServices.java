@@ -21,9 +21,9 @@ public class EmpresaServices {
 
 	@Autowired
 	private EmpresaRepository repository;
-	
+
 	public Empresa save(Empresa empresa) {
-		return  repository.save(empresa);
+		return repository.save(empresa);
 	}
 	
 	public Page<Empresa> list() {
@@ -34,11 +34,14 @@ public class EmpresaServices {
 		return lista;
 	}
 
-	public Page<Empresa> getInfoByFilter(final String filtro) {
+	public Empresa getInfoByFilter(final EmpresaDTO filtro) {
+		Empresa empresa = new Empresa();
+		if (filtro.getFantasia() != null) {
+			String info = filtro.getFantasia() == null ? "%" : filtro.getFantasia();
+			empresa = repository.findByCnpj(info);
+		}
 		
-		Page<Empresa> empresas = null; // = repository.;  PAREI AQUI- nao acho o metodo que busca com parametro cnpj
-		
-		return empresas;
+		return empresa;
 	}
 	
 	public EmpresaDTO findEmpresa(EmpresaDTO request) {

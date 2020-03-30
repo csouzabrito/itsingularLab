@@ -14,6 +14,8 @@ import com.br.itsingular.entity.Empresa;
 @Repository
 public interface EmpresaRepository extends MongoRepository<Empresa, String> {
 
-	List<Empresa> findByCnpj(String filtro);
+	Empresa findByCnpj(String filtro);
 	
+	List<Empresa> findByFantasiaContaning(String fantasia);
+
 }

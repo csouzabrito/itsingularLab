@@ -8,8 +8,12 @@
 <div th:insert="Header.html"></div>
 <body>
 <div th:replace="Menu :: menu">...</div>
-
-<section>
+		<div id="content" class="p-4 p-md-5 pt-5 form-requisicao">
+			<button id="sidebarCollapse" type="button"
+				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+				<i class="fa fa-bars mr-2"></i><small
+					class="text-uppercase font-weight-bold">Menu</small>
+			</button>
 
 	<a href="#"><img src="/img/itsingular.jpg"></a>
 	<h3 align="center" style="margin-left: -100px">Informações Empresa</h3>
@@ -17,7 +21,18 @@
 	<div class="panel-body">
 
 			<div class="table-responsive">
-			<input type="hidden" th:field="*{cnpj}" />
+<!-- 			<input type="hidden" th:field="*{id}" /> -->
+				<form method="get" th:action="@{/empresa}" th:object="${filtro}">
+					<input type="text" th:field="*{fantasia}"
+									class="form-control" placeholder="Nome Fantasia">
+								<span class="text-danger">
+									<button type="submit" class="btn btn-primary"
+										value="Consultar">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+				</form>
+				
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -28,7 +43,6 @@
 							<th class="text-center">Email</th>
 						</tr>
 					</thead>
-
 					<tbody>
 
 						<tr th:each="empresa: ${empresas}">
@@ -45,7 +59,8 @@
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
+		</div>
 	</div>
-</section>
 </html>
