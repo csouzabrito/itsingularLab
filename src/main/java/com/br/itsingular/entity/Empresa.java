@@ -25,12 +25,7 @@ import lombok.Setter;
 public class Empresa implements Serializable {
 
 	private static final long serialVersionUID = 1764081334527695609L;
-<<<<<<< HEAD
 
-	
-=======
-
->>>>>>> 1463dd1ba08b0d645b993be0df2cb7c73f5f1acf
 	@Id
 	private String id;
 
