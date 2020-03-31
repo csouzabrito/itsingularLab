@@ -423,33 +423,27 @@
 								</div>
 							</div>
 							<div class="row">
-								<BR /> 
+								<BR />
 								<div class=" form-group col-md-6">
 									<label for="requisitoObrigatorio" style="margin-left: 1px">Escolha
 										conhecimento obrigatório</label> <select class="form-control"
 										th:field="*{requisitoObrigatorio}" multiple="multiple">
-										<option th:value="1">Java</option>
-										<option th:value="2">.Net</option>
-										<option th:value="3">Kotlin</option>
-										<option th:value="4">Cobol</option>
-										<option th:value="5">C++</option>
-										<option th:value="6">C#</option>
-										<option th:value="7">AWB</option>
+										<option th:each="cursos : ${listCursos}"
+											th:value="${cursos.id}"
+											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
+											selected="selected"></option>
 									</select> <span th:if="${#fields.hasErrors('requisitoObrigatorio')}"
 										th:errors="*{requisitoObrigatorio}" class="text-danger"></span>
 								</div>
 								<div class=" form-group col-md-6">
 									<label for="requisitoConhecimento" class="col-form-label"
 										style="margin-left: 1px">Escolha conhecimento
-										Desejável </label> <select class="form-control"
-										multiple="multiple" th:field="*{requisitoConhecimento}">
-										<option th:value="1">Java</option>
-										<option th:value="2">.Net</option>
-										<option th:value="3">Kotlin</option>
-										<option th:value="4">Cobol</option>
-										<option th:value="5">C++</option>
-										<option th:value="6">C#</option>
-										<option th:value="7">AWB</option>
+										Desejável </label> <select class="form-control" multiple="multiple"
+										th:field="*{requisitoConhecimento}">
+										<option th:each="cursos : ${listCursos}"
+											th:value="${cursos.id}"
+											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
+											selected="selected"></option>
 									</select> <span th:if="${#fields.hasErrors('requisitoConhecimento')}"
 										th:errors="*{requisitoConhecimento}" class="text-danger"></span>
 								</div>
