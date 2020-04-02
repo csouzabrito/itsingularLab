@@ -5,16 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.br.itsingular.enums.TipoProcessoSeletivo;
@@ -27,7 +25,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity
 @Document(collection = "SOLICITA_REQUISICAO")
 public class Requisicao implements Serializable {
 
@@ -157,17 +154,10 @@ public class Requisicao implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String observacao;
 
-	@Transient
 	private String requisitoObrigatorio;
 	
-	@Transient
 	private String requisitoConhecimento;
 
-	@Transient
 	private String requisitoTempo;
-	
-	@OneToMany(mappedBy = "requisicao")
-	private List<Requisitos> requisitos;
-
 	
 }
