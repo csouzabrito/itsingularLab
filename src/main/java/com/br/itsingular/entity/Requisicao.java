@@ -164,16 +164,12 @@ public class Requisicao implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String observacao;
 
-	@Column(name = "observacao")
+	@Column(name = "requisitoObrigatorio")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoObrigatorio;
 
-	@Column(name = "observacao")
+	@Column(name = "requisitoConhecimento")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoConhecimento;
 
-	@Column(name = "observacao")
-	@NotNull(message = "Campo obrigatório")
-	private String[] requisitoTempo;
-	
 }
