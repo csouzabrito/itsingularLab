@@ -65,6 +65,7 @@ public class ComercialController {
 		
 		Object email = session.getAttribute("email");
 		
+
 		List<Requisicao> requisicoes = this.requisicaoServices.getInfoByEmail(String.valueOf(email));
 		
 		ModelAndView view = new ModelAndView("ViewComercial");

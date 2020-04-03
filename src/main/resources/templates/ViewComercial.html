@@ -51,11 +51,11 @@
 					<thead class="thead-light">
 						<tr>
 							<th class="text-center col-md-2">Data Solicitação</th>
-							<th class="text-center col-md-3">Cliente</th>
-							<th class="text-center col-md-4">Solicitante</th>
-							<!-- <th class="text-center col-md-3">SLA</th> -->
-							<th class="text-center col-md-3">Ramo Atividade</th>
-							<th class="text-center col-md-6">Tipo Requisição</th>
+							<th class="text-center col-md-2">Cliente</th>
+							<th class="text-center col-md-3">Solicitante</th>
+							<th class="text-center col-md-2">Ramo Atividade</th>
+							<th class="text-center col-md-2">SLA</th>
+							<th class="text-center col-md-6">Status</th>
 						</tr>
 					</thead>
 
@@ -64,9 +64,10 @@
 							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}"></td>
 							<td class="text-center" th:text="${{requisicao.cliente}}"></td>
 							<td class="text-center" th:text="${{requisicao.nomeSolicitante}}"></td>
-							<!-- <td class="text-center" th:text="${{requisicao.sla}}"></td> -->
 							<td class="text-center" th:text="${{requisicao.ramoAtividade}}"></td>
-							<td class="text-center" th:text="${{requisicao.tipoRequisicao}}"></td>
+							<td class="text-center" th:style="${{requisicao.sla == 3 ? 'color: red;' : 'color: green;'}}" th:text="${{requisicao.sla}}"></td>
+							<td class="text-center" th:style="${{requisicao.status.descricao == 'Pendente' ? 'color: red;' : 'color: green;'}}" th:text="${{requisicao.status.descricao}}">
+							</td>
 						</tr>
 
 						<tr>

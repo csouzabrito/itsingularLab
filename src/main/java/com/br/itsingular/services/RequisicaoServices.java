@@ -1,13 +1,16 @@
 package com.br.itsingular.services;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.entity.Requisicao;
+import com.br.itsingular.enums.StatusRequisicao;
+import com.br.itsingular.enums.TipoRequisicao;
 import com.br.itsingular.repository.RequisicaoRepository;
 
 /**
@@ -17,29 +20,41 @@ import com.br.itsingular.repository.RequisicaoRepository;
 @Service
 public class RequisicaoServices {
 	
-	public int PAGE = 0;
-	public int SIZE = 10;
-
+	@Autowired
+	private SlaService slaService;
+	
 	@Autowired
 	private RequisicaoRepository repository;
 	
 	public Requisicao salvarRequisicao(Requisicao requisicao ) {
 		try {
-			return this.repository.insert(requisicao);
+			
+			requisicao.setStatus(StatusRequisicao.PENDENTE);
+			
+			Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
+			requisicao.setSla(sla);
+			
+			Requisicao newRequisicao = this.repository.insert(requisicao);
+			
+			this.slaService.criarSla(newRequisicao);
+			
+			return  newRequisicao;
 		} catch (RuntimeException e) {
 			throw e;
 		}
 	}
 	
-	public List<Requisicao> listar() {
-		
-		Page<Requisicao> requisicoes = this.repository.findAll(PageRequest.of(PAGE, SIZE));
-		
-		return requisicoes.getContent();
-	}
-	
 	public List<Requisicao> getInfoByEmail(final String email) {
-		return repository.findByEmail(email);
+		
+		List<Requisicao> requisicoesComSLA = new ArrayList<>();
+		
+		List<Requisicao> requisicoes = repository.findByEmail(email);
+		
+		requisicoes.forEach(r -> {
+			requisicoesComSLA.add(calcularSLA(r));
+		});
+		
+		return requisicoesComSLA;
 	}
 	
 	public List<Requisicao> filtrarRequisicao(final RequisicaoFilter filtro) {
@@ -49,4 +64,19 @@ public class RequisicaoServices {
 		
 		return requisicoes;
 	}
+	
+	private Requisicao calcularSLA(Requisicao requisicao){
+		
+		LocalDate hoje = LocalDate.now();
+		
+		LocalDate dataSolicitacao = LocalDate.parse(requisicao.getDataSolicitacao());
+		
+		Long diferencaEmDias = ChronoUnit.DAYS.between(hoje, dataSolicitacao);
+		
+		Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
+		requisicao.setSla(sla);
+
+		return requisicao;
+	}
+
 }

@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.br.itsingular.enums.StatusRequisicao;
 import com.br.itsingular.enums.TipoProcessoSeletivo;
 import com.br.itsingular.enums.TipoQualificacaoTestes;
 import com.br.itsingular.enums.TipoRequisicao;
@@ -153,7 +154,7 @@ public class Requisicao implements Serializable {
 	@NotNull(message = "Campo obrigatório")
 	@ElementCollection(targetClass = TipoRequisito.class)
 	@Enumerated(EnumType.STRING)
-	private List<TipoRequisicao> tipoRequisicao;
+	private TipoRequisicao tipoRequisicao;
 	
 	@Column(name = "localAplicacao")
 	@NotBlank(message = "Campo obrigatório")
@@ -166,8 +167,9 @@ public class Requisicao implements Serializable {
 	@Column(name = "requisitoObrigatorio")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoObrigatorio;
-
+	
 	private Integer sla;
+	
 	@Column(name = "requisitoConhecimento")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoConhecimento;
@@ -175,5 +177,9 @@ public class Requisicao implements Serializable {
 	@Column(name = "requisitoTempo")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoTempo;
+	
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private StatusRequisicao status;
 	
 }
