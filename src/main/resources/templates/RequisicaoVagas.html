@@ -347,7 +347,6 @@
 											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
 											th:value="${descricaoProcessoSeletivo}"
 											th:text="${descricaoProcessoSeletivo}"></option>
-												<option th:value="''" selected="false"></option>
 									</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
 										th:errors="*{rhProcesso}" class="text-danger"></span>
 								</div>
