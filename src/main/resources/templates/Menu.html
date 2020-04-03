@@ -11,18 +11,34 @@
 				<a class="logo" ><img src="/img/logo-horizontal.svg"></a>
 			</h1>
 			<ul class="list-unstyled components mb-5">
-				<li><a href="#"><i class="fas fa-user-edit"></i> <span class="glyphicon glyphicon-pencil"></span> Cadastrar Comercial </a></li>
+				<li><a th:href="@{/comercial/cadastro}"><i class="fas fa-user-edit"></i> <span class="glyphicon glyphicon-pencil"></span> Cadastrar Comercial </a></li>
 						
-				<li><a href="#"><span class="fa fa-user mr-3"></span> Menu1</a>
+				<li><a th:href="@{/empresa/abrir}"><span class="fa fa-user mr-3"></span> Cadastro Empresas</a>
 				</li>
-				<li><a href="#"><span class="fa fa-sticky-note mr-3"></span>
-						Menu2</a></li>
-				<li><a href="#"><span class="fa fa-sticky-note mr-3"></span>
-						Menu3</a></li>
-				<li><a href="#"><span class="fa fa-paper-plane mr-3"></span>
-						Menu4</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-off"></span>
-						Sair</a></li>
+				<li><a th:href="@{/requisicao/abrir}"><span class="fa fa-sticky-note mr-3"></span>
+						Requisição de Vagas</a></li>
+				<li><a href="#homeSubmenu"
+					   data-toggle="collapse" aria-expanded="false"> <i class="glyphicon glyphicon-cog"></i> Configurações
+					
+					</a>
+					<ul class="list-unstyled components mb-5" id="homeSubmenu">
+					<li>
+						<a th:href="@{/cadastrarCursos/listar}"><i class="glyphicon glyphicon-book"></i> Cadastrar Cursos</a>
+					</li>
+							
+					<li>
+						<a href="#"><i class="glyphicon glyphicon-book"></i> Cadastro XXXX</a>
+					</li>
+					<li>
+						<a href="#"><i class="glyphicon glyphicon-book"></i> Cadastro YYYY</a>
+					</li>
+							
+					</ul>
+				</li>
+						
+				<li><a th:href="@{/login/logout}" ><span class="glyphicon glyphicon-off"></span>
+						Sair</a>
+				</li>
 			</ul>
 		</nav>
 	<!-- End vertical navbar -->

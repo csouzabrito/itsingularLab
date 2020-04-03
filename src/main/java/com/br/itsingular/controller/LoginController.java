@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +23,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService service;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/view")
 	public ModelAndView novo(Login login){
@@ -48,8 +52,8 @@ public class LoginController {
 		return page;
 	}
 	
-	@PostMapping("/logout")
-	public String logout(@Validated Login login, RedirectAttributes attributes, HttpSession session) {
+	@GetMapping("/logout")
+	public String logout(@Validated Login login, RedirectAttributes attributes) {
 		session.invalidate();
 		return "redirect:/login/view";
 	}
