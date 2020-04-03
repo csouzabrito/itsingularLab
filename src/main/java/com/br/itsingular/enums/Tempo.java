@@ -1,5 +1,10 @@
 package com.br.itsingular.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum Tempo {
 
 	UM(    1, "1-ANO"),
@@ -16,22 +21,4 @@ public enum Tempo {
 	private Integer tempo;
 	private String descricaoTempo;
 	
-	private Tempo(Integer tempo, String descricaoTempo) {
-		this.tempo = tempo;
-		this.descricaoTempo = descricaoTempo;
-	}
-	
-	public Integer getTempo() {
-		return tempo;
-	}
-	public void setTempo(Integer tempo) {
-		this.tempo = tempo;
-	}
-	public String getDescricaoTempo() {
-		return descricaoTempo;
-	}
-	public void setDescricaoTempo(String descricaoTempo) {
-		this.descricaoTempo = descricaoTempo;
-	}
-
 }

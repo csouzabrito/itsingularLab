@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,6 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.br.itsingular.enums.TipoProcessoSeletivo;
 import com.br.itsingular.enums.TipoQualificacaoTestes;
+import com.br.itsingular.enums.TipoRequisicao;
+import com.br.itsingular.enums.TipoRequisito;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -102,9 +103,11 @@ public class Requisicao implements Serializable {
 	private String duracaoContrato;
 
 	@Column(name = "renovacao")
+	@NotBlank(message = "Campo obrigatório")
 	private String renovacao;
 
 	@Column(name = "formaContratacao")
+	@NotBlank(message = "Campo obrigatório")
 	private String formaContratacao;
 
 	@Column(name = "valor")
@@ -112,6 +115,7 @@ public class Requisicao implements Serializable {
 	private String valor;
 
 	@Column(name = "por")
+	@NotBlank(message = "Campo obrigatório")
 	private String por;
 
 	@Column(name = "horaAberta")
@@ -146,18 +150,30 @@ public class Requisicao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private List<TipoQualificacaoTestes> quaisTestes;
 	
-	@Column(name = "localAplicacao")
+	@Column(name = "tipoRequisicao")
 	@NotNull(message = "Campo obrigatório")
+	@ElementCollection(targetClass = TipoRequisito.class)
+	@Enumerated(EnumType.STRING)
+	private List<TipoRequisicao> tipoRequisicao;
+	
+	@Column(name = "localAplicacao")
+	@NotBlank(message = "Campo obrigatório")
 	private String localAplicacao;
 
 	@Column(name = "observacao")
 	@NotBlank(message = "Campo obrigatório")
 	private String observacao;
 
-	private String requisitoObrigatorio;
-	
-	private String requisitoConhecimento;
+	@Column(name = "observacao")
+	@NotNull(message = "Campo obrigatório")
+	private String[] requisitoObrigatorio;
 
-	private String requisitoTempo;
+	@Column(name = "observacao")
+	@NotNull(message = "Campo obrigatório")
+	private String[] requisitoConhecimento;
+
+	@Column(name = "observacao")
+	@NotNull(message = "Campo obrigatório")
+	private String[] requisitoTempo;
 	
 }

@@ -73,14 +73,26 @@
 							</div>
 							<div class="row">
 								<BR />
+								<div class="form-group col-md-4">
+									<label for="tipoRequisicao" class="col-form-label"
+										style="margin-left: 1px">Tipo Requisição</label> <select
+										class="form-control" th:field="*{tipoRequisicao}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoRequisicao : ${T(com.br.itsingular.enums.TipoRequisicao).values()}"
+											th:value="${descricaoRequisicao}" th:text="${tipoRequisicao}"></option>
+									</select> <span th:if="${#fields.hasErrors('tipoRequisicao')}"
+										th:errors="*{tipoRequisicao}" class="text-danger"></span>
+								</div>
+
 								<div class="form-group col-md-6">
-									<label for="nomeSolicitante" class="col-form-label"
-										style="margin-left: 1px">Solicitante</label> <input
-										type="text" th:field="*{nomeSolicitante}" class="form-control"
+									<label for="nomeSolicitante" class="col-form-label">Solicitante</label>
+									<input readonly="true" type="text"
+										th:field="*{nomeSolicitante}" class="form-control"
 										id="nomeSolicitante">
 
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-2">
 									<label for="dataSolicitacao" class="col-form-label"
 										style="margin-left: 1px">Data Solicitação</label> <input
 										type="text" th:field="*{dataSolicitacao}" class="form-control"
@@ -221,6 +233,7 @@
 									<label for="formaContratacao" class="col-form-label"
 										style="margin-left: 1px">Contratação</label> <select
 										class="form-control" th:field="*{formaContratacao}">
+										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoContratacao : ${T(com.br.itsingular.enums.TipoContratacao).values()}"
 											th:value="${tipoContratacao}" th:text="${tipoContratacao}"></option>
@@ -242,6 +255,7 @@
 									<label for="por" class="col-form-label"
 										style="margin-left: 1px">Por</label> <select
 										class="form-control" th:field="*{por}">
+										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoProjeto : ${T(com.br.itsingular.enums.TipoProjeto).values()}"
 											th:value="${tipoProjeto}" th:text="${tipoProjeto}"></option>
@@ -252,8 +266,9 @@
 									<label for="horaAberta" class="col-form-label"
 										style="margin-left: 1px">Hora Aberta</label> <select
 										class="form-control" th:field="*{horaAberta}">
-										<option th:value="'S'" th:text="Sim"></option>
-										<option th:value="'N'" th:text="Não"></option>
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option th:value="'S'" th:text="SIM"></option>
+										<option th:value="'N'" th:text="NÃO"></option>
 									</select> <span th:if="${#fields.hasErrors('horaAberta')}"
 										th:errors="*{horaAberta}" class="text-danger"></span>
 								</div>
@@ -296,9 +311,11 @@
 									<label for="renovacao" class="col-form-label"
 										style="margin-left: 1px">Chances de Renovação?</label> <select
 										class="form-control" th:field="*{renovacao}">
+										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoRenovacao : ${T(com.br.itsingular.enums.TipoRenovacao).values()}"
-											th:value="${tipoRenovacao}" th:text="${tipoRenovacao}">
+											th:value="${tipoRenovacao}" th:text="${tipoRenovacao}"
+											>
 										</option>
 									</select> <span th:if="${#fields.hasErrors('renovacao')}"
 										th:errors="*{renovacao}" class="text-danger"></span>
@@ -325,10 +342,12 @@
 										style="margin-left: 1px">RH</label> <select
 										class="form-control" th:field="*{rhProcesso}"
 										th:value="${rhProcesso}" multiple="multiple">
+										
 										<option
 											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
 											th:value="${descricaoProcessoSeletivo}"
 											th:text="${descricaoProcessoSeletivo}"></option>
+												<option th:value="''" selected="false"></option>
 									</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
 										th:errors="*{rhProcesso}" class="text-danger"></span>
 								</div>
@@ -378,6 +397,7 @@
 									<label for="localAplicacao" class="col-form-label"
 										style="margin-left: 1px">Local de Aplicação</label> <select
 										class="form-control" th:field="*{localAplicacao}">
+										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="descricaoLocalAplicacaoTestes : ${T(com.br.itsingular.enums.TipoLocalAplicacaoTestes).values()}"
 											th:value="${descricaoLocalAplicacaoTestes}"

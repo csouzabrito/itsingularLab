@@ -3,10 +3,15 @@
  */
 package com.br.itsingular.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @author dcarneiro
  *
  */
+@Getter
+@AllArgsConstructor
 public enum TipoRenovacao {
 
 	ALTA(1,"ALTA"),
@@ -15,27 +20,5 @@ public enum TipoRenovacao {
 	
 	private Integer tipoRenovacao;
 	private String descricaoTipoRenovacao;
-
-	private TipoRenovacao(Integer tipoRenovacao, String descricaoTipoRenovacao) {
-		this.tipoRenovacao = tipoRenovacao;
-		this.descricaoTipoRenovacao = descricaoTipoRenovacao;
-		
-	}
-
-	public Integer getTipoRenovacao() {
-		return tipoRenovacao;
-	}
-
-	public void setTipoRenovacao(Integer tipoRenovacao) {
-		this.tipoRenovacao = tipoRenovacao;
-	}
-
-	public String getDescricaoTipoRenovacao() {
-		return descricaoTipoRenovacao;
-	}
-
-	public void setDescricaoTipoRenovacao(String descricaoTipoRenovacao) {
-		this.descricaoTipoRenovacao = descricaoTipoRenovacao;
-	}	
 	
 }
