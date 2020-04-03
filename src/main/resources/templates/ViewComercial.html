@@ -1,42 +1,72 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <div th:insert="Header.html"></div>
+<script>
+	$(function() {
+		// Sidebar toggle behavior
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+</script>
+
 <body>
-<div th:replace="Menu :: menu">...</div>
+	<div class="d-flex">
+	<div th:replace="Menu :: menu">...</div>
+	<div class="container" id="content">
+		<h3 align="center">Lista Comercial</h3>
+		<br /> <br />
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Menu</small>
+		</button>
+		<div class="panel-body">
 
-<section>
-
-	<a href="#"><img src="/img/itsingular.jpg"></a>
-	<h3 align="center" style="margin-left: -100px">Informações Comercial</h3>
-	<BR />
-	<div class="panel-body">
+			<form method="GET" class="form-horizontal"
+				th:action="@{/comercial/filtrar}" th:object="${filtro}">
+				<div class="form-group">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<input class="form-control" placeholder="Filtrar requisição" autofocus="autofocus"
+								th:field="*{descricao}"></input> <span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
 
 			<div class="table-responsive">
-			<input type="hidden" th:field="*{email}" />
 				<table class="table table-bordered table-striped">
-					<thead>
+					<thead class="thead-light">
 						<tr>
-							<th class="text-center col-md-1">Data Solicitação</th>
-							<th class="text-center">Cliente</th>
-							<th class="text-center col-md-2">Cargo</th>
-							<th class="text-center">Ramo Atividade</th>
-							<th class="text-center">Email</th>
+							<th class="text-center col-md-2">Data Solicitação</th>
+							<th class="text-center col-md-3">Cliente</th>
+							<th class="text-center col-md-4">Solicitante</th>
+							<!-- <th class="text-center col-md-3">SLA</th> -->
+							<th class="text-center col-md-3">Ramo Atividade</th>
+							<th class="text-center col-md-6">Tipo Requisição</th>
 						</tr>
 					</thead>
 
 					<tbody>
-
 						<tr th:each="requisicao: ${requisicoes}">
-							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}">1</td>
+							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}"></td>
 							<td class="text-center" th:text="${{requisicao.cliente}}"></td>
-							<td class="text-center" th:text="${{requisicao.cargo}}"></td>
-							<td class="text-center" th:text="${{requisicao.ramoAtividade}}|"></td>
-							<td class="text-center" th:text="${{email}}|"></td>
+							<td class="text-center" th:text="${{requisicao.nomeSolicitante}}"></td>
+							<!-- <td class="text-center" th:text="${{requisicao.sla}}"></td> -->
+							<td class="text-center" th:text="${{requisicao.ramoAtividade}}"></td>
+							<td class="text-center" th:text="${{requisicao.tipoRequisicao}}"></td>
 						</tr>
 
 						<tr>
@@ -46,6 +76,8 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+		</div>
 	</div>
-</section>
+</body>
 </html>

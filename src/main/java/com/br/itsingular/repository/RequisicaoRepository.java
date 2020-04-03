@@ -18,4 +18,6 @@ import com.br.itsingular.entity.Requisicao;
 public interface RequisicaoRepository extends MongoRepository<Requisicao, String> {
 
 	List<Requisicao> findByEmail(String filtro);
+
+	List<Requisicao> findByClienteContaining(String filtro);
 }

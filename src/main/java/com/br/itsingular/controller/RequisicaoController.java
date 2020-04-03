@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,24 @@ public class RequisicaoController {
 	
 	@Autowired
 	private RequisicaoServices requisicaoServices;
+	
+	@Autowired
+	private HttpSession session;
 
 	@Autowired
 	private CadastrarCursosServices cursosServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main( Requisicao requisicao) {
+		
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
+		
+		Object username = session.getAttribute("email");
+		
 		if(!Utils.isEmptyOrNull(requisicao)) { 
 			requisicao = new Requisicao();
 			
-			requisicao.setNomeSolicitante("ITSINGULAR@ITSINGULAR.COM.BR");
+			requisicao.setNomeSolicitante(String.valueOf(username));
 			requisicao.setDataSolicitacao(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 			modelAndView.addObject("requisicao", requisicao);
 		}

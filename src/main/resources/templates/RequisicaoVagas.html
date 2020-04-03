@@ -23,7 +23,7 @@
 				<i class="fa fa-bars mr-2"></i><small
 					class="text-uppercase font-weight-bold">Menu</small>
 			</button>
-			<div>
+			<!-- <div>
 				<a href="#"><img src="/img/itsingular.jpg"></a>
 				<div class="label-session-user">
 					<form th:action="@{/login/logout}" method="POST">
@@ -33,7 +33,7 @@
 						</div>
 					</form>
 				</div>
-			</div>
+			</div> -->
 			<div th:each="m : ${msg}">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<span th:text="${m}"></span>
@@ -59,7 +59,7 @@
 					<form th:action="@{/requisicao/addRequisicao}"
 						th:object="${requisicao}" method="post">
 
-						<div th:if="${session.containsKey('name')}"
+						<div style="display: none;" th:if="${session.containsKey('name')}"
 							th:text="${session.name}"></div>
 
 						<div class="panel panel-default">

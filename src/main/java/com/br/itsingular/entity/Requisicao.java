@@ -34,7 +34,6 @@ public class Requisicao implements Serializable {
 	@Id
 	private String id;
 
-	@Column(name = "nomeSolicitante")
 	@NotBlank(message = "Campo obrigatório")
 	private String nomeSolicitante;
 
@@ -168,8 +167,19 @@ public class Requisicao implements Serializable {
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoObrigatorio;
 
+<<<<<<< HEAD
+=======
+	private Integer sla;
+>>>>>>> 68ae434bde5c2428c2eb3f80ac298dc6fe2c4411
 	@Column(name = "requisitoConhecimento")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoConhecimento;
 
+<<<<<<< HEAD
+=======
+	@Column(name = "requisitoTempo")
+	@NotNull(message = "Campo obrigatório")
+	private String[] requisitoTempo;
+	
+>>>>>>> 68ae434bde5c2428c2eb3f80ac298dc6fe2c4411
 }

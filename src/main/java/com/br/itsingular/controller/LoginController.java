@@ -7,13 +7,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.br.itsingular.entity.Login;
 import com.br.itsingular.messages.Messages;
-import com.br.itsingular.model.Login;
 import com.br.itsingular.services.LoginService;
 
 @Controller
@@ -22,6 +23,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService service;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/view")
 	public ModelAndView novo(Login login){
@@ -39,6 +43,7 @@ public class LoginController {
 		
 		if(Objects.nonNull(user)) {
 			 session.setAttribute("name", user.getName());
+			 session.setAttribute("email", user.getUsername());
 			 return "redirect:/requisicao/abrir";
 		}else {
 			Messages.setMessage(attributes, "message", "Erro ao logar, tente novamente");
@@ -47,8 +52,8 @@ public class LoginController {
 		return page;
 	}
 	
-	@PostMapping("/logout")
-	public String logout(@Validated Login login, RedirectAttributes attributes, HttpSession session) {
+	@GetMapping("/logout")
+	public String logout(@Validated Login login, RedirectAttributes attributes) {
 		session.invalidate();
 		return "redirect:/login/view";
 	}

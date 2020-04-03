@@ -2,6 +2,8 @@ package com.br.itsingular.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,9 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.br.itsingular.entity.Pessoa;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.PessoaService;
+import com.br.itsingular.services.RequisicaoFilter;
+import com.br.itsingular.services.RequisicaoServices;
 
 
 @Controller
@@ -22,6 +27,12 @@ public class ComercialController {
 	
 	@Autowired
 	private PessoaService pesssoaService;
+	
+	@Autowired
+	private RequisicaoServices requisicaoServices;
+	
+	@Autowired
+	private HttpSession session;
 	
 	
 	@RequestMapping("/cadastro")
@@ -49,13 +60,28 @@ public class ComercialController {
 	}
 	
 	
-	@GetMapping("/informacoes/{email}")
-	public ModelAndView listarInfo(@ModelAttribute("email") final String filtro){
+	@GetMapping("/informacoes")
+	public ModelAndView listarInfo(){
 		
-		List<Requisicao> requisicoes = this.pesssoaService.getInfoByFilter(filtro);
+		Object email = session.getAttribute("email");
+		
+		List<Requisicao> requisicoes = this.requisicaoServices.getInfoByEmail(String.valueOf(email));
 		
 		ModelAndView view = new ModelAndView("ViewComercial");
+		view.addObject("filtro", new RequisicaoFilter());
 		view.addObject("requisicoes", requisicoes) ;
 		return view;
 	}
+	
+	@GetMapping("/filtrar")
+	public ModelAndView listar(@ModelAttribute("filtro") final RequisicaoFilter filtro){
+		
+		List<Requisicao> requisicoes  = this.requisicaoServices.filtrarRequisicao(filtro);
+		
+		ModelAndView view = new ModelAndView("ViewComercial");
+		view.addObject("filtro", new RequisicaoFilter());
+		view.addObject("requisicoes", requisicoes) ;
+		return view;
+	}
+	
 }

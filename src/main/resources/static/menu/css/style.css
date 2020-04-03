@@ -8217,7 +8217,8 @@ h1, h2, h3, h4, h5,
       color: #fff;
       display: block;
       padding: 10px 30px;
-      background: #5FB423; }
+     /*  background: #5FB423; */ 
+      }
   #sidebar ul.components {
     padding: 0; }
   #sidebar ul li {
@@ -8230,7 +8231,8 @@ h1, h2, h3, h4, h5,
       padding: 15px 30px;
       display: block;
       color: rgba(255, 255, 255, 0.6);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+      }
       #sidebar ul li a:hover {
         color: #fff;
         background: #EF0980;
