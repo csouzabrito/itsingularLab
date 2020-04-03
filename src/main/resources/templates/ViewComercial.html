@@ -50,11 +50,12 @@
 				<table class="table table-bordered table-striped">
 					<thead class="thead-light">
 						<tr>
-							<th class="text-center col-md-3">Data Solicitação</th>
+							<th class="text-center col-md-2">Data Solicitação</th>
 							<th class="text-center col-md-3">Cliente</th>
 							<th class="text-center col-md-4">Solicitante</th>
-							<th class="text-center col-md-3">SLA</th>
+							<!-- <th class="text-center col-md-3">SLA</th> -->
 							<th class="text-center col-md-3">Ramo Atividade</th>
+							<th class="text-center col-md-6">Tipo Requisição</th>
 						</tr>
 					</thead>
 
@@ -63,8 +64,9 @@
 							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}"></td>
 							<td class="text-center" th:text="${{requisicao.cliente}}"></td>
 							<td class="text-center" th:text="${{requisicao.nomeSolicitante}}"></td>
-							<td class="text-center" th:text="${{requisicao.sla}}"></td>
+							<!-- <td class="text-center" th:text="${{requisicao.sla}}"></td> -->
 							<td class="text-center" th:text="${{requisicao.ramoAtividade}}"></td>
+							<td class="text-center" th:text="${{requisicao.tipoRequisicao}}"></td>
 						</tr>
 
 						<tr>
