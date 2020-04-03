@@ -2,6 +2,7 @@ package com.br.itsingular.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.br.itsingular.entity.Cursos;
 import com.br.itsingular.entity.Requisicao;
+import com.br.itsingular.services.CadastrarCursosServices;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
@@ -26,6 +29,9 @@ public class RequisicaoController {
 	
 	@Autowired
 	private HttpSession session;
+
+	@Autowired
+	private CadastrarCursosServices cursosServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main( Requisicao requisicao) {
@@ -41,7 +47,7 @@ public class RequisicaoController {
 			requisicao.setDataSolicitacao(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 			modelAndView.addObject("requisicao", requisicao);
 		}
-		
+		modelAndView.addObject("listCursos",  listCursos());
 		return modelAndView;
 	}
 	
@@ -52,6 +58,7 @@ public class RequisicaoController {
 			return main(null);
 		}
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
+		modelAndView.addObject("listCursos",  listCursos());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("requisicao", new Requisicao());
@@ -59,5 +66,13 @@ public class RequisicaoController {
 		}
 		modelAndView.addObject("error","error");
 		return modelAndView;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Cursos> listCursos(){
+		return cursosServices.findCursos();
 	}
 }

@@ -13,6 +13,13 @@
 			$('#sidebar, #content').toggleClass('active');
 		});
 	});
+    $(document).on("keydown", "#descricaoResumida", function () {
+        var caracteresRestantes = 1000;
+        var caracteresDigitados = parseInt($(this).val().length);
+        var caracteresRestantes = caracteresRestantes - caracteresDigitados;
+        
+        $(".caracteres").text(caracteresRestantes);
+    });
 </script>
 <body>
 	<div class="d-flex">
@@ -52,7 +59,7 @@
 							<div class="row">
 								<input type="hidden"  th:field="*{id}">
 								<BR />
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-6">
 									<label for="nomeCurso" class="col-form-label"
 										style="margin-left: 1px">Cursos e/ou Linguagens</label> <input
 										type="text" th:field="*{nomeCurso}" class="form-control"
@@ -68,10 +75,13 @@
 										th:if="${#fields.hasErrors('versao')}" th:errors="*{versao}"
 										class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-6">
+								</div>
+								<div class="row">
+								<div class="form-group col-md-12">
+								
 									<label for="descricaoResumida" class="col-form-label"
-										style="margin-left: 1px">Descrição Resumida</label>
-									<textarea maxlength="500" cols="10" rows="5"
+										style="margin-left: 1px">Descrição Resumida</label> <span class="caracteres">1000</span> Restantes <br>
+									<textarea maxlength="1000" cols="10" rows="5"
 										th:field="*{descricaoResumida}" class="form-control"
 										id="descricaoResumida"></textarea>
 									<span th:if="${#fields.hasErrors('descricaoResumida')}"
@@ -98,23 +108,25 @@
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
-									<table
+									<table 
 										class="table table-sm table-striped table-hover table-bordered">
 										<thead>
 											<tr>
 												<th>Código de Cadastro</th>
 												<th>Nome do Curso</th>
 												<th>Versão</th>
-												<th>Data Manutenção</th>
+												<th>Descrição da tecnologia</th>
+												<th>Data</th>
 												<th>Usuário</th>
+												<th>Ações</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="cursos : ${listCursos}">
+											<tr th:each="cursos : ${listCursos}" >
 												<td th:text="${cursos.id}"></td>
 												<td th:text="${cursos.nomeCurso}"></td>
 												<td th:text="${cursos.versao}"></td>
-												<td th:text="${cursos.descricaoResumida}"></td>
+												<td th:text="${cursos.descricaoResumida}" style="word-wrap:break-word;"></td>
 												<td
 													th:text="${#dates.format(cursos.dataInclOrManut, 'dd/MM/yyyy')}"></td>
 												<td th:text="${cursos.usuario}"></td>

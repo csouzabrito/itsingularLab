@@ -3,10 +3,15 @@
  */
 package com.br.itsingular.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @author dcarneiro
  *
  */
+@Getter
+@AllArgsConstructor
 public enum TipoProcessoSeletivo {
 
 	ENTREVISTA_PRESENCIAL(1, "ENTREVISTA PRESENCIAL"),
@@ -16,22 +21,5 @@ public enum TipoProcessoSeletivo {
 	
 	private Integer tipoProcessoSeletivo;
 	private String descricaotipoProcessoSeletivo;
-	
-	private TipoProcessoSeletivo(Integer tipoProcessoSeletivo, String descricaotipoProcessoSeletivo){
-		this.tipoProcessoSeletivo = tipoProcessoSeletivo;
-		this.descricaotipoProcessoSeletivo = descricaotipoProcessoSeletivo;
-	}
-	public String getDescricaotipoProcessoSeletivo() {
-		return descricaotipoProcessoSeletivo;
-	}
-	public void setDescricaotipoProcessoSeletivo(String descricaotipoProcessoSeletivo) {
-		this.descricaotipoProcessoSeletivo = descricaotipoProcessoSeletivo;
-	}
-	public void setTipoProcessoSeletivo(Integer tipoProcessoSeletivo) {
-		this.tipoProcessoSeletivo = tipoProcessoSeletivo;
-	}
-	public Integer getTipoProcessoSeletivo() {
-		return tipoProcessoSeletivo;
-	}
 	
 }

@@ -3,10 +3,15 @@
  */
 package com.br.itsingular.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @author dcarneiro
  *
  */
+@Getter
+@AllArgsConstructor
 public enum TipoQualificacaoTestes {
 
 	ADT(1, "ADT"),
@@ -18,23 +23,4 @@ public enum TipoQualificacaoTestes {
 	
 	private Integer tipoQualificacaoTestes;
 	private String descricaotipoQualificacaoTestes;
-
-	private TipoQualificacaoTestes(Integer tipoqualificacaoTestes, String descricaotipoQualificacaoTestes){
-		this.tipoQualificacaoTestes = tipoqualificacaoTestes;
-		this.descricaotipoQualificacaoTestes = descricaotipoQualificacaoTestes;
-	
-	}
-	public Integer getTipoQualificacaoTestes() {
-		return tipoQualificacaoTestes;
-	}
-	public void setTipoQualificacaoTestes(Integer tipoQualificacaoTestes) {
-		this.tipoQualificacaoTestes = tipoQualificacaoTestes;
-	}
-	public String getDescricaotipoQualificacaoTestes() {
-		return descricaotipoQualificacaoTestes;
-	}
-	public void setDescricaotipoQualificacaoTestes(String descricaotipoQualificacaoTestes) {
-		this.descricaotipoQualificacaoTestes = descricaotipoQualificacaoTestes;
-	}
-
 }

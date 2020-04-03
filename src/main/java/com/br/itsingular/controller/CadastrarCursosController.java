@@ -57,9 +57,7 @@ public class CadastrarCursosController {
 			if(Utils.isEmptyOrNull(cursos.getId())) {
 				services.insertCurso(complementar(cursos));
 			}else {
-				String aux = cursos.getId();
-				cursos.setId(null);
-				services.UpdateCursos(aux, complementar(cursos));
+				services.UpdateCursos(cursos.getId(), complementar(cursos));
 			}
 			listCursos= services.findCursos();
 			cursos.setCursos(listCursos);
@@ -108,6 +106,9 @@ public class CadastrarCursosController {
 	
 	
 	public Cursos complementar(Cursos cursos) {
+		if(cursos.getId().equals("")) {
+			cursos.setId(null);
+		}
 		cursos.setDataInclOrManut(new Date());
 		cursos.setUsuario("Usuário Logado");
 		return cursos;

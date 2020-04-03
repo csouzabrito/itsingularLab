@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.entity.Cursos;
@@ -21,6 +25,9 @@ public class CadastrarCursosServices {
 
 	@Autowired
 	private CadastrarCursosRepository cadCursos;
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
 	/**
 	 * 
@@ -72,8 +79,14 @@ public class CadastrarCursosServices {
 	 */
 	public void UpdateCursos(String id, Cursos cursos) {
 		try {
-			deleteCursos(id);
-			insertCurso(cursos);
+			Query query = new Query();
+			query.addCriteria(Criteria.where("_id").is(cursos.getId()));
+			Update update = new Update();
+			update.set("versao", cursos.getVersao());
+			update.set("descricaoResumida", cursos.getDescricaoResumida());
+			update.set("dataInclOrManut", cursos.getDataInclOrManut());
+			update.set("usuario", cursos.getUsuario());		
+			mongoTemplate.findAndModify(query, update, Cursos.class);
 		} catch (RuntimeException e) {
 			throw e;
 		}
