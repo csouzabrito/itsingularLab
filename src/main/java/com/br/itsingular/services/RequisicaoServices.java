@@ -1,6 +1,7 @@
 package com.br.itsingular.services;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +72,13 @@ public class RequisicaoServices {
 		
 		LocalDate dataSolicitacao = LocalDate.parse(requisicao.getDataSolicitacao());
 		
+		String dataFormatada = dataSolicitacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		
 		Long diferencaEmDias = ChronoUnit.DAYS.between(hoje, dataSolicitacao);
 		
 		Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
 		requisicao.setSla(sla);
+		requisicao.setDataSolicitacao(dataFormatada);
 
 		return requisicao;
 	}
