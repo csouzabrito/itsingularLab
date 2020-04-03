@@ -36,7 +36,6 @@ public class Requisicao implements Serializable {
 	@Id
 	private String id;
 
-	@Column(name = "nomeSolicitante")
 	@NotBlank(message = "Campo obrigatório")
 	private String nomeSolicitante;
 
@@ -168,6 +167,8 @@ public class Requisicao implements Serializable {
 	
 	@OneToMany(mappedBy = "requisicao")
 	private List<Requisitos> requisitos;
+	
+	private Integer sla;
 
 	
 }

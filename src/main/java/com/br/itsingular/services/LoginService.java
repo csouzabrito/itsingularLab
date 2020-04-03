@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.br.itsingular.model.Login;
+import com.br.itsingular.entity.Login;
 import com.br.itsingular.repository.LoginRepository;
 
 @Service

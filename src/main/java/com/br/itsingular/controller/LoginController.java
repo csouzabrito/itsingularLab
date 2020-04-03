@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.br.itsingular.entity.Login;
 import com.br.itsingular.messages.Messages;
-import com.br.itsingular.model.Login;
 import com.br.itsingular.services.LoginService;
 
 @Controller
@@ -39,6 +39,7 @@ public class LoginController {
 		
 		if(Objects.nonNull(user)) {
 			 session.setAttribute("name", user.getName());
+			 session.setAttribute("email", user.getUsername());
 			 return "redirect:/requisicao/abrir";
 		}else {
 			Messages.setMessage(attributes, "message", "Erro ao logar, tente novamente");
