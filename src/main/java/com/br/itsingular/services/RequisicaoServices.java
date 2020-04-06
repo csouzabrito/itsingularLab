@@ -28,6 +28,7 @@ public class RequisicaoServices {
 	private RequisicaoRepository repository;
 	
 	public Requisicao salvarRequisicao(Requisicao requisicao ) {
+		
 		try {
 			
 			requisicao.setStatus(StatusRequisicao.PENDENTE);
@@ -52,7 +53,7 @@ public class RequisicaoServices {
 		List<Requisicao> requisicoes = repository.findByEmail(email);
 		
 		requisicoes.forEach(r -> {
-			requisicoesComSLA.add(calcularSLA(r));
+			requisicoesComSLA.add(formatDate(r));
 		});
 		
 		return requisicoesComSLA;
@@ -66,18 +67,12 @@ public class RequisicaoServices {
 		return requisicoes;
 	}
 	
-	private Requisicao calcularSLA(Requisicao requisicao){
-		
-		LocalDate hoje = LocalDate.now();
+	private Requisicao formatDate(Requisicao requisicao){
 		
 		LocalDate dataSolicitacao = LocalDate.parse(requisicao.getDataSolicitacao());
 		
 		String dataFormatada = dataSolicitacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		
-		Long diferencaEmDias = ChronoUnit.DAYS.between(hoje, dataSolicitacao);
-		
-		Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
-		requisicao.setSla(sla);
 		requisicao.setDataSolicitacao(dataFormatada);
 
 		return requisicao;
