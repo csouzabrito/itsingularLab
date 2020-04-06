@@ -80,7 +80,7 @@
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoRequisicao : ${T(com.br.itsingular.enums.TipoRequisicao).values()}"
-											th:value="${descricaoRequisicao}" th:text="${tipoRequisicao}"></option>
+											th:value="${tipoRequisicao}" th:text="${tipoRequisicao}"></option>
 									</select> <span th:if="${#fields.hasErrors('tipoRequisicao')}"
 										th:errors="*{tipoRequisicao}" class="text-danger"></span>
 								</div>
@@ -347,7 +347,6 @@
 											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
 											th:value="${descricaoProcessoSeletivo}"
 											th:text="${descricaoProcessoSeletivo}"></option>
-												<option th:value="''" selected="false"></option>
 									</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
 										th:errors="*{rhProcesso}" class="text-danger"></span>
 								</div>

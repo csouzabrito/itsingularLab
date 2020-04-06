@@ -1,5 +1,6 @@
 package com.br.itsingular.entity;
 
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Requisicao implements Serializable {
 	@Id
 	private String id;
 
+	@Column(name = "nomeSolicitante")
 	@NotBlank(message = "Campo obrigatório")
 	private String nomeSolicitante;
 
@@ -169,14 +171,11 @@ public class Requisicao implements Serializable {
 	private String[] requisitoObrigatorio;
 	
 	private Integer sla;
-	
+
 	@Column(name = "requisitoConhecimento")
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoConhecimento;
 
-	@Column(name = "requisitoTempo")
-	@NotNull(message = "Campo obrigatório")
-	private String[] requisitoTempo;
 	
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
