@@ -66,17 +66,16 @@
 							<div class="panel-heading">
 								<div class="panel-heading">
 									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Solicitante
-											ITSingular</h1>
+										<h1 class="panel-title" style="margin-left: -27px">Solicitante ITSingular</h1>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<BR />
 								<div class="form-group col-md-4">
-									<label for="tipoRequisicao" class="col-form-label"
-										style="margin-left: 1px">Tipo Requisição</label> <select
-										class="form-control" th:field="*{tipoRequisicao}">
+									<label for="tipoRequisicao" class="col-form-label labels">Tipo Requisição</label> 
+									<select
+										class="form-control fields" th:field="*{tipoRequisicao}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoRequisicao : ${T(com.br.itsingular.enums.TipoRequisicao).values()}"
@@ -93,9 +92,9 @@
 
 								</div>
 								<div class="form-group col-md-2">
-									<label for="dataSolicitacao" class="col-form-label"
-										style="margin-left: 1px">Data Solicitação</label> <input
-										type="text" th:field="*{dataSolicitacao}" class="form-control"
+									<label for="dataSolicitacao" class="col-form-label">
+										Data Solicitação</label> <input
+										type="text" th:field="*{dataSolicitacao}" class="form-control field-data-solicitacao"
 										id="dataSolicitacao" readonly="true">
 								</div>
 							</div>
@@ -112,16 +111,14 @@
 							<div class="row">
 								<BR />
 								<div class="form-group col-md-3">
-									<label for="cliente" class="col-form-label"
-										style="margin-left: 1px">Cliente</label> <input type="text"
+									<label for="cliente" class="col-form-label labels">Cliente</label> <input type="text"
 										th:field="*{cliente}" class="form-control" id="cliente"
 										placeholder="Cliente"> <span
 										th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"
 										class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-3">
-									<label for="ramoAtividade" class="col-form-label"
-										style="margin-left: 1px">Ramo Atividade</label> <input
+									<label for="ramoAtividade" class="col-form-label">Ramo Atividade</label> <input
 										type="text" th:field="*{ramoAtividade}" class="form-control"
 										id="ramoAtividade" placeholder="Ramo de Atividade"> <span
 										th:if="${#fields.hasErrors('ramoAtividade')}"
@@ -144,8 +141,7 @@
 										class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-6">
-									<label for="endereco" class="col-form-label"
-										style="margin-left: 1px">Endereço</label> <input type="text"
+									<label for="endereco" class="col-form-label labels">Endereço</label> <input type="text"
 										th:field="*{endereco}" class="form-control" id="endereco"
 										placeholder="Endereço"> <span
 										th:if="${#fields.hasErrors('endereco')}"
@@ -160,8 +156,7 @@
 										class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-3">
-									<label for="telCorporativo" class="col-form-label"
-										style="margin-left: 1px">Telefone Corporativo</label> <input
+									<label for="telCorporativo" class="col-form-label labels">Telefone Corporativo</label> <input
 										type="text" th:field="*{telCorporativo}" class="form-control"
 										id="telCorporativo" data-inputmask="'mask': '(99)9999-9999'"
 										maxlength="13" placeholder="Telefone Corporativo"> <span
@@ -169,8 +164,7 @@
 										th:errors="*{telCorporativo}" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-3">
-									<label for="telCelular" class="col-form-label"
-										style="margin-left: 1px">Telefone Celular</label> <input
+									<label for="telCelular" class="col-form-label labels">Telefone Celular</label> <input
 										type="text" th:field="*{telCelular}" class="form-control"
 										id="telCelular" maxlength="14"
 										data-inputmask="'mask': '(99)99999-9999'"
@@ -179,8 +173,7 @@
 										th:errors="*{telCelular}" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-6">
-									<label for="email" class="col-form-label"
-										style="margin-left: 1px">E-mail</label> <input type="text"
+									<label for="email" class="col-form-label labels">E-mail</label> <input type="text"
 										th:field="*{email}" class="form-control" id="email"
 										data-inputmask="'alias': 'email'"> <span
 										th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
@@ -204,8 +197,7 @@
 							<div class="row">
 								<br />
 								<div class="form-group col-md-4">
-									<label for="perfil" class="col-form-label"
-										style="margin-left: 1px">Perfil</label> <input type="text"
+									<label for="perfil" class="col-form-label labels">Perfil</label> <input type="text"
 										th:field="*{perfil}" class="form-control" id="perfil"
 										placeholder="Perfil"><span
 										th:if="${#fields.hasErrors('perfil')}" th:errors="*{perfil}"
@@ -213,8 +205,7 @@
 
 								</div>
 								<div class="form-group col-md-4">
-									<label for="regiaoAtuacao" class="col-form-label"
-										style="margin-left: 1px">Região de Atuação</label> <input
+									<label for="regiaoAtuacao" class="col-form-label labels">Região de Atuação</label> <input
 										type="text" th:field="*{regiaoAtuacao}" class="form-control"
 										id="regiaoAtuacao" placeholder="Região de Atuação"><span
 										th:if="${#fields.hasErrors('regiaoAtuacao')}"
@@ -222,16 +213,14 @@
 								</div>
 
 								<div class="form-group col-md-4">
-									<label for="vagas" class="col-form-label"
-										style="margin-left: 1px">Nº de Vagas</label> <input
+									<label for="vagas" class="col-form-label labels">Nº de Vagas</label> <input
 										type="text" th:field="*{vagas}" class="form-control"
 										id="vagas" placeholder="Vagas"> <span
 										th:if="${#fields.hasErrors('vagas')}" th:errors="*{vagas}"
 										class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-2">
-									<label for="formaContratacao" class="col-form-label"
-										style="margin-left: 1px">Contratação</label> <select
+									<label for="formaContratacao" class="col-form-label labels">Contratação</label> <select
 										class="form-control" th:field="*{formaContratacao}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
@@ -242,8 +231,7 @@
 
 								</div>
 								<div class="form-group col-md-3">
-									<label for="valor" class="col-form-label"
-										style="margin-left: 1px">Valor</label> <input type="text"
+									<label for="valor" class="col-form-label labels">Valor</label> <input type="text"
 										th:field="*{valor}"
 										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
 										class="form-control" id="previsaoInicio" placeholder="Valor"><span
@@ -252,8 +240,7 @@
 								</div>
 
 								<div class="form-group col-md-2">
-									<label for="por" class="col-form-label"
-										style="margin-left: 1px">Por</label> <select
+									<label for="por" class="col-form-label labels">Por</label> <select
 										class="form-control" th:field="*{por}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
@@ -263,8 +250,7 @@
 										class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-2">
-									<label for="horaAberta" class="col-form-label"
-										style="margin-left: 1px">Hora Aberta</label> <select
+									<label for="horaAberta" class="col-form-label labels">Hora Aberta</label> <select
 										class="form-control" th:field="*{horaAberta}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option th:value="'S'" th:text="SIM"></option>
@@ -273,8 +259,7 @@
 										th:errors="*{horaAberta}" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-3">
-									<label for="quantidadeMinimaHoras" class="col-form-label"
-										style="margin-left: 1px">Quantidade Mínima Horas/Mês</label> <input
+									<label for="quantidadeMinimaHoras" class="col-form-label labels">Quantidade Mínima Horas/Mês</label> <input
 										type="number" th:field="*{quantidadeMinimaHoras}"
 										class="form-control" id="quantidadeMinimaHoras"
 										placeholder="Quantidade Mínima Horas/Mês"><span
@@ -282,8 +267,7 @@
 										th:errors="*{quantidadeMinimaHoras}" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-3">
-									<label for="cargaHoraria" class="col-form-label"
-										style="margin-left: 1px">Carga Horária</label> <input
+									<label for="cargaHoraria" class="col-form-label labels">Carga Horária</label> <input
 										type="text" th:field="*{cargaHoraria}" class="form-control"
 										id="cargaHoraria" placeholder="Carga Horária"><span
 										th:if="${#fields.hasErrors('cargaHoraria')}"
@@ -291,8 +275,7 @@
 
 								</div>
 								<div class="form-group col-md-3">
-									<label for="previsaoInicio" class="col-form-label"
-										style="margin-left: 1px">Previsão de Início</label> <input
+									<label for="previsaoInicio" class="col-form-label labels">Previsão de Início</label> <input
 										type="date" th:field="*{previsaoInicio}" class="form-control"
 										id="previsaoInicio" placeholder="Previsão de Início"><span
 										th:if="${#fields.hasErrors('previsaoInicio')}"
@@ -300,8 +283,7 @@
 								</div>
 
 								<div class="form-group col-md-3">
-									<label for="duracaoContrato" class="col-form-label"
-										style="margin-left: 1px">Duração Contrato</label> <input
+									<label for="duracaoContrato" class="col-form-label labels">Duração Contrato</label> <input
 										type="text" th:field="*{duracaoContrato}" class="form-control"
 										id="duracaoContrato" placeholder="Duração Contrato"> <span
 										th:if="${#fields.hasErrors('duracaoContrato')}"
@@ -393,8 +375,7 @@
 							<div class="row">
 								<BR />
 								<div class="form-group col-md-4">
-									<label for="localAplicacao" class="col-form-label"
-										style="margin-left: 1px">Local de Aplicação</label> <select
+									<label for="localAplicacao" class="col-form-label labels">Local de Aplicação</label> <select
 										class="form-control" th:field="*{localAplicacao}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
@@ -444,8 +425,7 @@
 							<div class="row">
 								<BR />
 								<div class=" form-group col-md-6">
-									<label for="requisitoObrigatorio" style="margin-left: 1px">Escolha
-										conhecimento obrigatório</label> <select class="form-control"
+									<label for="requisitoObrigatorio">Escolha conhecimento obrigatório</label> <select class="form-control"
 										th:field="*{requisitoObrigatorio}" multiple="multiple">
 										<option th:each="cursos : ${listCursos}"
 											th:value="${cursos.id}"
