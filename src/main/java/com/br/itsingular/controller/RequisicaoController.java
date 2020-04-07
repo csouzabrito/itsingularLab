@@ -65,7 +65,7 @@ public class RequisicaoController {
 		modelAndView.addObject("listCursos",  listCursos());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
-			//EnviarEmail
+			//EnviarEmail 
 			try {
 				enviarEmailPosRequisicao(Integer.valueOf(requisicao.getVagas()),requisicao.getNomeSolicitante(), 
 						requisicao.getCliente(),requisicao.getDataSolicitacao());
