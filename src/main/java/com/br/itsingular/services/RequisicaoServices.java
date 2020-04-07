@@ -2,7 +2,6 @@ package com.br.itsingular.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,67 +19,50 @@ import com.br.itsingular.repository.RequisicaoRepository;
  */
 @Service
 public class RequisicaoServices {
-	
+
 	@Autowired
 	private SlaService slaService;
-	
+
 	@Autowired
 	private RequisicaoRepository repository;
-	
-	public Requisicao salvarRequisicao(Requisicao requisicao ) {
+
+	public Requisicao salvarRequisicao(Requisicao requisicao) {
+
 		try {
-			
 			requisicao.setStatus(StatusRequisicao.PENDENTE);
-			
 			Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
 			requisicao.setSla(sla);
-			
 			Requisicao newRequisicao = this.repository.insert(requisicao);
-			
 			this.slaService.criarSla(newRequisicao);
-			
-			return  newRequisicao;
+			return newRequisicao;
 		} catch (RuntimeException e) {
 			throw e;
 		}
 	}
-	
+
 	public List<Requisicao> getInfoByEmail(final String email) {
-		
 		List<Requisicao> requisicoesComSLA = new ArrayList<>();
-		
 		List<Requisicao> requisicoes = repository.findByEmail(email);
-		
 		requisicoes.forEach(r -> {
-			requisicoesComSLA.add(calcularSLA(r));
+			requisicoesComSLA.add(formatDate(r));
 		});
-		
 		return requisicoesComSLA;
 	}
-	
+
 	public List<Requisicao> filtrarRequisicao(final RequisicaoFilter filtro) {
-		
 		String cliente = filtro.getDescricao() == null ? "%" : filtro.getDescricao();
 		List<Requisicao> requisicoes = repository.findByClienteContaining(cliente);
-		
 		return requisicoes;
 	}
-	
-	private Requisicao calcularSLA(Requisicao requisicao){
-		
-		LocalDate hoje = LocalDate.now();
-		
-		LocalDate dataSolicitacao = LocalDate.parse(requisicao.getDataSolicitacao());
-		
-		String dataFormatada = dataSolicitacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-		
-		Long diferencaEmDias = ChronoUnit.DAYS.between(hoje, dataSolicitacao);
-		
-		Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
-		requisicao.setSla(sla);
-		requisicao.setDataSolicitacao(dataFormatada);
+
+	private Requisicao formatDate(Requisicao requisicao) {
+
+		LocalDate dataSolicitacao = LocalDate.parse(
+					requisicao.getDataSolicitacao().toString(),
+										DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+		requisicao.setDataSolicitacao(dataSolicitacao);
 
 		return requisicao;
 	}
-
 }

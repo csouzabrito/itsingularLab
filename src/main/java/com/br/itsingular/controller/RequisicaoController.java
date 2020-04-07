@@ -1,16 +1,15 @@
 package com.br.itsingular.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.br.itsingular.entity.Cursos;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.CadastrarCursosServices;
+import com.br.itsingular.services.EmailServices;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
@@ -33,6 +33,9 @@ public class RequisicaoController {
 
 	@Autowired
 	private CadastrarCursosServices cursosServices;
+	
+	@Autowired
+	private EmailServices emailServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main( Requisicao requisicao) {
@@ -45,7 +48,7 @@ public class RequisicaoController {
 			requisicao = new Requisicao();
 			
 			requisicao.setNomeSolicitante(String.valueOf(username));
-			requisicao.setDataSolicitacao(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+			requisicao.setDataSolicitacao(LocalDate.now());
 			modelAndView.addObject("requisicao", requisicao);
 		}
 		modelAndView.addObject("listCursos",  listCursos());
@@ -53,7 +56,7 @@ public class RequisicaoController {
 	}
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
-	public ModelAndView addRequisicao(@Valid @RequestBody Requisicao requisicao, BindingResult result) {
+	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return main(null);
@@ -62,10 +65,19 @@ public class RequisicaoController {
 		modelAndView.addObject("listCursos",  listCursos());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
-			modelAndView.addObject("requisicao", new Requisicao());
+			//EnviarEmail 
+			try {
+//				enviarEmailPosRequisicao(Integer.valueOf(requisicao.getVagas()),requisicao.getNomeSolicitante(), 
+//						requisicao.getCliente(),requisicao.getDataSolicitacao());
+				modelAndView.addObject("requisicao", new Requisicao());
+				modelAndView.addObject("message","emailSuccess");
+			} catch (Exception e) {
+				modelAndView.addObject("message","emailErro");
+			}
 			return modelAndView;
 		}
-		modelAndView.addObject("error","error");
+		
+		modelAndView.addObject("message","error");
 		return modelAndView;
 	}
 	
@@ -75,5 +87,12 @@ public class RequisicaoController {
 	 */
 	public List<Cursos> listCursos(){
 		return cursosServices.findCursos();
+	}
+	/**
+	 * @throws MessagingException 
+	 * 
+	 */
+	public void enviarEmailPosRequisicao(int quantidadeVagas, String requisitante, String cliente, LocalDate dataAbertura) throws MessagingException {
+		emailServices.enviarEmail(quantidadeVagas, dataAbertura, requisitante, cliente);
 	}
 }
