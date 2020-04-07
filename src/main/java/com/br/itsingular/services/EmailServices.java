@@ -3,6 +3,8 @@
  */
 package com.br.itsingular.services;
 
+import java.time.LocalDate;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -27,7 +29,7 @@ public class EmailServices {
 	@Qualifier("gmail")
 	private JavaMailSender emailSend;
 	
-	public void enviarEmail(final int quantidadeVagas,final String dataAbertura, 
+	public void enviarEmail(final int quantidadeVagas,final LocalDate dataAbertura, 
 							final String requisitante, final String cliente) throws MessagingException {
 		try {
 			MimeMessage mm = emailSend.createMimeMessage();

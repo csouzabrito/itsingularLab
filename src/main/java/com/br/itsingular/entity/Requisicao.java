@@ -2,6 +2,7 @@ package com.br.itsingular.entity;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -41,8 +42,7 @@ public class Requisicao implements Serializable {
 	private String nomeSolicitante;
 
 	@Column(name="dataSolicitacao")
-	@NotBlank(message = "Campo obrigatório")
-	private String dataSolicitacao;
+	private LocalDate dataSolicitacao;
 
 	@Column(name = "cliente")
 	@NotBlank(message = "Campo obrigatório")

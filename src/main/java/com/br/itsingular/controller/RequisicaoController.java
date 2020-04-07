@@ -1,7 +1,6 @@
 package com.br.itsingular.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -49,7 +48,7 @@ public class RequisicaoController {
 			requisicao = new Requisicao();
 			
 			requisicao.setNomeSolicitante(String.valueOf(username));
-			requisicao.setDataSolicitacao(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+			requisicao.setDataSolicitacao(LocalDate.now());
 			modelAndView.addObject("requisicao", requisicao);
 		}
 		modelAndView.addObject("listCursos",  listCursos());
@@ -93,7 +92,7 @@ public class RequisicaoController {
 	 * @throws MessagingException 
 	 * 
 	 */
-	public void enviarEmailPosRequisicao(int quantidadeVagas, String requisitante, String cliente, String dataAbertura) throws MessagingException {
+	public void enviarEmailPosRequisicao(int quantidadeVagas, String requisitante, String cliente, LocalDate dataAbertura) throws MessagingException {
 		emailServices.enviarEmail(quantidadeVagas, dataAbertura, requisitante, cliente);
 	}
 }

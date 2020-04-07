@@ -1,7 +1,5 @@
 package com.br.itsingular.services;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +15,9 @@ public class SlaService {
 
 	public void criarSla(final Requisicao requisicao) {
 		
-		LocalDate dataSolicitacao = LocalDate.parse(requisicao.getDataSolicitacao());
-		
 		final Sla sla = Sla.builder()
 				.solicitante(requisicao.getNomeSolicitante())
-				.dataSolicitacao(dataSolicitacao)
+				.dataSolicitacao(requisicao.getDataSolicitacao())
 				.tipoRequisicao(requisicao.getTipoRequisicao()).build();
 		
 		this.repository.save(sla);
