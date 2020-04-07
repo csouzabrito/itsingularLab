@@ -42,12 +42,20 @@
 			<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
 				<div th:case="'Success'" class="alert alert-success">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Sucesso!</strong> Requisição criada com sucesso
+					<strong>Sucesso!</strong> Requisição criada com sucesso!
 				</div>
-				<div th:case="'Failed'" class="alert alert-danger">
+				<div th:case="'emailSuccess'" class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Sucesso!</strong> E-mail da Requisição enviado com sucesso!
+				</div>
+				<div th:case="'error'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Falha!</strong> Houve algum problema na abertura de
-					requisição
+					requisição!
+				</div>
+				<div th:case="'emailErro'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Não conseguimos enviar sua requisição por e-mail. Favor, verificar com o ADM!
 				</div>
 			</div>
 
@@ -224,7 +232,7 @@
 								<div class="form-group col-md-4">
 									<label for="vagas" class="col-form-label"
 										style="margin-left: 1px">Nº de Vagas</label> <input
-										type="text" th:field="*{vagas}" class="form-control"
+										type="number" th:field="*{vagas}" class="form-control"
 										id="vagas" placeholder="Vagas"> <span
 										th:if="${#fields.hasErrors('vagas')}" th:errors="*{vagas}"
 										class="text-danger"></span>
@@ -450,7 +458,7 @@
 										<option th:each="cursos : ${listCursos}"
 											th:value="${cursos.id}"
 											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
-											selected="selected"></option>
+											></option>
 									</select> <span th:if="${#fields.hasErrors('requisitoObrigatorio')}"
 										th:errors="*{requisitoObrigatorio}" class="text-danger"></span>
 								</div>
@@ -461,8 +469,8 @@
 										th:field="*{requisitoConhecimento}">
 										<option th:each="cursos : ${listCursos}"
 											th:value="${cursos.id}"
-											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
-											selected="selected"></option>
+											th:text="Tecnologia + ' : ' + ${cursos.nomeCurso} + ' - ' + Versão + ' : ' + ${cursos.versao}"
+											></option>
 									</select> <span th:if="${#fields.hasErrors('requisitoConhecimento')}"
 										th:errors="*{requisitoConhecimento}" class="text-danger"></span>
 								</div>
