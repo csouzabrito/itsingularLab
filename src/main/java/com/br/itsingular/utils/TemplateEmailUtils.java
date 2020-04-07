@@ -4,6 +4,7 @@
 package com.br.itsingular.utils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author dcarneiro
@@ -143,11 +144,12 @@ sb.append(" <td bgcolor=\"#ffffff\">");
 sb.append(" <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">");
 sb.append("  <tr>");
 sb.append("  <td style=\"padding: 40px 25px;\">");
-sb.append("<P style=\"text-align:center;margin: 0;  font-family: Arial, sans-serif; font-size: 20px; line-height: 140%; color: #3e4049;\">DADOS DA REQUISIÇÃO DE VAGA ABERTA</P></BR></BR>");
+sb.append("<P style=\"text-align:center;margin: 0;  font-family: Arial, sans-serif; font-size: 20px; line-height: 140%; color: #3e4049;\">DADOS DA REQUISIÇÃO DE VAGA ABERTA</P>");
+sb.append("<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\"></P><BR>");
 sb.append("<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Solicitante:" + is[0]+ "</P><BR>");
 sb.append("<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Cliente:" + is[1]+ "</P><BR>");
 sb.append("<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Qtde Vagas:" + quantidade + "</P><BR>");
-sb.append("<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Dt. Abertura:" + dataAbertura + "</P><BR>");
+sb.append("<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Dt. Abertura:" + dataAbertura.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "</P><BR>");
 sb.append("   </td>");	
 sb.append("  </tr>");
 sb.append(" </table>");
