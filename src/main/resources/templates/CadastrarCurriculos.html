@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<div th:insert="Header.html"></div>
+<script>
+	$(function() {
+		// Sidebar toggle behavior
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+	$(document).on("keydown", "#descricaoResumida", function() {
+		var caracteresRestantes = 1000;
+		var caracteresDigitados = parseInt($(this).val().length);
+		var caracteresRestantes = caracteresRestantes - caracteresDigitados;
+
+		$(".caracteres").text(caracteresRestantes);
+	});
+</script>
+<body>
+	<div class="d-flex">
+		<div th:replace="Menu :: menu">...</div>
+		<div id="content" class="p-4 p-md-5 pt-5 form-requisicao">
+			<button id="sidebarCollapse" type="button"
+				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+				<i class="fa fa-bars mr-2"></i><small
+					class="text-uppercase font-weight-bold">Menu</small>
+			</button>
+			<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
+				<div th:case="'success'" class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Sucesso!</strong> Currículo Cadastrado com sucesso!
+				</div>
+				<div th:case="'failed'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Houve algum problema no cadatro. Favor
+					verificar com o ADM!
+				</div>
+				<div th:case="'duplicateInsert'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Este candidato já existe na base de dados! 
+				</div>
+				<div th:case="'upload'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Favor selecione as extensões dos arquivos corretamente. PDF ou DOC/DOCX! 
+				</div>		
+			</div>
+			<div class="col-md-12">
+				<form th:action="@{/cadastrarCurriculos/add}" method="post"
+					th:object="${curriculos}" enctype="multipart/form-data">
+					<div class="container my-5">
+						<h3 align="center">Cadastrar Currículos</h3>
+						<BR />
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-heading">
+									<div class="clearfix">
+										<h1 class="panel-title" style="margin-left: -27px">Currículos</h1>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="cpf" class="col-form-label"
+										style="margin-left: 1px">CPF</label> <input type="text"
+										th:field="*{key.cpf}" data-inputmask="'mask': '999.999.999-99'"
+										class="form-control" id="cpf" placeholder="Digite seu CPF">
+									<span th:if="${#fields.hasErrors('key.cpf')}" th:errors="*{key.cpf}"
+										class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-9">
+									<label for="nome" class="col-form-label"
+										style="margin-left: 1px">Nome do Candidato</label> <input
+										type="text" th:field="*{nome}" class="form-control" id="nome"
+										placeholder="Digite o nome do Candidato"> <span
+										th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+										class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="dataNascimento" class="col-form-label"
+										style="margin-left: 1px">Data Nascimento</label> <input
+										type="date" th:field="*{dataNascimento}"
+										th:text="${#dates.format(tecnologias.dataInclOrManut, 'dd/MM/yyyy')}"
+										class="form-control" id="dataNascimento"
+										placeholder="Data Nascimento"><span
+										th:if="${#fields.hasErrors('dataNascimento')}"
+										th:errors="*{dataNascimento}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="telCelular" class="col-form-label"
+										style="margin-left: 1px">Telefone Celular</label> <input
+										type="text" th:field="*{telCelular}" class="form-control"
+										id="telCelular" maxlength="14"
+										data-inputmask="'mask': '(99)99999-9999'"
+										placeholder="Telefone Celular"> <span
+										th:if="${#fields.hasErrors('telCelular')}"
+										th:errors="*{telCelular}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="email" class="col-form-label"
+										style="margin-left: 1px">E-mail</label> <input type="text"
+										th:field="*{email}" class="form-control" id="email"
+										data-inputmask="'alias': 'email'" placeholder="Digite E-mail">
+									<span th:if="${#fields.hasErrors('email')}"
+										th:errors="*{email}" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="fileCurriculoPDC" class="col-form-label"
+										style="margin-left: 1px">Upload Arquivos</label> <input
+										type="file" th:field="*{filePdf}" name="filePdf" id="filePdf" />
+									<br /> <input type="file" th:field="*{fileWord}"
+										name="fileWord" id="fileWord" /> <br />
+								</div>
+							</div>
+							<div class="row">
+								<BR />
+								<div class=" form-group col-md-9">
+									<label for="tecnologiasAssociadas" style="margin-left: 1px">Currículos
+									</label> <select class="form-control"
+										th:field="*{tecnologiasAssociadas}" style="height: 200px"
+										multiple="multiple">
+										<option th:each="cursos : ${listCursos}"
+											th:value="${cursos.id}"
+											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"></option>
+									</select> <span th:if="${#fields.hasErrors('tecnologiasAssociadas')}"
+										th:errors="*{tecnologiasAssociadas}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-3" style="margin-top: 100px;">
+									<input type="submit" id="incluir" class="btn btn-primary"
+										value="Cadastrar Curriculo">
+								</div>
+							</div>
+							<BR />
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="panel-heading">
+										<div class="clearfix">
+											<h1 class="panel-title" style="margin-left: -27px">curriculos
+												Cadastrados</h1>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table
+											class="table table-sm table-striped table-hover table-bordered">
+											<thead>
+												<tr>
+													<th>CPF</th>
+													<th>Nome do Candidato</th>
+													<th>Data Nascimento</th>
+													<th>Celular de Contato</th>
+													<th>Email</th>
+													<!-- <th>Ações</th> -->
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="curriculos : ${listCurriculos}">
+													<td th:text="${curriculos.key.cpf}"></td>
+													<td th:text="${curriculos.nome}"></td>
+													<td th:text="${#dates.format(curriculos.dataNascimento, 'dd/MM/yyyy')}"></td>
+													<td th:text="${curriculos.telCelular}"></td>
+													<td th:text="${curriculos.email}"></td>
+													<!-- <td>
+														<div class="btn-group pull-right">
+															<a class="btn btn-sm btn-primary"
+																th:href="@{/cadastrarcurriculos/edit/{id}(id=${curriculos.id})}">Editar</a>
+															<a class="delete btn btn-sm btn-danger"
+																th:href="@{/cadastrarcurriculos/delete/{id}(id=${curriculos.id})}">Excluir</a>
+														</div>
+													</td> -->
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

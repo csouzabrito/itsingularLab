@@ -56,13 +56,10 @@ public class RequisicaoServices {
 	}
 
 	private Requisicao formatDate(Requisicao requisicao) {
-
 		LocalDate dataSolicitacao = LocalDate.parse(
 					requisicao.getDataSolicitacao().toString(),
 										DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
 		requisicao.setDataSolicitacao(dataSolicitacao);
-
 		return requisicao;
 	}
 }
