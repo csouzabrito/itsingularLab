@@ -3,6 +3,7 @@
  */
 package com.br.itsingular.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,18 +14,19 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import com.br.itsingular.entity.Cursos;
-import com.br.itsingular.repository.CadastrarCursosRepository;
+import com.br.itsingular.entity.Tecnologias;
+import com.br.itsingular.repository.CadastrarTecnlogiasRepository;
+import com.mongodb.MongoException;
 
 /**
  * @author dcarneiro
  *
  */
 @Service
-public class CadastrarCursosServices {
+public class CadastrarTecnologiasServices {
 
 	@Autowired
-	private CadastrarCursosRepository cadCursos;
+	private CadastrarTecnlogiasRepository cadTecnologias;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -33,9 +35,9 @@ public class CadastrarCursosServices {
 	 * 
 	 * @param cursos
 	 */
-	public void insertCurso(Cursos cursos) {
+	public void insertCurso(Tecnologias cursos) {
 		try {
-			cadCursos.insert(cursos);
+			cadTecnologias.insert(cursos);
 		} catch (RuntimeException e) {
 			throw e;
 		}
@@ -44,20 +46,22 @@ public class CadastrarCursosServices {
 	 * 
 	 * @return
 	 */
-	public List<Cursos> findCursos() {
+	public List<Tecnologias> findCursos() {
+		List<Tecnologias> listCursos = new ArrayList<Tecnologias>();
 		try {
-			return cadCursos.findAll();
-		} catch (RuntimeException e) {
+			cadTecnologias.findAll().forEach(l -> { listCursos.add(l); });
+		} catch (MongoException e) {
 			throw e;
 		}
+		return listCursos;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public Optional<Cursos> findCursosById(String id) {
+	public Optional<Tecnologias> findCursosById(String id) {
 		try {
-			return cadCursos.findById(id);
+			return cadTecnologias.findById(id);
 		} catch (RuntimeException e) {
 			throw e;
 		}
@@ -68,7 +72,7 @@ public class CadastrarCursosServices {
 	 */
 	public void deleteCursos(String id) {
 		try {
-			cadCursos.deleteById(id);
+			cadTecnologias.deleteById(id);
 		} catch (RuntimeException e) {
 			throw e;
 		}
@@ -77,7 +81,7 @@ public class CadastrarCursosServices {
 	 * 
 	 * @return
 	 */
-	public void UpdateCursos(String id, Cursos cursos) {
+	public void UpdateCursos(String id, Tecnologias cursos) {
 		try {
 			Query query = new Query();
 			query.addCriteria(Criteria.where("_id").is(cursos.getId()));
@@ -86,7 +90,7 @@ public class CadastrarCursosServices {
 			update.set("descricaoResumida", cursos.getDescricaoResumida());
 			update.set("dataInclOrManut", cursos.getDataInclOrManut());
 			update.set("usuario", cursos.getUsuario());		
-			mongoTemplate.findAndModify(query, update, Cursos.class);
+			mongoTemplate.findAndModify(query, update, Tecnologias.class);
 		} catch (RuntimeException e) {
 			throw e;
 		}

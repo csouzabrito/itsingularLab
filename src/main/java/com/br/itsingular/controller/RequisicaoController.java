@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.br.itsingular.entity.Cursos;
 import com.br.itsingular.entity.Requisicao;
-import com.br.itsingular.services.CadastrarCursosServices;
+import com.br.itsingular.entity.Tecnologias;
+import com.br.itsingular.services.CadastrarTecnologiasServices;
 import com.br.itsingular.services.EmailServices;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
@@ -32,7 +32,7 @@ public class RequisicaoController {
 	private HttpSession session;
 
 	@Autowired
-	private CadastrarCursosServices cursosServices;
+	private CadastrarTecnologiasServices cadastrarTecnologiasServices;
 	
 	@Autowired
 	private EmailServices emailServices;
@@ -85,8 +85,8 @@ public class RequisicaoController {
 	 * 
 	 * @return
 	 */
-	public List<Cursos> listCursos(){
-		return cursosServices.findCursos();
+	public List<Tecnologias> listCursos(){
+		return cadastrarTecnologiasServices.findCursos();
 	}
 	/**
 	 * @throws MessagingException 

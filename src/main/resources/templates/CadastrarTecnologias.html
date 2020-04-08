@@ -43,16 +43,16 @@
 				</div>
 			</div>
 			<div class="col-md-12">
-				<form th:action="@{/cadastrarCursos/incluir}" method="post"
-					th:object="${cursos}">
+				<form th:action="@{/cadastrarTecnologias/incluir}" method="post"
+					th:object="${tecnologias}">
 					<div class="container my-5">
-						<h3 align="center">Cadastrar Cursos</h3>
+						<h3 align="center">Cadastrar Cursos | Tecnologias | Linguagens</h3>
 						<BR />
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-heading">
 									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Cursos</h1>
+										<h1 class="panel-title" style="margin-left: -27px">Cursos | Tecnologias | Linguagens</h1>
 									</div>
 								</div>
 							</div>
@@ -61,7 +61,7 @@
 								<BR />
 								<div class="form-group col-md-6">
 									<label for="nomeCurso" class="col-form-label"
-										style="margin-left: 1px">Cursos e/ou Linguagens</label> <input
+										style="margin-left: 1px">Tecnolgias</label> <input
 										type="text" th:field="*{nomeCurso}" class="form-control"
 										id="nomeCurso" placeholder="Digite o Curso e/ou Linguagem">
 									<span th:if="${#fields.hasErrors('nomeCurso')}"
@@ -102,7 +102,7 @@
 							<div class="panel-heading">
 								<div class="panel-heading">
 									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Cursos Cadastrados</h1>
+										<h1 class="panel-title" style="margin-left: -27px">Tecnologias Cadastrados</h1>
 									</div>
 								</div>
 							</div>
@@ -113,7 +113,7 @@
 										<thead>
 											<tr>
 												<th>Código de Cadastro</th>
-												<th>Nome do Curso</th>
+												<th>Nome da tecnologia</th>
 												<th>Versão</th>
 												<th>Descrição da tecnologia</th>
 												<th>Data</th>
@@ -122,20 +122,20 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="cursos : ${listCursos}" >
-												<td th:text="${cursos.id}"></td>
-												<td th:text="${cursos.nomeCurso}"></td>
-												<td th:text="${cursos.versao}"></td>
-												<td th:text="${cursos.descricaoResumida}" style="word-wrap:break-word;"></td>
+											<tr th:each="tecnologias : ${listTecnologias}" >
+												<td th:text="${tecnologias.id}"></td>
+												<td th:text="${tecnologias.nomeCurso}"></td>
+												<td th:text="${tecnologias.versao}"></td>
+												<td th:text="${tecnologias.descricaoResumida}" style="word-wrap:break-word;"></td>
 												<td
-													th:text="${#dates.format(cursos.dataInclOrManut, 'dd/MM/yyyy')}"></td>
-												<td th:text="${cursos.usuario}"></td>
+													th:text="${#dates.format(tecnologias.dataInclOrManut, 'dd/MM/yyyy')}"></td>
+												<td th:text="${tecnologias.usuario}"></td>
 												<td>
 													<div class="btn-group pull-right">
 														<a class="btn btn-sm btn-primary"
-															th:href="@{/cadastrarCursos/edit/{id}(id=${cursos.id})}">Editar</a>
+															th:href="@{/cadastrarTecnologias/edit/{id}(id=${tecnologias.id})}">Editar</a>
 														<a class="delete btn btn-sm btn-danger"
-															th:href="@{/cadastrarCursos/delete/{id}(id=${cursos.id})}">Excluir</a>
+															th:href="@{/cadastrarTecnologias/delete/{id}(id=${tecnologias.id})}">Excluir</a>
 													</div>
 												</td>
 											</tr>
