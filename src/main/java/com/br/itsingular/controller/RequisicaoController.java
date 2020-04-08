@@ -40,7 +40,7 @@ public class RequisicaoController {
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main( Requisicao requisicao) {
 		
-		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
+		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
 		
 		Object username = session.getAttribute("email");
 		
@@ -61,7 +61,7 @@ public class RequisicaoController {
 		if (result.hasErrors()) {
 			return main(null);
 		}
-		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
+		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
 		modelAndView.addObject("listCursos",  listCursos());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
