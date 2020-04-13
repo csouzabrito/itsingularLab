@@ -86,7 +86,7 @@
 									<label for="dataNascimento" class="col-form-label"
 										style="margin-left: 1px">Data Nascimento</label> <input
 										type="date" th:field="*{dataNascimento}"
-										th:text="${#dates.format(tecnologias.dataInclOrManut, 'dd/MM/yyyy')}"
+										th:text="${#dates.format(curriculos.dataNascimento, 'dd/MM/yyyy')}"
 										class="form-control" id="dataNascimento"
 										placeholder="Data Nascimento"><span
 										th:if="${#fields.hasErrors('dataNascimento')}"

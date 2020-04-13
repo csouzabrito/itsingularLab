@@ -40,7 +40,7 @@ public class CadastrarCurriculosController {
 
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
 	public ModelAndView init() {
-		return addModel(null);
+		return addModel("");
 	}
 
 	public List<Tecnologias> listCursos() {
@@ -95,14 +95,18 @@ public class CadastrarCurriculosController {
 			model.addObject("listCurriculos", listCurriculos);
 			model.addObject("message", mensagem);
 			break;
-
+		case "":
+			model.addObject("curriculos", new Curriculos());
+			model.addObject("listCursos", listCursos());
+			listCurriculos.addAll(cadastrarCurriculosServices.findCurriculos());
+			model.addObject("listCurriculos", listCurriculos);
+			break;
+			
 		default:
 			model.addObject("listCursos", listCursos());
 			listCurriculos.addAll(cadastrarCurriculosServices.findCurriculos());
 			model.addObject("listCurriculos", listCurriculos);
-			if(mensagem!=null) {
-				model.addObject("message", mensagem);
-			}
+			model.addObject("message", mensagem);
 			break;
 		}
 		return model;
