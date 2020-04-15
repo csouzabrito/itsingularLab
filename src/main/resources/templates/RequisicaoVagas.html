@@ -302,7 +302,7 @@
 									<label for="previsaoInicio" class="col-form-label"
 										style="margin-left: 1px">Previsão de Início</label> 
 										<input type="date" th:field="*{previsaoInicio}"
-										th:text="${#temporals.format(localDate, 'yyyy-MM-yyyy')}" class="form-control"
+										th:text="${#temporals.format(localDate, 'yyyy-MM-dd')}" class="form-control"
 										id="previsaoInicio" placeholder="Previsão de Início"><span
 										th:if="${#fields.hasErrors('previsaoInicio')}"
 										th:errors="*{previsaoInicio}" class="text-danger"></span>

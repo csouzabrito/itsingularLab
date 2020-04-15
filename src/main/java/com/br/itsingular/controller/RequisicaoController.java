@@ -86,7 +86,7 @@ public class RequisicaoController {
 	 * @return
 	 */
 	public List<Tecnologias> listCursos(){
-		return cadastrarTecnologiasServices.findCursos();
+		return cadastrarTecnologiasServices.findTecnologias();
 	}
 	/**
 	 * @throws MessagingException 

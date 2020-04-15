@@ -3,7 +3,6 @@
  */
 package com.br.itsingular.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +40,7 @@ public class CadastrarTecnologiasController {
 	public ModelAndView inicio() {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		model.addObject("tecnologias", new Tecnologias());
-		listTecnologias = cadastrarTecnologiasServices.findCursos();
+		listTecnologias = cadastrarTecnologiasServices.findTecnologias();
 		if (listTecnologias.isEmpty()) {
 			return model;
 		}
@@ -59,13 +58,14 @@ public class CadastrarTecnologiasController {
 				return model;
 			}
 			if (Utils.isEmptyOrNull(tec.getId())) {
-				cadastrarTecnologiasServices.insertCurso(complementar(tec));
+				tec.setId(null);
+				cadastrarTecnologiasServices.insertTecnologias(tec);
 			} else {
-				cadastrarTecnologiasServices.UpdateCursos(tec.getId(), complementar(tec));
+				cadastrarTecnologiasServices.updateTecnologias(tec.getId(), tec);
 			}
-			listTecnologias = cadastrarTecnologiasServices.findCursos();
 			model.addObject("tecnologias", new Tecnologias());
-			model.addObject("listTecnologias", listTecnologias);
+			model.addObject("listTecnologias", 
+								cadastrarTecnologiasServices.findTecnologias());
 			model.addObject("message", "Success");
 		} catch (Exception e) {
 			model.addObject("error", e.getMessage().toString());
@@ -78,8 +78,8 @@ public class CadastrarTecnologiasController {
 	public ModelAndView excluir(@PathVariable("id") String id, Tecnologias cursos) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		try {
-			cadastrarTecnologiasServices.deleteCursos(id);
-			listTecnologias = cadastrarTecnologiasServices.findCursos();
+			cadastrarTecnologiasServices.deleteTecnologias(id);
+			listTecnologias = cadastrarTecnologiasServices.findTecnologias();
 			model.addObject("tecnologias", new Tecnologias());
 			model.addObject("listTecnologias", listTecnologias);
 			model.addObject("message", "Success");
@@ -93,23 +93,12 @@ public class CadastrarTecnologiasController {
 	@RequestMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") String id) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
-		Optional<Tecnologias> tst = cadastrarTecnologiasServices.findCursosById(id);
-		Tecnologias tec = new Tecnologias();
-		tec.setId(tst.get().getId());
-		tec.setNomeCurso(tst.get().getNomeCurso());
-		tec.setVersao(tst.get().getVersao());
-		tec.setDescricaoResumida(tst.get().getDescricaoResumida());
-		model.addObject("tecnologias", tec);
-		listTecnologias = cadastrarTecnologiasServices.findCursos();
+		Optional<Tecnologias> tst = cadastrarTecnologiasServices.findTecnologiasById(id);
+		model.addObject("tecnologias", new Tecnologias(tst.get().getId(), tst.get().getNomeCurso(),
+				tst.get().getVersao(), tst.get().getDescricaoResumida(),null,null));
+		listTecnologias = cadastrarTecnologiasServices.findTecnologias();
+		model.addObject("listTecnologias", listTecnologias);
 		return model;
 	}
 
-	public Tecnologias complementar(Tecnologias tec) {
-		if (Utils.isEmptyOrNull(tec.getId())) {
-			tec.setId(null);
-		}
-		tec.setDataInclOrManut(new Date());
-		tec.setUsuario("Usuário Logado");
-		return tec;
-	}
 }

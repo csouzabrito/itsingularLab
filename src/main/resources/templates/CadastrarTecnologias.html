@@ -128,7 +128,7 @@
 												<td th:text="${tecnologias.versao}"></td>
 												<td th:text="${tecnologias.descricaoResumida}" style="word-wrap:break-word;"></td>
 												<td
-													th:text="${#dates.format(tecnologias.dataInclOrManut, 'dd/MM/yyyy')}"></td>
+													th:text="${tecnologias.dataManutencaoFormat}"></td>
 												<td th:text="${tecnologias.usuario}"></td>
 												<td>
 													<div class="btn-group pull-right">

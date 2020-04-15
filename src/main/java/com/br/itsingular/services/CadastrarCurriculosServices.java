@@ -1,6 +1,7 @@
 package com.br.itsingular.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,11 @@ public class CadastrarCurriculosServices {
 			throw e;
 		}
 	}
-	
 	public List<Curriculos> findCurriculos(){
 		return cadastrarCurriculo.findAll();
 	}
+	public Optional<Curriculos> findCurriculoById(String id){
+		return Optional.ofNullable(cadastrarCurriculo.findById(id).get());
+	}
+	
 }

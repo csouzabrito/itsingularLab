@@ -1,12 +1,16 @@
 package com.br.itsingular.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.br.itsingular.utils.Utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +20,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "CADASTRAR_TECNOLOGIAS")
 public class Tecnologias implements Serializable { 
 
@@ -35,8 +39,14 @@ public class Tecnologias implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String descricaoResumida;
 	
-	private Date dataInclOrManut;
+	@LastModifiedDate
+	private LocalDate dataInclOrManut;
 	
+	@LastModifiedBy
 	private String usuario;
+
+	public String getDataManutencaoFormat() {
+		return Utils.formatDate(this.getDataInclOrManut());
+	}
 	
 }
