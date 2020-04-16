@@ -9,8 +9,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +37,6 @@ public class CadastrarTecnologiasController {
 	private List<Tecnologias> listTecnologias;
 
 	@RequestMapping(path = "/listar")
-	@Cacheable(value = "listarTecnologias")
 	public ModelAndView init() {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		model.addObject("tecnologias", new Tecnologias());
@@ -52,7 +49,6 @@ public class CadastrarTecnologiasController {
 	}
 
 	@RequestMapping(path = "/incluir", method = RequestMethod.POST)
-	@CacheEvict(allEntries = true, value = "listarTecnologias")
 	public ModelAndView insertTecnologias(@Valid Tecnologias tec, BindingResult result) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		try {
@@ -79,7 +75,6 @@ public class CadastrarTecnologiasController {
 	}
 
 	@RequestMapping("/delete/{id}")
-	@CacheEvict(allEntries = true, value = "listarTecnologias")
 	public ModelAndView excluir(@PathVariable("id") String id, Tecnologias cursos) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		try {
@@ -96,7 +91,6 @@ public class CadastrarTecnologiasController {
 	}
 
 	@RequestMapping("/edit/{id}")
-	@CacheEvict(allEntries = true, value = "listarTecnologias")
 	public ModelAndView edit(@PathVariable("id") String id) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		Optional<Tecnologias> tst = cadastrarTecnologiasServices.findTecnologiasById(id);
