@@ -8,7 +8,8 @@ dist/
 .factorypath
 .DS_Store
 /.settings
-/.classpath
-
+.classpath
+.project
+.settings
 
  
