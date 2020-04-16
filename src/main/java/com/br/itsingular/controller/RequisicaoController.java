@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +38,6 @@ public class RequisicaoController {
 	private EmailServices emailServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
-	@Cacheable(value = "listarTecnologias")
 	public ModelAndView main( Requisicao requisicao) {
 		
 		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");

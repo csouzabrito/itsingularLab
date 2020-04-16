@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
@@ -36,7 +35,6 @@ public class CadastrarCurriculosController {
 	private CadastrarCurriculosServices cadastrarCurriculosServices;
 
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
-	@Cacheable(value = "listarTecnologias")
 	public ModelAndView init(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = getAddModel("init");
 		request.getSession().invalidate();
