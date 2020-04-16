@@ -1,30 +1,29 @@
 package com.br.itsingular.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.br.itsingular.utils.Utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Document(collection = "CADASTRO_CURSOS")
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Cursos implements Serializable {
+@AllArgsConstructor
+@Document(collection = "CADASTRAR_TECNOLOGIAS")
+public class Tecnologias implements Serializable { 
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,12 +39,14 @@ public class Cursos implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String descricaoResumida;
 	
-	@Temporal(value = TemporalType.DATE)
-	private Date dataInclOrManut;
+	@LastModifiedDate
+	private LocalDate dataInclOrManut;
 	
+	@LastModifiedBy
 	private String usuario;
-	
-	@Transient
-	private List<Cursos> cursos;
+
+	public String getDataManutencaoFormat() {
+		return Utils.formatDate(this.getDataInclOrManut());
+	}
 	
 }

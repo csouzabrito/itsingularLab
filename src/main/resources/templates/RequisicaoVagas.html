@@ -289,7 +289,7 @@
 									<label for="previsaoInicio" class="col-form-label"
 										style="margin-left: 1px">Previsão de Início</label> 
 										<input type="date" th:field="*{previsaoInicio}"
-										th:text="${#temporals.format(localDate, 'yyyy-MM-yyyy')}" class="form-control"
+										th:text="${#temporals.format(localDate, 'yyyy-MM-dd')}" class="form-control"
 										id="previsaoInicio" placeholder="Previsão de Início"><span
 										th:if="${#fields.hasErrors('previsaoInicio')}"
 										th:errors="*{previsaoInicio}" class="text-danger"></span>
@@ -438,9 +438,10 @@
 							<div class="row">
 								<BR />
 								<div class=" form-group col-md-6">
-									<label for="requisitoObrigatorio">Escolha conhecimento obrigatório</label> <select class="form-control"
+									<label for="requisitoObrigatorio" style="margin-left: 1px">Escolha conhecimento obrigatório</label> 
+										<select class="form-control"
 										th:field="*{requisitoObrigatorio}" multiple="multiple">
-										<option th:each="cursos : ${listCursos}"
+										<option th:each="cursos : ${listTecnologias}"
 											th:value="${cursos.id}"
 											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
 											></option>
@@ -452,7 +453,7 @@
 										style="margin-left: 1px">Escolha conhecimento
 										Desejável </label> <select class="form-control" multiple="multiple"
 										th:field="*{requisitoConhecimento}">
-										<option th:each="cursos : ${listCursos}"
+										<option th:each="cursos : ${listTecnologias}"
 											th:value="${cursos.id}"
 											th:text="Tecnologia + ' : ' + ${cursos.nomeCurso} + ' - ' + Versão + ' : ' + ${cursos.versao}"
 											></option>

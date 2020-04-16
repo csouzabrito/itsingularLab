@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.br.itsingular.entity.Cursos;
 import com.br.itsingular.entity.Requisicao;
-import com.br.itsingular.services.CadastrarCursosServices;
+import com.br.itsingular.entity.Tecnologias;
+import com.br.itsingular.services.CadastrarTecnologiasServices;
 import com.br.itsingular.services.EmailServices;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
@@ -32,7 +32,7 @@ public class RequisicaoController {
 	private HttpSession session;
 
 	@Autowired
-	private CadastrarCursosServices cursosServices;
+	private CadastrarTecnologiasServices cadastrarTecnologiasServices;
 	
 	@Autowired
 	private EmailServices emailServices;
@@ -40,7 +40,7 @@ public class RequisicaoController {
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main( Requisicao requisicao) {
 		
-		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
+		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
 		
 		Object username = session.getAttribute("email");
 		
@@ -51,7 +51,7 @@ public class RequisicaoController {
 			requisicao.setDataSolicitacao(LocalDate.now());
 			modelAndView.addObject("requisicao", requisicao);
 		}
-		modelAndView.addObject("listCursos",  listCursos());
+		modelAndView.addObject("listTecnologias",  listTecnologias());
 		return modelAndView;
 	}
 	
@@ -61,8 +61,8 @@ public class RequisicaoController {
 		if (result.hasErrors()) {
 			return main(null);
 		}
-		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
-		modelAndView.addObject("listCursos",  listCursos());
+		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
+		modelAndView.addObject("listTecnologias",  listTecnologias());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
 			//EnviarEmail 
@@ -85,8 +85,8 @@ public class RequisicaoController {
 	 * 
 	 * @return
 	 */
-	public List<Cursos> listCursos(){
-		return cursosServices.findCursos();
+	public List<Tecnologias> listTecnologias(){
+		return cadastrarTecnologiasServices.findTecnologias();
 	}
 	/**
 	 * @throws MessagingException 
