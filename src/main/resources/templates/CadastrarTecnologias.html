@@ -126,15 +126,15 @@
 												<td th:text="${tecnologias.id}"></td>
 												<td th:text="${tecnologias.nomeCurso}"></td>
 												<td th:text="${tecnologias.versao}"></td>
-												<td th:text="${tecnologias.descricaoResumida}" style="word-wrap:break-word;"></td>
+												<td th:text="${tecnologias.descricaoResumida}" style="word-wrap:break-word;width: 310px"></td>
 												<td
 													th:text="${tecnologias.dataManutencaoFormat}"></td>
 												<td th:text="${tecnologias.usuario}"></td>
 												<td>
 													<div class="btn-group pull-right">
-														<a class="btn btn-sm btn-primary"
+														<a class="btn btn-sm btn-primary" style="width: 58px"
 															th:href="@{/cadastrarTecnologias/edit/{id}(id=${tecnologias.id})}">Editar</a>
-														<a class="delete btn btn-sm btn-danger"
+														<a class="delete btn btn-sm btn-danger" style="margin-left:2px"
 															th:href="@{/cadastrarTecnologias/delete/{id}(id=${tecnologias.id})}">Excluir</a>
 													</div>
 												</td>

@@ -51,9 +51,8 @@
 				</div>
 				<div th:case="'tamanhoNSuportado'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Falha!</strong> Tamanho do(s) documento(s) para
-					upload está superior ao permitido. Favor, refaça o processo
-					novamente.
+					<strong>Falha!</strong> Tamanho do(s) documento(s) para upload está
+					superior ao permitido. Favor, refaça o processo novamente.
 				</div>
 			</div>
 			<div class="col-md-12">
@@ -126,11 +125,20 @@
 										<span><a style="font-size: 12px; color: red">**
 												Limite de upload por arquivo: 1MB **</a></span>
 									</p>
+									<p>
+										<span><a style="font-size: 12px;">** 1º Adicione o
+												PDF **</a></span>
+									</p>
 									<input type="file" name="pdf" id="pdf"
 										title="Tamanho Permitido: 2MB" alt="Tamanho Permitido: 2MB"
-										style="width: 800px" /> <br /> <input type="file" name="word"
-										id="word" title="Tamanho Permitido: 2MB"
-										alt="Tamanho Permitido: 2MB" style="width: 800px" /> <br />
+										style="width: 800px" /> <br />
+									<p>
+										<span><a style="font-size: 12px;">** 2º Adicione o
+												Word **</a></span>
+									</p>
+									<input type="file" name="word" id="word"
+										title="Tamanho Permitido: 2MB" alt="Tamanho Permitido: 2MB"
+										style="width: 800px" /> <br />
 								</div>
 							</div>
 							<div class="row">
@@ -178,19 +186,21 @@
 											<tbody>
 												<tr th:each="curriculos : ${listCurriculos}">
 													<td th:text="${curriculos.cpf}"></td>
-													<td th:text="${curriculos.nome}"></td>
-													<td
-														th:text="${curriculos.dataNascimentoFormat}"></td>
+													<td th:text="${curriculos.nome}"
+														style="word-wrap: break-word;"></td>
+													<td th:text="${curriculos.dataNascimentoFormat}"></td>
 													<td th:text="${curriculos.telCelular}"></td>
 													<td th:text="${curriculos.email}"></td>
 													<td>
 														<div class="btn-group pull-right">
 															<a class="btn btn-sm btn-primary"
-																th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">Download PDF</a>
-															<a class="delete btn btn-sm btn-danger" style="margin-left:2px"
-																th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Download Word</a>
+																th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">Download
+																PDF</a> <a class="delete btn btn-sm btn-danger"
+																style="margin-left: 2px"
+																th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Download
+																Word</a>
 														</div>
-													</td> 
+													</td>
 												</tr>
 											</tbody>
 										</table>
