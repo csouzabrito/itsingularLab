@@ -457,7 +457,7 @@
 										conhecimento obrigatório</label> 
 										<select class="form-control"
 										th:field="*{requisitoObrigatorio}" multiple="multiple">
-										<option th:each="cursos : ${listCursos}"
+										<option th:each="cursos : ${listTecnologias}"
 											th:value="${cursos.id}"
 											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
 											></option>
@@ -469,7 +469,7 @@
 										style="margin-left: 1px">Escolha conhecimento
 										Desejável </label> <select class="form-control" multiple="multiple"
 										th:field="*{requisitoConhecimento}">
-										<option th:each="cursos : ${listCursos}"
+										<option th:each="cursos : ${listTecnologias}"
 											th:value="${cursos.id}"
 											th:text="Tecnologia + ' : ' + ${cursos.nomeCurso} + ' - ' + Versão + ' : ' + ${cursos.versao}"
 											></option>

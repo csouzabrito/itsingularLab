@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ public class RequisicaoController {
 	private EmailServices emailServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
+	@Cacheable(value = "listarTecnologias")
 	public ModelAndView main( Requisicao requisicao) {
 		
 		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
@@ -51,7 +53,7 @@ public class RequisicaoController {
 			requisicao.setDataSolicitacao(LocalDate.now());
 			modelAndView.addObject("requisicao", requisicao);
 		}
-		modelAndView.addObject("listCursos",  listCursos());
+		modelAndView.addObject("listTecnologias",  listTecnologias());
 		return modelAndView;
 	}
 	
@@ -62,7 +64,7 @@ public class RequisicaoController {
 			return main(null);
 		}
 		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
-		modelAndView.addObject("listCursos",  listCursos());
+		modelAndView.addObject("listTecnologias",  listTecnologias());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			modelAndView.addObject("message","Success");
 			//EnviarEmail 
@@ -85,7 +87,7 @@ public class RequisicaoController {
 	 * 
 	 * @return
 	 */
-	public List<Tecnologias> listCursos(){
+	public List<Tecnologias> listTecnologias(){
 		return cadastrarTecnologiasServices.findTecnologias();
 	}
 	/**
