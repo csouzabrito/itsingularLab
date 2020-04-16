@@ -7,4 +7,6 @@ dist/
 /target
 .factorypath
 .DS_Store
+/.settings
+/.classpath
  
