@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 target/
 build/
 out/
@@ -10,17 +9,5 @@ dist/
 .DS_Store
 /.settings
 /.classpath
-=======
-target/
-build/
-out/
-dist/
-**/logs
-/c:
-/target
-.factorypath
-.DS_Store
-/.settings
-/.classpath
->>>>>>> master
+
  
