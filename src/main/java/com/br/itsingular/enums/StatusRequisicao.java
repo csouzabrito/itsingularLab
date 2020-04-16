@@ -8,7 +8,9 @@ import lombok.Getter;
 public enum StatusRequisicao {
 
 	PENDENTE("Pendente"),
-	EM_ANDAMENTO("Em andamento");
+	EM_ABERTO("Em aberto"),
+	EM_ANDAMENTO("Em andamento"),
+	AGUARDANDO_REPOSTA("Aguardando Resposta");
 	
 	private String descricao;
 }

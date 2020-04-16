@@ -1,13 +1,12 @@
 package com.br.itsingular.services;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.br.itsingular.custom.repository.MongoCustomRepository;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.enums.StatusRequisicao;
 import com.br.itsingular.enums.TipoRequisicao;
@@ -20,16 +19,22 @@ import com.br.itsingular.repository.RequisicaoRepository;
 @Service
 public class RequisicaoServices {
 
+	@Value("${collection}")
+	private String collection;
+	
 	@Autowired
 	private SlaService slaService;
 
 	@Autowired
 	private RequisicaoRepository repository;
-
+	
+	@Autowired
+	private MongoCustomRepository customRepository;
+	
 	public Requisicao salvarRequisicao(Requisicao requisicao) {
 
 		try {
-			requisicao.setStatus(StatusRequisicao.PENDENTE);
+			requisicao.setStatus(StatusRequisicao.PENDENTE.getDescricao());
 			Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
 			requisicao.setSla(sla);
 			Requisicao newRequisicao = this.repository.insert(requisicao);
@@ -41,28 +46,16 @@ public class RequisicaoServices {
 	}
 
 	public List<Requisicao> getInfoByEmail(final String email) {
-		List<Requisicao> requisicoesComSLA = new ArrayList<>();
-		List<Requisicao> requisicoes = repository.findByEmail(email);
-		requisicoes.forEach(r -> {
-			requisicoesComSLA.add(formatDate(r));
-		});
-		return requisicoesComSLA;
-	}
 
-	public List<Requisicao> filtrarRequisicao(final RequisicaoFilter filtro) {
-		String cliente = filtro.getDescricao() == null ? "%" : filtro.getDescricao();
-		List<Requisicao> requisicoes = repository.findByClienteContaining(cliente);
+		List<Requisicao> requisicoes = repository.findByEmail(email);
+
 		return requisicoes;
 	}
 
-	private Requisicao formatDate(Requisicao requisicao) {
-
-		LocalDate dataSolicitacao = LocalDate.parse(
-					requisicao.getDataSolicitacao().toString(),
-										DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-		requisicao.setDataSolicitacao(dataSolicitacao);
-
-		return requisicao;
+	public List<Requisicao> filtrarRequisicao(final String filtro) {
+		
+		List<Requisicao> requisicoes = customRepository.findRequisicaoByFilter(filtro);
+		
+		return requisicoes;
 	}
 }

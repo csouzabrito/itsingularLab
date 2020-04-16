@@ -67,8 +67,8 @@ public class RequisicaoController {
 			modelAndView.addObject("message","Success");
 			//EnviarEmail 
 			try {
-//				enviarEmailPosRequisicao(Integer.valueOf(requisicao.getVagas()),requisicao.getNomeSolicitante(), 
-//						requisicao.getCliente(),requisicao.getDataSolicitacao());
+				enviarEmailPosRequisicao(Integer.valueOf(requisicao.getVagas()),requisicao.getNomeSolicitante(), 
+						requisicao.getCliente(),requisicao.getDataSolicitacao());
 				modelAndView.addObject("requisicao", new Requisicao());
 				modelAndView.addObject("message","emailSuccess");
 			} catch (Exception e) {

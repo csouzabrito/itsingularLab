@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -14,423 +16,228 @@
 		});
 	});
 </script>
+
 <body>
-	<div class="d-flex">
-		<div th:replace="Menu :: menu">...</div>
-		<div id="content" class="p-4 p-md-5 pt-5 form-requisicao">
-			<button id="sidebarCollapse" type="button"
-				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
-				<i class="fa fa-bars mr-2"></i><small
-					class="text-uppercase font-weight-bold">Menu</small>
-			</button>
-			<div class="container my-5">
-				<h3 align="center">Requisição de Vagas</h3>
-				<BR />
-
-				<div class="col-md-11">
-					<form th:action="@{/requisicao/addRequisicao}"
-						th:object="${requisicao}" method="post">
-
-						<div style="display: none;" th:if="${session.containsKey('name')}"
-							th:text="${session.name}"></div>
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="panel-heading">
-									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Solicitante ITSingular</h1>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<BR />
-								<div class="form-group col-md-4">
-									<label for="tipoRequisicao" class="col-form-label labels">Tipo Requisição</label> 
-									<select
-										class="form-control fields" th:field="*{tipoRequisicao}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option
-											th:each="tipoRequisicao : ${T(com.br.itsingular.enums.TipoRequisicao).values()}"
-											th:value="${tipoRequisicao}" th:text="${tipoRequisicao}"></option>
-									</select> <span th:if="${#fields.hasErrors('tipoRequisicao')}"
-										th:errors="*{tipoRequisicao}" class="text-danger"></span>
-								</div>
-
-								<div class="form-group col-md-6">
-									<label for="nomeSolicitante" class="col-form-label">Solicitante</label>
-									<input readonly="true" type="text"
-										th:field="*{nomeSolicitante}" class="form-control"
-										id="nomeSolicitante">
-
-								</div>
-								<div class="form-group col-md-2">
-									<label for="dataSolicitacao" class="col-form-label">
-										Data Solicitação</label> <input
-										type="text" th:field="*{dataSolicitacao}" class="form-control field-data-solicitacao"
-										id="dataSolicitacao" readonly="true">
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="panel-heading">
-									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Dados
-											do Cliente</h1>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<BR />
-								<div class="form-group col-md-3">
-									<label for="cliente" class="col-form-label labels">Cliente</label> <input type="text"
-										th:field="*{cliente}" class="form-control" id="cliente"
-										placeholder="Cliente"> <span
-										th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"
-										class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="ramoAtividade" class="col-form-label">Ramo Atividade</label> <input
-										type="text" th:field="*{ramoAtividade}" class="form-control"
-										id="ramoAtividade" placeholder="Ramo de Atividade"> <span
-										th:if="${#fields.hasErrors('ramoAtividade')}"
-										th:errors="*{ramoAtividade}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="pessoaContato" class="col-form-label"
-										style="margin-left: 1px">Pessoa Contato</label> <input
-										type="text" th:field="*{pessoaContato}" class="form-control"
-										id="pessoaContato" placeholder="Pessoa Contato"> <span
-										th:if="${#fields.hasErrors('pessoaContato')}"
-										th:errors="*{pessoaContato}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="cargo" class="col-form-label"
-										style="margin-left: 1px">Cargo</label> <input type="text"
-										th:field="*{cargo}" class="form-control" id="cargo"
-										placeholder="Cargo"> <span
-										th:if="${#fields.hasErrors('cargo')}" th:errors="*{cargo}"
-										class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="endereco" class="col-form-label labels">Endereço</label> <input type="text"
-										th:field="*{endereco}" class="form-control" id="endereco"
-										placeholder="Endereço"> <span
-										th:if="${#fields.hasErrors('endereco')}"
-										th:errors="*{endereco}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="regiao" class="col-form-label"
-										style="margin-left: 1px">Região</label> <input type="text"
-										th:field="*{regiao}" class="form-control" id="ramoAtividade"
-										placeholder="Região"> <span
-										th:if="${#fields.hasErrors('regiao')}" th:errors="*{regiao}"
-										class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="telCorporativo" class="col-form-label labels">Telefone Corporativo</label> <input
-										type="text" th:field="*{telCorporativo}" class="form-control"
-										id="telCorporativo" data-inputmask="'mask': '(99)9999-9999'"
-										maxlength="13" placeholder="Telefone Corporativo"> <span
-										th:if="${#fields.hasErrors('telCorporativo')}"
-										th:errors="*{telCorporativo}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="telCelular" class="col-form-label labels">Telefone Celular</label> <input
-										type="text" th:field="*{telCelular}" class="form-control"
-										id="telCelular" maxlength="14"
-										data-inputmask="'mask': '(99)99999-9999'"
-										placeholder="Telefone Celular"> <span
-										th:if="${#fields.hasErrors('telCelular')}"
-										th:errors="*{telCelular}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="email" class="col-form-label labels">E-mail</label> <input type="text"
-										th:field="*{email}" class="form-control" id="email"
-										data-inputmask="'alias': 'email'"> <span
-										th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-										class="text-danger"></span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<h3 align="center">Dados da Vaga</h3>
-							<BR />
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="panel-heading">
-									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Perfil
-											Requisitante</h1>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<br />
-								<div class="form-group col-md-4">
-									<label for="perfil" class="col-form-label labels">Perfil</label> <input type="text"
-										th:field="*{perfil}" class="form-control" id="perfil"
-										placeholder="Perfil"><span
-										th:if="${#fields.hasErrors('perfil')}" th:errors="*{perfil}"
-										class="text-danger"></span>
-
-								</div>
-								<div class="form-group col-md-4">
-									<label for="regiaoAtuacao" class="col-form-label labels">Região de Atuação</label> <input
-										type="text" th:field="*{regiaoAtuacao}" class="form-control"
-										id="regiaoAtuacao" placeholder="Região de Atuação"><span
-										th:if="${#fields.hasErrors('regiaoAtuacao')}"
-										th:errors="*{regiaoAtuacao}" class="text-danger"></span>
-								</div>
-
-								<div class="form-group col-md-4">
-									<label for="vagas" class="col-form-label labels">Nº de Vagas</label> <input
-										type="text" th:field="*{vagas}" class="form-control"
-										id="vagas" placeholder="Vagas"> <span
-										th:if="${#fields.hasErrors('vagas')}" th:errors="*{vagas}"
-										class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-2">
-									<label for="formaContratacao" class="col-form-label labels">Contratação</label> <select
-										class="form-control" th:field="*{formaContratacao}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option
-											th:each="tipoContratacao : ${T(com.br.itsingular.enums.TipoContratacao).values()}"
-											th:value="${tipoContratacao}" th:text="${tipoContratacao}"></option>
-									</select> <span th:if="${#fields.hasErrors('formaContratacao')}"
-										th:errors="*{formaContratacao}" class="text-danger"></span>
-
-								</div>
-								<div class="form-group col-md-3">
-									<label for="valor" class="col-form-label labels">Valor</label> <input type="text"
-										th:field="*{valor}"
-										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
-										class="form-control" id="previsaoInicio" placeholder="Valor"><span
-										th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"
-										class="text-danger"></span>
-								</div>
-
-								<div class="form-group col-md-2">
-									<label for="por" class="col-form-label labels">Por</label> <select
-										class="form-control" th:field="*{por}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option
-											th:each="tipoProjeto : ${T(com.br.itsingular.enums.TipoProjeto).values()}"
-											th:value="${tipoProjeto}" th:text="${tipoProjeto}"></option>
-									</select> <span th:if="${#fields.hasErrors('por')}" th:errors="*{por}"
-										class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-2">
-									<label for="horaAberta" class="col-form-label labels">Hora Aberta</label> <select
-										class="form-control" th:field="*{horaAberta}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option th:value="'S'" th:text="SIM"></option>
-										<option th:value="'N'" th:text="NÃO"></option>
-									</select> <span th:if="${#fields.hasErrors('horaAberta')}"
-										th:errors="*{horaAberta}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="quantidadeMinimaHoras" class="col-form-label labels">Quantidade Mínima Horas/Mês</label> <input
-										type="number" th:field="*{quantidadeMinimaHoras}"
-										class="form-control" id="quantidadeMinimaHoras"
-										placeholder="Quantidade Mínima Horas/Mês"><span
-										th:if="${#fields.hasErrors('quantidadeMinimaHoras')}"
-										th:errors="*{quantidadeMinimaHoras}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="cargaHoraria" class="col-form-label labels">Carga Horária</label> <input
-										type="text" th:field="*{cargaHoraria}" class="form-control"
-										id="cargaHoraria" placeholder="Carga Horária"><span
-										th:if="${#fields.hasErrors('cargaHoraria')}"
-										th:errors="*{cargaHoraria}" class="text-danger"></span>
-
-								</div>
-								<div class="form-group col-md-3">
-									<label for="previsaoInicio" class="col-form-label labels">Previsão de Início</label> <input
-										type="date" th:field="*{previsaoInicio}" class="form-control"
-										id="previsaoInicio" placeholder="Previsão de Início"><span
-										th:if="${#fields.hasErrors('previsaoInicio')}"
-										th:errors="*{previsaoInicio}" class="text-danger"></span>
-								</div>
-
-								<div class="form-group col-md-3">
-									<label for="duracaoContrato" class="col-form-label labels">Duração Contrato</label> <input
-										type="text" th:field="*{duracaoContrato}" class="form-control"
-										id="duracaoContrato" placeholder="Duração Contrato"> <span
-										th:if="${#fields.hasErrors('duracaoContrato')}"
-										th:errors="*{duracaoContrato}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
-									<label for="renovacao" class="col-form-label"
-										style="margin-left: 1px">Chances de Renovação?</label> <select
-										class="form-control" th:field="*{renovacao}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option
-											th:each="tipoRenovacao : ${T(com.br.itsingular.enums.TipoRenovacao).values()}"
-											th:value="${tipoRenovacao}" th:text="${tipoRenovacao}"
-											>
-										</option>
-									</select> <span th:if="${#fields.hasErrors('renovacao')}"
-										th:errors="*{renovacao}" class="text-danger"></span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<h3 align="center">Processo Seletivo</h3>
-							<BR />
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="panel-heading">
-									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Como
-											deverá ser o processo?</h1>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<BR />
-								<div class="form-group col-md-4">
-									<label for="rhProcesso" class="col-form-label"
-										style="margin-left: 1px">RH</label> <select
-										class="form-control" th:field="*{rhProcesso}"
-										th:value="${rhProcesso}" multiple="multiple">
-										
-										<option
-											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-											th:value="${descricaoProcessoSeletivo}"
-											th:text="${descricaoProcessoSeletivo}"></option>
-									</select> <span th:if="${#fields.hasErrors('rhProcesso')}"
-										th:errors="*{rhProcesso}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="solicitanteProcesso" class="col-form-label"
-										style="margin-left: 1px">Solicitante</label> <select
-										class="form-control" th:field="*{solicitanteProcesso}"
-										multiple="multiple">
-										<option
-											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-											th:value="${descricaoProcessoSeletivo}"
-											th:text="${descricaoProcessoSeletivo}"></option>
-									</select> <span th:if="${#fields.hasErrors('solicitanteProcesso')}"
-										th:errors="*{solicitanteProcesso}" class="text-danger"></span>
-								</div>
-
-								<div class="form-group col-md-4">
-									<label for="clienteProcesso" class="col-form-label"
-										style="margin-left: 1px">Cliente</label> <select
-										class="form-control" th:field="*{clienteProcesso}"
-										multiple="multiple">
-										<option
-											th:each="descricaoProcessoSeletivo : ${T(com.br.itsingular.enums.TipoProcessoSeletivo).values()}"
-											th:value="${descricaoProcessoSeletivo}"
-											th:text="${descricaoProcessoSeletivo}"></option>
-									</select> <span th:if="${#fields.hasErrors('clienteProcesso')}"
-										th:errors="*{clienteProcesso}" class="text-danger"></span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<h3 align="center">Testes</h3>
-							<BR />
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="panel-heading">
-									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Onde
-											será seus testes e quais serão?</h1>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<BR />
-								<div class="form-group col-md-4">
-									<label for="localAplicacao" class="col-form-label labels">Local de Aplicação</label> <select
-										class="form-control" th:field="*{localAplicacao}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option
-											th:each="descricaoLocalAplicacaoTestes : ${T(com.br.itsingular.enums.TipoLocalAplicacaoTestes).values()}"
-											th:value="${descricaoLocalAplicacaoTestes}"
-											th:text="${descricaoLocalAplicacaoTestes}"></option>
-									</select> <span th:if="${#fields.hasErrors('localAplicacao')}"
-										th:errors="*{localAplicacao}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="quaisTestes" class="col-form-label"
-										style="margin-left: 1px">Quais</label> <select
-										class="form-control" th:field="*{quaisTestes}"
-										style="height: 113px;" multiple="multiple">
-										<option
-											th:each="descricaoQualificacaoTestes : ${T(com.br.itsingular.enums.TipoQualificacaoTestes).values()}"
-											th:value="${descricaoQualificacaoTestes}"
-											th:text="${descricaoQualificacaoTestes}"></option>
-									</select> <span th:if="${#fields.hasErrors('quaisTestes')}"
-										th:errors="*{quaisTestes}" class="text-danger"></span>
-								</div>
-
-								<div class="form-group col-md-4">
-									<label for="observacao" class="col-form-label"
-										style="margin-left: 1px">Observação</label>
-									<textarea maxlength="500" cols="10" rows="5"
-										th:field="*{observacao}" class="form-control"
-										id="duracaoContrato"></textarea>
-									<span th:if="${#fields.hasErrors('observacao')}"
-										th:errors="*{observacao}" class="text-danger"></span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<h3 align="center">Requisitos</h3>
-							<BR />
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<div class="panel-heading">
-									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Quais
-											as tecnologias?</h1>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<BR />
-								<div class=" form-group col-md-6">
-									<label for="requisitoObrigatorio">Escolha conhecimento obrigatório</label> <select class="form-control"
-										th:field="*{requisitoObrigatorio}" multiple="multiple">
-										<option th:each="cursos : ${listCursos}"
-											th:value="${cursos.id}"
-											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
-											selected="selected"></option>
-									</select> <span th:if="${#fields.hasErrors('requisitoObrigatorio')}"
-										th:errors="*{requisitoObrigatorio}" class="text-danger"></span>
-								</div>
-								<div class=" form-group col-md-6">
-									<label for="requisitoConhecimento" class="col-form-label"
-										style="margin-left: 1px">Escolha conhecimento
-										Desejável </label> <select class="form-control" multiple="multiple"
-										th:field="*{requisitoConhecimento}">
-										<option th:each="cursos : ${listCursos}"
-											th:value="${cursos.id}"
-											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"
-											selected="selected"></option>
-									</select> <span th:if="${#fields.hasErrors('requisitoConhecimento')}"
-										th:errors="*{requisitoConhecimento}" class="text-danger"></span>
-								</div>
-							</div>
-						</div>
-						<HR style="color: black" />
-						<div class="form-group col-md-12" style="text-align: center">
-							<input type="submit" class="btn btn-primary"
-								value="Confirmar Requisição">
-						</div>
-						<div class="form-group col-md-8"></div>
-					</form>
+	<div class="panel-body">
+		<form th:action="@{/recursos-humanos/vagas/pesquisar}" method="GET" class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-6">
+					<div class="input-group">
+						<input class="form-control" name="filtro" id="filtro"
+							placeholder="Filtrar vagas" autofocus="autofocus"
+							th:value="${filtro}" /> <span class="input-group-btn">
+							<button type="submit" class="btn btn-default">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</span>
+					</div>
 				</div>
+			</div>
+		</form>
+
+		<div class="table-responsive">
+
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<!-- <th class="text-center col-md-1">#</th> -->
+						<th class="text-center">Data Solicitação</th>
+						<th class="text-center col-md-1">Cliente</th>
+						<th class="text-center col-md-1">Vaga</th>
+						<th class="text-center col-md-1">Status</th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<tr th:each="vaga: ${vagas.content}">
+						<!-- <td class="text-center" th:text="${vaga.id}">1</td> -->
+						<td class="text-center col-md-1" th:text="${vaga.dataSolicitacao}"></td>
+						<td class="text-center" th:text="${{vaga.cliente}}"></td>
+						<td class="text-center col-md-1"
+							th:text="${{vaga.cargo}}|"></td>
+						<td class="text-center col-md-1" th:attr="data-role=${vaga.id}">
+							<span class="label" th:text="${vaga.status}"
+							th:classappend="${vaga.status == 'Pendente'? 'label-danger' : 'label-success'}">
+						</span>
+						</td>
+						<td class="text-center col-md-1"><a
+							class="btn btn-link btn-xs js-view-information" data-toggle="modal"
+							data-target="#vagas-modal"
+							th:href="@{/recursos-humanos/vagas/{id}(id=${vaga.id})}"
+							title="Vizualizar" rel="tooltip" data-placement="top"> <span
+								class="glyphicon glyphicon-eye-open"></span>
+						</a></td>
+					</tr>
+					<tr>
+						<td class="text-center col-md-2" colspan="6"
+							th:if="${#lists.isEmpty(vagas)}">Vagas não encontradas</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!--Pagination  -->
+		<div id="bottom" class="row">
+			<div class="col-md-12">
+				<span th:if="${vagas.hasPrevious()}" class="pagination"> <a
+					th:href="@{/recursos-humanos/view(page=${vagas.number-1},size=${vagas.size})}">Anterior</a>
+				</span>
+				<th:block th:each="i: ${#numbers.sequence(0, vagas.totalPages - 1)}">
+					<span th:if="${vagas.number == i}" class="selected">[[${i}+1]]</span>
+					<span th:unless="${vagas.number == i}"> <a
+						th:href="@{/recursos-humanos/view(page=${i},size=${vagas.size})}">[[${i}+1]]</a>
+					</span>
+				</th:block>
+				<span th:if="${vagas.hasNext()}"> <a
+					th:href="@{/recursos-humanos/view(page=${vagas.number+1},size=${vagas.size})}">Próximo</a>
+				</span>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal myForm" id="vagas-modal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog" role="document">
+			  	<div class="modal-content">
+				  	<form th:action="@{/save}" method="post">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				 <!--      <div class="modal-body">
+						 <div class="form-group">
+		                    <label for="nomeSolicitante" class="col-form-label">Nome Solicitante:</label>
+		                    <output id="nomeSolicitante" name="nomeSolicitante"/></output>
+		                 </div>
+				      </div> -->
+						<div class="modal-body">
+
+						<div class="form-group">
+							<div class="window-module">
+								<div class="window-module-title window-module-title-no-divider description-title">
+									<span class="glyphicon glyphicon-info-sign window-module-title-icon"></span>
+									<h3 class="u-inline-block">Nome solicitante:</h3>
+									<div class="editable">
+										<output class="button subtle hide-on-edit js-show-with-desc js-edit-desc js-edit-desc-button" id="nomeSolicitante" name="nomeSolicitante" for="nomeSolicitante"></output>
+									</div>
+								</div>
+								<div class="u-gutter">
+										<div class="editable">
+											<div class="description-content js-desc-content">
+												<div class="window-module-title window-module-title-no-divider description-title">
+													<span class="glyphicon glyphicon-info-sign window-module-title-icon"></span>
+													<h3 class="u-inline-block">Data Solicitação:</h3>
+													<div class="editable">
+														<output class="button subtle hide-on-edit js-show-with-desc js-edit-desc js-edit-desc-button" id="dataSolicitacao" name="dataSolicitacao" for="dataSolicitacao"></output>
+													</div>
+												</div>
+												<!-- <p class="u-bottom js-hide-with-desc hide">
+												<a
+													class="description-fake-text-area hide-on-edit js-edit-desc  js-hide-with-draft"
+													href="#">Adicione uma descrição mais detalhada...</a>
+											</p> -->
+												<!-- 	<div class="description-edit edit">
+												<a class="helper button subtle js-format-help" href="#">Ajuda
+													para formatação</a>
+												<textarea
+													class="field field-autosave js-description-draft description card-description"
+													placeholder="Adicione uma descrição mais detalhada..."></textarea>
+											</div> -->
+												<!-- <p class="edits-warning quiet">
+												Você tem edições não salvas neste campo. <a
+													class="js-view-edits" href="#">Exibir edições</a> - <a
+													class="js-discard-edits" href="#">Descartar</a>
+											</p>
+											<p class="edits-error error">A edição não foi salva.</p> -->
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+
+
+							<div class="form-group">
+								<div class="window-module js-attachments-section u-clearfix">
+									<div class="window-module-title window-module-title-no-divider">
+										<span class="window-module-title-icon glyphicon glyphicon-paperclip"></span>
+										<h3 class="u-inline-block">Anexos</h3>
+									</div>
+									<div class="u-gutter">
+										<div class="u-clearfix js-attachment-list ui-sortable">
+											<div class="attachment-thumbnail">
+												<a class="attachment-thumbnail-preview js-open-viewer"
+													href="https://trello-attachments.s3.amazonaws.com/5c34c29e22332b4655e15278/5d66e92920d77c327f2f3fb9/85fbab9419ac861d1d5e02c4440532b6/Requisi%C3%A7%C3%A3o_de_Vagas_-_Teste.pdf"
+													target="_blank" title="Requisição de Vagas - Teste.pdf"
+													style="" rel="noreferrer nofollow noopener"><span
+													class="attachment-thumbnail-preview-ext">pdf</span></a>
+												<p class="attachment-thumbnail-details js-open-viewer">
+													<span class="attachment-thumbnail-name">Requisição
+														de Vagas - Teste.pdf</span><a
+														class="attachment-thumbnail-details-title-action dark-hover js-attachment-action js-direct-link"
+														href="https://trello-attachments.s3.amazonaws.com/5c34c29e22332b4655e15278/5d66e92920d77c327f2f3fb9/85fbab9419ac861d1d5e02c4440532b6/Requisi%C3%A7%C3%A3o_de_Vagas_-_Teste.pdf"
+														target="_blank" rel="noreferrer nofollow noopener"><span
+														class="icon-sm icon-external-link"></span></a><span
+														class="u-block quiet attachment-thumbnail-details-title-options"><span>Adicionado:
+															<span class="date" dt="2020-02-05T16:53:53.563Z"
+															title="5 de fevereiro de 2020 às 13:53">5 de fev
+																às 13:53</span>
+													</span><span><a
+															class="attachment-thumbnail-details-title-options-item js-reply"
+															href="#"><span
+																class="attachment-thumbnail-details-options-item-text">Comentário</span></a></span><span><a
+															class="attachment-thumbnail-details-title-options-item dark-hover js-confirm-delete"
+															href="#"><span
+																class="attachment-thumbnail-details-options-item-text">Excluir</span></a></span><span><a
+															class="attachment-thumbnail-details-title-options-item dark-hover js-edit"
+															href="#"><span
+																class="attachment-thumbnail-details-options-item-text">Editar</span></a></span></span><span
+														class="quiet attachment-thumbnail-details-options"><a
+														class="attachment-thumbnail-details-options-item dark-hover hide js-make-cover"
+														href="#"><span class="icon-sm icon-card-cover"></span>
+															<span
+															class="attachment-thumbnail-details-options-item-text">Criar
+																Capa</span></a><a
+														class="attachment-thumbnail-details-options-item dark-hover hide js-remove-cover"
+														href="#"><span class="icon-sm icon-card-cover"></span>
+															<span
+															class="attachment-thumbnail-details-options-item-text">Remover
+																Capa</span></a></span>
+												</p>
+											</div>
+										</div>
+										<p class="js-show-fewer-attachments hide">
+											<a class="quiet-button js-view-some-attachments" href="#">Mostre
+												menos anexos.</a>
+										</p>
+										<p class="js-show-more-attachments hide">
+											<a class="quiet-button js-view-all-attachments" href="#">Exibir
+												todos os anexos (-3 ocultos)</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+				       <!--  <button type="button" class="btn btn-primary">Salvar mudanças</button> -->
+				      </div>
+					</form>
+				
+				 <!-- <div class="row">
+	            <div class="col-md-8 mx-auto">
+	                <h3>Upload File Example</h3>
+	                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+	                <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+	                    <span class="attachment-thumbnail-preview-ext">pdf</span>
+	                    <button type="submit" class="btn btn-primary">Upload File</button>
+	                </form>
+	           	 </div>
+       			 </div> -->
+			  </div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
