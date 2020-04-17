@@ -11,5 +11,5 @@ dist/
 .classpath
 .project
 .settings
-
+/bin
  
