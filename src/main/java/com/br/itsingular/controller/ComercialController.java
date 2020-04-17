@@ -65,7 +65,7 @@ public class ComercialController {
 		
 		Object email = session.getAttribute("email");
 
-		Page<Requisicao> requisicoes = this.requisicaoServices.getInfoByEmail(String.valueOf(email), page, size);
+		Page<Requisicao> requisicoes = this.requisicaoServices.getInfoBySolicitante(String.valueOf(email), page, size);
 		
 		ModelAndView view = new ModelAndView("ViewComercial");
 		view.addObject("requisicoes", requisicoes) ;

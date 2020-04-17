@@ -19,7 +19,7 @@ import com.br.itsingular.entity.Requisicao;
 @Repository
 public interface RequisicaoRepository extends MongoRepository<Requisicao, String> {
 
-	Page<Requisicao> findByEmail(String filtro, Pageable pageRequest);
+	Page<Requisicao> findByNomeSolicitante(String filtro, Pageable pageRequest);
 
 	List<Requisicao> findByClienteContaining(String filtro);
 }

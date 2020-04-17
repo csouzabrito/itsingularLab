@@ -50,11 +50,11 @@ public class RequisicaoServices {
 		}
 	}
 
-	public Page<Requisicao> getInfoByEmail(final String email, final int page, final int size ) {
+	public Page<Requisicao> getInfoBySolicitante(final String email, final int page, final int size ) {
 
 		final Pageable pageable = PageRequest.of(page, size);
 		
-		Page<Requisicao> requisicoes = this.repository.findByEmail(email, pageable);
+		Page<Requisicao> requisicoes = this.repository.findByNomeSolicitante(email, pageable);
 		
 		return requisicoes;
 	}
