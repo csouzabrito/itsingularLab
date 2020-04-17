@@ -22,4 +22,5 @@ public interface RequisicaoRepository extends MongoRepository<Requisicao, String
 	Page<Requisicao> findByNomeSolicitante(String filtro, Pageable pageRequest);
 
 	List<Requisicao> findByClienteContaining(String filtro);
+
 }
