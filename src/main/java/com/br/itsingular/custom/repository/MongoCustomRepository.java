@@ -3,6 +3,8 @@ package com.br.itsingular.custom.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,19 +18,35 @@ public class MongoCustomRepository {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
-	public List<Requisicao> findRequisicaoByFilter(final String filtro) {
+	public List<Requisicao> findVagasByFilter(final String filtro,final int page, final int size) {
 		
-		List<Requisicao> requisicoes = mongoTemplate.find(Query.query(new Criteria()
+		List<Requisicao> vagas = mongoTemplate.find(Query.query(new Criteria()
 				.orOperator(Criteria.where("dataSolicitacao").is(filtro), 
 							Criteria.where("cliente").regex(filtro,"i"), 
 							Criteria.where("vaga").regex(filtro, "i"),
 							Criteria.where("ramoAtividade").regex(filtro, "i"),
 							Criteria.where("sla").gte(filtro),
-							Criteria.where("status").regex(filtro))
-				), Requisicao.class);
+							Criteria.where("status").regex(filtro))),Requisicao.class);
+				
+		return vagas;
+	}
+	
+	public List<Requisicao> findRequisicaoByFilter(final String filtro,final int page, final int size) {
 		
+		final Pageable pageable = PageRequest.of(page, size);
+		
+		Query query = new Query().with(pageable);
+		
+		query.addCriteria(new Criteria()
+				.orOperator(Criteria.where("dataSolicitacao").is(filtro), 
+						Criteria.where("cliente").regex(filtro,"i"), 
+						Criteria.where("nomeSolicitante").regex(filtro, "i"),
+						Criteria.where("ramoAtividade").regex(filtro, "i"),
+						Criteria.where("sla").gte(filtro),
+						Criteria.where("status").regex(filtro)));
+		
+		List<Requisicao> requisicoes = mongoTemplate.find(query, Requisicao.class);
 		
 		return requisicoes;
 	}
-	
 }

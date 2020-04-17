@@ -1,5 +1,6 @@
 package com.br.itsingular.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class RHController {
 	private RHSrevice service;
 
 	@RequestMapping("/view")
-	public ModelAndView novo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "4") final int size){
+	public ModelAndView novo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
 		
 		ModelAndView view = new ModelAndView("ViewRH");
 		
@@ -34,7 +35,7 @@ public class RHController {
 	}
 	
 	@GetMapping("/vagas")
-	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "4") final int size){
+	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
 
 	final Page<Requisicao> vagas = this.service.findRequisicao(page, size);
 		
@@ -43,17 +44,22 @@ public class RHController {
 		return view;
 	}
 	
-	@GetMapping("/vagas/{id}")	
 	@ResponseBody
+	@GetMapping("/vagas/{id}")	
 	public Requisicao find(@PathVariable("id") Requisicao vaga) {
 		return vaga;
 	}
 	
 	@GetMapping("/vagas/pesquisar")
-	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "4") final int size){
+	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
 		
-		final Page<Requisicao> vagas  = this.service.filtrarVagas(filtro, page, size);
+		Page<Requisicao> vagas = null;
 		
+		if(StringUtils.isBlank(filtro)) {
+		   vagas = this.service.findRequisicao(page, size);
+		}else {
+		   vagas = this.service.filtrarVagas(filtro, page, size);
+		}
 		model.addAttribute("filtro", filtro);
 		ModelAndView view = new ModelAndView("ViewRH");
 		view.addObject("vagas", vagas) ;

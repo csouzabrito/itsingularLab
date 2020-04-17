@@ -18,14 +18,22 @@
 </script>
 
 <body>
+<div class="d-flex">
+	<div th:replace="Menu :: menu">...</div>
+	<div class="container" id="content">
+	<h3 align="center">Lista de Vagas RH</h3>
+		<br /> <br />
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Menu</small>
+		</button>
 	<div class="panel-body">
 		<form th:action="@{/recursos-humanos/vagas/pesquisar}" method="GET" class="form-horizontal">
 			<div class="form-group">
 				<div class="col-sm-6">
 					<div class="input-group">
-						<input class="form-control" name="filtro" id="filtro"
-							placeholder="Filtrar vagas" autofocus="autofocus"
-							th:value="${filtro}" /> <span class="input-group-btn">
+						<input class="form-control" name="filtro" id="filtro" placeholder="Filtrar vagas" autofocus="autofocus" th:value="${filtro}" /> <span class="input-group-btn">
 							<button type="submit" class="btn btn-default">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
@@ -36,11 +44,9 @@
 		</form>
 
 		<div class="table-responsive">
-
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped ">
 				<thead>
 					<tr>
-						<!-- <th class="text-center col-md-1">#</th> -->
 						<th class="text-center">Data Solicitação</th>
 						<th class="text-center col-md-1">Cliente</th>
 						<th class="text-center col-md-1">Vaga</th>
@@ -52,7 +58,6 @@
 				<tbody>
 
 					<tr th:each="vaga: ${vagas.content}">
-						<!-- <td class="text-center" th:text="${vaga.id}">1</td> -->
 						<td class="text-center col-md-1" th:text="${vaga.dataSolicitacao}"></td>
 						<td class="text-center" th:text="${{vaga.cliente}}"></td>
 						<td class="text-center col-md-1"
@@ -78,24 +83,26 @@
 			</table>
 		</div>
 		<!--Pagination  -->
-		<div id="bottom" class="row">
-			<div class="col-md-12">
-				<span th:if="${vagas.hasPrevious()}" class="pagination"> <a
-					th:href="@{/recursos-humanos/view(page=${vagas.number-1},size=${vagas.size})}">Anterior</a>
-				</span>
-				<th:block th:each="i: ${#numbers.sequence(0, vagas.totalPages - 1)}">
-					<span th:if="${vagas.number == i}" class="selected">[[${i}+1]]</span>
-					<span th:unless="${vagas.number == i}"> <a
-						th:href="@{/recursos-humanos/view(page=${i},size=${vagas.size})}">[[${i}+1]]</a>
-					</span>
-				</th:block>
-				<span th:if="${vagas.hasNext()}"> <a
-					th:href="@{/recursos-humanos/view(page=${vagas.number+1},size=${vagas.size})}">Próximo</a>
-				</span>
-			</div>
-		</div>
+			<div id="bottom" class="row">
+				<div class="col-md-12">
+				<ul class="nav">
+					<li th:if="${vagas.hasPrevious()}" class="nav item">
+	                    <a class="page-link disabled" th:href="@{/recursos-humanos/view(page=${vagas.number-1},size=${vagas.size})}">Anterior</a>
+	                </li>
+	                
+	                <li class="nav item" th:each="i : ${#numbers.sequence(0, vagas.totalPages - 1)}">
+	                    <a th:href="@{/recursos-humanos/view(page=${i},size=${vagas.size})}" th:text="${i}" class="page-link"
+	                       th:classappend="${currentPage}==${i}?'active':''">[[${i}+1]]</a>
+	                </li>
+	                
+	                <li th:if="${vagas.hasNext()}" class="nav item" >
+	                    <a class="page-link" th:href="@{/recursos-humanos/view(page=${vagas.number+1},size=${vagas.size})}">Próximo</a>
+	                </li>
+	            </ul>
+           	</div>
+           </div>
 		<!-- Modal -->
-		<div class="modal myForm" id="vagas-modal" tabindex="-1" role="dialog">
+		<div class="modal myForm" id="vagas-modals" tabindex="-1" role="dialog">
 			  <div class="modal-dialog" role="document">
 			  	<div class="modal-content">
 				  	<form th:action="@{/save}" method="post">
@@ -104,14 +111,7 @@
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				      </div>
-				 <!--      <div class="modal-body">
-						 <div class="form-group">
-		                    <label for="nomeSolicitante" class="col-form-label">Nome Solicitante:</label>
-		                    <output id="nomeSolicitante" name="nomeSolicitante"/></output>
-		                 </div>
-				      </div> -->
-						<div class="modal-body">
-
+					<div class="modal-body">
 						<div class="form-group">
 							<div class="window-module">
 								<div class="window-module-title window-module-title-no-divider description-title">
@@ -131,30 +131,11 @@
 														<output class="button subtle hide-on-edit js-show-with-desc js-edit-desc js-edit-desc-button" id="dataSolicitacao" name="dataSolicitacao" for="dataSolicitacao"></output>
 													</div>
 												</div>
-												<!-- <p class="u-bottom js-hide-with-desc hide">
-												<a
-													class="description-fake-text-area hide-on-edit js-edit-desc  js-hide-with-draft"
-													href="#">Adicione uma descrição mais detalhada...</a>
-											</p> -->
-												<!-- 	<div class="description-edit edit">
-												<a class="helper button subtle js-format-help" href="#">Ajuda
-													para formatação</a>
-												<textarea
-													class="field field-autosave js-description-draft description card-description"
-													placeholder="Adicione uma descrição mais detalhada..."></textarea>
-											</div> -->
-												<!-- <p class="edits-warning quiet">
-												Você tem edições não salvas neste campo. <a
-													class="js-view-edits" href="#">Exibir edições</a> - <a
-													class="js-discard-edits" href="#">Descartar</a>
-											</p>
-											<p class="edits-error error">A edição não foi salva.</p> -->
 											</div>
 										</div>
 									</div>
 							</div>
 						</div>
-
 
 							<div class="form-group">
 								<div class="window-module js-attachments-section u-clearfix">
@@ -218,26 +199,15 @@
 							</div>
 						</div>
 
-
 						<div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-				       <!--  <button type="button" class="btn btn-primary">Salvar mudanças</button> -->
 				      </div>
 					</form>
-				
-				 <!-- <div class="row">
-	            <div class="col-md-8 mx-auto">
-	                <h3>Upload File Example</h3>
-	                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-	                <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-	                    <span class="attachment-thumbnail-preview-ext">pdf</span>
-	                    <button type="submit" class="btn btn-primary">Upload File</button>
-	                </form>
-	           	 </div>
-       			 </div> -->
 			  </div>
 			</div>
 		</div>
 	</div>
+ </div>
+</div>
 </body>
 </html>

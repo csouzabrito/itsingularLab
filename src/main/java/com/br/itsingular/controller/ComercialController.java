@@ -1,10 +1,10 @@
 package com.br.itsingular.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.br.itsingular.entity.Comercial;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.ComercialService;
-import com.br.itsingular.services.RequisicaoFilter;
 import com.br.itsingular.services.RequisicaoServices;
 
 
@@ -62,29 +61,31 @@ public class ComercialController {
 	
 	
 	@GetMapping("/informacoes")
-	public ModelAndView listarInfo(){
+	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
 		
 		Object email = session.getAttribute("email");
-		
 
-		List<Requisicao> requisicoes = this.requisicaoServices.getInfoByEmail(String.valueOf(email));
+		Page<Requisicao> requisicoes = this.requisicaoServices.getInfoByEmail(String.valueOf(email), page, size);
 		
 		ModelAndView view = new ModelAndView("ViewComercial");
-		view.addObject("filtro", new RequisicaoFilter());
 		view.addObject("requisicoes", requisicoes) ;
 		return view;
 	}
 	
-	@PostMapping("/filtrar")
-	public ModelAndView listar(Model model, @RequestParam final String filtro){
+	@GetMapping("/filtrar")
+	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
 		
-		List<Requisicao> requisicoes  = this.requisicaoServices.filtrarRequisicao(filtro);
+		Page<Requisicao> requisicoes = null;
 		
-//		view.addObject("filtro", new RequisicaoFilter());
+		if (StringUtils.isBlank(filtro)) {
+			requisicoes = this.requisicaoServices.listarRequisicoes(page, size);
+		} else {
+			requisicoes = this.requisicaoServices.filtrarRequisicao(filtro, page, size);
+		}
+		
 		model.addAttribute("filtro", filtro);
 		ModelAndView view = new ModelAndView("ViewComercial");
 		view.addObject("requisicoes", requisicoes) ;
 		return view;
 	}
-	
 }

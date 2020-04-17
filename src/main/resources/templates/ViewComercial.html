@@ -30,7 +30,7 @@
 		</button>
 		<div class="panel-body">
 
-			<form th:action="@{/comercial/filtrar}" method="POST" class="form-horizontal">
+			<form th:action="@{/comercial/filtrar}" method="GET" class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-6">
 						<div class="input-group">
@@ -59,7 +59,7 @@
 					</thead>
 
 					<tbody>
-						<tr th:each="requisicao: ${requisicoes}">
+						<tr th:each="requisicao: ${requisicoes.content}">
 							<td class="text-center" th:text="${{requisicao.dataSolicitacao}}"></td>
 							<td class="text-center" th:text="${{requisicao.cliente}}"></td>
 							<td class="text-center" th:text="${{requisicao.nomeSolicitante}}"></td>
@@ -78,6 +78,25 @@
 					</tbody>
 				</table>
 			</div>
+			<!--Pagination  -->
+			<div id="bottom" class="row">
+				<div class="col-md-12">
+				<ul class="nav">
+					<li th:if="${requisicoes.hasPrevious()}" class="nav item">
+	                    <a class="page-link disabled" th:href="@{/comercial/informacoes(page=${requisicoes.number-1},size=${requisicoes.size})}">Anterior</a>
+	                </li>
+	                
+	                <li class="nav item" th:each="i : ${#numbers.sequence(0, requisicoes.totalPages - 1)}">
+	                    <a th:href="@{/comercial/informacoes(page=${i},size=${requisicoes.size})}" th:text="${i}" class="page-link"
+	                       th:classappend="${currentPage}==${i}?'active':''">[[${i}+1]]</a>
+	                </li>
+	                
+	                <li th:if="${requisicoes.hasNext()}" class="nav item" >
+	                    <a class="page-link" th:href="@{/comercial/informacoes(page=${requisicoes.number+1},size=${requisicoes.size})}">Próximo</a>
+	                </li>
+	            </ul>
+           	</div>
+           </div>
 		</div>
 		</div>
 	</div>

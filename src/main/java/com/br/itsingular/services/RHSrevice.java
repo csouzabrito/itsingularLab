@@ -1,10 +1,11 @@
 package com.br.itsingular.services;
 
+import static com.br.itsingular.utils.Utils.toPageable;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -23,18 +24,13 @@ public class RHSrevice {
 	private MongoCustomRepository customRepository;
 	
 	public Page<Requisicao> findRequisicao(final int page, final int size){
-		
-		final Page<Requisicao> requisicoes = this.repository.findAll(PageRequest.of(page, size));
-		
-		return requisicoes;
+		return this.repository.findAll(PageRequest.of(page, size));
 	}
 	
 	public Page<Requisicao> filtrarVagas(final String filtro, final int page, final int size) {
 		
-		List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro);
+		final List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
 		
-		final Page<Requisicao> requisicaoPageble = new PageImpl<>(requisicoes);
-		
-		return requisicaoPageble;
+		return toPageable(requisicoes);
 	}
 }

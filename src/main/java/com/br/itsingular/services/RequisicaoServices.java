@@ -1,9 +1,14 @@
 package com.br.itsingular.services;
 
+import static com.br.itsingular.utils.Utils.toPageable;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.custom.repository.MongoCustomRepository;
@@ -32,7 +37,7 @@ public class RequisicaoServices {
 	private MongoCustomRepository customRepository;
 	
 	public Requisicao salvarRequisicao(Requisicao requisicao) {
-
+		
 		try {
 			requisicao.setStatus(StatusRequisicao.PENDENTE.getDescricao());
 			Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
@@ -45,18 +50,26 @@ public class RequisicaoServices {
 		}
 	}
 
-	public List<Requisicao> getInfoByEmail(final String email) {
+	public Page<Requisicao> getInfoByEmail(final String email, final int page, final int size ) {
 
-		List<Requisicao> requisicoes = repository.findByEmail(email);
-
-		return requisicoes;
-	}
-
-	public List<Requisicao> filtrarRequisicao(final String filtro) {
+		final Pageable pageable = PageRequest.of(page, size);
 		
-		List<Requisicao> requisicoes = customRepository.findRequisicaoByFilter(filtro);
+		Page<Requisicao> requisicoes = this.repository.findByEmail(email, pageable);
 		
 		return requisicoes;
 	}
 	
+	public Page<Requisicao> filtrarRequisicao(final String filtro, final int page, final int size) {
+		
+		List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
+		
+		return toPageable(requisicoes);
+	}
+	
+	public Page<Requisicao> listarRequisicoes(final int page, final int size){
+		
+		final Page<Requisicao> requisicoes = this.repository.findAll(PageRequest.of(page, size));
+		
+		return requisicoes;
+	}
 }
