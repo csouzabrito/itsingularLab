@@ -24,7 +24,6 @@
 					class="text-uppercase font-weight-bold">Menu</small>
 			</button>
 			<div>
-				<a href="#"><img src="/img/itsingular.jpg"></a>
 				<div th:each="m : ${msg}">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<span th:text="${m}"></span>
@@ -32,8 +31,7 @@
 
 				<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
 					<div th:case="'Success'" class="alert alert-success">
-						<a href="#" class="close" data-dismiss="aler
-t"
+						<a href="#" class="close" data-dismiss="alert"
 							aria-label="close">&times;</a> <strong>Sucesso!</strong>
 						Comercial criado com sucesso.
 					</div>
@@ -58,7 +56,7 @@ t"
 						</div>
 
 						<div class="panel-body">
-							<form th:action="@{/comercial/salvar}" th:object="${pessoa}"
+							<form th:action="@{/comercial/salvar}" th:object="${comercial}"
 								method="POST">
 
 								<div class="row">

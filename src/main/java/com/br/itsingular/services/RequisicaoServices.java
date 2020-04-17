@@ -1,13 +1,17 @@
 package com.br.itsingular.services;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import static com.br.itsingular.utils.Utils.toPageable;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.br.itsingular.custom.repository.MongoCustomRepository;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.enums.StatusRequisicao;
 import com.br.itsingular.enums.TipoRequisicao;
@@ -20,16 +24,22 @@ import com.br.itsingular.repository.RequisicaoRepository;
 @Service
 public class RequisicaoServices {
 
+	@Value("${collection}")
+	private String collection;
+	
 	@Autowired
 	private SlaService slaService;
 
 	@Autowired
 	private RequisicaoRepository repository;
-
+	
+	@Autowired
+	private MongoCustomRepository customRepository;
+	
 	public Requisicao salvarRequisicao(Requisicao requisicao) {
-
+		
 		try {
-			requisicao.setStatus(StatusRequisicao.PENDENTE);
+			requisicao.setStatus(StatusRequisicao.PENDENTE.getDescricao());
 			Integer sla = requisicao.getTipoRequisicao() == TipoRequisicao.CONTRATACAO_PROJETOS ? 3 : 5;
 			requisicao.setSla(sla);
 			Requisicao newRequisicao = this.repository.insert(requisicao);
@@ -40,26 +50,26 @@ public class RequisicaoServices {
 		}
 	}
 
-	public List<Requisicao> getInfoByEmail(final String email) {
-		List<Requisicao> requisicoesComSLA = new ArrayList<>();
-		List<Requisicao> requisicoes = repository.findByEmail(email);
-		requisicoes.forEach(r -> {
-			requisicoesComSLA.add(formatDate(r));
-		});
-		return requisicoesComSLA;
-	}
+	public Page<Requisicao> getInfoByEmail(final String email, final int page, final int size ) {
 
-	public List<Requisicao> filtrarRequisicao(final RequisicaoFilter filtro) {
-		String cliente = filtro.getDescricao() == null ? "%" : filtro.getDescricao();
-		List<Requisicao> requisicoes = repository.findByClienteContaining(cliente);
+		final Pageable pageable = PageRequest.of(page, size);
+		
+		Page<Requisicao> requisicoes = this.repository.findByEmail(email, pageable);
+		
 		return requisicoes;
 	}
-
-	private Requisicao formatDate(Requisicao requisicao) {
-		LocalDate dataSolicitacao = LocalDate.parse(
-					requisicao.getDataSolicitacao().toString(),
-										DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-		requisicao.setDataSolicitacao(dataSolicitacao);
-		return requisicao;
+	
+	public Page<Requisicao> filtrarRequisicao(final String filtro, final int page, final int size) {
+		
+		List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
+		
+		return toPageable(requisicoes);
+	}
+	
+	public Page<Requisicao> listarRequisicoes(final int page, final int size){
+		
+		final Page<Requisicao> requisicoes = this.repository.findAll(PageRequest.of(page, size));
+		
+		return requisicoes;
 	}
 }

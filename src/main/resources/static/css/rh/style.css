@@ -1,0 +1,247 @@
+.form-inline .form-group {
+	margin-right: 10px;
+}
+
+.well-primary {
+	color: rgb(255, 255, 255);
+	background-color: rgb(66, 139, 202);
+	border-color: rgb(53, 126, 189);
+}
+
+.glyphicon {
+	margin-right: 5px;
+}
+
+.attachment-thumbnail-details {
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 8px 8px 8px 128px;
+    min-height: 80px;
+    margin: 0;
+    z-index: 0;
+}
+
+body, button, html, input, select, textarea {
+    color: #172b4d;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.attachment-thumbnail {
+    border-radius: 3px;
+    min-height: 80px;
+    margin: 0 0 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.attachment-thumbnail-preview {
+    background-color: rgba(9,30,66,.04);
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    height: 80px;
+    margin-top: -40px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    text-decoration: none;
+    z-index: 1;
+    width: 112px;
+}
+
+.quiet, .quiet a {
+    color: #5e6c84;
+}
+
+.attachment-thumbnail-details-title-options-item {
+    font-size: 14px;
+    margin-bottom: 8px
+}
+
+.attachment-thumbnail-preview-ext {
+    color: #5e6c84;
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    height: 100%;
+    line-height: 80px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%
+}
+
+.attachment-thumbnail-details-options-item {
+    border-radius: 3px;
+    margin-right: 8px;
+    text-decoration: none
+}
+
+.attachment-thumbnail-details-title-options span:not(:first-child):before {
+    content: " - ";
+}
+
+.icon-sm {
+    height: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    width: 20px;
+}
+
+.icon-lg, .icon-md, .icon-sm {
+    color: #42526e;
+}
+
+.window-module-title h3 {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    min-height: 18px;
+    min-width: 40px;
+}
+
+.window-module-title-no-divider {
+    border-bottom: none;
+}
+
+.window-module-title {
+    /* border-bottom: 1px solid rgba(9,30,66,.13); */
+    padding: 8px 0;
+    position: relative;
+    margin: 0 0 4px 40px;
+}
+
+.window-module-title.description-title {
+    display: flex;
+    align-items: center;
+    min-height: 32px
+}
+
+.u-inline-block {
+    display: inline-block;
+}
+
+.icon-lg, .icon-md, .icon-sm {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font-family: trellicons;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: bottom;
+}
+
+.icon-lg, .icon-md, .icon-sm {
+    color: #42526e;
+}
+
+.icon-lg, .icon-md {
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+}
+
+.icon-lg {
+    font-size: 24px;
+}
+
+.icon-lg, .icon-md, .icon-sm {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font-family: trellicons;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: bottom;
+}
+
+.window-module {
+    clear: both;
+    margin-bottom: 24px;
+    position: relative
+}
+
+.window-module-title-icon {
+    left: -40px;
+    position: absolute;
+    top: 2px
+}
+
+.u-clearfix:after {
+    clear: both;
+    content: "";
+    display: table
+}
+
+.attachment-thumbnail-details-options-item-text {
+    text-decoration: underline;
+}
+
+.icon-external-link:before {
+    content: "\E927";
+}
+
+.icon-attachment:before {
+    content: "\E908";
+}
+
+.icon-description:before {
+    content: "\E91D";
+}
+
+.icon-external-link:before {
+    content: "\E927";
+}
+
+h3, h4, h5, h6 {
+    font-size: 16px;
+    line-height: 20px
+}
+
+.modal-dialog {
+  	position: relative;
+    width: auto;
+    /* margin: 0.5rem; */
+    pointer-events: none;
+}
+
+.button.subtle {
+    margin: 0 0 0 8px;
+}

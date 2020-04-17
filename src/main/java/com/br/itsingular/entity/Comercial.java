@@ -13,10 +13,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "PESSOA")
+@Document(collection = "COMERCIAL")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa {
+public class Comercial {
 	
 	@Id
 	private String id;

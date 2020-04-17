@@ -5,7 +5,11 @@ package com.br.itsingular.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 /**
  * @author dcarneiro
@@ -32,5 +36,13 @@ public class Utils {
 			return d.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy"));
 		}
 		return "<S/D>";
+	}
+	
+	
+	public static <T> Page<T> toPageable(final List<T> list) {
+		
+		final Page<T> pageble = new PageImpl<>(list);	
+		
+		return pageble;
 	}
 }

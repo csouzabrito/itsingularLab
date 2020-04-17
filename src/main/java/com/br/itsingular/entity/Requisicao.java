@@ -16,7 +16,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.br.itsingular.enums.StatusRequisicao;
 import com.br.itsingular.enums.TipoProcessoSeletivo;
 import com.br.itsingular.enums.TipoQualificacaoTestes;
 import com.br.itsingular.enums.TipoRequisicao;
@@ -145,7 +144,6 @@ public class Requisicao implements Serializable {
 	@NotNull(message = "Campo obrigatório")
 	private String[] requisitoConhecimento;
 
-	@Enumerated(EnumType.STRING)
-	private StatusRequisicao status;
+	private String status;
 	
 }

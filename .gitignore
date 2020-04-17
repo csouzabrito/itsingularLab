@@ -1,4 +1,3 @@
-target/
 build/
 out/
 dist/
@@ -11,5 +10,4 @@ dist/
 .classpath
 .project
 .settings
-
- 
+/bin 
