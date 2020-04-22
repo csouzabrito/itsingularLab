@@ -1,17 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>ItSingular</title>
+<title>Recursos Humanos</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 
-<link rel="stylesheet" href="/menu/css/style.css">
+<!-- <link th:rel="stylesheet"  th:href="@{/css/rh/datatable/bootstrap.min.css} "/> -->
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<!-- <link th:rel="stylesheet"  th:href="@{/css/rh/datatable/datatable.css} "/> -->
+<!-- <link th:rel="stylesheet"  th:href="@{/css/rh/style.css} "/>
+
+
+<script th:src="@{/js/rh/datatable/bootstrap.min.js}"></script>
+<script th:src="@{/js/rh/datatable/datatables.js}"></script>
+<script th:src="@{/js/rh/datatable/jquery.min.js}"></script>
+<script th:src="@{/js/rh/datatable/popper.min.js}"></script> -->
+
+<link th:rel="stylesheet" th:href="@{/menu/css/style.css}">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
@@ -23,12 +40,12 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
 
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/requisicao/requisicao.css">
-<link rel="stylesheet" href="/css/rh/style.css">
+<link th:rel="stylesheet" th:href="@{/css/main.css}">
+<link th:rel="stylesheet" th:href="@{/css/requisicao/requisicao.css}">
+<link th:rel="stylesheet" th:href="@{/css/rh/style.css}">
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
@@ -63,9 +80,10 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
-<!-- <script src="/menu/js/jquery.min.js"></script> -->
-<script src="/menu/js/popper.js"></script>
-<script src="/menu/js/bootstrap.min.js"></script>
-<script src="/menu/js/main.js"></script>
-<script src="/js/main.js"></script>
+
+<script th:src="@{/menu/js/popper.js}"></script>
+<script th:src="@{/menu/js/bootstrap.min.js}"></script>
+<script th:src="@{/menu/js/main.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
 </head>

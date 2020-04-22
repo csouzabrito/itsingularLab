@@ -40,9 +40,8 @@ public class MongoCustomRepository {
 		query.addCriteria(new Criteria()
 				.orOperator(Criteria.where("dataSolicitacao").is(filtro), 
 						Criteria.where("cliente").regex(filtro,"i"), 
-						Criteria.where("nomeSolicitante").regex(filtro, "i"),
+						Criteria.where("cargo").regex(filtro, "i"),
 						Criteria.where("ramoAtividade").regex(filtro, "i"),
-						Criteria.where("sla").gte(filtro),
 						Criteria.where("status").regex(filtro)));
 		
 		List<Requisicao> requisicoes = mongoTemplate.find(query, Requisicao.class);

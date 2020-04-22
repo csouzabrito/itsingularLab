@@ -13,9 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.br.itsingular.utils.Utils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +24,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Document(collection = "CADASTRAR_CURRICULOS")
 public class Curriculos implements Serializable{
 	
@@ -48,9 +49,8 @@ public class Curriculos implements Serializable{
 	@NotBlank(message = "Campo obrigatório")
 	private String email;
 	
-	@JsonIgnore
     private TipagemArquivosUpload uploadDownloadPdf;
-	@JsonIgnore
+	
     private TipagemArquivosUpload uploadDownloadWord;
 
 	@Transient

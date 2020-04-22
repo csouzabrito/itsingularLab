@@ -1,5 +1,6 @@
 package com.br.itsingular.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,26 +8,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.entity.Curriculos;
+import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.repository.CadastrarCurriculosRepository;
 
 @Service
 public class CadastrarCurriculosServices {
 
 	@Autowired
-	private CadastrarCurriculosRepository cadastrarCurriculo;
+	private CadastrarCurriculosRepository repository;
 	
 	public void save( final Curriculos curriculos) {
 		try {
-			cadastrarCurriculo.insert(curriculos);
+			repository.insert(curriculos);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	public List<Curriculos> findCurriculos(){
-		return cadastrarCurriculo.findAll();
+		return repository.findAll();
 	}
 	public Optional<Curriculos> findCurriculoById(String id){
-		return Optional.ofNullable(cadastrarCurriculo.findById(id).get());
+		return Optional.ofNullable(repository.findById(id).get());
 	}
 	
+	
+//	@Cacheable("cvs")
+	public List<Curriculos> findByIds(final Requisicao vaga){
+		
+		List<String> ids = Arrays.asList(vaga.getRequisitoObrigatorio());
+		
+		List<Curriculos> curriculos = this.repository.findByTecnologiasAssociadasIn(ids);
+		
+		return curriculos;
+	}
 }

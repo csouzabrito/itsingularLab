@@ -14,12 +14,18 @@
 <body>
 	<div class="login-form">
 		
-		<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
+		<!-- <div th:switch="${message}" class="col-md-12" id="msg" role="alert">
 		<div th:case="'Failed'" class="alert alert-danger">
 	           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 	           <strong>Erro!</strong> Erro ao logar, tente novamente.
          </div>
-		</div>
+		</div> -->
+		
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+		  <button type="button" class="close" data-dismiss="alert"></button>
+		  <span th:text="${message}"></span>
+	  	</div>
+		
 		<h4 class="modal-title">Membros ITSingular</h4>
 		<form th:action="@{/login/users}" th:object="${login}" method="POST">
 			<div>

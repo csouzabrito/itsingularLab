@@ -17,6 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<cache.version>1.8</cache.version>
 	</properties>
 
 
@@ -67,6 +68,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

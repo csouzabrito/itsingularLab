@@ -2,7 +2,30 @@
  * 
  */
 
+
+//$(document).ready(function() {
+//    	
+//	event.preventDefault();
+//	
+//	var vagaSolicitada = $(event.currentTarget);
+//	var urlReceiver = vagaSolicitada.attr('href');
+//	
+//	console.log("href", urlReceiver);
+//	
+//	var href = $(this).attr('href');
+//	
+//	$.ajax(href,{
+//	        success: function (data) {
+//	        	$('.loading #modalAguardeBatchInput').modal('show');
+//		    }
+//		});
+//});	 
+
 $(document).ready(function() {
+	
+	var dataRow = null;
+	var responseDonwload = null;
+	var dataTable = null
 	
 	$('.js-view-information').on('click', function(event) {
 		event.preventDefault();
@@ -14,24 +37,88 @@ $(document).ready(function() {
 		
 		var href = $(this).attr('href');
 		
-		$.get(href, function(vaga){
-			$('.myForm #id').val(vaga.id);
-			$('.myForm #nomeSolicitante').val(vaga.nomeSolicitante);
-			console.log("dataSolicitacao:", vaga.dataSolicitacao)
-			$('.myForm #dataSolicitacao').val(vaga.dataSolicitacao);
-		});
-		console.log("VAGA: ", vaga.id);
-		$('.myForm #vagas-modal').modal();
+		$('#modalAguardeBatchInput').modal('show');
 		
+		$.ajax({
+			  url: href,
+			  type: "GET"
+			}).then(function(data) {
+				console.log(data);
+				dataTable = data
+				$('#modalAguardeBatchInput').modal('hide');
+				
+				
+				var table =  $('#table').DataTable({
+		            "processing": true,
+		            "info": true,
+		            "bLengthChange": false,
+		            data: dataTable,
+		            "columns": [
+		            	{ "data": "cpf", "visible": false},
+		                { "data": "nome"},
+		                { "data": "dataNascimento"},
+		                { "data": "email" },
+		                { "data": "telCelular" },
+		                { "data": "uploadDownloadPdf.nameArquivo",
+		                	"render": function(data, type, row, meta){
+		                        if(type === 'display'){
+		                        	return '<a id="singular" href="#">' + data + '</a>';
+		                        }
+		                     }
+		                }
+		            ],
+		            "language": {
+			            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json"
+			        }
+		        });
+				alert = function() {};
+				
+				 // Apply the search
+			    table.columns().every( function () {
+			        var that = this;
+			 
+			        $( 'input', this.footer() ).on( 'keyup change clear', function () {
+			            if ( that.search() !== this.value ) {
+			                 that.search( this.value ).draw();
+			            }
+			        });
+			    });
+				
+				
+				$('#table tbody').on( 'click', 'tr', function () {
+				    dataRow = table.row( this ).data();
+				    downloadFile(dataRow);
+				} );	
+		       
+			$('#vagas-modal').modal('show');
+				
 	});
+});
 	
-function onDadosRecebidos(data) {
-		
-	console.log("data", data);
-}	
 });
 
 
-
-
+function downloadFile(dataRow) {
 	
+	var cpf = dataRow.cpf;
+	var byte = dataRow.uploadDownloadPdf.bitesArquivo;
+	var x = "application/pdf";
+	
+	$.ajax({
+		   type:"GET",
+		   async: false,
+		   url: '/cadastrarCurriculos/viewPdf/'+cpf,
+		   success: (data) => {
+			   console.log(data);
+				     const linkSource = `data:${x};base64,${byte}`;
+				     const downloadLink = document.createElement("a");
+				     downloadLink.href = linkSource;
+				     downloadLink.download = dataRow.uploadDownloadPdf.nameArquivo;
+				     downloadLink.click();
+	        },
+	        error: (e) => {
+	            //call error message
+	        }
+	     });
+	
+}
