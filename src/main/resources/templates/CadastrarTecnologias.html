@@ -13,18 +13,18 @@
 			$('#sidebar, #content').toggleClass('active');
 		});
 	});
-    $(document).on("keydown", "#descricaoResumida", function () {
-        var caracteresRestantes = 1000;
-        var caracteresDigitados = parseInt($(this).val().length);
-        var caracteresRestantes = caracteresRestantes - caracteresDigitados;
-        
-        $(".caracteres").text(caracteresRestantes);
-    });
+	$(document).on("keydown", "#descricaoResumida", function() {
+		var caracteresRestantes = 1000;
+		var caracteresDigitados = parseInt($(this).val().length);
+		var caracteresRestantes = caracteresRestantes - caracteresDigitados;
+
+		$(".caracteres").text(caracteresRestantes);
+	});
 </script>
 <body>
 	<div class="d-flex">
 		<div th:replace="Menu :: menu">...</div>
-		<div id="content" class="p-4 p-md-5 pt-5 form-requisicao">
+		<div id="content">
 			<button id="sidebarCollapse" type="button"
 				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
 				<i class="fa fa-bars mr-2"></i><small
@@ -42,29 +42,39 @@
 					requisição
 				</div>
 			</div>
-			<div class="col-md-12">
-				<form th:action="@{/cadastrarTecnologias/incluir}" method="post"
-					th:object="${tecnologias}">
-					<div class="container my-5">
-						<h3 align="center">Cadastrar Cursos | Tecnologias | Linguagens</h3>
-						<BR />
+
+			<div class="container my-5">
+				<div align="right" style="margin-top: -20px"
+					class="form-group col-md-12">
+					<output th:text="Olá+': ' + ${login.name}"></output>
+					<span>Sair</span>&nbsp; <a href="#" th:href="@{/login/logout}">
+						<img src="/img/sair.png" style="width: 22px; height: 22px">
+					</a>
+
+				</div>
+				<h3 align="center">Cadastrar Cursos | Tecnologias | Linguagens</h3>
+				<BR />
+				<div class="col-md-12">
+					<form th:action="@{/cadastrarTecnologias/incluir}" method="post"
+						th:object="${tecnologias}">
+
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-heading">
 									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Cursos | Tecnologias | Linguagens</h1>
+										<h1 class="panel-title" style="margin-left: -27px">Cursos
+											| Tecnologias | Linguagens</h1>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<input type="hidden"  th:field="*{id}">
-								<BR />
+								<input type="hidden" th:field="*{id}"> <BR />
 								<div class="form-group col-md-6">
 									<label for="nomeCurso" class="col-form-label"
-										style="margin-left: 1px">Tecnolgias</label> <input
-										type="text" th:field="*{nomeCurso}" class="form-control"
-										id="nomeCurso" placeholder="Digite o Curso e/ou Linguagem">
-									<span th:if="${#fields.hasErrors('nomeCurso')}"
+										style="margin-left: 1px">Tecnolgias</label> <input type="text"
+										th:field="*{nomeCurso}" class="form-control" id="nomeCurso"
+										placeholder="Digite o Curso e/ou Linguagem"> <span
+										th:if="${#fields.hasErrors('nomeCurso')}"
 										th:errors="*{nomeCurso}" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-3">
@@ -75,12 +85,13 @@
 										th:if="${#fields.hasErrors('versao')}" th:errors="*{versao}"
 										class="text-danger"></span>
 								</div>
-								</div>
-								<div class="row">
+							</div>
+							<div class="row">
 								<div class="form-group col-md-12">
-								
+
 									<label for="descricaoResumida" class="col-form-label"
-										style="margin-left: 1px">Descrição Resumida</label> <span class="caracteres">1000</span> Restantes <br>
+										style="margin-left: 1px">Descrição Resumida</label> <span
+										class="caracteres">1000</span> Restantes <br>
 									<textarea maxlength="1000" cols="10" rows="5"
 										th:field="*{descricaoResumida}" class="form-control"
 										id="descricaoResumida"></textarea>
@@ -102,13 +113,14 @@
 							<div class="panel-heading">
 								<div class="panel-heading">
 									<div class="clearfix">
-										<h1 class="panel-title" style="margin-left: -27px">Tecnologias Cadastrados</h1>
+										<h1 class="panel-title" style="margin-left: -27px">Tecnologias
+											Cadastrados</h1>
 									</div>
 								</div>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
-									<table 
+									<table
 										class="table table-sm table-striped table-hover table-bordered">
 										<thead>
 											<tr>
@@ -122,19 +134,20 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="tecnologias : ${listTecnologias}" >
+											<tr th:each="tecnologias : ${listTecnologias}">
 												<td th:text="${tecnologias.id}"></td>
 												<td th:text="${tecnologias.nomeCurso}"></td>
 												<td th:text="${tecnologias.versao}"></td>
-												<td th:text="${tecnologias.descricaoResumida}" style="word-wrap:break-word;width: 310px"></td>
-												<td
-													th:text="${tecnologias.dataManutencaoFormat}"></td>
+												<td th:text="${tecnologias.descricaoResumida}"
+													style="word-wrap: break-word; width: 310px"></td>
+												<td th:text="${tecnologias.dataManutencaoFormat}"></td>
 												<td th:text="${tecnologias.usuario}"></td>
 												<td>
 													<div class="btn-group pull-right">
 														<a class="btn btn-sm btn-primary" style="width: 58px"
 															th:href="@{/cadastrarTecnologias/edit/{id}(id=${tecnologias.id})}">Editar</a>
-														<a class="delete btn btn-sm btn-danger" style="margin-left:2px"
+														<a class="delete btn btn-sm btn-danger"
+															style="margin-left: 2px"
 															th:href="@{/cadastrarTecnologias/delete/{id}(id=${tecnologias.id})}">Excluir</a>
 													</div>
 												</td>
@@ -144,8 +157,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

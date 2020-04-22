@@ -6,6 +6,7 @@ package com.br.itsingular.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.br.itsingular.entity.Login;
 import com.br.itsingular.entity.Tecnologias;
 import com.br.itsingular.services.CadastrarTecnologiasServices;
 import com.br.itsingular.utils.Utils;
@@ -31,6 +33,9 @@ import lombok.Getter;
 public class CadastrarTecnologiasController {
 
 	@Autowired
+	private HttpSession session;
+
+	@Autowired
 	private CadastrarTecnologiasServices cadastrarTecnologiasServices;
 
 	@Getter
@@ -44,6 +49,7 @@ public class CadastrarTecnologiasController {
 		if (listTecnologias.isEmpty()) {
 			return model;
 		}
+		model.addObject("login", (Login) session.getAttribute("login"));
 		model.addObject("listTecnologias", listTecnologias);
 		return model;
 	}
@@ -51,10 +57,12 @@ public class CadastrarTecnologiasController {
 	@RequestMapping(path = "/incluir", method = RequestMethod.POST)
 	public ModelAndView insertTecnologias(@Valid Tecnologias tec, BindingResult result) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
+		String mensagem = null;
 		try {
 			if (result.hasErrors()) {
 				model.addObject("tecnologias", new Tecnologias());
-				model.addObject("listTecnologias", listTecnologias);
+				model.addObject("listTecnologias", cadastrarTecnologiasServices.findTecnologias());
+				model.addObject("login", session.getAttribute("login"));
 				return model;
 			}
 			if (Utils.isEmptyOrNull(tec.getId())) {
@@ -63,31 +71,34 @@ public class CadastrarTecnologiasController {
 			} else {
 				cadastrarTecnologiasServices.updateTecnologias(tec.getId(), tec);
 			}
-			model.addObject("tecnologias", new Tecnologias());
-			model.addObject("listTecnologias", 
-								cadastrarTecnologiasServices.findTecnologias());
-			model.addObject("message", "Success");
+			mensagem = "Success";
 		} catch (Exception e) {
-			model.addObject("error", e.getMessage().toString());
+			mensagem = "Failed";
 		}
+		model.addObject("tecnologias", new Tecnologias());
+		model.addObject("listTecnologias", cadastrarTecnologiasServices.findTecnologias());
+		model.addObject("login", session.getAttribute("login"));
+		model.addObject("error", mensagem);
 		return model;
 
 	}
 
 	@RequestMapping("/delete/{id}")
-	public ModelAndView excluir(@PathVariable("id") String id, Tecnologias cursos) {
+	public ModelAndView excluir(@PathVariable("id") String id, Tecnologias cursos, Login login) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
+		String mensagem = null;
 		try {
 			cadastrarTecnologiasServices.deleteTecnologias(id);
 			listTecnologias = cadastrarTecnologiasServices.findTecnologias();
-			model.addObject("tecnologias", new Tecnologias());
-			model.addObject("listTecnologias", listTecnologias);
-			model.addObject("message", "Success");
+			mensagem = "Success";
 		} catch (Exception e) {
-			model.addObject("error", e.getMessage().toString());
+			mensagem = "Failed";
 		}
+		model.addObject("tecnologias", new Tecnologias());
+		model.addObject("listTecnologias", listTecnologias);
+		model.addObject("login", session.getAttribute("login"));
+		model.addObject("message", mensagem);
 		return model;
-
 	}
 
 	@RequestMapping("/edit/{id}")
@@ -95,10 +106,10 @@ public class CadastrarTecnologiasController {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
 		Optional<Tecnologias> tst = cadastrarTecnologiasServices.findTecnologiasById(id);
 		model.addObject("tecnologias", new Tecnologias(tst.get().getId(), tst.get().getNomeCurso(),
-				tst.get().getVersao(), tst.get().getDescricaoResumida(),null,null));
+				tst.get().getVersao(), tst.get().getDescricaoResumida(), null, null));
 		listTecnologias = cadastrarTecnologiasServices.findTecnologias();
 		model.addObject("listTecnologias", listTecnologias);
+		model.addObject("login", session.getAttribute("login"));
 		return model;
 	}
-
 }

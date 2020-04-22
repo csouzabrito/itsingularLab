@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.entity.Curriculos;
+import com.br.itsingular.entity.Login;
 import com.br.itsingular.entity.TipagemArquivosUpload;
 import com.br.itsingular.services.CadastrarCurriculosServices;
 import com.br.itsingular.services.CadastrarTecnologiasServices;
@@ -29,6 +31,9 @@ import com.br.itsingular.utils.Utils;
 public class CadastrarCurriculosController {
 
 	@Autowired
+	private HttpSession session;
+	
+	@Autowired
 	private CadastrarTecnologiasServices cadastrarTecnologiasServices;
 
 	@Autowired
@@ -37,14 +42,12 @@ public class CadastrarCurriculosController {
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
 	public ModelAndView init(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = getAddModel("init");
-		request.getSession().invalidate();
-		request.getSession().setAttribute("curriculos", model);
 		return model;
 	}
 
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	public ModelAndView incluirCurriculos(@RequestParam("pdf") MultipartFile pdf,
-			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result)
+			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result, Login login)
 			throws IOException {
 
 		String mensagem = null;
@@ -113,6 +116,8 @@ public class CadastrarCurriculosController {
 		ModelAndView model = new ModelAndView("/CadastrarCurriculos");
 		model.addObject("listCursos", cadastrarTecnologiasServices.findTecnologias());
 		model.addObject("listCurriculos", cadastrarCurriculosServices.findCurriculos());
+		model.addObject("login", session.getAttribute("login"));
+		
 		if (!mensagem.equals("init")) {
 			model.addObject("message", mensagem);
 		}

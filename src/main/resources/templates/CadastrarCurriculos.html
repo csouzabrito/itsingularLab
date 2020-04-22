@@ -24,7 +24,7 @@
 <body>
 	<div class="d-flex">
 		<div th:replace="Menu :: menu">...</div>
-		<div id="content" class="p-4 p-md-5 pt-5 form-requisicao">
+		<div id="content">
 			<button id="sidebarCollapse" type="button"
 				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
 				<i class="fa fa-bars mr-2"></i><small
@@ -55,12 +55,21 @@
 					superior ao permitido. Favor, refaça o processo novamente.
 				</div>
 			</div>
-			<div class="col-md-12">
-				<form th:action="@{/cadastrarCurriculos/add}" method="post"
-					th:object="${curriculos}" enctype="multipart/form-data">
-					<div class="container my-5">
-						<h3 align="center">Cadastrar Currículos</h3>
-						<BR />
+
+			<div class="container my-5">
+				<div align="right" style="margin-top: -20px"
+					class="form-group col-md-12">
+					<output th:text="Olá+': ' + ${login.name}"></output>
+					<span>Sair</span>&nbsp; <a href="#" th:href="@{/login/logout}">
+						<img src="/img/sair.png" style="width: 22px; height: 22px">
+					</a>
+				</div>
+				<h3 align="center">Cadastrar Currículos</h3>
+				<BR />
+				<div class="col-md-12">
+					<form th:action="@{/cadastrarCurriculos/add}" method="post"
+						th:object="${curriculos}" enctype="multipart/form-data">
+
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-heading">
@@ -208,10 +217,10 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
+			</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
