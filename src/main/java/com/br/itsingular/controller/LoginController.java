@@ -17,7 +17,7 @@ import com.br.itsingular.entity.Login;
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
-
+	
 	@Autowired
 	private LdapConfig autentication;
 
@@ -25,7 +25,7 @@ public class LoginController {
 	private HttpSession session;
 
 	@RequestMapping("/view")
-	public ModelAndView novo(Login login) {
+	public ModelAndView view(Login login){
 		ModelAndView view = new ModelAndView("Login");
 		view.addObject("login", new Login());
 		return view;

@@ -2,21 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<div th:insert="Header.html"></div>
-<script>
-	$(function() {
-		// Sidebar toggle behavior
-		$('#sidebarCollapse').on('click', function() {
-			$('#sidebar, #content').toggleClass('active');
-		});
-	});
-</script>
 
+<div th:insert="LayoutRH.html"></div>
 <body>
 <div class="d-flex">
 	<div th:replace="Menu :: menu">...</div>
@@ -67,9 +54,8 @@
 							th:classappend="${vaga.status == 'Pendente'? 'label-danger' : 'label-success'}">
 						</span>
 						</td>
-						<td class="text-center col-md-1"><a
+						<td class="text-center col-md-1"><a 
 							class="btn btn-link btn-xs js-view-information" data-toggle="modal"
-							data-target="#vagas-modal"
 							th:href="@{/recursos-humanos/vagas/{id}(id=${vaga.id})}"
 							title="Vizualizar" rel="tooltip" data-placement="top"> <span
 								class="glyphicon glyphicon-eye-open"></span>
@@ -83,7 +69,7 @@
 			</table>
 		</div>
 		<!--Pagination  -->
-			<div id="bottom" class="row">
+			<div id="bottom" class="row" >
 				<div class="col-md-12">
 				<ul class="nav">
 					<li th:if="${vagas.hasPrevious()}" class="nav item">
@@ -101,113 +87,45 @@
 	            </ul>
            	</div>
            </div>
-		<!-- Modal -->
-		<div class="modal myForm" id="vagas-modals" tabindex="-1" role="dialog">
-			  <div class="modal-dialog" role="document">
-			  	<div class="modal-content">
-				  	<form th:action="@{/save}" method="post">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-					<div class="modal-body">
-						<div class="form-group">
-							<div class="window-module">
-								<div class="window-module-title window-module-title-no-divider description-title">
-									<span class="glyphicon glyphicon-info-sign window-module-title-icon"></span>
-									<h3 class="u-inline-block">Nome solicitante:</h3>
-									<div class="editable">
-										<output class="button subtle hide-on-edit js-show-with-desc js-edit-desc js-edit-desc-button" id="nomeSolicitante" name="nomeSolicitante" for="nomeSolicitante"></output>
-									</div>
-								</div>
-								<div class="u-gutter">
-										<div class="editable">
-											<div class="description-content js-desc-content">
-												<div class="window-module-title window-module-title-no-divider description-title">
-													<span class="glyphicon glyphicon-info-sign window-module-title-icon"></span>
-													<h3 class="u-inline-block">Data Solicitação:</h3>
-													<div class="editable">
-														<output class="button subtle hide-on-edit js-show-with-desc js-edit-desc js-edit-desc-button" id="dataSolicitacao" name="dataSolicitacao" for="dataSolicitacao"></output>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-							</div>
-						</div>
-
-							<div class="form-group">
-								<div class="window-module js-attachments-section u-clearfix">
-									<div class="window-module-title window-module-title-no-divider">
-										<span class="window-module-title-icon glyphicon glyphicon-paperclip"></span>
-										<h3 class="u-inline-block">Anexos</h3>
-									</div>
-									<div class="u-gutter">
-										<div class="u-clearfix js-attachment-list ui-sortable">
-											<div class="attachment-thumbnail">
-												<a class="attachment-thumbnail-preview js-open-viewer"
-													href="https://trello-attachments.s3.amazonaws.com/5c34c29e22332b4655e15278/5d66e92920d77c327f2f3fb9/85fbab9419ac861d1d5e02c4440532b6/Requisi%C3%A7%C3%A3o_de_Vagas_-_Teste.pdf"
-													target="_blank" title="Requisição de Vagas - Teste.pdf"
-													style="" rel="noreferrer nofollow noopener"><span
-													class="attachment-thumbnail-preview-ext">pdf</span></a>
-												<p class="attachment-thumbnail-details js-open-viewer">
-													<span class="attachment-thumbnail-name">Requisição
-														de Vagas - Teste.pdf</span><a
-														class="attachment-thumbnail-details-title-action dark-hover js-attachment-action js-direct-link"
-														href="https://trello-attachments.s3.amazonaws.com/5c34c29e22332b4655e15278/5d66e92920d77c327f2f3fb9/85fbab9419ac861d1d5e02c4440532b6/Requisi%C3%A7%C3%A3o_de_Vagas_-_Teste.pdf"
-														target="_blank" rel="noreferrer nofollow noopener"><span
-														class="icon-sm icon-external-link"></span></a><span
-														class="u-block quiet attachment-thumbnail-details-title-options"><span>Adicionado:
-															<span class="date" dt="2020-02-05T16:53:53.563Z"
-															title="5 de fevereiro de 2020 às 13:53">5 de fev
-																às 13:53</span>
-													</span><span><a
-															class="attachment-thumbnail-details-title-options-item js-reply"
-															href="#"><span
-																class="attachment-thumbnail-details-options-item-text">Comentário</span></a></span><span><a
-															class="attachment-thumbnail-details-title-options-item dark-hover js-confirm-delete"
-															href="#"><span
-																class="attachment-thumbnail-details-options-item-text">Excluir</span></a></span><span><a
-															class="attachment-thumbnail-details-title-options-item dark-hover js-edit"
-															href="#"><span
-																class="attachment-thumbnail-details-options-item-text">Editar</span></a></span></span><span
-														class="quiet attachment-thumbnail-details-options"><a
-														class="attachment-thumbnail-details-options-item dark-hover hide js-make-cover"
-														href="#"><span class="icon-sm icon-card-cover"></span>
-															<span
-															class="attachment-thumbnail-details-options-item-text">Criar
-																Capa</span></a><a
-														class="attachment-thumbnail-details-options-item dark-hover hide js-remove-cover"
-														href="#"><span class="icon-sm icon-card-cover"></span>
-															<span
-															class="attachment-thumbnail-details-options-item-text">Remover
-																Capa</span></a></span>
-												</p>
-											</div>
-										</div>
-										<p class="js-show-fewer-attachments hide">
-											<a class="quiet-button js-view-some-attachments" href="#">Mostre
-												menos anexos.</a>
-										</p>
-										<p class="js-show-more-attachments hide">
-											<a class="quiet-button js-view-all-attachments" href="#">Exibir
-												todos os anexos (-3 ocultos)</a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-				      </div>
-					</form>
-			  </div>
+        
+        <!-- Modal Loading-->   
+       <div class="modal loading modalLoading" id="modalAguardeBatchInput" aria-labelledby="modalAguarde" role="dialog" aria-hidden="true">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="mySmallModalLabel">Aguarde</h4>
+				</div>
+				<div class="modal-body">
+					<center><img src="/img/rh/loading.gif" /></center>
+				</div>
 			</div>
+		</div>    
+        <!-- Modal Loading-->      
+           
+           
+		<!-- Modal -->
+			<div class="modal myForm datatableModal" id="vagas-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			  	<div class="modal-content">
+						<div class="modal-body">
+				                <table id="table" class="table cell-border table-responsive table-striped table-bordered" style="width:0%">
+				                    <thead>
+				                        <tr>
+				                         	<th>CPF</th>
+				                            <th>Nome</th>
+				                            <th>Data Nascimento</th>
+				                            <th>E-mail</th>
+				                            <th>Telefone</th>
+				                            <th>Currículo</th>
+				                        </tr>
+				                    </thead>
+				                </table>
+						</div>
+				 <div class="modal-footer">
+		       		 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+		      	</div>
+			</div>
+		 </div>
 		</div>
 	</div>
- </div>
 </div>
 </body>
 </html>

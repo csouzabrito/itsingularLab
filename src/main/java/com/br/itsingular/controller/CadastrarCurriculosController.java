@@ -82,12 +82,11 @@ public class CadastrarCurriculosController {
 	public void viewPdf(@PathVariable("cpf") String cpf, HttpServletRequest req, HttpServletResponse response)
 			throws IOException {
 	
-		Optional<Curriculos> infoCandidato = Optional
-				.ofNullable(cadastrarCurriculosServices.findCurriculoById(cpf).get());
+		Optional<Curriculos> infoCandidato = Optional.ofNullable(cadastrarCurriculosServices.findCurriculoById(cpf).get());
+				
 			response.setContentType(infoCandidato.get().getUploadDownloadPdf().getType() + ";charset=UTF-8");
 			response.setContentLength(infoCandidato.get().getUploadDownloadPdf().getBitesArquivo().length);
-			response.setHeader("Content-Disposition", "attachment; charset=utf-8; filename=\""
-					+ infoCandidato.get().getUploadDownloadPdf().getNameArquivo() + "\"");
+			response.setHeader("Content-Disposition", "attachment; charset=utf-8; filename=\"" + infoCandidato.get().getUploadDownloadPdf().getNameArquivo() + "\"");
 			
 			FileCopyUtils.copy(infoCandidato.get().getUploadDownloadPdf().getBitesArquivo(), response.getOutputStream());
 			response.getOutputStream().flush();
