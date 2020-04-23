@@ -3,87 +3,33 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Recursos Humanos</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-
-<!-- <link th:rel="stylesheet"  th:href="@{/css/rh/datatable/bootstrap.min.css} "/> -->
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-<!-- <link th:rel="stylesheet"  th:href="@{/css/rh/datatable/datatable.css} "/> -->
-<!-- <link th:rel="stylesheet"  th:href="@{/css/rh/style.css} "/>
-
-
-<script th:src="@{/js/rh/datatable/bootstrap.min.js}"></script>
-<script th:src="@{/js/rh/datatable/datatables.js}"></script>
-<script th:src="@{/js/rh/datatable/jquery.min.js}"></script>
-<script th:src="@{/js/rh/datatable/popper.min.js}"></script> -->
-
-<link th:rel="stylesheet" th:href="@{/menu/css/style.css}">
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
-
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
-	rel="stylesheet">
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	
-<!-- <link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
-
-<link th:rel="stylesheet" th:href="@{/css/main.css}">
-<link th:rel="stylesheet" th:href="@{/css/requisicao/requisicao.css}">
-<link th:rel="stylesheet" th:href="@{/css/rh/style.css}">
-
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script
-	src="http://code.jquery.com/jquery-2.1.1.min.js"></script>	
-	
-<script
-	src="/js/jquery-2.2.0.min.js"></script>
-	
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	
+	<title>Recursos Humanos</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	<link th:rel="stylesheet" th:href="@{/menu/css/style.css}">
+	<link th:rel="stylesheet" th:href="@{/css/rh/style.css}">
+	<link th:rel="stylesheet" th:href="@{/css/rh/datatable/dataTables.bootstrap.min.css}">
+	<link th:rel="stylesheet" th:href="@{/css/rh/datatable/datatables.min.css}">
+	<link th:rel="stylesheet" th:href="@{/css/rh/bootstrap.min.css}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" 	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<script th:src="@{/css/rh/datatable/bootstrap.min.css}"></script>
+<script th:src="@{/js/rh/jquery/3.1.1/jquery.min.js}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
-	
-<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.regex.extensions.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
-
 <script th:src="@{/menu/js/popper.js}"></script>
 <script th:src="@{/menu/js/bootstrap.min.js}"></script>
 <script th:src="@{/menu/js/main.js}"></script>
 <script th:src="@{/js/main.js}"></script>
-
-</head>
+<script>
+	$(function() {
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+</script>	
+</body>

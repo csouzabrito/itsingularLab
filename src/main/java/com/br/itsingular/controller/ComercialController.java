@@ -61,7 +61,7 @@ public class ComercialController {
 	
 	
 	@GetMapping("/informacoes")
-	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
+	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "15") final int size){
 		
 		Object email = session.getAttribute("email");
 

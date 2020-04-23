@@ -2,21 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<div th:insert="LayoutRH.html"></div>
-<script>
-	$(function() {
-		// Sidebar toggle behavior
-		$('#sidebarCollapse').on('click', function() {
-			$('#sidebar, #content').toggleClass('active');
-		});
-	});
-</script>
 
+<div th:insert="LayoutRH.html"></div>
 <body>
 <div class="d-flex">
 	<div th:replace="Menu :: menu">...</div>
@@ -102,7 +89,7 @@
            </div>
         
         <!-- Modal Loading-->   
-       <div class="modal loading" id="modalAguardeBatchInput" aria-labelledby="modalAguarde" role="dialog" aria-hidden="true">
+       <div class="modal loading modalLoading" id="modalAguardeBatchInput" aria-labelledby="modalAguarde" role="dialog" aria-hidden="true">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="mySmallModalLabel">Aguarde</h4>
@@ -116,7 +103,7 @@
            
            
 		<!-- Modal -->
-			<div class="modal myForm" id="vagas-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal myForm datatableModal" id="vagas-modal" tabindex="-1" role="dialog" aria-hidden="true">
 			  	<div class="modal-content">
 						<div class="modal-body">
 				                <table id="table" class="table cell-border table-responsive table-striped table-bordered" style="width:0%">
@@ -132,13 +119,13 @@
 				                    </thead>
 				                </table>
 						</div>
-
-						<div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-				      </div>
+				 <div class="modal-footer">
+		       		 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+		      	</div>
 			</div>
 		 </div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
