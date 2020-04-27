@@ -60,12 +60,15 @@ public class RequisicaoController {
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
 	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
 		if (result.hasErrors()) {
 			return main(null);
 		}
 		String mensagem = null;
-		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
+		Login login = (Login) session.getAttribute("login");
+		modelAndView.addObject("login", login);
 		modelAndView.addObject("listTecnologias",  listTecnologias());
+		requisicao.setLoginSolicitante(login.getUsername());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			mensagem = "Success";
 			//EnviarEmail 
@@ -78,7 +81,7 @@ public class RequisicaoController {
 				mensagem = "emailErro";
 			}
 		}
-		modelAndView.addObject("login", session.getAttribute("login"));
+		
 		modelAndView.addObject("message",mensagem);
 		return modelAndView;
 	}
