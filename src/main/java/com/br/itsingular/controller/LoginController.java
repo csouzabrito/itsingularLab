@@ -37,6 +37,7 @@ public class LoginController {
 		try {
 			if (autentication.autenticacao(login.getUsername(), login.getPassword())) {
 				login.setName(autentication.searchName(login.getUsername(), login.getPassword()).get(0));
+				session.setAttribute("email", login.getUsername());
 				session.setAttribute("login", login);
 				return "redirect:/login/home";
 			}

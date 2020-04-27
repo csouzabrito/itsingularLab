@@ -79,25 +79,58 @@
 				</table>
 			</div>
 			<!--Pagination  -->
-			<div id="bottom" class="row">
-				<div class="col-md-12">
-				<ul class="nav">
-					<li th:if="${requisicoes.hasPrevious()}" class="nav item">
-	                    <a class="page-link disabled" th:href="@{/comercial/informacoes(page=${requisicoes.number-1},size=${requisicoes.size})}">Anterior</a>
-	                </li>
-	                
-	                <li class="nav item" th:each="i : ${#numbers.sequence(0, requisicoes.totalPages - 1)}">
-	                    <a th:href="@{/comercial/informacoes(page=${i},size=${requisicoes.size})}" th:text="${i}" class="page-link"
-	                       th:classappend="${currentPage}==${i}?'active':''">[[${i}+1]]</a>
-	                </li>
-	                
-	                <li th:if="${requisicoes.hasNext()}" class="nav item" >
-	                    <a class="page-link" th:href="@{/comercial/informacoes(page=${requisicoes.number+1},size=${requisicoes.size})}">Próximo</a>
-	                </li>
-	            </ul>
-           	</div>
-           </div>
-		</div>
+          	<div class="col-sm-3" style="margin-right:285px;">
+                 <div class="pagination">
+                 		<p>
+                 			<!-- <span class="badge" th:text="${page.size * (page.number-1) + 1}"></span> de  -->
+                          <span class="badge" th:text="${page.lastPage ? page.totalElements : page.size * (page.number-1)+ page.size}"></span> de 
+                          <span class="badge" th:text="${page.totalElements}"></span>
+                         vagas
+                         </p>
+                 </div>
+             </div>
+           
+			<div class="row" style="margin-left:790px;">
+                <div class="col-sm-15">
+                    <!-- Pagination Bar -->
+                    <div th:fragment='paginationbar'>
+                        <div class="text-center">
+                            <ul class='pagination pagination-centered'>
+                                <li th:class="${page.firstPage}?'disabled':''">
+                                    <span th:if='${page.firstPage}'>Anterior</span>
+                                    <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>←
+                                        Anterior
+                                    </a>
+                                </li>
+                                <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                                    <span th:if='${not page.hasPreviousPage}'>«</span>
+                                    <a th:if='${page.hasPreviousPage}'
+                                       th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+                                       title='Go to previous page'>«</a>
+                                </li>
+                                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+                                    <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                                    <a th:if='${not item.current}'
+                                       th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+                                            th:text='${item.number}'>1</span></a>
+                                </li>
+                                <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                                    <span th:if='${not page.hasNextPage}'>»</span>
+                                    <a th:if='${page.hasNextPage}'
+                                       th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+                                       title='Go to next page'>»</a>
+                                </li>
+                                <li th:class="${page.lastPage}? 'disabled' : ''">
+                                    <span th:if='${page.lastPage}'>Próximo →</span>
+                                    <a th:if='${not page.lastPage}'
+                                       th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Próximo</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
 		</div>
 	</div>
 </body>

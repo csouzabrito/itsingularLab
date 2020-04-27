@@ -19,6 +19,7 @@ import com.br.itsingular.entity.Comercial;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.ComercialService;
 import com.br.itsingular.services.RequisicaoServices;
+import com.br.itsingular.utils.PageWrapper;
 
 
 @Controller
@@ -61,14 +62,18 @@ public class ComercialController {
 	
 	
 	@GetMapping("/informacoes")
-	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "15") final int size){
+	public ModelAndView listarInfo(Model model, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
 		
 		Object email = session.getAttribute("email");
 
 		Page<Requisicao> requisicoes = this.requisicaoServices.getInfoBySolicitante(String.valueOf(email), page, size);
 		
+		PageWrapper<Requisicao> requisicoesPage = new PageWrapper<Requisicao>(requisicoes, "/comercial/informacoes");
+		
 		ModelAndView view = new ModelAndView("ViewComercial");
-		view.addObject("requisicoes", requisicoes) ;
+		view.addObject("requisicoes", requisicoesPage) ;
+		model.addAttribute("requisicoes", requisicoes.getContent());
+        model.addAttribute("page", requisicoesPage);
 		return view;
 	}
 	

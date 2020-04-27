@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.entity.Curriculos;
@@ -32,7 +33,7 @@ public class CadastrarCurriculosServices {
 	}
 	
 	
-//	@Cacheable("cvs")
+	@Cacheable("cvs")
 	public List<Curriculos> findByIds(final Requisicao vaga){
 		
 		List<String> ids = Arrays.asList(vaga.getRequisitoObrigatorio());

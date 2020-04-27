@@ -1,26 +1,7 @@
 /**
- * 
+ * @author thiagocorrea
  */
-
-
-//$(document).ready(function() {
-//    	
-//	event.preventDefault();
-//	
-//	var vagaSolicitada = $(event.currentTarget);
-//	var urlReceiver = vagaSolicitada.attr('href');
-//	
-//	console.log("href", urlReceiver);
-//	
-//	var href = $(this).attr('href');
-//	
-//	$.ajax(href,{
-//	        success: function (data) {
-//	        	$('.loading #modalAguardeBatchInput').modal('show');
-//		    }
-//		});
-//});	 
-
+	 
 $(document).ready(function() {
 	
 	var dataRow = null;
@@ -37,7 +18,7 @@ $(document).ready(function() {
 		
 		var href = $(this).attr('href');
 		
-		$('#modalAguardeBatchInput').modal('show');
+		$('#modalAguarde').modal('show');
 		
 		$.ajax({
 			  url: href,
@@ -45,7 +26,7 @@ $(document).ready(function() {
 			}).then(function(data) {
 				console.log(data);
 				dataTable = data
-				$('#modalAguardeBatchInput').modal('hide');
+				$('#modalAguarde').modal('hide');
 				
 				
 				var table =  $('#table').DataTable({

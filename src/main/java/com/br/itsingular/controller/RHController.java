@@ -18,7 +18,11 @@ import com.br.itsingular.entity.Curriculos;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.CadastrarCurriculosServices;
 import com.br.itsingular.services.RHSrevice;
+import com.br.itsingular.utils.PageWrapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping(value = "/recursos-humanos")
 public class RHController {
@@ -30,19 +34,22 @@ public class RHController {
 	private CadastrarCurriculosServices curriculoService;
 
 	@RequestMapping("/view")
-	public ModelAndView novo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "15") final int size){
+	public ModelAndView novo(Model model, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
 		
 		ModelAndView view = new ModelAndView("ViewRH");
 		
 		final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
+		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/view");
 		
-		view.addObject("vagas", vagas) ;
+		view.addObject("vagas", vagas);
+		model.addAttribute("vagas", vagas.getContent());
+		model.addAttribute("page", vagasPage);
 		
 		return view;
 	}
 	
 	@GetMapping("/vagas")
-	public ModelAndView listarInfo(@RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "15") final int size){
+	public ModelAndView listarInfo(@RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
 
 	final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
 		
@@ -63,7 +70,7 @@ public class RHController {
 	}
 	
 	@GetMapping("/vagas/pesquisar")
-	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "15") final int size){
+	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(defaultValue = "5") final int size){
 		
 		Page<Requisicao> vagas = null;
 		
@@ -72,9 +79,14 @@ public class RHController {
 		}else {
 		   vagas = this.rhService.filtrarVagas(filtro, page, size);
 		}
-		model.addAttribute("filtro", filtro);
+		
+		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/vagas/pesquisar");
 		ModelAndView view = new ModelAndView("ViewRH");
 		view.addObject("vagas", vagas) ;
+		model.addAttribute("filtro", filtro);
+		model.addAttribute("vagas", vagas.getContent());
+		model.addAttribute("page", vagasPage);
+		
 		return view;
 	}
 }
