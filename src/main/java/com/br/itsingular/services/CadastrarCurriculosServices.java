@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.entity.Curriculos;
@@ -28,8 +30,25 @@ public class CadastrarCurriculosServices {
 	public List<Curriculos> findCurriculos(){
 		return repository.findAll();
 	}
+		
+	public Page<Curriculos> findCurriculos(Pageable pageable){
+		return repository.findAll(pageable);
+	}
 	public Optional<Curriculos> findCurriculoById(String id){
 		return Optional.ofNullable(repository.findById(id).get());
+	}
+	/**
+	 * Este processo ocorrerá porque o RH poderá 
+	 *      alterar o CPF (CPF é chave da Entity)
+	 * @param curriculos
+	 */
+	public void removeAndInsertCurriculos(Curriculos curriculos) {
+		try {
+			repository.deleteById(curriculos.getCpf());
+			repository.insert(curriculos);
+		} catch (RuntimeException e) {
+			throw e;
+		}
 	}
 	
 	

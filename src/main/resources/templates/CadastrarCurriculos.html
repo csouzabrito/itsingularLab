@@ -97,7 +97,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-2">
 									<label for="dataNascimento" class="col-form-label"
 										style="margin-left: 1px">Data Nascimento</label> <input
 										type="date" th:field="*{dataNascimento}"
@@ -107,6 +107,26 @@
 										th:if="${#fields.hasErrors('dataNascimento')}"
 										th:errors="*{dataNascimento}" class="text-danger"></span>
 								</div>
+								<div class="form-group col-md-2">
+									<label for="formaContratacao" class="col-form-label labels">Contratação</label>
+									<select class="form-control" th:field="*{formaContratacao}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoContratacao : ${T(com.br.itsingular.enums.TipoContratacao).values()}"
+											th:value="${tipoContratacao}" th:text="${tipoContratacao}"></option>
+									</select> <span th:if="${#fields.hasErrors('formaContratacao')}"
+										th:errors="*{formaContratacao}" class="text-danger"></span>
+
+								</div>
+								<div class="form-group col-md-2">
+									<label for="valor" class="col-form-label labels">Valor
+										(Por Hora)</label> <input type="text" th:field="*{valor}"
+										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+										class="form-control" id="valor" placeholder="Valor"><span
+										th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"
+										class="text-danger"></span>
+								</div>
+
 								<div class="form-group col-md-3">
 									<label for="telCelular" class="col-form-label"
 										style="margin-left: 1px">Telefone Celular</label> <input
@@ -117,7 +137,19 @@
 										th:if="${#fields.hasErrors('telCelular')}"
 										th:errors="*{telCelular}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-3">
+									<label for="telCelularSecundario" class="col-form-label"
+										style="margin-left: 1px">Telefone Celular Secundário</label> <input
+										type="text" th:field="*{telCelularSecundario}"
+										class="form-control" id="telCelularSecundario" maxlength="14"
+										data-inputmask="'mask': '(99)99999-9999'"
+										placeholder="Telefone Celular"> <span
+										th:if="${#fields.hasErrors('telCelularSecundario')}"
+										th:errors="*{telCelularSecundario}" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-4">
 									<label for="email" class="col-form-label"
 										style="margin-left: 1px">E-mail</label> <input type="text"
 										th:field="*{email}" class="form-control" id="email"
@@ -125,7 +157,20 @@
 									<span th:if="${#fields.hasErrors('email')}"
 										th:errors="*{email}" class="text-danger"></span>
 								</div>
+								<div class="form-group col-md-4">
+									<label for="emailSecundario" class="col-form-label"
+										style="margin-left: 1px">E-mail Secundário</label> <input
+										type="text" th:field="*{emailSecundario}" class="form-control"
+										id="emailSecundario" data-inputmask="'alias': 'email'"
+										placeholder="Digite E-mail"> <span
+										th:if="${#fields.hasErrors('emailSecundario')}"
+										th:errors="*{emailSecundario}" class="text-danger"></span>
+								</div>
 							</div>
+
+
+
+
 							<div class="row">
 								<div class="form-group col-md-3">
 									<label for="fileCurriculoPDC" class="col-form-label"
@@ -196,23 +241,39 @@
 												<tr th:each="curriculos : ${listCurriculos}">
 													<td th:text="${curriculos.cpf}"></td>
 													<td th:text="${curriculos.nome}"
-														style="word-wrap: break-word;"></td>
+														style="word-wrap: break-word; width: 250px"></td>
 													<td th:text="${curriculos.dataNascimentoFormat}"></td>
 													<td th:text="${curriculos.telCelular}"></td>
 													<td th:text="${curriculos.email}"></td>
 													<td>
 														<div class="btn-group pull-right">
 															<a class="btn btn-sm btn-primary"
-																th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">Download
-																PDF</a> <a class="delete btn btn-sm btn-danger"
+																th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
+															<a class="delete btn btn-sm btn-danger"
 																style="margin-left: 2px"
-																th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Download
-																Word</a>
+																th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
+															<a class="delete btn btn-sm btn-danger"
+																style="margin-left: 2px"
+																th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">Edit</a>
 														</div>
 													</td>
 												</tr>
 											</tbody>
 										</table>
+									</div>
+									<div class="row" th:fragment="pagination">
+										<div class="col-md-8">
+											<nav aria-label="Pagination">
+												<ul class="pagination justify-content-center">
+													<li class="page-item" th:each="pageNumber : ${pageNumbers}">
+														<a class="page-link"
+														th:href="@{/cadastrarCurriculos/paginacao/{pageNumber}(pageNumber=${pageNumber})}"
+														th:text=${pageNumber}>1</a>
+													</li>
+												</ul>
+											</nav>
+										</div>
+										<div class="col-md-2"></div>
 									</div>
 								</div>
 							</div>
@@ -220,7 +281,7 @@
 					</form>
 				</div>
 			</div>
-			</div>
 		</div>
+	</div>
 </body>
 </html>
