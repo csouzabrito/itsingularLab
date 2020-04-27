@@ -213,71 +213,71 @@
 										value="Cadastrar Curriculo">
 								</div>
 							</div>
-							<BR />
-							<div class="panel panel-default">
+						</div>
+						<BR />
+						<div class="panel panel-default">
+							<div class="panel-heading">
 								<div class="panel-heading">
-									<div class="panel-heading">
-										<div class="clearfix">
-											<h1 class="panel-title" style="margin-left: -27px">Currículos
-												Cadastrados</h1>
-										</div>
+									<div class="clearfix">
+										<h1 class="panel-title" style="margin-left: -27px">Currículos
+											Cadastrados</h1>
 									</div>
 								</div>
-								<div class="panel-body">
-									<div class="table-responsive">
-										<table
-											class="table table-sm table-striped table-hover table-bordered">
-											<thead>
-												<tr>
-													<th>CPF</th>
-													<th>Nome do Candidato</th>
-													<th>Data Nascimento</th>
-													<th>Celular de Contato</th>
-													<th>Email</th>
-													<th>Ações</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="curriculos : ${listCurriculos}">
-													<td th:text="${curriculos.cpf}"></td>
-													<td th:text="${curriculos.nome}"
-														style="word-wrap: break-word; width: 250px"></td>
-													<td th:text="${curriculos.dataNascimentoFormat}"></td>
-													<td th:text="${curriculos.telCelular}"></td>
-													<td th:text="${curriculos.email}"></td>
-													<td>
-														<div class="btn-group pull-right">
-															<a class="btn btn-sm btn-primary"
-																th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
-															<a class="delete btn btn-sm btn-danger"
-																style="margin-left: 2px"
-																th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
-															<a class="delete btn btn-sm btn-danger"
-																style="margin-left: 2px"
-																th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">Edit</a>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="row" th:fragment="pagination">
-										<div class="col-md-8">
-											<nav aria-label="Pagination">
-												<ul class="pagination justify-content-center">
-													<li class="page-item" th:each="pageNumber : ${pageNumbers}">
-														<a class="page-link"
-														th:href="@{/cadastrarCurriculos/paginacao/{pageNumber}(pageNumber=${pageNumber})}"
-														th:text=${pageNumber}>1</a>
-													</li>
-												</ul>
-											</nav>
-										</div>
-										<div class="col-md-2"></div>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>CPF</th>
+												<th>Nome do Candidato</th>
+												<th>Data Nascimento</th>
+												<th>Celular de Contato</th>
+												<th>Email</th>
+												<th>Ações</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="curriculos : ${listCurriculos.content}">
+												<td th:text="${curriculos.cpf}"></td>
+												<td th:text="${curriculos.nome}"
+													style="word-wrap: break-word; width: 250px"></td>
+												<td th:text="${curriculos.dataNascimentoFormat}"></td>
+												<td th:text="${curriculos.telCelular}"></td>
+												<td th:text="${curriculos.email}"></td>
+												<td>
+													<div class="btn-group pull-right">
+														<a class="btn btn-sm btn-primary"
+															th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
+														<a class="delete btn btn-sm btn-danger"
+															style="margin-left: 2px"
+															th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
+														<a class="delete btn btn-sm btn-danger"
+															style="margin-left: 2px"
+															th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">Edit</a>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="row" th:fragment="pagination">
+									<div class="col-md-12">
+										<nav aria-label="Pagination">
+											<ul class="pagination pg-blue justify-content-center">
+												<li class="page-item" th:each="pageNumber : ${pageNumbers}"
+													th:class="${pageNumber eq listCurriculos.number + 1} ? 'active'">
+													<a class="page-link"
+													th:href="@{/cadastrarCurriculos/paginacao/{pageNumber}(pageNumber=${pageNumber})}"
+													th:text=${pageNumber}>1</a>
+												</li>
+											</ul>
+										</nav>
 									</div>
 								</div>
 							</div>
 						</div>
+
 					</form>
 				</div>
 			</div>
