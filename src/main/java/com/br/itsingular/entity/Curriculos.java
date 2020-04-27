@@ -3,6 +3,7 @@ package com.br.itsingular.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -48,6 +49,19 @@ public class Curriculos implements Serializable{
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String email;
+
+	@NotBlank(message = "Campo obrigatório")
+	private String telCelularSecundario;
+
+	@NotBlank(message = "Campo obrigatório")
+	@Email
+	private String emailSecundario;
+	
+	@NotBlank(message = "Campo obrigatório")
+	private String formaContratacao;
+	
+	@NotBlank(message = "Campo obrigatório")
+	private String valor;
 	
     private TipagemArquivosUpload uploadDownloadPdf;
 	
@@ -59,6 +73,7 @@ public class Curriculos implements Serializable{
 	@Transient
 	private MultipartFile word;
 	
+
 	public String getDataNascimentoFormat() {
 		return Utils.formatDate(this.getDataNascimento());
 	}

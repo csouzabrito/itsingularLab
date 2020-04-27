@@ -96,10 +96,6 @@ public class Requisicao implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String valor;
 
-	@NotBlank(message = "Campo obrigatório")
-	private String por;
-
-	@NotBlank(message = "Campo obrigatórioo")
 	private String horaAberta;
 
 	@NotNull(message = "Campo obrigatório")
