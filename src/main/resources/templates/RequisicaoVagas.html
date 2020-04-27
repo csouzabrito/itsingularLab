@@ -221,7 +221,7 @@
 										class="text-danger"></span>
 
 								</div>
-								<div class="form-group col-md-4">
+								<div class="form-group col-md-8">
 									<label for="regiaoAtuacao" class="col-form-label labels">Região
 										de Atuação</label> <input type="text" th:field="*{regiaoAtuacao}"
 										class="form-control" id="regiaoAtuacao"
@@ -230,7 +230,7 @@
 										th:errors="*{regiaoAtuacao}" class="text-danger"></span>
 								</div>
 
-								<div class="form-group col-md-4">
+								<div class="form-group col-md-2">
 
 									<label for="vagas" class="col-form-label"
 										style="margin-left: 1px">Nº de Vagas</label> <input
@@ -239,7 +239,7 @@
 										th:if="${#fields.hasErrors('vagas')}" th:errors="*{vagas}"
 										class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-2">
+								<div class="form-group col-md-3">
 									<label for="formaContratacao" class="col-form-label labels">Contratação</label>
 									<select class="form-control" th:field="*{formaContratacao}">
 										<option th:value="''" th:text="SELECIONE"></option>
@@ -250,7 +250,7 @@
 										th:errors="*{formaContratacao}" class="text-danger"></span>
 
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-2">
 									<label for="valor" class="col-form-label labels">Valor</label>
 									<input type="text" th:field="*{valor}"
 										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
@@ -258,7 +258,7 @@
 										th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"
 										class="text-danger"></span>
 								</div>
-
+								<!-- 
 								<div class="form-group col-md-2">
 									<label for="por" class="col-form-label labels">Por</label> <select
 										class="form-control" th:field="*{por}">
@@ -268,7 +268,7 @@
 											th:value="${tipoProjeto}" th:text="${tipoProjeto}"></option>
 									</select> <span th:if="${#fields.hasErrors('por')}" th:errors="*{por}"
 										class="text-danger"></span>
-								</div>
+								</div> -->
 								<div class="form-group col-md-2">
 									<label for="horaAberta" class="col-form-label labels">Hora
 										Aberta</label> <select class="form-control" th:field="*{horaAberta}">
