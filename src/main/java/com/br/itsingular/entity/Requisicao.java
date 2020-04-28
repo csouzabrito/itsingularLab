@@ -39,6 +39,8 @@ public class Requisicao implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String nomeSolicitante;
 
+	private String loginSolicitante;
+	
 	private LocalDate dataSolicitacao;
 
 	@NotBlank(message = "Campo obrigatório")

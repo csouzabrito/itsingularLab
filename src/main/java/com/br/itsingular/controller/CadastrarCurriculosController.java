@@ -147,7 +147,7 @@ public class CadastrarCurriculosController {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			model.addObject("pageNumbers", pageNumbers);
 		}
-		model.addObject("listCurriculos", listCurriculos.getContent());
+		model.addObject("listCurriculos", listCurriculos);
 		model.addObject("login", session.getAttribute("login"));
 
 		if (!mensagem.equals("init") && !mensagem.equals("paginacao")) {
