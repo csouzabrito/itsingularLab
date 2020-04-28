@@ -50,18 +50,20 @@ public class RHController {
 	
 	@GetMapping("/vagas")
 	public ModelAndView listarInfo(@RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
-
-	final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
+	
+	log.info("Listando vagas {}");
 		
+	final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
+	
 		ModelAndView view = new ModelAndView("ViewRH");
 		view.addObject("vagas", vagas) ;
 		return view;
 	}
 	
 	@ResponseBody
-	@GetMapping("/vagas/{id}")	
+	@GetMapping("/vagas/{id}")
 	public List<Curriculos> find(Model model, @PathVariable("id") final Requisicao vaga) {
-		
+		log.info("Consultando vagas{}");
 		List<Curriculos> curriculos = this.curriculoService.findByIds(vaga);
 		
 		model.addAttribute("curriculos", curriculos);

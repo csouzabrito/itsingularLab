@@ -37,7 +37,8 @@ $(document).ready(function() {
 		            "columns": [
 		            	{ "data": "cpf", "visible": false},
 		                { "data": "nome"},
-		                { "data": "dataNascimento"},
+		                { "data": "formaContratacao", "className": "dt-center"},
+		                { "data": "valor", "className": "dt-center" },
 		                { "data": "email" },
 		                { "data": "telCelular" },
 		                { "data": "uploadDownloadPdf.nameArquivo",
@@ -64,9 +65,8 @@ $(document).ready(function() {
 			            }
 			        });
 			    });
-				
-				
-				$('#table tbody').on( 'click', 'tr', function () {
+			    
+				$('#table tbody').on( 'click','td', function () {
 				    dataRow = table.row( this ).data();
 				    downloadFile(dataRow);
 				} );	
@@ -83,23 +83,21 @@ function downloadFile(dataRow) {
 	
 	var cpf = dataRow.cpf;
 	var byte = dataRow.uploadDownloadPdf.bitesArquivo;
-	var x = "application/pdf";
+	var type = "application/pdf";
 	
 	$.ajax({
 		   type:"GET",
 		   async: false,
 		   url: '/cadastrarCurriculos/viewPdf/'+cpf,
 		   success: (data) => {
-			   console.log(data);
-				     const linkSource = `data:${x};base64,${byte}`;
-				     const downloadLink = document.createElement("a");
-				     downloadLink.href = linkSource;
-				     downloadLink.download = dataRow.uploadDownloadPdf.nameArquivo;
-				     downloadLink.click();
+			     const linkSource = `data:${type};base64,${byte}`;
+			     const downloadLink = document.createElement("a");
+			     downloadLink.href = linkSource;
+			     downloadLink.download = dataRow.uploadDownloadPdf.nameArquivo;
+			     downloadLink.click();
 	        },
 	        error: (e) => {
 	            //call error message
 	        }
 	     });
-	
 }

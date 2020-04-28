@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.br.itsingular.entity.Comercial;
 import com.br.itsingular.repository.ComercialRepository;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Service
 public class ComercialService {
 	
@@ -16,11 +20,14 @@ public class ComercialService {
 	@Qualifier("comercialRepository")
 	private ComercialRepository comercialRepository;
 	
-	public void salvar(final Comercial comercial){
+	@Transactional
+	public void create(final Comercial comercial){
+		log.info("Registrando comercial{}");
 		try{
-			this.comercialRepository.insert(comercial);
+			this.comercialRepository.save(comercial);
+		log.info("Comercial registrado{}");
 		}catch(DataIntegrityViolationException e){
-			throw new IllegalArgumentException("Erro ao salvar o comercial");
+			throw new IllegalArgumentException("Erro ao registrar comercial");
 		}
 	}
 }

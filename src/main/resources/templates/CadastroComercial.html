@@ -74,7 +74,7 @@
 									<div class="form-group col-md-3">
 										<label for="telefone" class="col-form-label">Telefone
 										</label> <input type="text" th:field="*{telefone}"
-											class="form-control" id="telefone" placeholder="Telefone"><span
+											class="form-control" name="telefone" id="telefone" placeholder="Telefone"><span
 											th:if="${#fields.hasErrors('telefone')}"
 											th:errors="*{telefone}" class="text-danger"></span>
 									</div>

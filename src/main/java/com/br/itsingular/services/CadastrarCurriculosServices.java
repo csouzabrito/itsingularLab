@@ -14,6 +14,9 @@ import com.br.itsingular.entity.Curriculos;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.repository.CadastrarCurriculosRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CadastrarCurriculosServices {
 
@@ -54,9 +57,8 @@ public class CadastrarCurriculosServices {
 	
 	@Cacheable("cvs")
 	public List<Curriculos> findByIds(final Requisicao vaga){
-		
 		List<String> ids = Arrays.asList(vaga.getRequisitoObrigatorio());
-		
+		log.info("Buscando um currículos por ID's {}", ids);
 		List<Curriculos> curriculos = this.repository.findByTecnologiasAssociadasIn(ids);
 		
 		return curriculos;

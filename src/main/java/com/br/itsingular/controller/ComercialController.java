@@ -51,7 +51,7 @@ public class ComercialController {
 		
 		try{
 			ModelAndView modelAndView = new ModelAndView("CadastroComercial");
-			this.comercialService.salvar(comercial);
+			this.comercialService.create(comercial);
 			modelAndView.addObject("message","Success");
 			modelAndView.addObject("comercial", new Comercial());
 			return modelAndView;

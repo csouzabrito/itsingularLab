@@ -69,26 +69,6 @@
 			</table>
 		</div>
 		<!--Pagination  -->
-			<!-- <div id="bottom" class="row" >
-				<div class="col-md-12">
-				<ul class="nav">
-					<li th:if="${vagas.hasPrevious()}" class="nav item">
-	                    <a class="page-link disabled" th:href="@{/recursos-humanos/view(page=${vagas.number-1},size=${vagas.size})}">Anterior</a>
-	                </li>
-	                
-	                <li class="nav item" th:each="i : ${#numbers.sequence(0, vagas.totalPages - 1)}">
-	                    <a th:href="@{/recursos-humanos/view(page=${i},size=${vagas.size})}" th:text="${i}" class="page-link"
-	                       th:classappend="${currentPage}==${i}?'active':''">[[${i}+1]]</a>
-	                </li>
-	                
-	                <li th:if="${vagas.hasNext()}" class="nav item" >
-	                    <a class="page-link" th:href="@{/recursos-humanos/view(page=${vagas.number+1},size=${vagas.size})}">Próximo</a>
-	                </li>
-	            </ul>
-           	</div>
-           </div> -->
-           
-           <!--Pagination  -->
           	<div class="col-sm-3" style="margin-right:285px;">
                  <div class="pagination">
                  		<p>
@@ -100,7 +80,7 @@
                  </div>
              </div>
            
-			<div class="row" style="margin-left:790px;">
+			<div class="row" style="margin-left:790px; width:470px;">
                 <div class="col-sm-15">
                     <!-- Pagination Bar -->
                     <div th:fragment='paginationbar'>
@@ -162,11 +142,12 @@
 				                <table id="table" class="table cell-border table-responsive table-striped table-bordered" style="width:0%">
 				                    <thead>
 				                        <tr>
-				                         	<th>CPF</th>
-				                            <th>Nome</th>
-				                            <th>Data Nascimento</th>
-				                            <th>E-mail</th>
-				                            <th>Telefone</th>
+				                         	<th class='foo'>CPF</th>
+				                            <th class='foo'>Nome</th>
+				                            <th class='foo'>Forma Contratação</th>
+				                            <th class='foo'>Valor Solicitado</th>
+				                            <th class='foo'>E-mail</th>
+				                            <th class='foo'>Telefone</th>
 				                            <th>Currículo</th>
 				                        </tr>
 				                    </thead>

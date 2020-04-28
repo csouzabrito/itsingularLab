@@ -54,14 +54,14 @@ public class RequisicaoServices {
 
 		final Pageable pageable = PageRequest.of(page, size);
 		
-		Page<Requisicao> requisicoes = this.repository.findByNomeSolicitante(email, pageable);
+		final Page<Requisicao> requisicoes = this.repository.findByNomeSolicitante(email, pageable);
 		
 		return requisicoes;
 	}
 	
 	public Page<Requisicao> filtrarRequisicao(final String filtro, final int page, final int size) {
 		
-		List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
+		final List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
 		
 		return toPageable(requisicoes);
 	}
