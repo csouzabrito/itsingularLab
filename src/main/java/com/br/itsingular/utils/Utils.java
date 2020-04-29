@@ -38,6 +38,13 @@ public class Utils {
 		return "<S/D>";
 	}
 	
+	public static String toLocalDateFormat(LocalDate date) {
+		if(Optional.ofNullable(date).isPresent()) {
+			return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		}
+		return "<S/D>";
+	}
+	
 	
 	public static <T> Page<T> toPageable(final List<T> list) {
 		

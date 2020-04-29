@@ -39,6 +39,7 @@ public class RHController {
 		ModelAndView view = new ModelAndView("ViewRH");
 		
 		final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
+		
 		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/view");
 		
 		view.addObject("vagas", vagas);
@@ -68,8 +69,8 @@ public class RHController {
 		
 		model.addAttribute("curriculos", curriculos);
 		return curriculos;
-		
 	}
+	
 	
 	@GetMapping("/vagas/pesquisar")
 	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(defaultValue = "5") final int size){
@@ -82,9 +83,9 @@ public class RHController {
 		   vagas = this.rhService.filtrarVagas(filtro, page, size);
 		}
 		
-		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/vagas/pesquisar");
+		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/vagas/pesquisar?filtro="+filtro);
 		ModelAndView view = new ModelAndView("ViewRH");
-		view.addObject("vagas", vagas) ;
+		view.addObject("vagas", vagas);
 		model.addAttribute("filtro", filtro);
 		model.addAttribute("vagas", vagas.getContent());
 		model.addAttribute("page", vagasPage);

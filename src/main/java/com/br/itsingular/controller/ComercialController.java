@@ -60,7 +60,6 @@ public class ComercialController {
 		}
 	}
 	
-	
 	@GetMapping("/informacoes")
 	public ModelAndView listarInfo(Model model, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
 		
@@ -78,7 +77,7 @@ public class ComercialController {
 	}
 	
 	@GetMapping("/filtrar")
-	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "3") final int size){
+	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "5") final int size){
 		
 		Page<Requisicao> requisicoes = null;
 		
@@ -87,10 +86,13 @@ public class ComercialController {
 		} else {
 			requisicoes = this.requisicaoServices.filtrarRequisicao(filtro, page, size);
 		}
+		PageWrapper<Requisicao> requisicoesPage = new PageWrapper<Requisicao>(requisicoes, "/comercial/filtrar?filtro="+filtro);
 		
-		model.addAttribute("filtro", filtro);
 		ModelAndView view = new ModelAndView("ViewComercial");
-		view.addObject("requisicoes", requisicoes) ;
+		view.addObject("requisicoes", requisicoes);
+		model.addAttribute("filtro", filtro);
+		model.addAttribute("requisicoes", requisicoes.getContent());
+		model.addAttribute("page", requisicoesPage);
 		return view;
 	}
 }
