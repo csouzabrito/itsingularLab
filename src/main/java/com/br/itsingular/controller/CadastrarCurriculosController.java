@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.entity.Curriculos;
-import com.br.itsingular.entity.Login;
 import com.br.itsingular.entity.TipagemArquivosUpload;
 import com.br.itsingular.services.CadastrarCurriculosServices;
 import com.br.itsingular.services.CadastrarTecnologiasServices;
@@ -52,7 +51,7 @@ public class CadastrarCurriculosController {
 
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	public ModelAndView incluirCurriculos(@RequestParam("pdf") MultipartFile pdf,
-			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result, Login login)
+			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result)
 			throws IOException {
 
 		String mensagem = null;
@@ -131,6 +130,7 @@ public class CadastrarCurriculosController {
 
 	private ModelAndView getAddModel(String mensagem, int page) {
 		ModelAndView model = new ModelAndView("/CadastrarCurriculos");
+		model.addObject("login", session.getAttribute("login"));
 
 		// Inicializacao do objeto Curriculos
 		// Quando inicia a funcionalidade
@@ -148,8 +148,6 @@ public class CadastrarCurriculosController {
 			model.addObject("pageNumbers", pageNumbers);
 		}
 		model.addObject("listCurriculos", listCurriculos);
-		model.addObject("login", session.getAttribute("login"));
-
 		if (!mensagem.equals("init") && !mensagem.equals("paginacao")) {
 			model.addObject("message", mensagem);
 		}

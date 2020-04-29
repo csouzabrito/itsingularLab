@@ -44,6 +44,7 @@ public class RequisicaoController {
 		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
 		
 		Login login = (Login) session.getAttribute("login");
+		modelAndView.addObject("login", login);
 		
 		if(!Utils.isEmptyOrNull(requisicao)) { 
 			requisicao = new Requisicao();
@@ -51,7 +52,6 @@ public class RequisicaoController {
 			requisicao.setNomeSolicitante(String.valueOf(login.getName()));
 			requisicao.setDataSolicitacao(LocalDate.now());
 			modelAndView.addObject("requisicao", requisicao);
-			modelAndView.addObject("login", login);
 			
 		}
 		modelAndView.addObject("listTecnologias",  listTecnologias());
@@ -61,17 +61,16 @@ public class RequisicaoController {
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
 	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
+		Login login = (Login) session.getAttribute("login");
+		modelAndView.addObject("login", login);
+		String mensagem = null;
 		if (result.hasErrors()) {
 			return main(null);
 		}
-		String mensagem = null;
-		Login login = (Login) session.getAttribute("login");
-		modelAndView.addObject("login", login);
 		modelAndView.addObject("listTecnologias",  listTecnologias());
 		requisicao.setLoginSolicitante(login.getUsername());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			mensagem = "Success";
-			//EnviarEmail 
 			try {
 				enviarEmailPosRequisicao(Integer.valueOf(requisicao.getVagas()),requisicao.getNomeSolicitante(), 
 						requisicao.getCliente(),requisicao.getDataSolicitacao());
