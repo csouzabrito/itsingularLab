@@ -57,12 +57,12 @@ public class CadastrarTecnologiasController {
 	@RequestMapping(path = "/incluir", method = RequestMethod.POST)
 	public ModelAndView insertTecnologias(@Valid Tecnologias tec, BindingResult result) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
+		model.addObject("login", session.getAttribute("login"));
 		String mensagem = null;
 		try {
 			if (result.hasErrors()) {
 				model.addObject("tecnologias", new Tecnologias());
 				model.addObject("listTecnologias", cadastrarTecnologiasServices.findTecnologias());
-				model.addObject("login", session.getAttribute("login"));
 				return model;
 			}
 			if (Utils.isEmptyOrNull(tec.getId())) {
@@ -77,7 +77,6 @@ public class CadastrarTecnologiasController {
 		}
 		model.addObject("tecnologias", new Tecnologias());
 		model.addObject("listTecnologias", cadastrarTecnologiasServices.findTecnologias());
-		model.addObject("login", session.getAttribute("login"));
 		model.addObject("error", mensagem);
 		return model;
 
@@ -86,6 +85,8 @@ public class CadastrarTecnologiasController {
 	@RequestMapping("/delete/{id}")
 	public ModelAndView excluir(@PathVariable("id") String id, Tecnologias cursos, Login login) {
 		ModelAndView model = new ModelAndView("/CadastrarTecnologias");
+		model.addObject("login", session.getAttribute("login"));
+		model.addObject("tecnologias", new Tecnologias());
 		String mensagem = null;
 		try {
 			cadastrarTecnologiasServices.deleteTecnologias(id);
@@ -94,9 +95,7 @@ public class CadastrarTecnologiasController {
 		} catch (Exception e) {
 			mensagem = "Failed";
 		}
-		model.addObject("tecnologias", new Tecnologias());
 		model.addObject("listTecnologias", listTecnologias);
-		model.addObject("login", session.getAttribute("login"));
 		model.addObject("message", mensagem);
 		return model;
 	}
