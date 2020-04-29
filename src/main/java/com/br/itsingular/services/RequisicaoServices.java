@@ -1,9 +1,5 @@
 package com.br.itsingular.services;
 
-import static com.br.itsingular.utils.Utils.toPageable;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -61,9 +57,9 @@ public class RequisicaoServices {
 	
 	public Page<Requisicao> filtrarRequisicao(final String filtro, final int page, final int size) {
 		
-		final List<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
+		final Page<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
 		
-		return toPageable(requisicoes);
+		return requisicoes;
 	}
 	
 	public Page<Requisicao> listarRequisicoes(final int page, final int size){
