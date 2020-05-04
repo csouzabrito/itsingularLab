@@ -76,21 +76,4 @@ public class EmpresaController {
 		view.addObject("empresas", empresas) ;
 		return view;
 	}
-//	
-//	@PostMapping("/listarEmpresas")
-//	public String list(@Validated EmpresaDTO dto, RedirectAttributes attributes, HttpSession session){
-//		
-//		final String page = "ConsultaEmpresa";
-//		
-//		EmpresaDTO result = this.empresaServices.findEmpresa(dto);
-//		
-//		if(Objects.nonNull(result)) {
-//			 session.setAttribute("name", result.getFantasia());
-//			 return "redirect:/empresa/empresas";
-//		}else {
-//			Messages.setMessage(attributes, "message", "Erro ao consultar, tente novamente");
-//		}
-//		
-//		return page;
-//	}
 }

@@ -41,6 +41,14 @@
 					<strong>Falha!</strong> Houve algum problema na abertura de
 					requisição
 				</div>
+				<div th:case="'Delete'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Exclusão!</strong> Processo efetuado com sucesso!
+				</div>
+				<div th:case="'Edit'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Atualização!</strong> Processo efetuado com sucesso!
+				</div>
 			</div>
 
 			<div class="container my-5">

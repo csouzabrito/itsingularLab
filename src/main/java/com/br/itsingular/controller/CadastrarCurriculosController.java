@@ -129,7 +129,7 @@ public class CadastrarCurriculosController {
 	}
 
 	private ModelAndView getAddModel(String mensagem, int page) {
-		ModelAndView model = new ModelAndView("/CadastrarCurriculos");
+		ModelAndView model = new ModelAndView("CadastrarCurriculos");
 		model.addObject("login", session.getAttribute("login"));
 
 		// Inicializacao do objeto Curriculos

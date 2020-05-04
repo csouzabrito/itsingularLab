@@ -32,7 +32,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/users")
-	public String login(@Validated Login login, RedirectAttributes attributes, HttpSession session) throws Exception {
+	public String login(@Validated Login login, RedirectAttributes attributes) throws Exception {
 		String mensagem = null;
 		try {
 			if (autentication.autenticacao(login.getUsername(), login.getPassword())) {

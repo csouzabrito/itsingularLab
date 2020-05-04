@@ -40,16 +40,15 @@ public class RequisicaoController {
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
 	public ModelAndView main( Requisicao requisicao) {
-		
 		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
-		
 		Login login = (Login) session.getAttribute("login");
 		modelAndView.addObject("login", login);
 		
 		if(!Utils.isEmptyOrNull(requisicao)) { 
 			requisicao = new Requisicao();
 			
-			requisicao.setNomeSolicitante(String.valueOf(login.getName()));
+			requisicao.setNomeSolicitante(login.getName());
+			requisicao.setLoginSolicitante(login.getUsername());
 			requisicao.setDataSolicitacao(LocalDate.now());
 			modelAndView.addObject("requisicao", requisicao);
 			
@@ -60,15 +59,13 @@ public class RequisicaoController {
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
 	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
-		Login login = (Login) session.getAttribute("login");
-		modelAndView.addObject("login", login);
+		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
+		modelAndView.addObject("login", session.getAttribute("login"));
 		String mensagem = null;
 		if (result.hasErrors()) {
 			return main(null);
 		}
 		modelAndView.addObject("listTecnologias",  listTecnologias());
-		requisicao.setLoginSolicitante(login.getUsername());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
 			mensagem = "Success";
 			try {
