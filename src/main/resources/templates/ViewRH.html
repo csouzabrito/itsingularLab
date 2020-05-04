@@ -7,9 +7,8 @@
 <body>
 <div class="d-flex">
 	<div th:replace="Menu :: menu">...</div>
-	<div class="container" id="content">
+	<div id="content">
 	<h3 align="center">Lista de Vagas RH</h3>
-		<br /> <br />
 		<button id="sidebarCollapse" type="button"
 			class="btn btn-light bg-white rounded-pill shadow-sm">
 			<i class="fa fa-bars mr-2"></i><small
@@ -20,7 +19,7 @@
 			<div class="form-group">
 				<div class="col-sm-6">
 					<div class="input-group">
-						<input class="form-control" name="filtro" id="filtro" placeholder="Filtrar vagas" autofocus="autofocus" th:value="${filtro}" /> <span class="input-group-btn">
+						<input class="form-control" name="filtro" id="filtro" placeholder="Pesquisar vagas" autofocus="autofocus" th:value="${filtro}" /> <span class="input-group-btn">
 							<button type="submit" class="btn btn-default">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
@@ -34,7 +33,7 @@
 			<table class="table table-bordered table-striped ">
 				<thead>
 					<tr>
-						<th class="text-center">Data Solicitação</th>
+						<th class="text-center col-md-1">Data Solicitação</th>
 						<th class="text-center col-md-1">Cliente</th>
 						<th class="text-center col-md-1">Vaga</th>
 						<th class="text-center col-md-1">Status</th>
@@ -45,21 +44,21 @@
 				<tbody>
 
 					<tr th:each="vaga: ${vagas.content}">
-						<td class="text-center col-md-1" th:text="${vaga.dataSolicitacao}"></td>
+						<td class="text-center" th:text="${vaga.dataSolicitacao}"></td>
 						<td class="text-center" th:text="${{vaga.cliente}}"></td>
-						<td class="text-center col-md-1"
-							th:text="${{vaga.cargo}}|"></td>
-						<td class="text-center col-md-1" th:attr="data-role=${vaga.id}">
+						<td class="text-center" th:text="${{vaga.cargo}}|"></td>
+						<td class="text-center" th:attr="data-role=${vaga.id}">
 							<span class="label" th:text="${vaga.status}"
-							th:classappend="${vaga.status == 'Pendente'? 'label-danger' : 'label-success'}">
-						</span>
+								  th:classappend="${vaga.status == 'Pendente'? 'label-danger' : 'label-success'}">
+							</span>
 						</td>
-						<td class="text-center col-md-1"><a 
-							class="btn btn-link btn-xs js-view-information" data-toggle="modal"
-							th:href="@{/recursos-humanos/vagas/{id}(id=${vaga.id})}"
-							title="Vizualizar" rel="tooltip" data-placement="top"> <span
-								class="glyphicon glyphicon-eye-open"></span>
-						</a></td>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs js-view-information" data-toggle="modal"
+							   th:href="@{/recursos-humanos/vagas/{id}(id=${vaga.id})}"
+							   title="Vizualizar" rel="tooltip" data-placement="top">
+							   <span class="glyphicon glyphicon-eye-open"></span>
+							</a>
+						</td>
 					</tr>
 					<tr>
 						<td class="text-center col-md-2" colspan="6"

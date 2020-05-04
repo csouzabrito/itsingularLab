@@ -7,6 +7,7 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<title>Lista de Vagas RH</title>
 <div th:insert="Header.html"></div>
 <script>
 	$(function() {
@@ -20,7 +21,7 @@
 <body>
 	<div class="d-flex">
 	<div th:replace="Menu :: menu">...</div>
-	<div class="container" id="content">
+	<div id="content">
 		<h3 align="center">Lista Comercial</h3>
 		<br /> <br />
 		<button id="sidebarCollapse" type="button"
@@ -49,12 +50,12 @@
 				<table class="table table-bordered table-striped">
 					<thead class="thead-light">
 						<tr>
-							<th class="text-center col-md-2">Data Solicitação</th>
+							<th class="text-center col-md-1">Data Solicitação</th>
 							<th class="text-center col-md-2">Cliente</th>
-							<th class="text-center col-md-3">Solicitante</th>
+							<th class="text-center col-md-2">Solicitante</th>
 							<th class="text-center col-md-2">Ramo Atividade</th>
-							<th class="text-center col-md-2">SLA (Dias)</th>
-							<th class="text-center col-md-6">Status</th>
+							<th class="text-center col-md-1">SLA (Dias)</th>
+							<th class="text-center col-md-1">Status</th>
 						</tr>
 					</thead>
 
@@ -90,11 +91,11 @@
                  </div>
              </div>
            
-			<div class="row" style="margin-left:790px; width:470px;">
-                <div class="col-sm-15">
+			<div class="row">
+                <div class="col-sm-12">
                     <!-- Pagination Bar -->
                     <div th:fragment='paginationbar'>
-                        <div class="text-center">
+                        <div class="text-right">
                             <ul class='pagination pagination-centered'>
                                 <li th:class="${page.firstPage}?'disabled':''">
                                     <span th:if='${page.firstPage}'>Anterior</span>
