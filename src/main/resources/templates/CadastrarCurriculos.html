@@ -44,10 +44,14 @@
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Falha!</strong> Este candidato já existe na base de dados!
 				</div>
-				<div th:case="'upload'" class="alert alert-danger">
+				<div th:case="'validacaoExtensaoUpload'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Falha!</strong> Favor selecione as extensões dos arquivos
 					corretamente. PDF ou DOC/DOCX!
+				</div>
+				<div th:case="'validacaoUpload'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Obrigatório ao menos um currículo para upload!
 				</div>
 				<div th:case="'tamanhoNSuportado'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -87,7 +91,7 @@
 									<span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"
 										class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-9">
+								<div class="form-group col-md-7">
 									<label for="nome" class="col-form-label"
 										style="margin-left: 1px">Nome do Candidato</label> <input
 										type="text" th:field="*{nome}" class="form-control" id="nome"
@@ -95,8 +99,7 @@
 										th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
 										class="text-danger"></span>
 								</div>
-							</div>
-							<div class="row">
+
 								<div class="form-group col-md-2">
 									<label for="dataNascimento" class="col-form-label"
 										style="margin-left: 1px">Data Nascimento</label> <input
@@ -107,29 +110,57 @@
 										th:if="${#fields.hasErrors('dataNascimento')}"
 										th:errors="*{dataNascimento}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-2">
-									<label for="formaContratacao" class="col-form-label labels">Contratação</label>
-									<select class="form-control" th:field="*{formaContratacao}">
+							</div>
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="formaContratacaoPrimaria"
+										class="col-form-label labels">Contratação Primária</label> <select
+										class="form-control" th:field="*{formaContratacaoPrimaria}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoContratacao : ${T(com.br.itsingular.enums.TipoContratacao).values()}"
 											th:value="${tipoContratacao}" th:text="${tipoContratacao}"></option>
-									</select> <span th:if="${#fields.hasErrors('formaContratacao')}"
-										th:errors="*{formaContratacao}" class="text-danger"></span>
+									</select> <span th:if="${#fields.hasErrors('formaContratacaoPrimaria')}"
+										th:errors="*{formaContratacaoPrimaria}" class="text-danger"></span>
 
 								</div>
-								<div class="form-group col-md-2">
-									<label for="valor" class="col-form-label labels">Valor
-										(Por Hora)</label> <input type="text" th:field="*{valor}"
-										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
-										class="form-control" id="valor" placeholder="Valor"><span
-										th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"
-										class="text-danger"></span>
-								</div>
-
 								<div class="form-group col-md-3">
+									<label for="valorContratacaoPrimaria"
+										class="col-form-label labels">Valor (Por Hora)</label> <input
+										type="text" th:field="*{valorContratacaoPrimaria}"
+										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+										class="form-control" id="valorContratacaoPrimaria"
+										placeholder="Valor"><span
+										th:if="${#fields.hasErrors('valorContratacaoPrimaria')}"
+										th:errors="*{valorContratacaoPrimaria}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="formaContratacaoSecundaria"
+										class="col-form-label labels">Pretenção Secundário</label> <select
+										class="form-control" th:field="*{formaContratacaoSecundaria}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoContratacao : ${T(com.br.itsingular.enums.TipoContratacao).values()}"
+											th:value="${tipoContratacao}" th:text="${tipoContratacao}"></option>
+									</select> <span
+										th:if="${#fields.hasErrors('formaContratacaoSecundaria')}"
+										th:errors="*{formaContratacaoSecundaria}" class="text-danger"></span>
+
+								</div>
+								<div class="form-group col-md-3">
+									<label for="valorContratacaoSecundaria"
+										class="col-form-label labels">Valor (Por Hora)</label> <input
+										type="text" th:field="*{valorContratacaoSecundaria}"
+										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+										class="form-control" id="valorContratacaoSecundaria"
+										placeholder="Valor"><span
+										th:if="${#fields.hasErrors('valorContratacaoSecundaria')}"
+										th:errors="*{valorContratacaoSecundaria}" class="text-danger"></span>
+								</div>
+
+								<div class="form-group col-md-2">
 									<label for="telCelular" class="col-form-label"
-										style="margin-left: 1px">Telefone Celular</label> <input
+										style="margin-left: 1px">Celular</label> <input
 										type="text" th:field="*{telCelular}" class="form-control"
 										id="telCelular" maxlength="14"
 										data-inputmask="'mask': '(99)99999-9999'"
@@ -137,18 +168,15 @@
 										th:if="${#fields.hasErrors('telCelular')}"
 										th:errors="*{telCelular}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-2">
 									<label for="telCelularSecundario" class="col-form-label"
-										style="margin-left: 1px">Telefone Celular Secundário</label> <input
+										style="margin-left: 1px">Celular Secundário</label> <input
 										type="text" th:field="*{telCelularSecundario}"
 										class="form-control" id="telCelularSecundario" maxlength="14"
 										data-inputmask="'mask': '(99)99999-9999'"
-										placeholder="Telefone Celular"> <span
-										th:if="${#fields.hasErrors('telCelularSecundario')}"
-										th:errors="*{telCelularSecundario}" class="text-danger"></span>
+										placeholder="Telefone Celular">
 								</div>
-							</div>
-							<div class="row">
+
 								<div class="form-group col-md-4">
 									<label for="email" class="col-form-label"
 										style="margin-left: 1px">E-mail</label> <input type="text"
@@ -162,15 +190,9 @@
 										style="margin-left: 1px">E-mail Secundário</label> <input
 										type="text" th:field="*{emailSecundario}" class="form-control"
 										id="emailSecundario" data-inputmask="'alias': 'email'"
-										placeholder="Digite E-mail"> <span
-										th:if="${#fields.hasErrors('emailSecundario')}"
-										th:errors="*{emailSecundario}" class="text-danger"></span>
+										placeholder="Digite E-mail">
 								</div>
 							</div>
-
-
-
-
 							<div class="row">
 								<div class="form-group col-md-3">
 									<label for="fileCurriculoPDC" class="col-form-label"
@@ -247,9 +269,10 @@
 												<td th:text="${curriculos.email}"></td>
 												<td>
 													<div class="btn-group pull-right">
-														<a class="btn btn-sm btn-primary"
+														<a th:if="${curriculos.uploadDownloadPdf != null}" class="btn btn-sm btn-primary"
 															th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
-														<a class="delete btn btn-sm btn-danger"
+															
+														<a th:if="${curriculos.uploadDownloadWord != null}" class="delete btn btn-sm btn-danger"
 															style="margin-left: 2px"
 															th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
 														<a class="delete btn btn-sm btn-danger"

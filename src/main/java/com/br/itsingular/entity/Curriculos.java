@@ -50,18 +50,20 @@ public class Curriculos implements Serializable{
 	@NotBlank(message = "Campo obrigatório")
 	private String email;
 
-	@NotBlank(message = "Campo obrigatório")
 	private String telCelularSecundario;
 
-	@NotBlank(message = "Campo obrigatório")
 	@Email
 	private String emailSecundario;
 	
 	@NotBlank(message = "Campo obrigatório")
-	private String formaContratacao;
+	private String formaContratacaoPrimaria;
 	
 	@NotBlank(message = "Campo obrigatório")
-	private String valor;
+	private String valorContratacaoPrimaria;
+	
+	private String formaContratacaoSecundaria;
+	
+	private String valorContratacaoSecundaria;
 	
     private TipagemArquivosUpload uploadDownloadPdf;
 	
