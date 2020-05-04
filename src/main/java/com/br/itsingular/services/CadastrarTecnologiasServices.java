@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -38,6 +40,9 @@ public class CadastrarTecnologiasServices {
 	}
 	public List<Tecnologias> findTecnologias() {
 		return Optional.ofNullable(cadTecnologias.findAll()).get();
+	}
+	public Page<Tecnologias> findTecnologias(final int page, final int size){
+		return cadTecnologias.findAll(PageRequest.of(page, size));
 	}
 	public Optional<Tecnologias> findTecnologiasById(String id) {
 		return Optional.ofNullable(cadTecnologias.findById(id)).get();

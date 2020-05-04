@@ -261,18 +261,53 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="row" th:fragment="pagination">
+								<div class="col-sm-3" style="margin-right: 285px;">
+									<div class="pagination">
+										<p>
+											<!-- <span class="badge" th:text="${page.size * (page.number-1) + 1}"></span> de  -->
+											<span class="badge"
+												th:text="${page.lastPage ? page.totalElements : page.size * (page.number-1)+ page.size}"></span>
+											de <span class="badge" th:text="${page.totalElements}"></span>
+											vagas
+										</p>
+									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-12">
-										<nav aria-label="Pagination">
-											<ul class="pagination pg-blue justify-content-center">
-												<li class="page-item" th:each="pageNumber : ${pageNumbers}"
-													th:class="${pageNumber eq listCurriculos.number + 1} ? 'active'">
-													<a class="page-link"
-													th:href="@{/cadastrarCurriculos/paginacao/{pageNumber}(pageNumber=${pageNumber})}"
-													th:text=${pageNumber}>1</a>
-												</li>
-											</ul>
-										</nav>
+										<!-- Pagination Bar -->
+										<div th:fragment='paginationbar'>
+											<div class="text-right">
+												<ul class='pagination pagination-centered'>
+													<li th:class="${page.firstPage}?'disabled':''"><span
+														th:if='${page.firstPage}'>Anterior</span> <a
+														th:if='${not page.firstPage}'
+														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=0,size=${page.size})}'>←
+															Anterior </a></li>
+													<li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+														<span th:if='${not page.hasPreviousPage}'>«</span> <a
+														th:if='${page.hasPreviousPage}'
+														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${page.number-2},size=${page.size})}'
+														title='Go to previous page'>«</a>
+													</li>
+													<li th:each='item : ${page.items}'
+														th:class="${item.current}? 'active' : ''"><span
+														th:if='${item.current}' th:text='${item.number}'>1</span>
+														<a th:if='${not item.current}'
+														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${item.number-1},size=${page.size})}'><span
+															th:text='${item.number}'>1</span></a></li>
+													<li th:class="${page.hasNextPage}? '' : 'disabled'"><span
+														th:if='${not page.hasNextPage}'>»</span> <a
+														th:if='${page.hasNextPage}'
+														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${page.number},size=${page.size})}'
+														title='Go to next page'>»</a></li>
+													<li th:class="${page.lastPage}? 'disabled' : ''"><span
+														th:if='${page.lastPage}'>Próximo →</span> <a
+														th:if='${not page.lastPage}'
+														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${page.totalPages - 1},size=${page.size})}'>Próximo</a>
+													</li>
+												</ul>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

@@ -22,6 +22,9 @@ import com.br.itsingular.services.EmailServices;
 import com.br.itsingular.services.RequisicaoServices;
 import com.br.itsingular.utils.Utils;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping(value = "/requisicao")
 public class RequisicaoController {
@@ -39,8 +42,9 @@ public class RequisicaoController {
 	private EmailServices emailServices;
 
 	@RequestMapping(value = "/abrir", method = RequestMethod.GET)
-	public ModelAndView main( Requisicao requisicao) {
-		ModelAndView modelAndView = new ModelAndView("/RequisicaoVagas");
+	public ModelAndView init( Requisicao requisicao) {
+		log.info("------ Rastrabilidade. Iniciando funcionalidade de Requisicao / init");
+		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
 		Login login = (Login) session.getAttribute("login");
 		modelAndView.addObject("login", login);
 		
@@ -59,11 +63,12 @@ public class RequisicaoController {
 	
 	@RequestMapping(path = "/addRequisicao", method = RequestMethod.POST)
 	public ModelAndView addRequisicao(@Valid Requisicao requisicao, BindingResult result) {
+		log.info("------ Rastrabilidade. Iniciando funcionalidade de Requisicao / addRequisicao");
 		ModelAndView modelAndView = new ModelAndView("RequisicaoVagas");
 		modelAndView.addObject("login", session.getAttribute("login"));
 		String mensagem = null;
 		if (result.hasErrors()) {
-			return main(null);
+			return init(null);
 		}
 		modelAndView.addObject("listTecnologias",  listTecnologias());
 		if (!Utils.isEmptyOrNull(requisicaoServices.salvarRequisicao(requisicao))) {
@@ -74,6 +79,7 @@ public class RequisicaoController {
 				modelAndView.addObject("requisicao", new Requisicao());
 				mensagem = "emailSuccess";
 			} catch (Exception e) {
+				log.error("###### -- FALHA! Cause:" + e.getCause() + "--> Mensagem" + e.getMessage());
 				mensagem = "emailErro";
 			}
 		}
@@ -94,6 +100,7 @@ public class RequisicaoController {
 	 * 
 	 */
 	public void enviarEmailPosRequisicao(int quantidadeVagas, String requisitante, String cliente, LocalDate dataAbertura) throws MessagingException {
+		log.info("------ Rastrabilidade. Iniciando funcionalidade de Requisicao / enviarEmailPosRequisicao");
 		emailServices.enviarEmail(quantidadeVagas, dataAbertura, requisitante, cliente);
 	}
 }
