@@ -47,7 +47,6 @@ public class CadastrarTecnologiasController {
 
 	@RequestMapping(path = "/listar")
 	public ModelAndView init() {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarTecnologias / init");
 		ModelAndView model = new ModelAndView("CadastrarTecnologias");
 		model.addObject("login",session.getAttribute("login"));
 		model.addObject("tecnologias", new Tecnologias());
@@ -55,12 +54,10 @@ public class CadastrarTecnologiasController {
 		return model;
 	}
 	private ModelAndView getListagem(final ModelAndView model, final int page, final int size) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarTecnologias / getListagem");
 		Page<Tecnologias> listTecnologias = cadastrarTecnologiasServices.findTecnologias(page, size==0?5:size);
 		PageWrapper<Tecnologias> curriculosPage = new PageWrapper<Tecnologias>(listTecnologias, "/cadastrarTecnologias/listar?page="+page+"/size="+size);
 		model.addObject("listTecnologias", listTecnologias) ;
 		model.addObject("page", curriculosPage);
-		log.info("------ Rastrabilidade. Finalizando funcionalidade de CadastrarTecnologias / getListagem");
 		return model;
 		
 	}
@@ -68,7 +65,6 @@ public class CadastrarTecnologiasController {
 	public ModelAndView listArticlesPageByPage(@PathVariable("page") int page, 
 												@PathVariable("size") int size, 
 												ModelAndView model) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarTecnologias / listArticlesPageByPage");
 		model= new ModelAndView("CadastrarTecnologias");
 		model.addObject("login", session.getAttribute("login"));
 		model.addObject("tecnologias", new Tecnologias());
@@ -76,13 +72,11 @@ public class CadastrarTecnologiasController {
 	}
 	@RequestMapping(path = "/incluir", method = RequestMethod.POST)
 	public ModelAndView insertTecnologias(@Valid Tecnologias tec, BindingResult result) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarTecnologias / insertTecnologias");
 		ModelAndView model = new ModelAndView("CadastrarTecnologias");
 		model.addObject("login", session.getAttribute("login"));
 		String mensagem = null;
 		try {
 			if (result.hasErrors()) {
-				model.addObject("tecnologias", new Tecnologias());
 				model.addObject("listTecnologias", cadastrarTecnologiasServices.findTecnologias());
 				return model;
 			}
@@ -108,7 +102,6 @@ public class CadastrarTecnologiasController {
 
 	@RequestMapping("/delete/{id}")
 	public ModelAndView excluir(@PathVariable("id") String id, Tecnologias cursos, Login login) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarTecnologias / excluir");
 		ModelAndView model = new ModelAndView("CadastrarTecnologias");
 		model.addObject("login", session.getAttribute("login"));
 		model.addObject("tecnologias", new Tecnologias());
@@ -129,7 +122,6 @@ public class CadastrarTecnologiasController {
 
 	@RequestMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") String id) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarTecnologias / edit");
 		ModelAndView model = new ModelAndView("CadastrarTecnologias");
 		Optional<Tecnologias> tst = cadastrarTecnologiasServices.findTecnologiasById(id);
 		model.addObject("tecnologias", new Tecnologias(tst.get().getId(), tst.get().getNomeCurso(),

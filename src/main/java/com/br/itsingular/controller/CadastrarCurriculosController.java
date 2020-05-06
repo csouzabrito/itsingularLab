@@ -54,7 +54,6 @@ public class CadastrarCurriculosController {
 	public ModelAndView incluirCurriculos(@RequestParam("pdf") MultipartFile pdf,
 			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result)
 			throws IOException {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarCurriculos / incluirCurriculos");
 		String mensagem = null;
 
 		if (result.hasErrors()) {
@@ -133,7 +132,6 @@ public class CadastrarCurriculosController {
 
 	@RequestMapping("/editar/{cpf}")
 	public ModelAndView editar(@PathVariable("cpf") String cpf) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarCurriculos / editar");
 		ModelAndView model = getAddModel("edit", 0, 0);
 		model.addObject("curriculos", Optional.ofNullable(cadastrarCurriculosServices.findCurriculoById(cpf).get()));
 		return model;
@@ -142,12 +140,9 @@ public class CadastrarCurriculosController {
 	private ModelAndView getAddModel(String mensagem, final int page, final int size) {
 		ModelAndView model = new ModelAndView("CadastrarCurriculos");
 		model.addObject("login", session.getAttribute("login"));
-
-		// Inicializacao do objeto Curriculos ocorre:
-		// Quando inicia a funcionalidade
-		// Quando realizar uma operacao dos dados
-		// Quando realiza a paginacao
-		if (mensagem.equals("success") || mensagem.equals("init") || mensagem.equals("paginacao")) {
+		if (mensagem.equals("success") 
+					|| mensagem.equals("init") 
+						|| mensagem.equals("paginacao")) { 		
 			model.addObject("curriculos", new Curriculos());
 		}
 		model.addObject("listCursos", cadastrarTecnologiasServices.findTecnologias());
@@ -159,7 +154,6 @@ public class CadastrarCurriculosController {
 	}
 
 	private ModelAndView getListagem(final ModelAndView model, final int page, final int size) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarCurriculos / getListagem");
 		Page<Curriculos> listCurriculos = cadastrarCurriculosServices.findCurriculos(page, size == 0 ? 5 : size);
 		PageWrapper<Curriculos> curriculosPage = new PageWrapper<Curriculos>(listCurriculos,
 				"/cadastrarCurriculos/listarCurriculos?page=" + page + "/size=" + size);
@@ -171,7 +165,6 @@ public class CadastrarCurriculosController {
 
 	@RequestMapping("/paginacao/{page}/{size}")
 	public ModelAndView listArticlesPageByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
-		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarCurriculos / listArticlesPageByPage");
 		ModelAndView model = getAddModel("paginacao", page, size);
 		return model;
 	}
