@@ -3,6 +3,8 @@ package com.br.itsingular.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,6 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.br.itsingular.enums.TipoCargo;
+import com.br.itsingular.enums.TipoNivel;
 import com.br.itsingular.utils.Utils;
 
 import lombok.AllArgsConstructor;
@@ -68,6 +72,14 @@ public class Curriculos implements Serializable{
     private TipagemArquivosUpload uploadDownloadPdf;
 	
     private TipagemArquivosUpload uploadDownloadWord;
+    
+	@NotNull(message = "Campo obrigatório")
+	@Enumerated(EnumType.STRING)
+    private TipoCargo tipoCargo;
+	
+	@NotNull(message = "Campo obrigatório")
+	@Enumerated(EnumType.STRING)
+    private TipoNivel tipoNivel;
 
 	@Transient
 	private MultipartFile pdf;

@@ -51,7 +51,8 @@
 				</div>
 				<div th:case="'validacaoUpload'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Falha!</strong> Obrigatório ao menos um currículo para upload!
+					<strong>Falha!</strong> Obrigatório ao menos um currículo para
+					upload!
 				</div>
 				<div th:case="'tamanhoNSuportado'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -160,10 +161,9 @@
 
 								<div class="form-group col-md-2">
 									<label for="telCelular" class="col-form-label"
-										style="margin-left: 1px">Celular</label> <input
-										type="text" th:field="*{telCelular}" class="form-control"
-										id="telCelular" maxlength="14"
-										data-inputmask="'mask': '(99)99999-9999'"
+										style="margin-left: 1px">Celular</label> <input type="text"
+										th:field="*{telCelular}" class="form-control" id="telCelular"
+										maxlength="14" data-inputmask="'mask': '(99)99999-9999'"
 										placeholder="Telefone Celular"> <span
 										th:if="${#fields.hasErrors('telCelular')}"
 										th:errors="*{telCelular}" class="text-danger"></span>
@@ -191,6 +191,31 @@
 										type="text" th:field="*{emailSecundario}" class="form-control"
 										id="emailSecundario" data-inputmask="'alias': 'email'"
 										placeholder="Digite E-mail">
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="tipoCargo" class="col-form-label labels">Cargo</label>
+									<select class="form-control" th:field="*{tipoCargo}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoCargo : ${T(com.br.itsingular.enums.TipoCargo).values()}"
+											th:value="${tipoCargo}" th:text="${tipoCargo}"></option>
+									</select> <span th:if="${#fields.hasErrors('tipoCargo')}"
+										th:errors="*{tipoCargo}" class="text-danger"></span>
+
+								</div>
+
+								<div class="form-group col-md-6">
+									<label for="tipoNivel" class="col-form-label labels">Nível</label>
+									<select class="form-control" th:field="*{tipoNivel}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoNivel : ${T(com.br.itsingular.enums.TipoNivel).values()}"
+											th:value="${tipoNivel}" th:text="${tipoNivel}"></option>
+									</select> <span th:if="${#fields.hasErrors('tipoNivel')}"
+										th:errors="*{tipoNivel}" class="text-danger"></span>
+
 								</div>
 							</div>
 							<div class="row">
@@ -253,9 +278,10 @@
 											<tr>
 												<th>CPF</th>
 												<th>Nome do Candidato</th>
-												<th>Data Nascimento</th>
-												<th>Celular de Contato</th>
-												<th>Email</th>
+												<th>Contatos</th>
+												<th>Emails</th>
+												<th>Cargo</th>
+												<th>Nível</th>
 												<th>Ações</th>
 											</tr>
 										</thead>
@@ -263,16 +289,38 @@
 											<tr th:each="curriculos : ${listCurriculos.content}">
 												<td th:text="${curriculos.cpf}"></td>
 												<td th:text="${curriculos.nome}"
-													style="word-wrap: break-word; width: 250px"></td>
-												<td th:text="${curriculos.dataNascimentoFormat}"></td>
-												<td th:text="${curriculos.telCelular}"></td>
-												<td th:text="${curriculos.email}"></td>
+													style="word-wrap: break-word; width: 200px"></td>
+												<td th:if="${curriculos.telCelularSecundario !=null}">
+													<span th:text="${curriculos.telCelular}"></span>
+													<p>
+														<span th:text="${curriculos.telCelularSecundario}"
+															style="word-wrap: break-word; width: 300px"></span>
+													</p>
+												</td>
+												<td th:if="${curriculos.telCelularSecundario ==null}">
+													<span th:text="${curriculos.telCelular}"></span>
+												</td>
+												<td th:if="${curriculos.emailSecundario !=null}">
+													<span th:text="${curriculos.email}"></span>
+													<p>
+														<span th:text="${curriculos.emailSecundario}"
+															style="word-wrap: break-word; width: 300px"></span>
+													</p>
+												</td>
+												<td th:if="${curriculos.emailSecundario ==null}">
+													<span th:text="${curriculos.email}"></span>
+												</td>
+												
+												<td th:text="${curriculos.tipoCargo}"></td>
+												<td th:text="${curriculos.tipoNivel}"></td>
 												<td>
-													<div class="btn-group pull-right">
-														<a th:if="${curriculos.uploadDownloadPdf != null}" class="btn btn-sm btn-primary"
+													<div class="btn-group pull-right" style="word-wrap: break-word; width: 145px">
+														<a th:if="${curriculos.uploadDownloadPdf != null}"
+															class="btn btn-sm btn-primary"
 															th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
-															
-														<a th:if="${curriculos.uploadDownloadWord != null}" class="delete btn btn-sm btn-danger"
+
+														<a th:if="${curriculos.uploadDownloadWord != null}"
+															class="delete btn btn-sm btn-danger"
 															style="margin-left: 2px"
 															th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
 														<a class="delete btn btn-sm btn-danger"
@@ -335,7 +383,6 @@
 								</div>
 							</div>
 						</div>
-
 					</form>
 				</div>
 			</div>
