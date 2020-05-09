@@ -1,0 +1,88 @@
+.h1-header {
+    text-align:center;
+}
+.button-add-fields{
+	float: right;
+	margin-left: 825px;
+	margin-top: -40px;
+    flex: 0 0 12%;
+}
+
+.span-button{
+	float: right;
+	margin-left: 1010px;
+    flex: 0 0 12%;
+}
+
+.toInsert:not(:first-of-type){
+    margin-top: 10px;
+}
+
+.glyphicon{
+    font-size: 12px;
+}
+
+.space-fields{
+    margin-left: 20px;
+}
+
+.field-nome{
+   margin-top: 5px;
+}
+
+.combo-disponibilidade{
+    margin-left: 150px;
+    margin-top: 5px;
+}
+
+.field-disponibilidade{
+    margin-top: 5px;
+}
+
+
+
+
+
+body {
+    margin-top:30px;
+}
+.stepwizard-step p {
+    margin-top: 0px;
+    color:#666;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+    opacity:1 !important;
+    color:#bbb;
+}
+.progress{
+    top: 13px;
+    bottom: 0;
+    position: absolute;
+    content:" ";
+    width: 74%;
+    left:13%;
+    height: 4px;
+    z-index: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}

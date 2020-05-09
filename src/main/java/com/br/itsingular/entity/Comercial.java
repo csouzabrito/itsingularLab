@@ -1,6 +1,6 @@
 package com.br.itsingular.entity;
 
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 

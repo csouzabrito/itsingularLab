@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+</head>
+<div th:insert="LayoutCandidato.html"></div>
+<script>
+	$(function() {
+		// Sidebar toggle behavior
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+</script>
+<body>
+	<div class="d-flex">
+		<div th:replace="Menu :: menu">...</div>
+		<div id="content">
+			<button id="sidebarCollapse" type="button"
+				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+				<i class="fa fa-bars mr-2"></i><small
+					class="text-uppercase font-weight-bold">Menu</small>
+			</button>
+
+			<div th:each="m : ${msg}">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<span th:text="${m}"></span>
+			</div>
+
+			<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
+				<div th:case="'Success'" class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Sucesso!</strong> Suas informações foram salvas com sucesso!
+				</div>
+				<div th:case="'error'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Erro ao salvar as informações.
+					
+				</div>
+			</div>
+			<div style="margin-top:-20px" class="container my-5">
+				<h3 align="center">Informações do Candidato</h3>
+				
+				  <div class="stepwizard">
+			        <div class="progress center-block">
+			            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 13%">
+			            </div>
+			        </div>
+        
+			        <div class="stepwizard-row setup-panel">
+			            <div class="stepwizard-step col-xs-3"> 
+			                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+			                <p><small>Experiência Profissional</small></p>
+			            </div>
+			            <div class="stepwizard-step col-xs-3"> 
+			                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+			                <p><small>Formação Academica</small></p>
+			            </div>
+			            <div class="stepwizard-step col-xs-3"> 
+			                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+			                <p><small>Cursos / Certificações</small></p>
+			            </div>
+			            <div class="stepwizard-step col-xs-3"> 
+			                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+			                <p><small>Idioma</small></p>
+			            </div>
+			        </div>
+    			</div>
+				
+				
+				<div class="col-md-12">
+					<form th:action="@{/candidatos/salvar-informacoes}" th:object="${candidato}" method="POST">
+						<div class="panel panel-primary setup-content" id="step-1">
+							<div class="panel-heading">
+								<h3 class="panel-title h1-header">EXPERIÊNCIA PROFISSIONAL</h3>
+							</div>
+							<div class="panel-body">
+							  	<div class="row">
+									<div class="form-group col-md-6">
+										<label for="nome" class="space-fields col-form-label field-nome">Nome</label>
+										<input type="text" name="nome" th:field="*{nome}" class="space-fields form-control" id="nome"/>
+									</div>
+									<div class="form-group col-md-3 combo-disponibilidade">
+										<label for="disponibilidade" class="space-fields field-disponibilidade col-md-10 control-label">Disponibilidade (Dias)</label>
+											<select class="form-control" name="disponibilidade" th:field="*{disponibilidade}">
+												<option th:each="disponibilidade : ${allStatusDisponibilidade}" th:value="${disponibilidade}" th:text="${disponibilidade.descricao}">5</option>
+					                    	</select>
+									</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="resumoQualificacao" class="space-fields col-form-label">Resumo das experiências</label>
+									<textarea style="width: 199%" name="resumoQualificacao" class="space-fields form-control" th:field="*{resumoQualificacao}" id="resumoQualificacao" rows="6"></textarea>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="empresa" class="space-fields col-form-label">Empresa</label>
+									 <input type="text" name="empresa" th:field="*{empresa.nome}" class="space-fields form-control" id="empresa"/>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="cargo" class="space-fields col-form-label">Cargo</label>
+									 <input type="text" name="cargo" th:field="*{cargo}" class="space-fields form-control" id="cargo"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="dataInicio" class="space-fields col-form-label">Data Início</label>
+									 <input type="text" name="dataInicio" th:field="*{empresa.dataInicio}" class="space-fields form-control" id="dataInicio"
+									 data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+								     data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"
+									 />
+								</div>
+								
+								<div class="form-group col-md-3">
+									<label for="dataFim" class="space-fields col-form-label">Data Fim</label>
+									 <input type="text" name="dataFim"
+									 th:field="*{empresa.dataFim}" class="space-fields form-control" id="dataFim"
+									 data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+								     data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="empresa.atividades" class="space-fields col-form-label">Resumo das Atividades</label>
+									<textarea name="atividades" style="width: 199%" class="space-fields form-control" th:field="*{empresa.atividades}" id="empresa.atividades" rows="6"></textarea>
+								</div>
+							</div>
+							 <nav>
+			                  <ul class="pager">
+			                    <li class="next"><a class="nextBtn" href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+			                  </ul>
+			                </nav>
+						</div>
+					</div>	
+						
+						<div class="panel panel-primary setup-content" id="step-2">
+							<div class="panel-heading">
+								<h3 class="panel-title h1-header">FORMAÇÃO ACADÊMICA</h3>
+							</div>
+							<div class="panel-body">
+							 <div class="controls">
+								<div class="toInsert">
+									<div class="row">
+									<div class="form-group col-md-3">
+										<label for="curso" class="space-fields col-form-label">Formação</label>
+										<input type="text" name="curso" th:field="*{formacaoAcademica.curso}" class="space-fields form-control" id="curso" />
+									</div>
+	
+									<div class="form-group col-md-3">
+										<label for="instituicao" class="space-fields col-form-label">Instituição</label>
+										 <input type="text" name="instituicao" th:field="*{formacaoAcademica.instituicao}" class="space-fields form-control" id="instituicao" />
+									</div>
+									<div class="form-group col-md-3 button-add-fields">
+										<span class="span-button">
+											<button class="btn btn-success btn-add" type="button">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							</div>
+							<nav>
+			                  <ul class="pager">
+			                    <li class="previous"><a class="prevBtn" href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+			                    <li class="next"><a class="nextBtn" href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+			                  </ul>
+			                </nav>
+						</div>
+						</div>
+						
+						<div class="panel panel-primary setup-content" id="step-3">
+							<div class="panel-heading">
+								<h3 class="panel-title h1-header">CURSOS / CERTIFICAÇÕES</h3>
+							</div>
+							<div class="panel-body">
+							<div class="controls-curso">
+								<div class="toInsertCurso">
+									<div class="row">
+									<div class="form-group col-md-3">
+										<label for="curso" class="space-fields col-form-label">Nome do Curso</label>
+										<input type="text" name="curso" th:field="*{curso.nome}" class="space-fields form-control" id="curso" />
+									</div>
+	
+									<div class="form-group col-md-3">
+										<label for="instituicao" class="space-fields col-form-label">Instituição</label>
+										 <input type="text" name="instituicao" th:field="*{curso.instituicao}" class="space-fields form-control" id="instituicao" />
+									</div>
+									<div class="form-group col-md-3 button-add-fields">
+										<span class="span-button">
+											<button class="btn btn-success btn-add-curso" type="button">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							</div>
+								<nav>
+				                  <ul class="pager">
+				                    <li class="previous"><a class="prevBtn" href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+				                    <li class="next"><a class="nextBtn" href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+				                  </ul>
+               			 </nav>
+						</div>
+						</div>
+
+						<div class="panel panel-primary setup-content" id="step-4">
+							
+							<div class="panel-heading">
+								<h3 class="panel-title h1-header">IDIOMA</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<BR />
+									<div class="form-group col-md-2">
+										<label for="idioma"
+											class="space-fields col-sm-2 control-label">Idioma</label> <select
+											class="space-fields form-control" name="idioma"
+											th:field="*{idioma.idioma}">
+											<option th:each="idioma : ${allStatusIdioma}"
+												th:value="${idioma}" th:text="${idioma.descricao}">Português</option>
+										</select>
+									</div>
+
+									<div class="form-group col-md-2">
+										<label for="nivel" class="col-sm-2 control-label">Nível</label>
+										<select class="form-control" name="nivel"
+											th:field="*{idioma.nivel}">
+											<option th:each="nivel : ${allNivelIdioma}"
+												th:value="${nivel}" th:text="${nivel.descricao}">5</option>
+										</select>
+									</div>
+								</div>
+								 <nav>
+				                  <ul class="pager">
+				                    <li class="previous"><a class="prevBtn" href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+				                    <li class="next">
+				                    	<button class="btn btn-success pull-right" type="submit">SUBMIT!</button>
+				                    </li>
+				                  </ul>
+				                </nav>
+							</div>
+						</div>
+						<!-- <div class="form-group col-md-12" style="text-align: center; margin-top:-15px;" >
+							<input type="submit" class="btn btn-primary" value="Salvar Informações">
+						</div> -->
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

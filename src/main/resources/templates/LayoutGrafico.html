@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	
+	<title>Gráfico</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	<link th:rel="stylesheet" th:href="@{/css/grafico/style.css}">
+	
+</head>
+<body>
+<script th:src="@{/js/rh/jquery/3.1.1/jquery.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0-rc.1/Chart.js"></script>
+<script th:src="@{/js/grafico/grafico.js}"></script>
+
+<script>
+	$(function() {
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+</script>	
+</body>
