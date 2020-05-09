@@ -8,13 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum TipoNivel {
-
-	ESTAGIARIO,
-	JUNIOR,
-	PLENO,
-	SENIOR,
-	ESPECIALISTA;
-	
+	ESTAGIARIO, JUNIOR, PLENO, SENIOR, ESPECIALISTA, VAZIO;
 	private String tipoNivel;
 	
 }

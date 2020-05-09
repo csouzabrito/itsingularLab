@@ -16,6 +16,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.br.itsingular.enums.TipoCargo;
+import com.br.itsingular.enums.TipoNivel;
 import com.br.itsingular.enums.TipoProcessoSeletivo;
 import com.br.itsingular.enums.TipoQualificacaoTestes;
 import com.br.itsingular.enums.TipoRequisicao;
@@ -58,9 +60,14 @@ public class Requisicao implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String pessoaContato;
 
-	@NotBlank(message = "Campo obrigatório")
-	private String cargo;
+	@NotNull(message = "Campo obrigatório")
+	@Enumerated(EnumType.STRING)
+	private TipoCargo cargo;
 
+	@NotNull(message = "Campo obrigatório")
+	@Enumerated(EnumType.STRING)
+	private TipoNivel tipoNivel;
+	
 	private String telCorporativo;
 
 	@NotBlank(message = "Campo obrigatório")

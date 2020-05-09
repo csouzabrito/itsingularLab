@@ -55,32 +55,48 @@ public class CadastrarCurriculosController {
 			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result)
 			throws IOException {
 		String mensagem = null;
-
-		if (result.hasErrors()) {
-			return getAddModel("result", 0, 0);
-		}
-
+		if (result.hasErrors()) {return getAddModel("result", 0, 0);}
 		try {
-			if (pdf.getBytes().length == 0 && word.getBytes().length == 0) {
-				return getAddModel("validacaoUpload", 0, 0);
-			}
-			if ((pdf.getBytes().length > 0 && !pdf.getContentType().equalsIgnoreCase("application/pdf"))
-						||(word.getBytes().length > 0 && !word.getContentType().contains("officedocument"))) {
-				return getAddModel("validacaoExtensaoUpload", 0, 0);
-			}
-			if(pdf.getBytes().length > 0) {
-				curriculos.setUploadDownloadPdf(new TipagemArquivosUpload(pdf.getOriginalFilename(), pdf.getName(),
-						pdf.getContentType(), pdf.getBytes()));
-				log.info("------ curriculo PDF realizando upload");
-			}
-			if(word.getBytes().length > 0) {
-				curriculos.setUploadDownloadWord(new TipagemArquivosUpload(word.getOriginalFilename(), word.getName(),
-						word.getContentType(), word.getBytes()));
-				log.info("------ curriculo Word realizando upload");
-			}
 
-			if (Utils.isEmptyOrNull(curriculos.getCpf())) {
-				cadastrarCurriculosServices.save(curriculos);
+			if (!Utils.isEmptyOrNull(session.getAttribute("curriculos"))) {
+				if (pdf.getBytes().length > 0) {
+					curriculos.setUploadDownloadPdf(new TipagemArquivosUpload(pdf.getOriginalFilename(), pdf.getName(),
+							pdf.getContentType(), pdf.getBytes()));
+					log.info("------ curriculo PDF realizando upload");
+				} else {
+					curriculos.setUploadDownloadPdf(
+							((Curriculos) session.getAttribute("curriculos")).getUploadDownloadPdf());
+				}
+				if (word.getBytes().length > 0) {
+					curriculos.setUploadDownloadWord(new TipagemArquivosUpload(word.getOriginalFilename(),
+							word.getName(), word.getContentType(), word.getBytes()));
+					log.info("------ curriculo Word realizando upload");
+				} else {
+					curriculos.setUploadDownloadWord(
+							((Curriculos) session.getAttribute("curriculos")).getUploadDownloadWord());
+				}
+			} else {
+				if (pdf.getBytes().length == 0 && word.getBytes().length == 0) {
+					return getAddModel("validacaoUpload", 0, 0);
+				}
+				if ((pdf.getBytes().length > 0 && !pdf.getContentType().equalsIgnoreCase("application/pdf"))
+						|| (word.getBytes().length > 0 && !((word.getContentType().contains("officedocument")
+								|| (word.getContentType().contains("application/msword")))))) {
+					return getAddModel("validacaoExtensaoUpload", 0, 0);
+				}
+				if (pdf.getBytes().length > 0) {
+					curriculos.setUploadDownloadPdf(new TipagemArquivosUpload(pdf.getOriginalFilename(), pdf.getName(),
+							pdf.getContentType(), pdf.getBytes()));
+					log.info("------ curriculo PDF realizando upload");
+				}
+				if (word.getBytes().length > 0) {
+					curriculos.setUploadDownloadWord(new TipagemArquivosUpload(word.getOriginalFilename(),
+							word.getName(), word.getContentType(), word.getBytes()));
+					log.info("------ curriculo Word realizando upload");
+				}
+			}
+			if (Utils.isEmptyOrNull(curriculos.getDataUltimaAtualizacao())) {
+				cadastrarCurriculosServices.insert(curriculos);
 			} else {
 				cadastrarCurriculosServices.removeAndInsertCurriculos(curriculos);
 			}
@@ -95,7 +111,7 @@ public class CadastrarCurriculosController {
 		}
 		return getAddModel(mensagem, 0, 0);
 	}
-	
+
 	@RequestMapping("/viewPdf/{cpf}")
 	public void viewPdf(@PathVariable("cpf") String cpf, HttpServletRequest req, HttpServletResponse response)
 			throws IOException {
@@ -133,16 +149,19 @@ public class CadastrarCurriculosController {
 	@RequestMapping("/editar/{cpf}")
 	public ModelAndView editar(@PathVariable("cpf") String cpf) {
 		ModelAndView model = getAddModel("edit", 0, 0);
-		model.addObject("curriculos", Optional.ofNullable(cadastrarCurriculosServices.findCurriculoById(cpf).get()));
+		Optional<Curriculos> list = cadastrarCurriculosServices.findCurriculoById(cpf);
+		if (list.isPresent()) {
+			model.addObject("curriculos", list.get());
+			session.setAttribute("curriculos", list.get());
+		}
 		return model;
 	}
 
 	private ModelAndView getAddModel(String mensagem, final int page, final int size) {
 		ModelAndView model = new ModelAndView("CadastrarCurriculos");
+		session.removeAttribute("curriculos");
 		model.addObject("login", session.getAttribute("login"));
-		if (mensagem.equals("success") 
-					|| mensagem.equals("init") 
-						|| mensagem.equals("paginacao")) { 		
+		if (mensagem.equals("success") || mensagem.equals("init") || mensagem.equals("paginacao")) {
 			model.addObject("curriculos", new Curriculos());
 		}
 		model.addObject("listCursos", cadastrarTecnologiasServices.findTecnologias());
@@ -154,7 +173,7 @@ public class CadastrarCurriculosController {
 	}
 
 	private ModelAndView getListagem(final ModelAndView model, final int page, final int size) {
-		Page<Curriculos> listCurriculos = cadastrarCurriculosServices.findCurriculos(page, size == 0 ? 5 : size);
+		Page<Curriculos> listCurriculos = cadastrarCurriculosServices.findCurriculos(page, size == 0 ? 10 : size);
 		PageWrapper<Curriculos> curriculosPage = new PageWrapper<Curriculos>(listCurriculos,
 				"/cadastrarCurriculos/listarCurriculos?page=" + page + "/size=" + size);
 		model.addObject("listCurriculos", listCurriculos);

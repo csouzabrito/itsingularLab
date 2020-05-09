@@ -10,11 +10,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.br.itsingular.enums.FerramentasBusca;
 import com.br.itsingular.enums.TipoCargo;
 import com.br.itsingular.enums.TipoNivel;
 import com.br.itsingular.utils.Utils;
@@ -87,7 +89,16 @@ public class Curriculos implements Serializable{
 	@Transient
 	private MultipartFile word;
 	
+	@NotNull(message = "Campo obrigatório")
+	@Enumerated(EnumType.STRING)
+	private FerramentasBusca tipoFerramentaBusca;
+	
+	@NotBlank(message = "Campo obrigatório")
+	private String linkedin;
 
+	@LastModifiedDate
+	private LocalDate dataUltimaAtualizacao;
+	
 	public String getDataNascimentoFormat() {
 		return Utils.formatDate(this.getDataNascimento());
 	}

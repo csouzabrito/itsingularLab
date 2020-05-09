@@ -59,12 +59,13 @@
 				</div>
 			</div>
 			<div class="container my-5">
-				<div align="right" style="margin-top: -20px" class="form-group col-md-12">
+				<div align="right" style="margin-top: -20px"
+					class="form-group col-md-12">
 					<output th:text="Olá+': ' + ${login.name}"></output>
-					<span>Sair</span>&nbsp;
-					<a href="#" th:href="@{/login/logout}">
-							<img src="/img/sair.png" style="width: 22px; height: 22px"></a>
-					
+					<span>Sair</span>&nbsp; <a href="#" th:href="@{/login/logout}">
+						<img src="/img/sair.png" style="width: 22px; height: 22px">
+					</a>
+
 				</div>
 				<h3 align="center">Requisição de Vagas</h3>
 				<BR />
@@ -125,14 +126,14 @@
 							</div>
 							<div class="row">
 								<BR />
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-4">
 									<label for="cliente" class="col-form-label labels">Cliente</label>
 									<input type="text" th:field="*{cliente}" class="form-control"
 										id="cliente" placeholder="Cliente"> <span
 										th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"
 										class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-4">
 									<label for="ramoAtividade" class="col-form-label">Ramo
 										Atividade</label> <input type="text" th:field="*{ramoAtividade}"
 										class="form-control" id="ramoAtividade"
@@ -140,7 +141,7 @@
 										th:if="${#fields.hasErrors('ramoAtividade')}"
 										th:errors="*{ramoAtividade}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-4">
 									<label for="pessoaContato" class="col-form-label"
 										style="margin-left: 1px">Pessoa Contato</label> <input
 										type="text" th:field="*{pessoaContato}" class="form-control"
@@ -148,14 +149,32 @@
 										th:if="${#fields.hasErrors('pessoaContato')}"
 										th:errors="*{pessoaContato}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-3">
+							</div>
+							<div class="row">
+								<div class="form-group col-md-6">
 									<label for="cargo" class="col-form-label"
-										style="margin-left: 1px">Cargo</label> <input type="text"
-										th:field="*{cargo}" class="form-control" id="cargo"
-										placeholder="Cargo"> <span
-										th:if="${#fields.hasErrors('cargo')}" th:errors="*{cargo}"
-										class="text-danger"></span>
+										style="margin-left: 1px">Cargo</label> <select
+										class="form-control" th:field="*{cargo}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="cargo : ${T(com.br.itsingular.enums.TipoCargo).values()}"
+											th:value="${cargo}" th:text="${cargo}"></option>
+									</select> <span th:if="${#fields.hasErrors('cargo')}"
+										th:errors="*{cargo}" class="text-danger"></span>
 								</div>
+								<div class="form-group col-md-6">
+									<label for="tipoNivel" class="col-form-label labels">Nível</label>
+									<select class="form-control" th:field="*{tipoNivel}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoNivel : ${T(com.br.itsingular.enums.TipoNivel).values()}"
+											th:value="${tipoNivel}" th:text="${tipoNivel}"></option>
+									</select> <span th:if="${#fields.hasErrors('tipoNivel')}"
+										th:errors="*{tipoNivel}" class="text-danger"></span>
+
+								</div>
+							</div>
+							<div class="row">
 								<div class="form-group col-md-6">
 									<label for="endereco" class="col-form-label labels">Endereço</label>
 									<input type="text" th:field="*{endereco}" class="form-control"

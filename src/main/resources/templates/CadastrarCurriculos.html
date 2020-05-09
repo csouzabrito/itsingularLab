@@ -219,33 +219,72 @@
 								</div>
 							</div>
 							<div class="row">
+								<div class="form-group col-md-4">
+									<label for="tipoFerramentaBusca" class="col-form-label labels">Ferramenta de Busca</label>
+									<select class="form-control" th:field="*{tipoFerramentaBusca}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoFerramentaBusca : ${T(com.br.itsingular.enums.FerramentasBusca).values()}"
+											th:value="${tipoFerramentaBusca}" th:text="${tipoFerramentaBusca}"></option>
+									</select> <span th:if="${#fields.hasErrors('tipoFerramentaBusca')}"
+										th:errors="*{tipoFerramentaBusca}" class="text-danger"></span>
+
+								</div>
+
+								<div class="form-group col-md-6">
+									<label for="linkedin" class="col-form-label labels">Linkedin</label>
+									<input type="text" th:field="*{linkedin}" class="form-control" id="linkedin"
+										placeholder="Digite URL Linkedin">
+									<span th:if="${#fields.hasErrors('linkedin')}"
+										th:errors="*{linkedin}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-2">
+									<label for="dataUltimaAtualizacao" class="col-form-label"
+										style="margin-left: 1px">Ultima Atualização</label> 
+										<input readonly="true" type="text"
+										th:field="*{dataUltimaAtualizacao}" class="form-control"
+										id="dataUltimaAtualizacao">
+								</div>
+							</div>
+							<div class="row">
 								<div class="form-group col-md-3">
 									<label for="fileCurriculoPDC" class="col-form-label"
 										style="margin-left: 1px">Upload Arquivos</label>
 									<p>
-										<span><a style="font-size: 12px; color: red">**
+										<span><a style="font-size: 12px; color: green">**
 												Limite de upload por arquivo: 1MB **</a></span>
 									</p>
 									<p>
 										<span><a style="font-size: 12px;">** 1º Adicione o
 												PDF **</a></span>
 									</p>
+									
 									<input type="file" name="pdf" id="pdf"
 										title="Tamanho Permitido: 2MB" alt="Tamanho Permitido: 2MB"
 										style="width: 800px" /> <br />
+									<p th:if="${curriculos.uploadDownloadPdf}">
+										<span>
+										<a style="font-size: 12px; color:red ">Atenção: Já existe um currículo em PDF cadastrado para este CPF</a></span>
+									</p>
+									
 									<p>
 										<span><a style="font-size: 12px;">** 2º Adicione o
 												Word **</a></span>
 									</p>
+									
 									<input type="file" name="word" id="word"
 										title="Tamanho Permitido: 2MB" alt="Tamanho Permitido: 2MB"
 										style="width: 800px" /> <br />
+										<p th:if="${curriculos.uploadDownloadWord}">
+										<span><a style="font-size: 12px; color: red  ">
+												Atenção: Já existe um currículo em Word cadastrado para este CPF</a></span>
+									</p>
 								</div>
 							</div>
 							<div class="row">
 								<BR />
 								<div class=" form-group col-md-9">
-									<label for="tecnologiasAssociadas" style="margin-left: 1px">Currículos
+									<label for="tecnologiasAssociadas" style="margin-left: 1px">Técnologias e Plataformas
 									</label> <select class="form-control"
 										th:field="*{tecnologiasAssociadas}" style="height: 200px"
 										multiple="multiple">
@@ -259,6 +298,13 @@
 									<input type="submit" id="incluir" class="btn btn-primary"
 										value="Cadastrar Curriculo">
 								</div>
+								<!-- <div>
+									<a class="delete btn btn-sm btn-danger"
+										style="margin-left: 2px"
+										th:href="@{/cadastrarCurriculos/importar}">Importar</a>
+
+								</div> -->
+
 							</div>
 						</div>
 						<BR />
@@ -278,19 +324,20 @@
 											<tr>
 												<th>CPF</th>
 												<th>Nome do Candidato</th>
-												<th>Contatos</th>
-												<th>Emails</th>
+												<!--  <th>Contatos</th>
+												<th>Emails</th>-->
 												<th>Cargo</th>
 												<th>Nível</th>
 												<th>Ações</th>
+
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="curriculos : ${listCurriculos.content}">
 												<td th:text="${curriculos.cpf}"></td>
 												<td th:text="${curriculos.nome}"
-													style="word-wrap: break-word; width: 200px"></td>
-												<td th:if="${curriculos.telCelularSecundario !=null}">
+													style="word-wrap: break-word; width: 350px"></td>
+												<!-- <td th:if="${curriculos.telCelularSecundario !=null}">
 													<span th:text="${curriculos.telCelular}"></span>
 													<p>
 														<span th:text="${curriculos.telCelularSecundario}"
@@ -300,21 +347,20 @@
 												<td th:if="${curriculos.telCelularSecundario ==null}">
 													<span th:text="${curriculos.telCelular}"></span>
 												</td>
-												<td th:if="${curriculos.emailSecundario !=null}">
-													<span th:text="${curriculos.email}"></span>
+												<td th:if="${curriculos.emailSecundario !=null}"><span
+													th:text="${curriculos.email}"></span>
 													<p>
 														<span th:text="${curriculos.emailSecundario}"
 															style="word-wrap: break-word; width: 300px"></span>
-													</p>
-												</td>
-												<td th:if="${curriculos.emailSecundario ==null}">
-													<span th:text="${curriculos.email}"></span>
-												</td>
-												
+													</p></td>
+												<td th:if="${curriculos.emailSecundario ==null}"><span
+													th:text="${curriculos.email}"></span></td>
+ 												-->
 												<td th:text="${curriculos.tipoCargo}"></td>
 												<td th:text="${curriculos.tipoNivel}"></td>
 												<td>
-													<div class="btn-group pull-right" style="word-wrap: break-word; width: 145px">
+													<div class="btn-group pull-right"
+														style="word-wrap: break-word; width: 180px">
 														<a th:if="${curriculos.uploadDownloadPdf != null}"
 															class="btn btn-sm btn-primary"
 															th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
@@ -325,7 +371,7 @@
 															th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
 														<a class="delete btn btn-sm btn-danger"
 															style="margin-left: 2px"
-															th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">Edit</a>
+															th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">View/Edit</a>
 													</div>
 												</td>
 											</tr>

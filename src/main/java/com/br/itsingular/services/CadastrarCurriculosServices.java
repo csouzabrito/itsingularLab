@@ -23,7 +23,7 @@ public class CadastrarCurriculosServices {
 	@Autowired
 	private CadastrarCurriculosRepository repository;
 	
-	public void save( final Curriculos curriculos) {
+	public void insert( final Curriculos curriculos) {
 		try {
 			repository.insert(curriculos);
 		} catch (Exception e) {
@@ -47,7 +47,7 @@ public class CadastrarCurriculosServices {
 	 */
 	public void removeAndInsertCurriculos(Curriculos curriculos) {
 		try {
-			repository.deleteById(curriculos.getCpf());
+			repository.delete(curriculos);
 			repository.insert(curriculos);
 		} catch (RuntimeException e) {
 			throw e;
