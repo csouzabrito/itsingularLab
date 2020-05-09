@@ -235,8 +235,6 @@
 									<label for="linkedin" class="col-form-label labels">Linkedin</label>
 									<input type="text" th:field="*{linkedin}" class="form-control" id="linkedin"
 										placeholder="Digite URL Linkedin">
-									<span th:if="${#fields.hasErrors('linkedin')}"
-										th:errors="*{linkedin}" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-2">
 									<label for="dataUltimaAtualizacao" class="col-form-label"
@@ -298,12 +296,12 @@
 									<input type="submit" id="incluir" class="btn btn-primary"
 										value="Cadastrar Curriculo">
 								</div>
-								<!-- <div>
+								<!--  <div>
 									<a class="delete btn btn-sm btn-danger"
 										style="margin-left: 2px"
 										th:href="@{/cadastrarCurriculos/importar}">Importar</a>
 
-								</div> -->
+								</div>-->
 
 							</div>
 						</div>

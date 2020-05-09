@@ -151,7 +151,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-md-6">
+								<div class="form-group col-md-4">
 									<label for="cargo" class="col-form-label"
 										style="margin-left: 1px">Cargo</label> <select
 										class="form-control" th:field="*{cargo}">
@@ -162,35 +162,7 @@
 									</select> <span th:if="${#fields.hasErrors('cargo')}"
 										th:errors="*{cargo}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-6">
-									<label for="tipoNivel" class="col-form-label labels">Nível</label>
-									<select class="form-control" th:field="*{tipoNivel}">
-										<option th:value="''" th:text="SELECIONE"></option>
-										<option
-											th:each="tipoNivel : ${T(com.br.itsingular.enums.TipoNivel).values()}"
-											th:value="${tipoNivel}" th:text="${tipoNivel}"></option>
-									</select> <span th:if="${#fields.hasErrors('tipoNivel')}"
-										th:errors="*{tipoNivel}" class="text-danger"></span>
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-6">
-									<label for="endereco" class="col-form-label labels">Endereço</label>
-									<input type="text" th:field="*{endereco}" class="form-control"
-										id="endereco" placeholder="Endereço"> <span
-										th:if="${#fields.hasErrors('endereco')}"
-										th:errors="*{endereco}" class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="regiao" class="col-form-label"
-										style="margin-left: 1px">Região</label> <input type="text"
-										th:field="*{regiao}" class="form-control" id="ramoAtividade"
-										placeholder="Região"> <span
-										th:if="${#fields.hasErrors('regiao')}" th:errors="*{regiao}"
-										class="text-danger"></span>
-								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-4">
 									<label for="telCorporativo" class="col-form-label labels">Telefone
 										Corporativo</label> <input type="text" th:field="*{telCorporativo}"
 										class="form-control" id="telCorporativo"
@@ -199,7 +171,7 @@
 										th:if="${#fields.hasErrors('telCorporativo')}"
 										th:errors="*{telCorporativo}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-3">
+								<div class="form-group col-md-4">
 									<label for="telCelular" class="col-form-label labels">Telefone
 										Celular</label> <input type="text" th:field="*{telCelular}"
 										class="form-control" id="telCelular" maxlength="14"
@@ -208,7 +180,25 @@
 										th:if="${#fields.hasErrors('telCelular')}"
 										th:errors="*{telCelular}" class="text-danger"></span>
 								</div>
-								<div class="form-group col-md-6">
+							</div>
+							<div class="row">
+								<div class="form-group col-md-4">
+									<label for="endereco" class="col-form-label labels">Endereço</label>
+									<input type="text" th:field="*{endereco}" class="form-control"
+										id="endereco" placeholder="Endereço"> <span
+										th:if="${#fields.hasErrors('endereco')}"
+										th:errors="*{endereco}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="regiao" class="col-form-label"
+										style="margin-left: 1px">Região</label> <input type="text"
+										th:field="*{regiao}" class="form-control" id="ramoAtividade"
+										placeholder="Região"> <span
+										th:if="${#fields.hasErrors('regiao')}" th:errors="*{regiao}"
+										class="text-danger"></span>
+								</div>
+
+								<div class="form-group col-md-4">
 									<label for="email" class="col-form-label labels">E-mail</label>
 									<input type="text" th:field="*{email}" class="form-control"
 										id="email" data-inputmask="'alias': 'email'"> <span
@@ -231,16 +221,29 @@
 								</div>
 							</div>
 							<div class="row">
-								<br />
 								<div class="form-group col-md-4">
 									<label for="perfil" class="col-form-label labels">Perfil</label>
-									<input type="text" th:field="*{perfil}" class="form-control"
-										id="perfil" placeholder="Perfil"><span
-										th:if="${#fields.hasErrors('perfil')}" th:errors="*{perfil}"
-										class="text-danger"></span>
+									<select class="form-control" th:field="*{perfil}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoCargo : ${T(com.br.itsingular.enums.TipoCargo).values()}"
+											th:value="${tipoCargo}" th:text="${tipoCargo}"></option>
+									</select> <span th:if="${#fields.hasErrors('perfil')}"
+										th:errors="*{perfil}" class="text-danger"></span>
+								</div>
+
+								<div class="form-group col-md-3">
+									<label for="tipoNivel" class="col-form-label labels">Nível</label>
+									<select class="form-control" th:field="*{tipoNivel}">
+										<option th:value="''" th:text="SELECIONE"></option>
+										<option
+											th:each="tipoNivel : ${T(com.br.itsingular.enums.TipoNivel).values()}"
+											th:value="${tipoNivel}" th:text="${tipoNivel}"></option>
+									</select> <span th:if="${#fields.hasErrors('tipoNivel')}"
+										th:errors="*{tipoNivel}" class="text-danger"></span>
 
 								</div>
-								<div class="form-group col-md-8">
+								<div class="form-group col-md-5">
 									<label for="regiaoAtuacao" class="col-form-label labels">Região
 										de Atuação</label> <input type="text" th:field="*{regiaoAtuacao}"
 										class="form-control" id="regiaoAtuacao"

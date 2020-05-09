@@ -77,8 +77,9 @@ public class Requisicao implements Serializable {
 	@Email
 	private String email;
 
-	@NotBlank(message = "Campo obrigatório")
-	private String perfil;
+	@NotNull(message = "Campo obrigatório")
+	@Enumerated(EnumType.STRING)
+	private TipoCargo perfil;
 
 	@NotBlank(message = "Campo obrigatório")
 	private String regiaoAtuacao;
@@ -105,6 +106,7 @@ public class Requisicao implements Serializable {
 	@NotBlank(message = "Campo obrigatório")
 	private String valor;
 
+	@NotBlank(message = "Campo obrigatório")
 	private String horaAberta;
 
 	@NotNull(message = "Campo obrigatório")

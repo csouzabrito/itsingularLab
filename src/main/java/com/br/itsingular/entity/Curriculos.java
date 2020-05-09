@@ -93,7 +93,6 @@ public class Curriculos implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private FerramentasBusca tipoFerramentaBusca;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String linkedin;
 
 	@LastModifiedDate
