@@ -275,7 +275,7 @@
 								<div class="form-group col-md-2">
 									<label for="valor" class="col-form-label labels">Valor</label>
 									<input type="text" th:field="*{valor}"
-										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+										data-inputmask="'autoUnmask': true, 'alias': 'numeric', 'groupSeparator': '.', 'digitsOptional': false,  'radixPoint': ',', 'autoGroup': true,'placeholder': '0', 'prefix': 'R$ ','digits': 2, 'unmaskAsNumber': true"
 										class="form-control" id="valor" placeholder="Valor"><span
 										th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"
 										class="text-danger"></span>

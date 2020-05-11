@@ -129,7 +129,7 @@
 									<label for="valorContratacaoPrimaria"
 										class="col-form-label labels">Valor (Por Hora)</label> <input
 										type="text" th:field="*{valorContratacaoPrimaria}"
-										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+										data-inputmask="'autoUnmask': true, 'alias': 'numeric', 'groupSeparator': '.', 'digitsOptional': false,  'radixPoint': ',', 'autoGroup': true,'placeholder': '0', 'prefix': 'R$ ','digits': 2, 'unmaskAsNumber': true"
 										class="form-control" id="valorContratacaoPrimaria"
 										placeholder="Valor"><span
 										th:if="${#fields.hasErrors('valorContratacaoPrimaria')}"
@@ -152,7 +152,7 @@
 									<label for="valorContratacaoSecundaria"
 										class="col-form-label labels">Valor (Por Hora)</label> <input
 										type="text" th:field="*{valorContratacaoSecundaria}"
-										data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"
+										data-inputmask="'autoUnmask': true, 'alias': 'numeric', 'groupSeparator': '.', 'digitsOptional': false,  'radixPoint': ',', 'autoGroup': true,'placeholder': '0', 'prefix': 'R$ ','digits': 2, 'unmaskAsNumber': true"
 										class="form-control" id="valorContratacaoSecundaria"
 										placeholder="Valor"><span
 										th:if="${#fields.hasErrors('valorContratacaoSecundaria')}"
