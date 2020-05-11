@@ -37,8 +37,11 @@ $(document).ready(function() {
 		            "columns": [
 		            	{ "data": "cpf", "visible": false},
 		                { "data": "nome"},
-		                { "data": "formaContratacao", "className": "dt-center"},
-		                { "data": "valor", "className": "dt-center" },
+		                { "data": "formaContratacaoPrimaria", "className": "dt-center"},
+		                { "data": "valorContratacaoPrimaria", "className": "dt-center" },
+		                { "data": "formaContratacaoSecundaria", "className": "dt-center"},
+		                { "data": "valorContratacaoSecundaria", "className": "dt-center" },
+//		                { "data": "valor", "className": "dt-center" },
 		                { "data": "email" },
 		                { "data": "telCelular" },
 		                { "data": "uploadDownloadPdf.nameArquivo",
