@@ -10,7 +10,7 @@ $(document).ready(function() {
 	
 	$('.js-view-information').on('click', function(event) {
 		event.preventDefault();
-		
+		alert = function() {};
 		var vagaSolicitada = $(event.currentTarget);
 		var urlReceiver = vagaSolicitada.attr('href');
 		
@@ -53,8 +53,6 @@ $(document).ready(function() {
 			            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json"
 			        }
 		        });
-				alert = function() {};
-				
 				 // Apply the search
 			    table.columns().every( function () {
 			        var that = this;
