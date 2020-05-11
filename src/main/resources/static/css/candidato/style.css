@@ -1,6 +1,23 @@
 .h1-header {
     text-align:center;
 }
+
+.graph-container{
+	width: 100%;
+	height: 10vh;
+}
+
+.canvas{
+  width:1000px !important;
+  height:100px !important;
+}
+
+..chart-container {
+    position: relative;
+    flex-grow: 1;
+    min-height: 0;
+  }
+
 .button-add-fields{
 	float: right;
 	margin-left: 825px;
@@ -67,7 +84,7 @@ body {
     bottom: 0;
     position: absolute;
     content:" ";
-    width: 74%;
+    width: 90%;
     left:13%;
     height: 4px;
     z-index: 0;

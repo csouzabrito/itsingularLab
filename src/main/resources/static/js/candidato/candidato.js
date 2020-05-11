@@ -58,11 +58,13 @@ $(function(){
             if(nextStepWizard == 1)
                 $('.stepwizard .progress-bar').animate({width:'0%'},0);
             if(nextStepWizard == 2)
-                $('.stepwizard .progress-bar').animate({width:'33%'},0);
+                $('.stepwizard .progress-bar').animate({width:'15%'},0);
             if(nextStepWizard == 3)
-                $('.stepwizard .progress-bar').animate({width:'66%'},0);
+                $('.stepwizard .progress-bar').animate({width:'30%'},0);
             if(nextStepWizard == 4)
-                $('.stepwizard .progress-bar').animate({width:'100%'},0);
+                $('.stepwizard .progress-bar').animate({width:'60%'},0);
+            if(nextStepWizard == 5)
+                $('.stepwizard .progress-bar').animate({width:'90%'},0);
             
 
             if (!$item.hasClass('disabled')) {
@@ -107,5 +109,7 @@ $(function(){
 
         $('div.setup-panel div a.btn-success').trigger('click');
     });
+    
+    document.getElementById("g1").contentEditable = true;
     
 });
