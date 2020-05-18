@@ -38,34 +38,38 @@
 					
 				</div>
 			</div>
-			<div style="margin-top:-20px; box-shadow: 10px 10px 8px #888888;" class="container" >
+			<div style="margin-top:-20px;box-shadow: 10px 10px 8px 10px #888888;" class="container" >
 				<h3 align="center">Informações do Candidato</h3>
 				
-				  <div class="stepwizard">
+				  <div style="margin-left:-70px;" class="stepwizard">
 			        <div class="progress center-block">
 			            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 13%">
 			            </div>
 			        </div>
         
 			        <div class="stepwizard-row setup-panel">
-			            <div class="stepwizard-step col-md-3"> 
+			            <div class="stepwizard-step col-md-3 steps"> 
 			                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
 			                <p><small>Experiência Profissional</small></p>
 			            </div>
-			            <div class="stepwizard-step col-xs-3"> 
+			            <div class="stepwizard-step col-xs-2 steps"> 
 			                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
 			                <p><small>Formação Academica</small></p>
 			            </div>
-			            <div class="stepwizard-step col-xs-3"> 
+			            <div class="stepwizard-step col-xs-2 steps"> 
 			                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
 			                <p><small>Cursos / Certificações</small></p>
 			            </div>
-			            <div class="stepwizard-step col-xs-3"> 
+			            <div class="stepwizard-step col-xs-2 steps"> 
 			                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
 			                <p><small>Idioma</small></p>
 			            </div>
-			            <div class="stepwizard-step col-xs-3"> 
+			            <div class="stepwizard-step col-xs-2 steps"> 
 			                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+			                <p><small>Informações de Skill</small></p>
+			            </div>
+			            <div class="stepwizard-step col-xs-1 steps"> 
+			                <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
 			                <p><small>Gerar PDF Customizado</small></p>
 			            </div>
 			        </div>
@@ -73,7 +77,7 @@
 				
 				
 				<div class="col-md-15">
-					<form th:action="@{/candidatos/salvar-informacoes}" th:object="${candidato}" method="POST">
+					<form th:object="${candidato}" method="POST" id="formCandidato">
 						<div class="panel panel-primary setup-content" id="step-1">
 							<div class="panel-heading">
 								<h3 class="panel-title h1-header">EXPERIÊNCIA PROFISSIONAL</h3>
@@ -90,7 +94,7 @@
 												<option th:each="disponibilidade : ${allStatusDisponibilidade}" th:value="${disponibilidade}" th:text="${disponibilidade.descricao}">5</option>
 					                    	</select>
 									</div>
-							</div>
+								</div>
 							
 							<div class="row">
 								<div class="form-group col-md-6">
@@ -98,39 +102,50 @@
 									<textarea style="width: 199%" name="resumoQualificacao" class="space-fields form-control" th:field="*{resumoQualificacao}" id="resumoQualificacao" rows="6"></textarea>
 								</div>
 							</div>
-							<div class="row">
-								<div class="form-group col-md-3">
-									<label for="empresa" class="space-fields col-form-label">Empresa</label>
-									 <input type="text" name="empresa" th:field="*{empresa.nome}" class="space-fields form-control" id="empresa"/>
+							<div class="controls-experiencia">
+								<div class="toInsertExperiencia">
+									<div class="row">
+										<div class="form-group col-md-3">
+											<label for="empresa" class="space-fields col-form-label">Empresa</label>
+											 <input type="text" name="empresa" th:field="*{empresa.nome}" class="space-fields form-control" id="empresa"/>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="cargo" class="space-fields col-form-label">Cargo</label>
+											 <input type="text" name="cargo" th:field="*{empresa.cargo}" class="space-fields form-control" id="cargo"/>
+										</div>
+									</div>
+									<div class="form-group col-md-3 button-add-fields">
+										<span class="span-button">
+											<button class="btn btn-success btn-add-experiencia" type="button">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-3">
+											<label for="dataInicio" class="space-fields col-form-label">Data Início</label>
+											 <input type="text" name="dataInicio" th:field="*{empresa.dataInicio}" class="space-fields form-control" id="dataInicio"
+											 data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+										     data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"
+											 />
+										</div>
+										
+										<div class="form-group col-md-3">
+											<label for="dataFim" class="space-fields col-form-label">Data Fim</label>
+											 <input type="text" name="dataFim"
+											 th:field="*{empresa.dataFim}" class="space-fields form-control" id="dataFim"
+											 data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+										     data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="empresa.atividades" class="space-fields col-form-label">Resumo das Atividades</label>
+											<textarea name="atividades" style="width: 199%" class="space-fields form-control" th:field="*{empresa.atividades}" id="empresa.atividades" rows="6"></textarea>
+										</div>
+									</div>
 								</div>
-								<div class="form-group col-md-3">
-									<label for="cargo" class="space-fields col-form-label">Cargo</label>
-									 <input type="text" name="cargo" th:field="*{cargo}" class="space-fields form-control" id="cargo"/>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-3">
-									<label for="dataInicio" class="space-fields col-form-label">Data Início</label>
-									 <input type="text" name="dataInicio" th:field="*{empresa.dataInicio}" class="space-fields form-control" id="dataInicio"
-									 data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
-								     data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"
-									 />
-								</div>
-								
-								<div class="form-group col-md-3">
-									<label for="dataFim" class="space-fields col-form-label">Data Fim</label>
-									 <input type="text" name="dataFim"
-									 th:field="*{empresa.dataFim}" class="space-fields form-control" id="dataFim"
-									 data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
-								     data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-6">
-									<label for="empresa.atividades" class="space-fields col-form-label">Resumo das Atividades</label>
-									<textarea name="atividades" style="width: 199%" class="space-fields form-control" th:field="*{empresa.atividades}" id="empresa.atividades" rows="6"></textarea>
-								</div>
-							</div>
+							</div>	
 							 <nav>
 			                  <ul class="pager">
 			                    <li class="next"><a class="nextBtn" href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
@@ -182,7 +197,7 @@
 							<div class="panel-body">
 							<div class="controls-curso">
 								<div class="toInsertCurso">
-									<div class="row">
+								  <div class="row">
 									<div class="form-group col-md-3">
 										<label for="curso" class="space-fields col-form-label">Nome do Curso</label>
 										<input type="text" name="curso" th:field="*{curso.nome}" class="space-fields form-control" id="curso" />
@@ -250,25 +265,72 @@
 						<div class="panel panel-primary setup-content" id="step-5">
 							
 							<div class="panel-heading">
+								<h3 class="panel-title h1-header">Skills</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="form-group col-md-3">
+										<label for="tecnologia" class="space-fields col-form-label">Tecnologia</label>
+										<input type="text" name="tecnologia" th:field="*{gafricoModel.tecnoloagia}" class="space-fields form-control" id="tecnologia" />
+									</div>
+	
+									<div class="form-group col-md-3">
+										<label for="percentual" class="space-fields col-form-label">Percentual</label>
+										 <input type="text" name="percentual" th:field="*{gafricoModel.percentualConhecimento}" class="space-fields form-control" id="percentual" />
+									</div>
+									<div class="form-group col-md-3 button-add-fields">
+										<span class="span-button">
+											<button class="btn btn-success btn-add-curso" type="button">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</div>
+								 <nav>
+				                  <ul class="pager">
+				                    <li class="previous"><a class="prevBtn" href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+				                    <li class="next"><a class="nextBtn" href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+				                  </ul>
+               					 </nav>
+							</div>
+						</div>
+						
+						<div class="panel panel-primary setup-content" id="step-6">
+							<div class="panel-heading">
 								<h3 class="panel-title h1-header">GERAR PDF CUSTOMIZADO</h3>
 							</div>
 							<div class="panel-body">
-								<div>
-									<canvas id="myChart"></canvas>
-									<div class="donut-inner">
-										<p id="g1">10<p>
-									</div>
+								<div style="height:300px; width:200px; margin-left:-5px;margin-top:30px;">
+									<canvas height="400" width="300" id="grafico1" style="z-index:0"></canvas>
+									<p class="valor-grafico1" id="g1">10</p>
+								</div>
+								
+								<div style="height:300px; width:200px; margin-left:200px;margin-top:-300px;">
+									<canvas height="400" width="300" id="grafico2"></canvas>
+									<p class="valor-grafico2" id="g2">5</p>
+								</div>
+								<div style="height:300px; width:200px; margin-left:410px;margin-top:-300px;">
+									<canvas height="400" width="300" id="grafico3" style="margin-right:100px;margin-top:-25px;"></canvas>
+									<p class="valor-grafico3" id="g3">7</p>
+								</div>
+								<div style="height:300px; width:200px; margin-left:620px;margin-top:-300px;">
+									<canvas height="400" width="300" id="grafico4" style="margin-right:200px;margin-top:-25px;"></canvas>
+									 <p class="valor-grafico4" id="g4">7</p>
+								</div>
+								<div style="height:300px; width:200px; margin-left:835px;margin-top:-300px;">
+									<canvas height="400" width="300" id="grafico5" style="margin-right:106px;margin-top:-25px;"></canvas>
+									<p class="valor-grafico5" id="g4">8</p>
 								</div>
 								<nav>
 				                  <ul class="pager">
-				                    <li class="previous"><a class="prevBtn" href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+				                    <li class="previous"><a class="prevBtn" href="#"><span aria-hidden="true">&larr;</span> Anterior</a></li>
 				                    <li class="next">
 				                    	<button class="btn btn-success pull-right" type="submit">SUBMIT!</button>
 				                    </li>
 				                  </ul>
 				                </nav>
 							</div>
-						</div>
+							</div> 
 						<!-- <div class="form-group col-md-12" style="text-align: center; margin-top:-15px;" >
 							<input type="submit" class="btn btn-primary" value="Salvar Informações">
 						</div> -->

@@ -40,7 +40,7 @@ public class CandidadoController {
 		}
 		try{
 			ModelAndView view = new ModelAndView("Candidatos");
-			Candidado save = this.repository.save(candidado);
+			this.repository.save(candidado);
 			view.addObject("message","Success");
 			view.addObject("candidato", new Candidado());
 			return view;

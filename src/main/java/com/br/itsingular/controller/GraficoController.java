@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.br.itsingular.model.Grafico;
+import com.br.itsingular.model.GraficoModel;
 
 @Controller
 @RequestMapping(value = "/graficos")
@@ -14,7 +14,7 @@ public class GraficoController {
 	public ModelAndView getGrafico() {
 		
 		ModelAndView view = new ModelAndView("ViewGrafico");
-		view.addObject(new Grafico());
+		view.addObject(new GraficoModel());
 		return view;
 	}
 }

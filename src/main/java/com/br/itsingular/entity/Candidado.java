@@ -12,6 +12,7 @@ import com.br.itsingular.enums.DisponibilidadeEnum;
 import com.br.itsingular.model.CursoModel;
 import com.br.itsingular.model.EmpresaModel;
 import com.br.itsingular.model.Formacao;
+import com.br.itsingular.model.GraficoModel;
 import com.br.itsingular.model.Idioma;
 
 import lombok.AllArgsConstructor;
@@ -40,13 +41,12 @@ public class Candidado {
 	
 	private EmpresaModel empresa;
 	
-	@NotBlank(message = "Campo obrigatório")
-	private String cargo;
-	
 	private Formacao formacaoAcademica;
 	
 	private CursoModel curso;
 	
 	private Idioma idioma;
+	
+	private GraficoModel gafricoModel;
 		
 }

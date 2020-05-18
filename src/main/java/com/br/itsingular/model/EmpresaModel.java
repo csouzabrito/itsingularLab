@@ -36,5 +36,8 @@ public class EmpresaModel implements Serializable{
 	private LocalDate dataFim;
 	
 	@NotBlank(message = "Campo obrigatório")
+	private String cargo;
+	
+	@NotBlank(message = "Campo obrigatório")
 	private String atividades;
 }
