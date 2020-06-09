@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<div th:insert="Header.html"></div>
+<script>
+	$(function() {
+		// Sidebar toggle behavior
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+	$(document).on("keydown", "#descricaoResumida", function() {
+		var caracteresRestantes = 1000;
+		var caracteresDigitados = parseInt($(this).val().length);
+		var caracteresRestantes = caracteresRestantes - caracteresDigitados;
+
+		$(".caracteres").text(caracteresRestantes);
+	});
+
+	$(document).ready(
+	function() {
+		$('#example').DataTable();
+
+		$('#example_filter').hide(); // Hide default search datatables where example is the ID of table
+
+		$('#txtSearch').on('keyup',
+			function() {
+				$('#example').DataTable().search(
+						$('#txtSearch').val(), false, true).draw();
+			});
+		});
+</script>
+<body>
+	<div class="d-flex">
+		<div th:replace="Menu :: menu">...</div>
+		<div id="content">
+			<button id="sidebarCollapse" type="button"
+				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+				<i class="fa fa-bars mr-2"></i><small
+					class="text-uppercase font-weight-bold">Menu</small>
+			</button>
+			<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
+				<div th:case="'success'" class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Sucesso!</strong> Currículo Cadastrado com sucesso!
+				</div>
+				<div th:case="'failed'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Houve algum problema no cadatro. Favor
+					verificar com o ADM!
+				</div>
+				<div th:case="'duplicateInsert'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Este candidato já existe na base de dados!
+				</div>
+				<div th:case="'validacaoExtensaoUpload'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Favor selecione as extensões dos arquivos
+					corretamente. PDF ou DOC/DOCX!
+				</div>
+				<div th:case="'validacaoUpload'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Obrigatório ao menos um currículo para
+					upload!
+				</div>
+				<div th:case="'tamanhoNSuportado'" class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Falha!</strong> Tamanho do(s) documento(s) para upload está
+					superior ao permitido. Favor, refaça o processo novamente.
+				</div>
+			</div>
+
+			<div class="container my-5">
+				<div align="right" style="margin-top: -20px"
+					class="form-group col-md-12">
+					<output th:text="Olá+': ' + ${login.name}"></output>
+					<span>Sair</span>&nbsp; <a href="#" th:href="@{/login/logout}">
+						<img src="/img/sair.png" style="width: 22px; height: 22px">
+					</a>
+				</div>
+				<h3 align="center">Cadastrar Currículos</h3>
+				<BR />
+				<div class="col-md-12">
+					<form th:action="@{/filtrarCandidatos/add}" method="post"
+						th:object="${curriculos}" enctype="multipart/form-data">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-heading">
+									<div class="clearfix">
+										<h1 class="panel-title" style="margin-left: -27px">Candidatos
+											Cadastrados</h1>
+									</div>
+								</div>
+							</div>
+							<input id="txtSearch"
+								placeholder="FILTRE SEU CANDIDATO POR AQUI!"
+								class="form-control" />
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered" id="example">
+										<thead>
+											<tr>
+												<th>CPF</th>
+												<th>Nome do Candidato</th>
+												<th>Cargo</th>
+												<th>Nível</th>
+												<th>Salário PJ</th>
+												<th>Salário CLT</th>
+												<th>Tecnologias</th>
+												<th>Curriculos</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="curriculos : ${listarCandidatos}">
+												<td th:text="${curriculos.cpf}"></td>
+												<td th:text="${curriculos.nome}"
+													style="word-wrap: break-word; width: 350px"></td>
+												<td th:text="${curriculos.tipoCargo}"></td>
+												<td th:text="${curriculos.tipoNivel}"></td>
+												<td th:text="${curriculos.valorContratacaoPrimaria}"></td>
+												<td th:text="${curriculos.valorContratacaoSecundaria}"></td>
+												<td th:text="${curriculos.tecnologiasAssociadas2}"></td>
+												<td>
+													<div class="btn-group pull-right"
+														style="word-wrap: break-word; width: 180px">
+														<a th:if="${curriculos.uploadDownloadPdf != null}"
+															class="btn btn-sm btn-primary"
+															th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
+
+														<a th:if="${curriculos.uploadDownloadWord != null}"
+															class="delete btn btn-sm btn-danger"
+															style="margin-left: 2px"
+															th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
+														<a class="delete btn btn-sm btn-danger"
+															style="margin-left: 2px"
+															th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">View/Edit</a>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

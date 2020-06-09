@@ -20,6 +20,20 @@
 
 		$(".caracteres").text(caracteresRestantes);
 	});
+
+	$(document).ready(
+			function() {
+				$('#curriculos').DataTable();
+
+				$('#curriculos_filter').hide(); // Hide default search datatables where example is the ID of table
+
+				$('#txtSearch').on(
+						'keyup',
+						function() {
+							$('#curriculos').DataTable().search(
+									$('#txtSearch').val(), false, true).draw();
+						});
+			});
 </script>
 <body>
 	<div class="d-flex">
@@ -220,12 +234,14 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label for="tipoFerramentaBusca" class="col-form-label labels">Ferramenta de Busca</label>
-									<select class="form-control" th:field="*{tipoFerramentaBusca}">
+									<label for="tipoFerramentaBusca" class="col-form-label labels">Ferramenta
+										de Busca</label> <select class="form-control"
+										th:field="*{tipoFerramentaBusca}">
 										<option th:value="''" th:text="SELECIONE"></option>
 										<option
 											th:each="tipoFerramentaBusca : ${T(com.br.itsingular.enums.FerramentasBusca).values()}"
-											th:value="${tipoFerramentaBusca}" th:text="${tipoFerramentaBusca}"></option>
+											th:value="${tipoFerramentaBusca}"
+											th:text="${tipoFerramentaBusca}"></option>
 									</select> <span th:if="${#fields.hasErrors('tipoFerramentaBusca')}"
 										th:errors="*{tipoFerramentaBusca}" class="text-danger"></span>
 
@@ -233,13 +249,13 @@
 
 								<div class="form-group col-md-6">
 									<label for="linkedin" class="col-form-label labels">Linkedin</label>
-									<input type="text" th:field="*{linkedin}" class="form-control" id="linkedin"
-										placeholder="Digite URL Linkedin">
+									<input type="text" th:field="*{linkedin}" class="form-control"
+										id="linkedin" placeholder="Digite URL Linkedin">
 								</div>
 								<div class="form-group col-md-2">
 									<label for="dataUltimaAtualizacao" class="col-form-label"
-										style="margin-left: 1px">Ultima Atualização</label> 
-										<input readonly="true" type="text"
+										style="margin-left: 1px">Ultima Atualização</label> <input
+										readonly="true" type="text"
 										th:field="*{dataUltimaAtualizacao}" class="form-control"
 										id="dataUltimaAtualizacao">
 								</div>
@@ -256,34 +272,35 @@
 										<span><a style="font-size: 12px;">** 1º Adicione o
 												PDF **</a></span>
 									</p>
-									
+
 									<input type="file" name="pdf" id="pdf"
 										title="Tamanho Permitido: 2MB" alt="Tamanho Permitido: 2MB"
 										style="width: 800px" /> <br />
 									<p th:if="${curriculos.uploadDownloadPdf}">
-										<span>
-										<a style="font-size: 12px; color:red ">Atenção: Já existe um currículo em PDF cadastrado para este CPF</a></span>
+										<span> <a style="font-size: 12px; color: red">Atenção:
+												Já existe um currículo em PDF cadastrado para este CPF</a></span>
 									</p>
-									
+
 									<p>
 										<span><a style="font-size: 12px;">** 2º Adicione o
 												Word **</a></span>
 									</p>
-									
+
 									<input type="file" name="word" id="word"
 										title="Tamanho Permitido: 2MB" alt="Tamanho Permitido: 2MB"
 										style="width: 800px" /> <br />
-										<p th:if="${curriculos.uploadDownloadWord}">
-										<span><a style="font-size: 12px; color: red  ">
-												Atenção: Já existe um currículo em Word cadastrado para este CPF</a></span>
+									<p th:if="${curriculos.uploadDownloadWord}">
+										<span><a style="font-size: 12px; color: red">
+												Atenção: Já existe um currículo em Word cadastrado para este
+												CPF</a></span>
 									</p>
 								</div>
 							</div>
 							<div class="row">
 								<BR />
 								<div class=" form-group col-md-9">
-									<label for="tecnologiasAssociadas" style="margin-left: 1px">Técnologias e Plataformas
-									</label> <select class="form-control"
+									<label for="tecnologiasAssociadas" style="margin-left: 1px">Técnologias
+										e Plataformas </label> <select class="form-control"
 										th:field="*{tecnologiasAssociadas}" style="height: 200px"
 										multiple="multiple">
 										<option th:each="cursos : ${listCursos}"
@@ -296,13 +313,6 @@
 									<input type="submit" id="incluir" class="btn btn-primary"
 										value="Cadastrar Curriculo">
 								</div>
-								<!--  <div>
-									<a class="delete btn btn-sm btn-danger"
-										style="margin-left: 2px"
-										th:href="@{/cadastrarCurriculos/importar}">Importar</a>
-
-								</div>-->
-
 							</div>
 						</div>
 						<BR />
@@ -316,14 +326,16 @@
 								</div>
 							</div>
 							<div class="panel-body">
+								<input id="txtSearch"
+									placeholder="FILTRE SEU CANDIDATO POR AQUI!"
+									class="form-control" />
 								<div class="table-responsive">
-									<table class="table table-striped table-bordered">
+									<table class="table table-striped table-bordered"
+										id="curriculos">
 										<thead>
 											<tr>
 												<th>CPF</th>
 												<th>Nome do Candidato</th>
-												<!--  <th>Contatos</th>
-												<th>Emails</th>-->
 												<th>Cargo</th>
 												<th>Nível</th>
 												<th>Ações</th>
@@ -331,29 +343,10 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="curriculos : ${listCurriculos.content}">
+											<tr th:each="curriculos : ${listCurriculos}">
 												<td th:text="${curriculos.cpf}"></td>
 												<td th:text="${curriculos.nome}"
 													style="word-wrap: break-word; width: 350px"></td>
-												<!-- <td th:if="${curriculos.telCelularSecundario !=null}">
-													<span th:text="${curriculos.telCelular}"></span>
-													<p>
-														<span th:text="${curriculos.telCelularSecundario}"
-															style="word-wrap: break-word; width: 300px"></span>
-													</p>
-												</td>
-												<td th:if="${curriculos.telCelularSecundario ==null}">
-													<span th:text="${curriculos.telCelular}"></span>
-												</td>
-												<td th:if="${curriculos.emailSecundario !=null}"><span
-													th:text="${curriculos.email}"></span>
-													<p>
-														<span th:text="${curriculos.emailSecundario}"
-															style="word-wrap: break-word; width: 300px"></span>
-													</p></td>
-												<td th:if="${curriculos.emailSecundario ==null}"><span
-													th:text="${curriculos.email}"></span></td>
- 												-->
 												<td th:text="${curriculos.tipoCargo}"></td>
 												<td th:text="${curriculos.tipoNivel}"></td>
 												<td>
@@ -375,55 +368,6 @@
 											</tr>
 										</tbody>
 									</table>
-								</div>
-								<div class="col-sm-3" style="margin-right: 285px;">
-									<div class="pagination">
-										<p>
-											<!-- <span class="badge" th:text="${page.size * (page.number-1) + 1}"></span> de  -->
-											<span class="badge"
-												th:text="${page.lastPage ? page.totalElements : page.size * (page.number-1)+ page.size}"></span>
-											de <span class="badge" th:text="${page.totalElements}"></span>
-											vagas
-										</p>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<!-- Pagination Bar -->
-										<div th:fragment='paginationbar'>
-											<div class="text-right">
-												<ul class='pagination pagination-centered'>
-													<li th:class="${page.firstPage}?'disabled':''"><span
-														th:if='${page.firstPage}'>Anterior</span> <a
-														th:if='${not page.firstPage}'
-														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=0,size=${page.size})}'>←
-															Anterior </a></li>
-													<li th:class="${page.hasPreviousPage}? '' : 'disabled'">
-														<span th:if='${not page.hasPreviousPage}'>«</span> <a
-														th:if='${page.hasPreviousPage}'
-														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${page.number-2},size=${page.size})}'
-														title='Go to previous page'>«</a>
-													</li>
-													<li th:each='item : ${page.items}'
-														th:class="${item.current}? 'active' : ''"><span
-														th:if='${item.current}' th:text='${item.number}'>1</span>
-														<a th:if='${not item.current}'
-														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${item.number-1},size=${page.size})}'><span
-															th:text='${item.number}'>1</span></a></li>
-													<li th:class="${page.hasNextPage}? '' : 'disabled'"><span
-														th:if='${not page.hasNextPage}'>»</span> <a
-														th:if='${page.hasNextPage}'
-														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${page.number},size=${page.size})}'
-														title='Go to next page'>»</a></li>
-													<li th:class="${page.lastPage}? 'disabled' : ''"><span
-														th:if='${page.lastPage}'>Próximo →</span> <a
-														th:if='${not page.lastPage}'
-														th:href='@{/cadastrarCurriculos/paginacao/{page}/{size}(page=${page.totalPages - 1},size=${page.size})}'>Próximo</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>

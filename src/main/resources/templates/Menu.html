@@ -27,47 +27,66 @@
 				class="nav-link text-dark font-italic"> <i
 					class="fa fa-th-large mr-3 text-primary fa-fw"></i> Home
 			</a></li>
-			<li class="nav-item"><a href="#"
-				th:href="@{/comercial/cadastro}"
-				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastrar
-					Comercial
-			</a></li>
-			<!-- <li class="nav-item"><a href="#" th:href="@{/empresa/abrir}"
-				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastro
-					Empresas
-			</a></li> -->
-			<li class="nav-item"><a href="#" th:href="@{/requisicao/abrir}"
-				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
-					Requisição de Vagas
-			</a></li>
-			<li class="nav-item"><a href="#" th:href="@{/cadastrarCurriculos/listar}"
-				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastrar 
-					Currículos
-			</a></li>
-			<li class="nav-item"><a href="#" th:href="@{/comercial/informacoes}"
-				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
-					Informacoes Comercial
-			</a></li>
-			<li class="nav-item"><a href="#" th:href="@{/recursos-humanos/view}"
-				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
-					View RH
-			</a></li>
-			<li class="active"><a href="#homeSubmenu"
-			 
+
+			<li class="active"><a href="#homeSubmenuComercial"
 				data-toggle="collapse" aria-expanded="false"
 				class="nav-link text-dark font-italic"> <i
+					class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Comercial
+			</a>
+				<ul class="collapse list-unstyled" id="homeSubmenuComercial">
+					<li class="nav-item"><a href="#"
+						th:href="@{/comercial/cadastro}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastrar
+							Comercial
+					</a></li>
+					<li class="nav-item"><a href="#"
+						th:href="@{/requisicao/abrir}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
+							Requisição de Vagas
+					</a></li>
+					<li class="nav-item"><a href="#"
+						th:href="@{/comercial/informacoes}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
+							Informacoes Comercial
+					</a></li>
+				</ul></li>
+
+			<li class="active"><a href="#homeSubmenuRh"
+				data-toggle="collapse" aria-expanded="false"
+				class="nav-link text-dark font-italic"> <i
+					class="fa fa-picture-o mr-3 text-primary fa-fw"></i> RH
+			</a>
+				<ul class="collapse list-unstyled" id="homeSubmenuRh">
+					<li class="nav-item"><a href="#"
+						th:href="@{/cadastrarCurriculos/listar}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card mr-3 text-primary fa-fw"></i> Cadastrar
+							Currículos
+					</a></li>
+					<li class="nav-item"><a href="#"
+						th:href="@{/recursos-humanos/view}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card-o mr-3 text-primary fa-fw"></i> View RH
+					</a></li>
+					<li class="nav-item"><a href="#"
+						th:href="@{/filtrarCandidatos/iniciarFiltroCandidatos}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card-o mr-3 text-primary fa-fw"></i> Analíse Candidatos
+					</a></li>
+				</ul></li>
+			<li class="active"><a href="#homeSubmenu" data-toggle="collapse"
+				aria-expanded="false" class="nav-link text-dark font-italic"> <i
 					class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Configurações
 			</a>
 				<ul class="collapse list-unstyled" id="homeSubmenu">
-					<li class="nav-link text-dark font-italic">
-						<a href="#" th:href="@{/cadastrarTecnologias/listar}" class="nav-link text-dark font-italic"><i
-							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastrar Tecnologias</a></li>
+					<li class="nav-link text-dark font-italic"><a href="#"
+						th:href="@{/cadastrarTecnologias/listar}"
+						class="nav-link text-dark font-italic"><i
+							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastrar
+							Tecnologias</a></li>
 					<!-- <li class="nav-link text-dark font-italic">
 						<a href="#" class="nav-link text-dark font-italic"><i
 							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastro XXXX</a></li> -->
@@ -75,10 +94,9 @@
 						<a href="#" class="nav-link text-dark font-italic"><i
 							class="fa fa-picture-o mr-3 text-primary fa-fw"></i>Cadastro YYYY</a></li>-->
 				</ul></li>
-				<li class="nav-item"><a href="#" th:href="@{/login/logout}"
+			<li class="nav-item"><a href="#" th:href="@{/login/logout}"
 				class="nav-link text-dark font-italic"> <i
-					class="fa fa-address-card-o mr-3 text-primary fa-fw"></i>
-					Sair
+					class="fa fa-address-card-o mr-3 text-primary fa-fw"></i> Sair
 			</a></li>
 		</ul>
 	</div>

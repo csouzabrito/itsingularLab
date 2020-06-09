@@ -1,7 +1,9 @@
 package com.br.itsingular.entity;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,12 +28,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Document(collection = "CADASTRAR_CURRICULOS")
 public class Curriculos implements Serializable{
 	
@@ -101,5 +105,7 @@ public class Curriculos implements Serializable{
 	public String getDataNascimentoFormat() {
 		return Utils.formatDate(this.getDataNascimento());
 	}
-	
+	public String getTecnologiasAssociadas2() {
+		return  Arrays.toString(tecnologiasAssociadas);
+	}
 }

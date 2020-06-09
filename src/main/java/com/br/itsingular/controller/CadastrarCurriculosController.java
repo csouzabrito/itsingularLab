@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
@@ -24,7 +23,6 @@ import com.br.itsingular.entity.Curriculos;
 import com.br.itsingular.entity.TipagemArquivosUpload;
 import com.br.itsingular.services.CadastrarCurriculosServices;
 import com.br.itsingular.services.CadastrarTecnologiasServices;
-import com.br.itsingular.utils.PageWrapper;
 import com.br.itsingular.utils.Utils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +44,7 @@ public class CadastrarCurriculosController {
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
 	public ModelAndView init(HttpServletRequest request, HttpServletResponse response) {
 		log.info("------ Rastrabilidade. Iniciando funcionalidade de CadastrarCurriculos / init");
-		ModelAndView model = getAddModel("init", 0, 0);
+		ModelAndView model = getAddModel("init");
 		return model;
 	}
 
@@ -55,7 +53,7 @@ public class CadastrarCurriculosController {
 			@RequestParam("word") MultipartFile word, @Valid Curriculos curriculos, BindingResult result)
 			throws IOException {
 		String mensagem = null;
-		if (result.hasErrors()) {return getAddModel("result", 0, 0);}
+		if (result.hasErrors()) {return getAddModel("result");}
 		try {
 
 			if (!Utils.isEmptyOrNull(session.getAttribute("curriculos"))) {
@@ -77,12 +75,12 @@ public class CadastrarCurriculosController {
 				}
 			} else {
 				if (pdf.getBytes().length == 0 && word.getBytes().length == 0) {
-					return getAddModel("validacaoUpload", 0, 0);
+					return getAddModel("validacaoUpload");
 				}
 				if ((pdf.getBytes().length > 0 && !pdf.getContentType().equalsIgnoreCase("application/pdf"))
 						|| (word.getBytes().length > 0 && !((word.getContentType().contains("officedocument")
 								|| (word.getContentType().contains("application/msword")))))) {
-					return getAddModel("validacaoExtensaoUpload", 0, 0);
+					return getAddModel("validacaoExtensaoUpload");
 				}
 				if (pdf.getBytes().length > 0) {
 					curriculos.setUploadDownloadPdf(new TipagemArquivosUpload(pdf.getOriginalFilename(), pdf.getName(),
@@ -109,7 +107,7 @@ public class CadastrarCurriculosController {
 				mensagem = "failed";
 			}
 		}
-		return getAddModel(mensagem, 0, 0);
+		return getAddModel(mensagem);
 	}
 
 	@RequestMapping("/viewPdf/{cpf}")
@@ -148,7 +146,7 @@ public class CadastrarCurriculosController {
 
 	@RequestMapping("/editar/{cpf}")
 	public ModelAndView editar(@PathVariable("cpf") String cpf) {
-		ModelAndView model = getAddModel("edit", 0, 0);
+		ModelAndView model = getAddModel("edit");
 		Optional<Curriculos> list = cadastrarCurriculosServices.findCurriculoById(cpf);
 		if (list.isPresent()) {
 			model.addObject("curriculos", list.get());
@@ -157,7 +155,7 @@ public class CadastrarCurriculosController {
 		return model;
 	}
 
-	private ModelAndView getAddModel(String mensagem, final int page, final int size) {
+	private ModelAndView getAddModel(String mensagem) {
 		ModelAndView model = new ModelAndView("CadastrarCurriculos");
 		session.removeAttribute("curriculos");
 		model.addObject("login", session.getAttribute("login"));
@@ -165,26 +163,22 @@ public class CadastrarCurriculosController {
 			model.addObject("curriculos", new Curriculos());
 		}
 		model.addObject("listCursos", cadastrarTecnologiasServices.findTecnologias());
-		model = getListagem(model, page, size);
+		model = getListagem(model);
 		if (!mensagem.equals("init") && !mensagem.equals("paginacao")) {
 			model.addObject("message", mensagem);
 		}
 		return model;
 	}
 
-	private ModelAndView getListagem(final ModelAndView model, final int page, final int size) {
-		Page<Curriculos> listCurriculos = cadastrarCurriculosServices.findCurriculos(page, size == 0 ? 10 : size);
-		PageWrapper<Curriculos> curriculosPage = new PageWrapper<Curriculos>(listCurriculos,
-				"/cadastrarCurriculos/listarCurriculos?page=" + page + "/size=" + size);
-		model.addObject("listCurriculos", listCurriculos);
-		model.addObject("page", curriculosPage);
+	private ModelAndView getListagem(final ModelAndView model) {
+		model.addObject("listCurriculos", cadastrarCurriculosServices.findCurriculos());
 		return model;
 
 	}
 
 	@RequestMapping("/paginacao/{page}/{size}")
 	public ModelAndView listArticlesPageByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
-		ModelAndView model = getAddModel("paginacao", page, size);
+		ModelAndView model = getAddModel("paginacao");
 		return model;
 	}
 

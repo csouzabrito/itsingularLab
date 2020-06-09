@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.br.itsingular.entity.Curriculos;
@@ -32,10 +30,6 @@ public class CadastrarCurriculosServices {
 	}
 	public List<Curriculos> findCurriculos(){
 		return repository.findAll();
-	}
-		
-	public Page<Curriculos> findCurriculos(final int page, final int size){
-		return repository.findAll(PageRequest.of(page, size));
 	}
 	public Optional<Curriculos> findCurriculoById(String id){
 		return Optional.ofNullable(repository.findById(id).get());
