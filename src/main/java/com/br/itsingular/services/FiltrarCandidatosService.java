@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.br.itsingular.entity.Curriculos;
 import com.br.itsingular.entity.Tecnologias;
 import com.br.itsingular.repository.FiltrarCandidatosRepository;
+import com.br.itsingular.utils.Utils;
 
 @Service
 public class FiltrarCandidatosService {
@@ -22,6 +23,7 @@ public class FiltrarCandidatosService {
 	public List<Curriculos> getCandidatos() {
 		List<Curriculos> listaCurriculos = filtrarCandidatosReposository.findAll();
 		for (int i = 0; i < listaCurriculos.size(); i++) {
+			if(Utils.isEmptyOrNull(listaCurriculos.get(i).getTecnologiasAssociadas())) continue;
 			String[] put = new String[listaCurriculos.get(i).getTecnologiasAssociadas().length];
 			for (int k = 0; k < listaCurriculos.get(i).getTecnologiasAssociadas().length; k++) {
 				Optional<Tecnologias> findTecnologiasById = 

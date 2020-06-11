@@ -20,7 +20,7 @@ public class FiltrarCandidatosController {
 	@Autowired
 	private HttpSession session;
 	
-	@RequestMapping("/iniciarFiltroCandidatos")
+	@RequestMapping(path = "/iniciarFiltroCandidatos")
 	public ModelAndView init() {
 		ModelAndView model = new ModelAndView("FiltroCandidatos");
 		model.addObject("curriculos", new Curriculos());

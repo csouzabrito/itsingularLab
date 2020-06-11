@@ -117,17 +117,17 @@
 										</thead>
 										<tbody>
 											<tr th:each="curriculos : ${listarCandidatos}">
-												<td th:text="${curriculos.cpf}"></td>
+												<td th:text="${curriculos.cpf}" style="word-wrap: break-word; width: 115px"></td>
 												<td th:text="${curriculos.nome}"
 													style="word-wrap: break-word; width: 350px"></td>
 												<td th:text="${curriculos.tipoCargo}"></td>
 												<td th:text="${curriculos.tipoNivel}"></td>
-												<td th:text="${curriculos.valorContratacaoPrimaria}"></td>
-												<td th:text="${curriculos.valorContratacaoSecundaria}"></td>
-												<td th:text="${curriculos.tecnologiasAssociadas2}"></td>
+												<td th:text="${curriculos.valorContratacaoPrimaria}" style="word-wrap: break-word; width: 120px"></td>
+												<td th:text="${curriculos.valorContratacaoSecundaria}" style="word-wrap: break-word; width: 120px"></td>
+												<td th:text="${curriculos.tecnologiasAssociadas2}" style="word-wrap: break-word;"></td>
 												<td>
 													<div class="btn-group pull-right"
-														style="word-wrap: break-word; width: 180px">
+														style="word-wrap: break-word; width: 100px">
 														<a th:if="${curriculos.uploadDownloadPdf != null}"
 															class="btn btn-sm btn-primary"
 															th:href="@{/cadastrarCurriculos/viewPdf/{cpf}(cpf=${curriculos.cpf})}">PDF</a>
@@ -136,9 +136,6 @@
 															class="delete btn btn-sm btn-danger"
 															style="margin-left: 2px"
 															th:href="@{/cadastrarCurriculos/viewWord/{cpf}(cpf=${curriculos.cpf})}">Word</a>
-														<a class="delete btn btn-sm btn-danger"
-															style="margin-left: 2px"
-															th:href="@{/cadastrarCurriculos/editar/{cpf}(cpf=${curriculos.cpf})}">View/Edit</a>
 													</div>
 												</td>
 											</tr>

@@ -2,9 +2,10 @@ package com.br.itsingular.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.itsingular.entity.Curriculos;
+import com.br.itsingular.entity.Login;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.services.CadastrarCurriculosServices;
 import com.br.itsingular.services.RHSrevice;
-import com.br.itsingular.utils.PageWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,33 +32,25 @@ public class RHController {
 	private RHSrevice rhService;
 	
 	@Autowired
+	private HttpSession session;
+	
+	@Autowired
 	private CadastrarCurriculosServices curriculoService;
 
 	@RequestMapping("/view")
-	public ModelAndView novo(Model model, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
-		
+	public ModelAndView novo(){
 		ModelAndView view = new ModelAndView("ViewRH");
-		
-		final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
-		
-		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/view");
-		
-		view.addObject("vagas", vagas);
-		model.addAttribute("vagas", vagas.getContent());
-		model.addAttribute("page", vagasPage);
-		
+		view.addObject("vagas", this.rhService.findRequisicao());
+		view.addObject("login", session.getAttribute("login"));
 		return view;
 	}
 	
 	@GetMapping("/vagas")
-	public ModelAndView listarInfo(@RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(name = "size", defaultValue = "5") final int size){
+	public ModelAndView listarInfo(){
 	
 	log.info("Listando vagas {}");
-		
-	final Page<Requisicao> vagas = this.rhService.findRequisicao(page, size);
-	
 		ModelAndView view = new ModelAndView("ViewRH");
-		view.addObject("vagas", vagas) ;
+		view.addObject("vagas", this.rhService.findRequisicao()) ;
 		return view;
 	}
 	
@@ -70,26 +63,41 @@ public class RHController {
 		model.addAttribute("curriculos", curriculos);
 		return curriculos;
 	}
+	@GetMapping("/responsavel/{id}")
+	public ModelAndView responsavelPelaRequisicao(Model model, @PathVariable("id") final Requisicao vaga) {
+		ModelAndView view = new ModelAndView("ViewRH");
+		Login login = (Login) session.getAttribute("login");
+		this.rhService.updateResposavelRequisicao(vaga, login.getName());
+		view.addObject("vagas", this.rhService.findRequisicao()) ;
+		view.addObject("login", login);
+		return view;
+	}
+	
+	@GetMapping("/concluirTarefa/{id}")
+	public ModelAndView concluirRequisicao(Model model, @PathVariable("id") final Requisicao vaga) {
+		ModelAndView view = new ModelAndView("ViewRH");
+		Login login = (Login) session.getAttribute("login");
+		this.rhService.updateConcluirTarefa(vaga, login.getName());
+		view.addObject("vagas", this.rhService.findRequisicao()) ;
+		view.addObject("login", login);
+		return view;
+	}
+	
 	
 	
 	@GetMapping("/vagas/pesquisar")
-	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(name = "page", defaultValue = "0") final int page, @RequestParam(defaultValue = "5") final int size){
-		
-		Page<Requisicao> vagas = null;
+	public ModelAndView listar(Model model, @RequestParam final String filtro){
+		ModelAndView view = new ModelAndView("ViewRH");
+		List<Requisicao> vagas = null;
 		
 		if(StringUtils.isBlank(filtro)) {
-		   vagas = this.rhService.findRequisicao(page, size);
+		   vagas = this.rhService.findRequisicao();
 		}else {
-		   vagas = this.rhService.filtrarVagas(filtro, page, size);
+		   vagas = this.rhService.filtrarVagas(filtro);
 		}
-		
-		PageWrapper<Requisicao> vagasPage = new PageWrapper<Requisicao>(vagas, "/recursos-humanos/vagas/pesquisar?filtro="+filtro);
-		ModelAndView view = new ModelAndView("ViewRH");
 		view.addObject("vagas", vagas);
 		model.addAttribute("filtro", filtro);
-		model.addAttribute("vagas", vagas.getContent());
-		model.addAttribute("page", vagasPage);
-		
+		view.addObject("login", session.getAttribute("login"));
 		return view;
 	}
 }

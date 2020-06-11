@@ -1,7 +1,6 @@
 package com.br.itsingular.entity;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -106,6 +105,9 @@ public class Curriculos implements Serializable{
 		return Utils.formatDate(this.getDataNascimento());
 	}
 	public String getTecnologiasAssociadas2() {
+		if(Utils.isEmptyOrNull(tecnologiasAssociadas)) {
+			return Utils.EMPTY;
+		}
 		return  Arrays.toString(tecnologiasAssociadas);
 	}
 }

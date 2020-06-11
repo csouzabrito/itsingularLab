@@ -1,5 +1,7 @@
 package com.br.itsingular.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -55,17 +57,11 @@ public class RequisicaoServices {
 		return requisicoes;
 	}
 	
-	public Page<Requisicao> filtrarRequisicao(final String filtro, final int page, final int size) {
-		
-		final Page<Requisicao> requisicoes = this.customRepository.findRequisicaoByFilter(filtro, page, size);
-		
-		return requisicoes;
+	public List<Requisicao> filtrarRequisicao(final String filtro) {
+		return this.customRepository.findRequisicaoByFilter(filtro);
 	}
 	
-	public Page<Requisicao> listarRequisicoes(final int page, final int size){
-		
-		final Page<Requisicao> requisicoes = this.repository.findAll(PageRequest.of(page, size));
-		
-		return requisicoes;
+	public List<Requisicao> listarRequisicoes(){
+		return this.repository.findAll();
 	}
 }

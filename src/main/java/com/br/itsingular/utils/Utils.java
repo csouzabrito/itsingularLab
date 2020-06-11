@@ -17,7 +17,7 @@ import org.springframework.data.domain.PageImpl;
  */
 public class Utils {
 
-	private static final String EMPTY = "";
+	public static final String EMPTY = "";
 	public static final String ERROR_DUPLICATE_KEY = "11000";
 	//public static final String EMAIL_RH = "rh@itsingular.com.br";
 	public static final String EMAIL_RH = "dcarneiro@itsingular.com.br";

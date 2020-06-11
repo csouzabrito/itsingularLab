@@ -153,4 +153,6 @@ public class Requisicao implements Serializable {
 
 	private String status;
 	
+	private String responsavelRh;
+	
 }

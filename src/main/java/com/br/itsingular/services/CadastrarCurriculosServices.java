@@ -1,5 +1,6 @@
 package com.br.itsingular.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.br.itsingular.entity.Curriculos;
 import com.br.itsingular.entity.Requisicao;
 import com.br.itsingular.repository.CadastrarCurriculosRepository;
+import com.br.itsingular.utils.Utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +22,7 @@ public class CadastrarCurriculosServices {
 
 	@Autowired
 	private CadastrarCurriculosRepository repository;
-	
+
 	public void insert( final Curriculos curriculos) {
 		try {
 			repository.insert(curriculos);
@@ -51,7 +53,17 @@ public class CadastrarCurriculosServices {
 	
 	@Cacheable("cvs")
 	public List<Curriculos> findByIds(final Requisicao vaga){
-		List<String> ids = Arrays.asList(vaga.getRequisitoObrigatorio());
+		List<String> ids = new ArrayList<String>();
+		if(!Utils.isEmptyOrNull(vaga.getRequisitoObrigatorio())){
+			for (String iterable_element : vaga.getRequisitoObrigatorio()) {
+				ids.add(iterable_element);
+			}
+		}	
+		if(!Utils.isEmptyOrNull(vaga.getRequisitoConhecimento())){
+			for (String iterable_element : vaga.getRequisitoConhecimento()) {
+				ids.add(iterable_element);
+			}
+		}
 		log.info("Buscando um currículos por ID's {}", ids);
 		List<Curriculos> curriculos = this.repository.findByTecnologiasAssociadasIn(ids);
 		

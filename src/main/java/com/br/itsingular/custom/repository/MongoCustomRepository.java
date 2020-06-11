@@ -3,13 +3,9 @@ package com.br.itsingular.custom.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.stereotype.Component;
 
 import com.br.itsingular.entity.Requisicao;
@@ -33,11 +29,9 @@ public class MongoCustomRepository {
 		return vagas;
 	}
 	
-	public Page<Requisicao> findRequisicaoByFilter(final String filtro,final int page, final int size) {
+	public List<Requisicao>  findRequisicaoByFilter(final String filtro) {
 		
-		final Pageable pageable = PageRequest.of(page, size);
-		
-		Query query = new Query().with(pageable);
+		Query query = new Query();
 		
 		query.addCriteria(new Criteria()
 				.orOperator(Criteria.where("dataSolicitacao").is(filtro), 
@@ -46,11 +40,6 @@ public class MongoCustomRepository {
 						Criteria.where("ramoAtividade").regex(filtro, "i"),
 						Criteria.where("status").regex(filtro)));
 		
-		List<Requisicao> requisicoes = mongoTemplate.find(query, Requisicao.class);
-		
-		Page<Requisicao> requisicoesPage = PageableExecutionUtils.getPage(requisicoes,pageable,
-				 () -> mongoTemplate.count(query, Requisicao.class));
-		
-		return requisicoesPage;
+		return mongoTemplate.find(query, Requisicao.class);
 	}	
 }

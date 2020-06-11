@@ -1,5 +1,7 @@
 package com.br.itsingular.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -77,22 +79,18 @@ public class ComercialController {
 	}
 	
 	@GetMapping("/filtrar")
-	public ModelAndView listar(Model model, @RequestParam final String filtro, @RequestParam(defaultValue = "0") final int page, @RequestParam(defaultValue = "5") final int size){
-		
-		Page<Requisicao> requisicoes = null;
-		
-		if (StringUtils.isBlank(filtro)) {
-			requisicoes = this.requisicaoServices.listarRequisicoes(page, size);
-		} else {
-			requisicoes = this.requisicaoServices.filtrarRequisicao(filtro, page, size);
-		}
-		PageWrapper<Requisicao> requisicoesPage = new PageWrapper<Requisicao>(requisicoes, "/comercial/filtrar?filtro="+filtro);
-		
+	public ModelAndView listar(Model model, @RequestParam final String filtro){
 		ModelAndView view = new ModelAndView("ViewComercial");
+		List<Requisicao> requisicoes = null;
+		 
+		if (StringUtils.isBlank(filtro)) {
+			requisicoes = this.requisicaoServices.listarRequisicoes();
+		} else {
+			requisicoes = this.requisicaoServices.filtrarRequisicao(filtro);
+		}		
+	
 		view.addObject("requisicoes", requisicoes);
 		model.addAttribute("filtro", filtro);
-		model.addAttribute("requisicoes", requisicoes.getContent());
-		model.addAttribute("page", requisicoesPage);
 		return view;
 	}
 }
