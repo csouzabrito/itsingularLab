@@ -1,23 +1,17 @@
 package com.br.itsingular.enums;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public enum StatusFuncionario {
 
-	ATIVO("Ativo"),
-	NOS_RESCINDIMOS("Nós rescindimos"),
-	PEDIU_RECISAO("Pediu rescisão"),
-	PEDIU_DEMISSAO("Pediu Demissão"),
-	FIM_CONTRATO("Fim de contrato"),
-	INTERNALIZADO_CLIENTE("Internalizado pelo cliente"),
-	ABANDONO_EMPRESA("Abandono de emprego");
+	ATIVO,
+	NOS_RESCINDIMOS,
+	PEDIU_RECISAO,
+	PEDIU_DEMISSAO,
+	FIM_CONTRATO,
+	INTERNALIZADO_CLIENTE,
+	ABANDONO_EMPRESA;
 
 	private String statusFuncionario;
 	

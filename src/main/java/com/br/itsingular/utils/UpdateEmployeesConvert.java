@@ -20,6 +20,9 @@ public class UpdateEmployeesConvert {
 		update.set("naturalidade", f.getNaturalidade());
 		update.set("estadoCivil", f.getEstadoCivil());
 		update.set("quantidadeFilhos", f.getQuantidadeFilhos());
+		update.set("grauInstrucao", f.getGrauInstrucao());
+		
+		//Dados de contato
 		update.set("numeroCelular", f.getNumeroCelular());
 		update.set("numeroTelefone", f.getNumeroTelefone());
 		update.set("email", f.getEmail());
@@ -51,14 +54,14 @@ public class UpdateEmployeesConvert {
 		update.set("cep", f.getCep());
 		
 		//Dados bancários
-		update.set("banco", f.getBanco());
 		update.set("tipoConta", f.getTipoConta());
+		update.set("banco", f.getBanco());
 		update.set("agencia", f.getAgencia());
 		update.set("conta", f.getConta());
-		update.set("digitoConta", f.getDigitoConta());
 		
 		//Se PJ, Dados da Empresa
 		update.set("cnpj", f.getCnpj());
+		update.set("nomeEmpresa", f.getNomeEmpresa());
 		return update;
 	}
 }

@@ -82,11 +82,11 @@ public class Funcionarios implements Serializable{
 	private String remuneracao;
 	
 	private String valorTransporte;
-	
+
 	private String valorVrVA;
 
 	private String valorPlanoSaude;
-	
+
 	private String valorAuxilioCreche;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -94,14 +94,12 @@ public class Funcionarios implements Serializable{
 	private LocalDate dataContratacao;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "Campo obrigatório")
 	private LocalDate dataFimContratacao;
 	
 	@NotNull(message = "Campo obrigatório")
 	@Enumerated(EnumType.STRING)
 	private StatusFuncionario statusFuncionario;
 
-	@NotNull(message = "Campo obrigatório")
 	@Enumerated(EnumType.STRING)
 	private TipoNivel nivelFimContratacao;
 	
@@ -144,7 +142,8 @@ public class Funcionarios implements Serializable{
 	@NotBlank(message = "Campo obrigatório")
 	private String estado;
 	
-	private Integer numero;
+	@NotBlank(message = "Campo obrigatório")
+	private String numero;
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String complemento;
@@ -164,11 +163,11 @@ public class Funcionarios implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private TipoConta tipoConta;
 	
-	private Integer agencia;
+	@NotBlank(message = "Campo obrigatório")
+	private String agencia;
 	
-	private Integer conta;
-	
-	private Integer digitoConta;
+	@NotBlank(message = "Campo obrigatório")
+	private String conta;
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String cnpj;
@@ -179,7 +178,6 @@ public class Funcionarios implements Serializable{
 	@NotBlank(message = "Campo obrigatório")
 	private String numeroCelular;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String numeroTelefone;
 	
 	@NotBlank(message = "Campo obrigatório")

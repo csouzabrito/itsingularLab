@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.br.itsingular.entity.Funcionarios;
 import com.br.itsingular.entity.Login;
 import com.br.itsingular.services.FuncionariosServices;
+import com.br.itsingular.utils.Utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,8 +27,10 @@ public class CadastrarFuncionarios {
 	@Autowired
 	private FuncionariosServices funcionarioServices;
 	
+	@Autowired
 	private HttpSession session;
 	
+	@RequestMapping(path = "/init")
 	public ModelAndView init() {
 		Login login = (Login)session.getAttribute("login");
 		ModelAndView model = new ModelAndView("CadastrarFuncionarios");
@@ -43,12 +46,18 @@ public class CadastrarFuncionarios {
 		model.addObject("login", (Login)session.getAttribute("login"));
 		if(resul.hasErrors()) {
 			model.addObject("listarFuncionarios", funcionarioServices.findFuncionarios());
+			return model;
 		}
 		try {
-			funcionarioServices.insert(funcionarios);
+			if(!Utils.isEmptyOrNull(funcionarios.getId())) {
+				update(funcionarios);
+				model.addObject("message", "update");
+			}else {
+				funcionarioServices.insert(funcionarios);
+				model.addObject("message", "insert");
+			}
 			model.addObject("listarFuncionarios", funcionarioServices.findFuncionarios());
 			model.addObject("funcionarios", new Funcionarios());
-			model.addObject("message", "insert");
 		} catch (Exception e) {
 			model.addObject("message", "error");
 			log.debug("Error -- " +  e.getMessage());
@@ -67,22 +76,21 @@ public class CadastrarFuncionarios {
 		}		
 		return model;
 	}
+//	@ResponseBody
+//	@RequestMapping("/consultarCep/cep")
+//	public ResponseEntity<String> consultarCep(@PathParam("cep") String cep) {
+//		log.debug("=================="+cep);
+//		RestTemplate restTemplate = new RestTemplate(); //1
+//		String url = "https://viacep.com.br/ws/'"+cep+"'/json/"; //2
+//		return restTemplate.getForEntity(url, String.class);
+//	}
 	
-	public ModelAndView update(@Valid Funcionarios funcionarios, BindingResult resul) {
-		ModelAndView model = new ModelAndView("CadastrarFuncionarios");
-		model.addObject("login", (Login)session.getAttribute("login"));
-		
+	
+	private void update(Funcionarios funcionarios) {
 		try {
-			if(resul.hasErrors()) {
-				return 	model.addObject("listarFuncionarios", funcionarioServices.findFuncionarios());
-			}
 			funcionarioServices.update(funcionarios);
-			model.addObject("listarFuncionarios", funcionarioServices.findFuncionarios());
-			model.addObject("message", "update");
 		} catch (Exception e) {
-			model.addObject("message", "error");
 			log.debug("Error -- " +  e.getMessage());
 		}
-		return model;
 	}
 }

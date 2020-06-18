@@ -6,20 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public enum Gestores {
 
-		GUILHERME("Guilherme"),
-		LUCAS("Lucas"),
-		HARLEI("Harlei"),
-		NADIA("Nádia"),
-		JESUS("Jesus"),
-		PAULO("Paulo"),
-		JOAO("João"),
-		LOPES("Lopes"),
-		DIEGO("Diego");
-		
-	private String gestor;		
+	GUILHERME, LUCAS, HARLEI, NADIA, JESUS, PAULO, JOAO, LOPES, DIEGO;
+
+	private String gestor;
 }
