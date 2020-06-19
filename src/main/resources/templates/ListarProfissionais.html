@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<div th:insert="Header.html"></div>
+<script>
+	$(function() {
+		// Sidebar toggle behavior
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar, #content').toggleClass('active');
+		});
+	});
+	$(document).on("keydown", "#descricaoResumida", function() {
+		var caracteresRestantes = 1000;
+		var caracteresDigitados = parseInt($(this).val().length);
+		var caracteresRestantes = caracteresRestantes - caracteresDigitados;
+
+		$(".caracteres").text(caracteresRestantes);
+	});
+
+	$(document).ready(
+			function() {
+				$('#profissionais').DataTable();
+
+				$('#profissionais_filter').hide(); // Hide default search datatables where example is the ID of table
+
+				$('#txtSearch').on(
+						'keyup',
+						function() {
+							$('#profissionais').DataTable().search(
+									$('#txtSearch').val(), false, true).draw();
+						});
+			});
+</script>
+<body>
+	<div class="d-flex">
+		<div th:replace="Menu :: menu">...</div>
+		<div id="content">
+			<button id="sidebarCollapse" type="button"
+				class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+				<i class="fa fa-bars mr-2"></i><small
+					class="text-uppercase font-weight-bold">Menu</small>
+			</button>
+			<div class="container my-5">
+				<div align="right" style="margin-top: -20px"
+					class="form-group col-md-12">
+					<output th:text="Olá+': ' + ${login.name}"></output>
+					<span>Sair</span>&nbsp; <a href="#" th:href="@{/login/logout}">
+						<img src="/img/sair.png" style="width: 22px; height: 22px">
+					</a>
+				</div>
+				<h3 align="center">Listar Profissionais IT Singular</h3>
+				<BR />
+				<div class="col-md-12">
+					<form th:action="@{/cadastrar-funcionarios/incluir-alterar}"
+						method="post" th:object="${funcionarios}"
+						enctype="multipart/form-data">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-heading">
+									<div class="clearfix">
+										<h1 class="panel-title" style="margin-left: -27px">Funcionários
+											Cadastrados</h1>
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<input id="txtSearch"
+									placeholder="FILTRE SEU CANDIDATO POR AQUI!"
+									class="form-control" />
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered"
+										id="profissionais">
+										<thead>
+											<tr>
+												<th>Nome</th>
+												<th>Gestor</th>
+												<th>DPTO</th>
+												<th>Cliente</th>
+												<th>Cargo</th>
+												<th>Status</th>
+												<th>Dt Contratação</th>
+												<th>Dt Fim Contratação</th>
+												<th>Ações</th>
+
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="funcionarios : ${listarFuncionarios}">
+												<td th:text="${funcionarios.nome}" 
+													style="word-wrap: break-word; width: 200px"></td>
+												<td th:text="${funcionarios.gestores}"
+													style="word-wrap: break-word; width: 100px"></td>
+												<td th:text="${funcionarios.departamento}"></td>
+												<td th:text="${funcionarios.clienteParceiros}"></td>
+												<td th:text="${funcionarios.cargo}"></td>
+												<td th:text="${funcionarios.statusFuncionario}"></td>
+												<td th:text="${funcionarios.dataContratacao}"></td>
+												<td th:text="${funcionarios.dataFimContratacao}"></td>
+
+												<td>
+													<div class="btn-group pull-right"
+														style="word-wrap: break-word">
+														<a class="delete btn btn-sm btn-danger"
+															style="margin-left: 2px"
+															th:href="@{/cadastrar-funcionarios/editar/{id}(id=${funcionarios.id})}">View/Edit</a>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+							<div align="right">
+								<a class="btn btn-sm btn-primary"
+									th:href="@{/cadastrar-funcionarios/direcionarTelaCadastro}">Cadastrar Profissional</a>
+							</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

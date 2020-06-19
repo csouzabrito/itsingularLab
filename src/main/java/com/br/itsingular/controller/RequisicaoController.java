@@ -89,6 +89,6 @@ public class RequisicaoController {
 		return cadastrarTecnologiasServices.findTecnologias();
 	}
 	public void enviarEmailPosRequisicao(int quantidadeVagas, String requisitante, String cliente, LocalDate dataAbertura) throws MessagingException {
-		emailServices.enviarEmail(quantidadeVagas, dataAbertura, requisitante, cliente);
+		emailServices.enviarEmailRequisicao(quantidadeVagas, dataAbertura, requisitante, cliente);
 	}
 }

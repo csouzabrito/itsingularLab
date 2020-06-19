@@ -59,23 +59,18 @@
 			</div>
 
 			<div th:switch="${message}" class="col-md-12" id="msg" role="alert">
-				<div th:case="'Success'" class="alert alert-success">
+				<div th:case="'insert'" class="alert alert-success">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Sucesso!</strong> Requisição criada com sucesso!
+					<strong>Sucesso!</strong> Cadastro executado com sucesso!
 				</div>
-				<div th:case="'emailSuccess'" class="alert alert-success">
+				<div th:case="'error'" class="alert alert-error">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Sucesso!</strong> E-mail da Requisição enviado com sucesso!
+					<strong>Error!</strong> Houve um problema ao executar o cadastro/atualização do
+					profissional!
 				</div>
-				<div th:case="'error'" class="alert alert-danger">
+				<div th:case="'update'" class="alert alert-success">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Falha!</strong> Houve algum problema na abertura de
-					requisição!
-				</div>
-				<div th:case="'emailErro'" class="alert alert-danger">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Falha!</strong> Não conseguimos enviar sua requisição por
-					e-mail. Favor, verificar com o ADM!
+					<strong>Sucesso!</strong> Atualização realizada com sucesso!
 				</div>
 			</div>
 			<div class="container my-5">
@@ -90,7 +85,8 @@
 				<h3 align="center">Cadastrar Funcionário</h3>
 				<BR />
 				<div class="col-md-12">
-					<form th:action="@{/cadastrar-funcionarios/addFuncionario}"
+					<form
+						th:action="@{/cadastrar-funcionarios/cadastrar-atualizar-Funcionario}"
 						th:object="${funcionarios}" method="post">
 
 						<div style="display: none;" th:if="${session.containsKey('name')}"
@@ -108,8 +104,10 @@
 							<div class="row">
 								<BR />
 								<div class="form-group col-md-6">
-									<label for="nome" class="col-form-label labels">Nome</label> <input
-										type="text" th:field="*{nome}" class="form-control" id="nome"
+									<input type="hidden" th:field="*{id}" class="form-control"
+										id="id_funcionario" /> <label for="nome"
+										class="col-form-label labels">Nome</label> <input type="text"
+										th:field="*{nome}" class="form-control" id="nome"
 										placeholder="Nome do Funcionário"> <span
 										th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
 										class="text-danger"></span>
@@ -235,7 +233,7 @@
 										Residêncial</label> <input type="text" th:field="*{numeroTelefone}"
 										class="form-control" id="numeroTelefone" maxlength="14"
 										data-inputmask="'mask': '(99)9999-9999'"
-										placeholder="Telefone Residêncial"> 
+										placeholder="Telefone Residêncial">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="email" class="col-form-label labels">E-mail</label>
@@ -335,7 +333,7 @@
 										<option
 											th:each="tipoNivel : ${T(com.br.itsingular.enums.TipoNivel).values()}"
 											th:value="${tipoNivel}" th:text="${tipoNivel}"></option>
-									</select> 
+									</select>
 								</div>
 							</div>
 						</div>
@@ -570,15 +568,21 @@
 									<label for="nomeEmpresa" class="col-form-label labels">Nome
 										da Empresa</label> <input type="text" th:field="*{nomeEmpresa}"
 										class="form-control" id="nomeEmpresa"
-										placeholder="Nome da Empresa"> 
+										placeholder="Nome da Empresa">
 								</div>
 
 							</div>
 						</div>
 						<HR style="color: black" />
-						<div class="form-group col-md-12" style="text-align: center">
-							<input type="submit" class="btn btn-primary"
-								value="Confirmar Cadastro">
+						<div class="row">
+							<div class="form-group col-md-12" style="text-align: right">
+								<input type="submit" class="btn btn-primary"
+									value="Confirmar Cadastro">
+							
+								<a class="btn bdelete btn btn-sm btn-danger"
+									th:href="@{/cadastrar-funcionarios/init}">Voltar</a>
+							</div>
+						
 						</div>
 					</form>
 				</div>

@@ -12,6 +12,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import com.br.itsingular.utils.Utils;
+
 /**
  * @author dcarneiro
  *
@@ -29,7 +31,7 @@ public class EmailConfigurador {
 		mailSender.setHost(env.getProperty("spring.mail.host"));
 		mailSender.setPort(Integer.valueOf(env.getProperty("spring.mail.port")));
 		mailSender.setUsername(env.getProperty("spring.mail.username"));
-		mailSender.setPassword(env.getProperty("spring.mail.password"));
+		mailSender.setPassword(Utils.descriptografiaBase64Decoder(env.getProperty("spring.mail.password")));
 		mailSender.setDefaultEncoding("utf-8");
 
 		Properties javaMailProperties = new Properties();

@@ -15,7 +15,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import com.br.itsingular.utils.TemplateEmailUtils;
+import com.br.itsingular.utils.TemplateEmailNovaContratacao;
+import com.br.itsingular.utils.TemplateEmailRequisicao;
 import com.br.itsingular.utils.Utils;
 
 /**
@@ -28,22 +29,40 @@ public class EmailServices {
 	@Autowired
 	@Qualifier("gmail")
 	private JavaMailSender emailSend;
-	
-	public void enviarEmail(final int quantidadeVagas,final LocalDate dataAbertura, 
-							final String requisitante, final String cliente) throws MessagingException {
+
+	public void enviarEmailRequisicao(final int quantidadeVagas, final LocalDate dataAbertura,
+			final String requisitante, final String cliente) throws MessagingException {
 		try {
 			MimeMessage mm = emailSend.createMimeMessage();
-			String mensagemHtml = TemplateEmailUtils.criarTemplateEmail(quantidadeVagas,dataAbertura,requisitante,cliente);
-			//mm.setContent(mensagemHtml, "text/html");
+			String mensagemHtml = TemplateEmailRequisicao.criarTemplateEmail(quantidadeVagas, dataAbertura,
+					requisitante, cliente);
+			// mm.setContent(mensagemHtml, "text/html");
 			MimeMessageHelper helper = new MimeMessageHelper(mm, false, "utf-8");
 			helper.setTo(Utils.EMAIL_RH);
-			helper.setFrom(Utils.EMAIL_RH);
+			helper.setCc(Utils.EMAIL_LIDER_RH);
 			helper.setSubject(Utils.ASSUNTO_REQUISICAO_VAGA);
 			helper.setText(mensagemHtml, true);
 			emailSend.send(helper.getMimeMessage());
 		} catch (MailException e) {
 			throw e;
 		}
-				
+	}
+
+	public void enviarEmailNovaContratacao(final String nome, final String departamento, final String gestor,
+			final String cliente, final LocalDate dataInicio) throws MessagingException {
+		try {
+			 String mensagemHtml = TemplateEmailNovaContratacao.criarTemplateEmail(nome, departamento, gestor, cliente,
+						dataInicio);
+			MimeMessage mm = emailSend.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mm, true, "utf-8");
+			helper.setTo(Utils.EMAIL_RH);
+			helper.setCc(Utils.EMAIL_LIDER_RH);
+			helper.setSubject(Utils.ASSUNTO_NOVO_FUNCIONARIO);
+			helper.setText(mensagemHtml, true);
+
+			emailSend.send(helper.getMimeMessage());
+		} catch (MailException e) {
+			throw e;
+		}
 	}
 }

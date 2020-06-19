@@ -169,10 +169,8 @@ public class Funcionarios implements Serializable{
 	@NotBlank(message = "Campo obrigatório")
 	private String conta;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String cnpj;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String nomeEmpresa;
 	
 	@NotBlank(message = "Campo obrigatório")
