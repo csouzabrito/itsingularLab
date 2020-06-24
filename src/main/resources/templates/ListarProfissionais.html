@@ -92,15 +92,19 @@
 										<tbody>
 											<tr th:each="funcionarios : ${listarFuncionarios}">
 												<td th:text="${funcionarios.nome}" 
-													style="word-wrap: break-word; width: 200px"></td>
+													style="white-space:nowrap"></td>
 												<td th:text="${funcionarios.gestores}"
-													style="word-wrap: break-word; width: 100px"></td>
+													style="white-space:nowrap"></td>
 												<td th:text="${funcionarios.departamento}"></td>
-												<td th:text="${funcionarios.clienteParceiros}"></td>
-												<td th:text="${funcionarios.cargo}"></td>
+												<td th:text="${funcionarios.clienteParceiros}"
+														style="white-space:nowrap"></td>
+												<td th:text="${funcionarios.cargo}"
+													style="white-space:nowrap"></td>
 												<td th:text="${funcionarios.statusFuncionario}"></td>
-												<td th:text="${funcionarios.dataContratacao}"></td>
-												<td th:text="${funcionarios.dataFimContratacao}"></td>
+												<td th:text="${funcionarios.dataContratacao}"
+													style="white-space:nowrap"></td>
+												<td th:text="${funcionarios.dataFimContratacao}"
+													style="white-space:nowrap "></td>
 
 												<td>
 													<div class="btn-group pull-right"

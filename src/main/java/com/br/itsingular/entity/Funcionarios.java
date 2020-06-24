@@ -155,18 +155,14 @@ public class Funcionarios implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private TipoGrauInstrucao grauInstrucao;
 	
-	@NotNull(message = "Campo obrigatório")
 	@Enumerated(EnumType.STRING)
 	private TipoBanco banco;
 	
-	@NotNull(message = "Campo obrigatório")
 	@Enumerated(EnumType.STRING)
 	private TipoConta tipoConta;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String agencia;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String conta;
 	
 	private String cnpj;

@@ -58,6 +58,7 @@ public class CadastrarFuncionarios {
 				update(funcionarios);
 				model.addObject("message", "update");
 			} else {
+				funcionarios.setId(null);
 				funcionarioServices.insert(funcionarios);
 				
 				model.addObject("message", "insert");
@@ -114,6 +115,6 @@ public class CadastrarFuncionarios {
 
 	private void enviarEmailCadastroFuncionario(String nome, String departamento, String gestor, String cliente,
 			LocalDate dataInicio) throws MessagingException {
-		emailServices.enviarEmailNovaContratacao(nome, departamento, gestor, cliente, dataInicio);
+		//emailServices.enviarEmailNovaContratacao(nome, departamento, gestor, cliente, dataInicio);
 	}
 }

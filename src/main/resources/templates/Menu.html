@@ -27,7 +27,18 @@
 				class="nav-link text-dark font-italic"> <i
 					class="fa fa-th-large mr-3 text-primary fa-fw"></i> Home
 			</a></li>
-
+			<li class="active"><a href="#homeSubmenuPagamentos"
+				data-toggle="collapse" aria-expanded="false"
+				class="nav-link text-dark font-italic"> <i
+					class="fa fa-picture-o mr-3 text-primary fa-fw"></i> Financeiro
+			</a>
+				<ul class="collapse list-unstyled" id="homeSubmenuPagamentos">
+					<li class="nav-item"><a href="#"
+						th:href="@{/financeiro/pagamento}"
+						class="nav-link text-dark font-italic"> <i
+							class="fa fa-address-card mr-3 text-primary fa-fw"></i> Pagamentos
+					</a></li>
+				</ul>
 			<li class="active"><a href="#homeSubmenuComercial"
 				data-toggle="collapse" aria-expanded="false"
 				class="nav-link text-dark font-italic"> <i
@@ -80,7 +91,8 @@
 					<li class="nav-item"><a href="#"
 						th:href="@{/filtrarCandidatos/iniciarFiltroCandidatos}"
 						class="nav-link text-dark font-italic"> <i
-							class="fa fa-address-card-o mr-3 text-primary fa-fw"></i> Analíse Candidatos
+							class="fa fa-address-card-o mr-3 text-primary fa-fw"></i> Analíse
+							Candidatos
 					</a></li>
 				</ul></li>
 			<li class="active"><a href="#homeSubmenu" data-toggle="collapse"

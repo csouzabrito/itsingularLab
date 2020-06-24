@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum TipoCor {
 
-	BRANCA, NEGRA, PARDO;
+	BRANCO, NEGRO;
 
 	private String tipoCor;
 

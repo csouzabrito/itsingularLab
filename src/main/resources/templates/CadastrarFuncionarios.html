@@ -63,7 +63,7 @@
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Sucesso!</strong> Cadastro executado com sucesso!
 				</div>
-				<div th:case="'error'" class="alert alert-error">
+				<div th:case="'error'" class="alert alert-danger">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Error!</strong> Houve um problema ao executar o cadastro/atualização do
 					profissional!
@@ -514,8 +514,7 @@
 										<option
 											th:each="tipoConta : ${T(com.br.itsingular.enums.TipoConta).values()}"
 											th:value="${tipoConta}" th:text="${tipoConta}"></option>
-									</select> <span th:if="${#fields.hasErrors('tipoConta')}"
-										th:errors="*{tipoConta}" class="text-danger"></span>
+									</select> 
 								</div>
 								<div class="form-group col-md-3">
 									<label for="banco" class="col-form-label labels">Banco</label>
@@ -524,24 +523,19 @@
 										<option
 											th:each="banco : ${T(com.br.itsingular.enums.TipoBanco).values()}"
 											th:value="${banco}" th:text="${banco}"></option>
-									</select> <span th:if="${#fields.hasErrors('banco')}"
-										th:errors="*{banco}" class="text-danger"></span>
+									</select> 
 								</div>
 								<div class="form-group col-md-2">
 									<label for="agencia" class="col-form-label labels">Agência</label>
 									<input type="text" th:field="*{agencia}"
 										data-inputmask="'mask': '9{1,4}-9{1}'" class="form-control"
-										id="agencia" placeholder="Agência Bancária"> <span
-										th:if="${#fields.hasErrors('agencia')}" th:errors="*{agencia}"
-										class="text-danger"></span>
+										id="agencia" placeholder="Agência Bancária"> 
 								</div>
 								<div class="form-group col-md-4">
 									<label for="conta" class="col-form-label"
 										style="margin-left: 1px">Nº Conta</label> <input type="text"
-										th:field="*{conta}" data-inputmask="'mask': '9{1,7}-9{1}'"
+										th:field="*{conta}" data-inputmask="'mask': '9{1,8}-9{1}'"
 										class="form-control" id="conta" placeholder="Nº Conta">
-									<span th:if="${#fields.hasErrors('conta')}"
-										th:errors="*{conta}" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
