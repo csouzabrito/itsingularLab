@@ -60,14 +60,10 @@ public class CadastrarFuncionarios {
 			} else {
 				funcionarios.setId(null);
 				funcionarioServices.insert(funcionarios);
-				
+				enviarEmails(funcionarios);
 				model.addObject("message", "insert");
 			}
-			enviarEmailCadastroFuncionario(funcionarios.getNome()
-					, funcionarios.getDepartamento().name()
-					, funcionarios.getGestores().name()
-					, funcionarios.getClienteParceiros().name()
-					, funcionarios.getDataContratacao());
+			
 			model.addObject("funcionarios", new Funcionarios());
 		} catch (Exception e) {
 			model.addObject("message", "error");
@@ -112,9 +108,27 @@ public class CadastrarFuncionarios {
 		model.addObject("funcionarios", new Funcionarios());
 		return model;
 	}
-
+	private void enviarEmails(Funcionarios funcionarios) {
+		try {
+			
+			enviarEmailCadastroFuncionario(funcionarios.getNome()
+					, funcionarios.getDepartamento().name()
+					, funcionarios.getGestores().name()
+					, funcionarios.getClienteParceiros().name()
+					, funcionarios.getDataContratacao());
+			
+			enviarEmailParaAreaTecnica(funcionarios);
+		} catch (Exception e) {
+			log.debug("Error -- " + e.getMessage());
+		}
+		
+	
+	}
 	private void enviarEmailCadastroFuncionario(String nome, String departamento, String gestor, String cliente,
 			LocalDate dataInicio) throws MessagingException {
-		//emailServices.enviarEmailNovaContratacao(nome, departamento, gestor, cliente, dataInicio);
+		emailServices.enviarEmailNovaContratacao(nome, departamento, gestor, cliente, dataInicio);
+	}
+	private void enviarEmailParaAreaTecnica(Funcionarios funcionarios) throws MessagingException {
+		emailServices.enviarEmailParaAreaTecnica(funcionarios);
 	}
 }

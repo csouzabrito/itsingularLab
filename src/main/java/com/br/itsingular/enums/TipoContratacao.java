@@ -17,7 +17,8 @@ public enum TipoContratacao {
 	CLT(1,"CLT"), 
 	PJ(2,"PJ"), 
 	FLEX(3,"FLEX"), 
-	COOPERATIVA(4,"COOPERATIVA"); 
+	COOPERATIVA(4,"COOPERATIVA"), 
+	ESTAGIO(5,"ESTÁGIO");
 	
 	private Integer tipoContratacao;
 	private String descricaoTipoContratacao;	

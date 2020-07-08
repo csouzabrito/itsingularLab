@@ -3,15 +3,15 @@
  */
 package com.br.itsingular.utils;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class TemplateEmailNovaContratacao {
+import com.br.itsingular.entity.Funcionarios;
+
+public class TemplateEmailAreaTecnica {
 
 	static StringBuffer sb = new StringBuffer();
 
-	public static String criarTemplateEmail(final String nome, final String departamento, final String gestor,
-			final String cliente, final LocalDate dataInicio) {
+	public static String criarTemplateEmail(Funcionarios funcionario) {
 
 		sb.append("	<!DOCTYPE html>");
 		sb.append("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"");
@@ -67,19 +67,66 @@ public class TemplateEmailNovaContratacao {
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\"></P><BR>");
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Nome do Funcionário: "
-						+ nome + "</P><BR>");
+						+ funcionario.getNome() + "</P><BR>");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">RG: "
+						+ funcionario.getRg() + "</P><BR>");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">CPF: "
+						+ funcionario.getCpf() + "</P><BR>");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">E-mail: "
+						+ funcionario.getEmail() + "</P><BR>");
+		
+		sb.append("---------------------------------------------------------------------------------------------------------------");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Logradouro: "
+						+ funcionario.getLogradouro() + "</P><BR>");
+		
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Número: "
+						+ funcionario.getNumero() + "</P><BR>");
+		
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Complemento: "
+						+ funcionario.getComplemento() + "</P><BR>");
+		
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Bairro: "
+						+ funcionario.getBairro() + "</P><BR>");
+		
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Cidade: "
+						+ funcionario.getLocalidade() + "</P><BR>");
+		
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Estado: "
+						+ funcionario.getEstado() + "</P><BR>");
+		
+		sb.append("---------------------------------------------------------------------------------------------------------------");
+		
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Departamento: "
-						+ departamento + "</P><BR>");
+						+ funcionario.getDepartamento().name() + "</P><BR>");
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Gestor Direto: "
-						+ gestor + "</P><BR>");
+						+ funcionario.getGestores().name() + "</P><BR>");
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Cliente: "
-						+ cliente + "</P><BR>");
+						+ funcionario.getClienteParceiros().name() + "</P><BR>");
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Dt. de Início: "
-						+ dataInicio.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "</P><BR>");
+						+ funcionario.getDataContratacao().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "</P><BR>");
+		sb.append("---------------------------------------------------------------------------------------------------------------");
+		
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Notebook?: "
+						+ funcionario.getNecessarioNotebookITSingular() + "</P><BR>");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Email IT?: "
+						+ funcionario.getNecessarioDominioITSingular() + "</P><BR>");
+		
+		
 		sb.append("   </td>");
 		sb.append("  </tr>");
 		sb.append(" </table>");

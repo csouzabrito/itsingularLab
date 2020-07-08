@@ -1,7 +1,6 @@
 package com.br.itsingular.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,11 +35,6 @@ public class CadastrarCurriculosServices {
 	public Optional<Curriculos> findCurriculoById(String id){
 		return Optional.ofNullable(repository.findById(id).get());
 	}
-	/**
-	 * Este processo ocorrerá porque o RH poderá 
-	 *      alterar o CPF (CPF é chave da Entity)
-	 * @param curriculos
-	 */
 	public void removeAndInsertCurriculos(Curriculos curriculos) {
 		try {
 			repository.delete(curriculos);
@@ -49,8 +43,6 @@ public class CadastrarCurriculosServices {
 			throw e;
 		}
 	}
-	
-	
 	@Cacheable("cvs")
 	public List<Curriculos> findByIds(final Requisicao vaga){
 		List<String> ids = new ArrayList<String>();

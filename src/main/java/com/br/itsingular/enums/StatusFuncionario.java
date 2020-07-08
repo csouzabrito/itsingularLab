@@ -8,10 +8,10 @@ public enum StatusFuncionario {
 	ATIVO,
 	NOS_RESCINDIMOS,
 	PEDIU_RECISAO,
-	PEDIU_DEMISSAO,
 	FIM_CONTRATO,
 	INTERNALIZADO_CLIENTE,
-	ABANDONO_EMPRESA;
+	ABANDONO_EMPRESA,
+	OBITO;
 
 	private String statusFuncionario;
 	

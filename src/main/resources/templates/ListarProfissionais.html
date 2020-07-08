@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <div th:insert="Header.html"></div>
+<script
+	src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
 <script>
 	$(function() {
 		// Sidebar toggle behavior
@@ -21,19 +23,38 @@
 		$(".caracteres").text(caracteresRestantes);
 	});
 
-	$(document).ready(
-			function() {
-				$('#profissionais').DataTable();
+	$(document).ready(function() {
+		$('#profissionais').DataTable({
+			"lengthMenu" : [ [ 10, 50, 100, -1 ], [ 10, 50, 100, "All" ] ]
+		});
 
-				$('#profissionais_filter').hide(); // Hide default search datatables where example is the ID of table
+		$('#profissionais_filter').hide(); // Hide default search datatables where example is the ID of table
 
-				$('#txtSearch').on(
-						'keyup',
-						function() {
-							$('#profissionais').DataTable().search(
-									$('#txtSearch').val(), false, true).draw();
-						});
-			});
+		$('#txtSearch').on(
+				'keyup',
+				function() {
+					$('#profissionais').DataTable().search(
+							$('#txtSearch').val(), false, true).draw();
+				});
+		});
+	$(function() {
+		$("#exporttable").click(function(e) {
+			var table = $("#profissionais");
+			if (table && table.length) {
+				$(table).table2excel({
+					exclude : ".noExl",
+					name : "Excel Document Name",
+					filename : "ITSingular_Colaboradores_" + new Date() + ".xls",
+					fileext : ".xls",
+					exclude_img : true,
+					exclude_links : true,
+					exclude_inputs : true,
+					preserveColors : false
+				});
+			}
+		});
+
+	});
 </script>
 <body>
 	<div class="d-flex">
@@ -55,6 +76,16 @@
 				<h3 align="center">Listar Profissionais IT Singular</h3>
 				<BR />
 				<div class="col-md-12">
+					<div align="right">
+						<a class="btn btn-sm btn-primary"
+							th:href="@{/cadastrar-funcionarios/direcionarTelaCadastro}">Cadastrar
+							Profissional</a> <a href="#" id="exporttable"
+							class="btn btn-sm btn-secondary"> <span
+							class="fa fa-file-excel-o"></span> Export to Excel
+						</a> <BR>
+					</div>
+
+
 					<form th:action="@{/cadastrar-funcionarios/incluir-alterar}"
 						method="post" th:object="${funcionarios}"
 						enctype="multipart/form-data">
@@ -67,6 +98,7 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="panel-body">
 								<input id="txtSearch"
 									placeholder="FILTRE SEU CANDIDATO POR AQUI!"
@@ -82,6 +114,7 @@
 												<th>Cliente</th>
 												<th>Cargo</th>
 												<th>Status</th>
+												<th>Tp Contratação</th>
 												<th>Dt Contratação</th>
 												<th>Dt Fim Contratação</th>
 												<th>Ações</th>
@@ -91,20 +124,22 @@
 										</thead>
 										<tbody>
 											<tr th:each="funcionarios : ${listarFuncionarios}">
-												<td th:text="${funcionarios.nome}" 
-													style="white-space:nowrap"></td>
+												<td th:text="${funcionarios.nome}"
+													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.gestores}"
-													style="white-space:nowrap"></td>
+													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.departamento}"></td>
 												<td th:text="${funcionarios.clienteParceiros}"
-														style="white-space:nowrap"></td>
+													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.cargo}"
-													style="white-space:nowrap"></td>
+													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.statusFuncionario}"></td>
+												<td th:text="${funcionarios.tipoContratacao}"
+													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.dataContratacao}"
-													style="white-space:nowrap"></td>
+													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.dataFimContratacao}"
-													style="white-space:nowrap "></td>
+													style="white-space: nowrap"></td>
 
 												<td>
 													<div class="btn-group pull-right"
@@ -120,10 +155,6 @@
 								</div>
 							</div>
 						</div>
-							<div align="right">
-								<a class="btn btn-sm btn-primary"
-									th:href="@{/cadastrar-funcionarios/direcionarTelaCadastro}">Cadastrar Profissional</a>
-							</div>
 					</form>
 				</div>
 			</div>

@@ -15,6 +15,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import com.br.itsingular.entity.Funcionarios;
+import com.br.itsingular.utils.TemplateEmailAreaTecnica;
 import com.br.itsingular.utils.TemplateEmailNovaContratacao;
 import com.br.itsingular.utils.TemplateEmailRequisicao;
 import com.br.itsingular.utils.Utils;
@@ -58,6 +60,21 @@ public class EmailServices {
 			helper.setTo(Utils.EMAIL_RH);
 			helper.setCc(Utils.EMAIL_LIDER_RH);
 			helper.setSubject(Utils.ASSUNTO_NOVO_FUNCIONARIO);
+			helper.setText(mensagemHtml, true);
+
+			emailSend.send(helper.getMimeMessage());
+		} catch (MailException e) {
+			throw e;
+		}
+	}
+	public void enviarEmailParaAreaTecnica(Funcionarios funcionario) throws MessagingException {
+		try {
+			 String mensagemHtml = TemplateEmailAreaTecnica.criarTemplateEmail(funcionario);
+			MimeMessage mm = emailSend.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mm, true, "utf-8");
+			helper.setTo(Utils.EMAIL_RH);
+			helper.setCc(Utils.EMAIL_RESP_TECNICO);
+			helper.setSubject(Utils.ASSUNTO_NOVO_FUNCIONARIO_AREA_TECNICA);
 			helper.setText(mensagemHtml, true);
 
 			emailSend.send(helper.getMimeMessage());

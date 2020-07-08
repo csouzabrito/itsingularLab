@@ -17,17 +17,19 @@
 	});
 
 	$(document).ready(
-			function() {
-				$('#example').DataTable();
+		function() {
+			$('#example').DataTable({
+				"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ]
+			});
 
-				$('#example_filter').hide(); // Hide default search datatables where example is the ID of table
+			$('#example_filter').hide(); // Hide default search datatables where example is the ID of table
 
-				$('#txtSearch').on(
-						'keyup',
-						function() {
-							$('#example').DataTable().search(
-									$('#txtSearch').val(), false, true).draw();
-						});
+			$('#txtSearch').on(
+					'keyup',
+					function() {
+						$('#example').DataTable().search(
+								$('#txtSearch').val(), false, true).draw();
+					});
 			});
 
 	$(function() {
@@ -71,6 +73,11 @@
 				<h3 align="center">Listagem dos Funcionários</h3>
 				<BR />
 				<div class="col-md-12">
+					<div align="right">
+						<a href="#" id="exporttable" class="btn btn-sm btn-secondary"> <span
+							class="fa fa-file-excel-o"></span> Export to Excel
+						</a>
+					</div>
 					<form method="post" th:action="@{/financeiro/}"
 						th:object="${funcionarios}" enctype="multipart/form-data">
 						<div class="panel panel-default">
@@ -131,11 +138,7 @@
 								</div>
 							</div>
 						</div>
-						<div align="right">
-							<a href="#" id="exporttable" class="btn btn-primary"> <span
-								class="fa fa-file-excel-o"></span> Export to Excel
-							</a>
-						</div>
+
 					</form>
 				</div>
 			</div>
