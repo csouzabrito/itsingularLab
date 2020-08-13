@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
 
 public class TemplateEmailNovaContratacao {
 
-	static StringBuffer sb = new StringBuffer();
-
 	public static String criarTemplateEmail(final String nome, final String departamento, final String gestor,
 			final String cliente, final LocalDate dataInicio) {
 
+		StringBuffer sb = new StringBuffer();
+		
 		sb.append("	<!DOCTYPE html>");
 		sb.append("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		sb.append("xmlns:v=\"urn:schemas-microsoft-com:vml\"");

@@ -12,10 +12,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class TemplateEmailRequisicao {
 
-	static StringBuffer sb = new StringBuffer();
-
 	public static String criarTemplateEmail(int quantidade, LocalDate dataAbertura, String... is) {
 
+		StringBuffer sb = new StringBuffer();
+		
 		sb.append("	<!DOCTYPE html>");
 		sb.append("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		sb.append("xmlns:v=\"urn:schemas-microsoft-com:vml\"");
@@ -37,91 +37,6 @@ public class TemplateEmailRequisicao {
 		sb.append("    -ms-text-size-adjust: 100%;");
 		sb.append("   -webkit-text-size-adjust: 100%;");
 		sb.append(" }");
-//sb.append(" div[style*=\"margin: 16px 0\"] {");
-//sb.append(" margin: 0 !important;\");");
-//sb.append("}");
-//sb.append(".tabelaProduto:nth-child(odd) {");
-//sb.append("background-color:#f5f5f5; ");            
-//sb.append("}");
-//sb.append(".tabelaProduto:nth-child(even) {");
-//sb.append(" background-color:#ebebeb; ");
-//sb.append("  }");
-//sb.append("  table,");
-//sb.append("  td {");
-//sb.append("     mso-table-lspace: 0pt !important;");
-//sb.append("    mso-table-rspace: 0pt !important;");
-//sb.append(" }");
-//sb.append(" table {");
-//sb.append("    border-spacing: 0 !important;");
-//sb.append("    border-collapse: collapse !important;");
-//sb.append("   table-layout: fixed !important;");
-//sb.append("  margin: 0 auto !important;");
-//sb.append("}");
-//sb.append(" table table table {");
-//sb.append("     table-layout: auto;");
-//sb.append(" }");
-//sb.append(" img {");
-//sb.append("     -ms-interpolation-mode:bicubic;");
-//sb.append(" }");
-//sb.append("*[x-apple-data-detectors], "); 
-//sb.append(".x-gmail-data-detectors,  ");  
-//sb.append(".x-gmail-data-detectors *,");
-//sb.append(".aBn {");
-//sb.append("   border-bottom: 0 !important;");
-//sb.append("    cursor: default !important;");
-//sb.append("    color: inherit !important;");
-//sb.append("    text-decoration: none !important;");
-//sb.append("    font-size: inherit !important;");
-//sb.append("   font-family: inherit !important;");
-//sb.append("   font-weight: inherit !important;");
-//sb.append("   line-height: inherit !important;");
-//sb.append("  }");
-//sb.append("    .a6S {");
-//sb.append("         display: none !important;");
-//sb.append("         opacity: 0.01 !important;");
-//sb.append("     }");
-//sb.append("     img.g-img + div {");
-//sb.append("         display: none !important;");
-//sb.append("      }");
-//sb.append("     .button-link {");
-//sb.append("          text-decoration: none !important;");
-//sb.append("      }");
-//sb.append("      @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {");
-//sb.append("  .email-container {");
-//sb.append("     min-width: 320px !important;");
-//sb.append(" }");
-//sb.append("}");
-//sb.append("@media only screen and (min-device-width: 375px) and (max-device-width: 413px) {");
-//sb.append(".email-container {");
-//sb.append(" min-width: 375px !important;");
-//sb.append("  }");
-//sb.append(" }");
-//sb.append("  @media only screen and (min-device-width: 414px) {");
-//sb.append("       .email-container {");
-//sb.append("           min-width: 414px !important;");
-//sb.append("   }");
-//sb.append("  }");
-//
-//sb.append("  </style>");
-//sb.append(" <style>");
-//
-//sb.append(".button-td,");
-//sb.append(".button-a {");
-//sb.append("   transition: all 100ms ease-in;");
-//sb.append(" }");
-//sb.append(" .button-td:hover,");
-//sb.append("  .button-a:hover {");
-//sb.append(" background: #555555 !important;");
-//sb.append("  border-color: #555555 !important;");
-//sb.append("}");
-//
-//sb.append("@media screen and (max-width: 640px) {");
-//sb.append("  .email-container p {");
-//sb.append(" font-size: 17px !important;");
-//sb.append("  }");
-//sb.append("   }");
-//sb.append(" </style>");
-//sb.append("	</head>");
 		sb.append("	<body width=\"100%\" bgcolor=\"#ffffff\" style=\"margin: 0; mso-line-height-rule: exactly;\">");
 		sb.append("    <center style=\"width: 100%; background: #ffffff; text-align: left;\">");
 		sb.append(

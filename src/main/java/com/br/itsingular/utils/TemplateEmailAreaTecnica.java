@@ -9,10 +9,10 @@ import com.br.itsingular.entity.Funcionarios;
 
 public class TemplateEmailAreaTecnica {
 
-	static StringBuffer sb = new StringBuffer();
-
 	public static String criarTemplateEmail(Funcionarios funcionario) {
 
+		StringBuffer sb = new StringBuffer();
+		
 		sb.append("	<!DOCTYPE html>");
 		sb.append("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		sb.append("xmlns:v=\"urn:schemas-microsoft-com:vml\"");
