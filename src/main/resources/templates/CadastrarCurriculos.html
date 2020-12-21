@@ -305,7 +305,7 @@
 										multiple="multiple">
 										<option th:each="cursos : ${listCursos}"
 											th:value="${cursos.id}"
-											th:text="Tecnologia +':'+ ${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"></option>
+											th:text="${cursos.nomeCurso} + ' - ' + Versão + ':' + ${cursos.versao}"></option>
 									</select> <span th:if="${#fields.hasErrors('tecnologiasAssociadas')}"
 										th:errors="*{tecnologiasAssociadas}" class="text-danger"></span>
 								</div>

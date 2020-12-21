@@ -23,36 +23,42 @@
 		$(".caracteres").text(caracteresRestantes);
 	});
 
-	$(document).ready(function() {
-		$('#profissionais').DataTable({
-			"lengthMenu" : [ [ 10, 50, 100, -1 ], [ 10, 50, 100, "All" ] ]
-		});
+	$(document).ready(
+			function() {
+				$('#profissionais').DataTable(
+						{
+							"lengthMenu" : [ [ 10, 50, 100, -1 ],
+									[ 10, 50, 100, "All" ] ]
+						});
 
-		$('#profissionais_filter').hide(); // Hide default search datatables where example is the ID of table
+				$('#profissionais_filter').hide(); // Hide default search datatables where example is the ID of table
 
-		$('#txtSearch').on(
-				'keyup',
-				function() {
-					$('#profissionais').DataTable().search(
-							$('#txtSearch').val(), false, true).draw();
-				});
-		});
+				$('#txtSearch').on(
+						'keyup',
+						function() {
+							$('#profissionais').DataTable().search(
+									$('#txtSearch').val(), false, true).draw();
+						});
+			});
 	$(function() {
-		$("#exporttable").click(function(e) {
-			var table = $("#profissionais");
-			if (table && table.length) {
-				$(table).table2excel({
-					exclude : ".noExl",
-					name : "Excel Document Name",
-					filename : "ITSingular_Colaboradores_" + new Date() + ".xls",
-					fileext : ".xls",
-					exclude_img : true,
-					exclude_links : true,
-					exclude_inputs : true,
-					preserveColors : false
+		$("#exporttable").click(
+				function(e) {
+					var table = $("#profissionais");
+					if (table && table.length) {
+						$(table).table2excel(
+								{
+									exclude : ".noExl",
+									name : "Excel Document Name",
+									filename : "ITSingular_Colaboradores_"
+											+ new Date() + ".xls",
+									fileext : ".xls",
+									exclude_img : true,
+									exclude_links : true,
+									exclude_inputs : true,
+									preserveColors : false
+								});
+					}
 				});
-			}
-		});
 
 	});
 </script>
@@ -104,11 +110,11 @@
 									placeholder="FILTRE SEU CANDIDATO POR AQUI!"
 									class="form-control" />
 								<div class="table-responsive">
-									<table class="table table-striped table-bordered"
+									<table class="table table-striped table-bordered "
 										id="profissionais">
 										<thead>
 											<tr>
-												<th>Nome</th>
+												<th class="sticky-col first-col">Nome</th>
 												<th>Gestor</th>
 												<th>DPTO</th>
 												<th>Cliente</th>
@@ -117,6 +123,14 @@
 												<th>Tp Contratação</th>
 												<th>Dt Contratação</th>
 												<th>Dt Fim Contratação</th>
+												<th>Remuneração</th>
+												<th>VL transporte</th>
+												<th>VL VR/VA</th>
+												<th>VL PL Saúde</th>
+												<th>VL Aux Creche</th>
+												<th>Nº Celular</th>
+												<th>Nº Telefone</th>
+												<th>E-Mail</th>
 												<th>Ações</th>
 
 
@@ -124,8 +138,8 @@
 										</thead>
 										<tbody>
 											<tr th:each="funcionarios : ${listarFuncionarios}">
-												<td th:text="${funcionarios.nome}"
-													style="white-space: nowrap"></td>
+												<td class="sticky-col first-col"
+													th:text="${funcionarios.nome}" style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.gestores}"
 													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.departamento}"></td>
@@ -140,7 +154,22 @@
 													style="white-space: nowrap"></td>
 												<td th:text="${funcionarios.dataFimContratacao}"
 													style="white-space: nowrap"></td>
-
+												<td th:text="${funcionarios.remuneracao}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.valorTransporte}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.valorVrVA}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.valorPlanoSaude}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.valorAuxilioCreche}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.numeroCelular}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.numeroTelefone}"
+													style="white-space: nowrap"></td>
+												<td th:text="${funcionarios.email}"
+													style="white-space: nowrap"></td>
 												<td>
 													<div class="btn-group pull-right"
 														style="word-wrap: break-word">

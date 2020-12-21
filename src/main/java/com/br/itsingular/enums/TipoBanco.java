@@ -19,7 +19,8 @@ public enum TipoBanco {
 	BCO_ABC_246,
 	BCO_PAN_623,
 	BCO_VOTORANTIM_655,
-	BCO_BS2;
+	BCO_BS2,
+	BCO_STONE_197;
 	
 	private String banco;
 }

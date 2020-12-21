@@ -34,3 +34,27 @@ h2{
 .modal-configuration{
 	height:150;
 }
+.view {
+  margin: auto;
+  width: 600px;
+}
+
+.wrapper {
+  position: relative;
+  overflow: auto;
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: white;
+}
+.first-col {
+  width: 100px;
+  white-space: nowrap;
+  --min-width: 200px;
+  --max-width: 100px;
+  left: 0px;
+}
