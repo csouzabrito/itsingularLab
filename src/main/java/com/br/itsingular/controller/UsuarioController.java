@@ -26,5 +26,7 @@ public class UsuarioController {
 				.password("1234").build();
 			
 		return this.service.salvarUsuario(l);
+			
 			}
+
 }
