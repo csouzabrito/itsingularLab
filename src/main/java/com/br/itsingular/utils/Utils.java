@@ -21,7 +21,7 @@ public class Utils {
 	public static final String EMPTY = "";
 	public static final String ERROR_DUPLICATE_KEY = "11000";
 	public static final String EMAIL_RH = "dcarneiro@itsingular.com.br";
-	public static final String EMAIL_LIDER_RH = "lcarvalho@itsingular.com.br";
+	public static final String EMAIL_LIDER_RH = "ymorais@itsingular.com.br";
 	public static final String EMAIL_RESP_TECNICO = "suporte@itsingular.com.br";
 	public static final String EMAIL_DIRETORIA = "gdmingues@itsingular.com.br";
 	//public static final String EMAIL_DIRETORIA = "gdomingues@itsingular.com.br";	
@@ -60,5 +60,4 @@ public class Utils {
 	public static String criptografiaBase64Encoder(String valor) {
 		return new Base64().encodeToString(valor.getBytes());
 	}
-
 }
