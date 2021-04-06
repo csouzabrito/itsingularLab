@@ -25,18 +25,6 @@ public class TemplateEmailRequisicao {
 		sb.append(" <meta name=\"viewport\" content=\"width=device-width\"> ");
 		sb.append("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> ");
 		sb.append("<meta name=\"x-apple-disable-message-reformatting\"> ");
-		sb.append(" <style>");
-		sb.append("    html,");
-		sb.append("    body {");
-		sb.append("       margin: 0 auto !important;");
-		sb.append("      padding: 0 !important;");
-		sb.append("     height: 100% !important;");
-		sb.append("      width: 100% !important;");
-		sb.append("   }");
-		sb.append("   * {");
-		sb.append("    -ms-text-size-adjust: 100%;");
-		sb.append("   -webkit-text-size-adjust: 100%;");
-		sb.append(" }");
 		sb.append("	<body width=\"100%\" bgcolor=\"#ffffff\" style=\"margin: 0; mso-line-height-rule: exactly;\">");
 		sb.append("    <center style=\"width: 100%; background: #ffffff; text-align: left;\">");
 		sb.append(

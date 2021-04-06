@@ -20,11 +20,10 @@ public class Utils {
 
 	public static final String EMPTY = "";
 	public static final String ERROR_DUPLICATE_KEY = "11000";
-	public static final String EMAIL_RH = "dcarneiro@itsingular.com.br";
+	public static final String EMAIL_ADM = "adm@itsingular.com.br";
 	public static final String EMAIL_LIDER_RH = "ymorais@itsingular.com.br";
 	public static final String EMAIL_RESP_TECNICO = "suporte@itsingular.com.br";
 	public static final String EMAIL_DIRETORIA = "gdmingues@itsingular.com.br";
-	//public static final String EMAIL_DIRETORIA = "gdomingues@itsingular.com.br";	
 	public static final String ASSUNTO_REQUISICAO_VAGA = "REQUISIÇÃO DE VAGAS";
 	public static final String ASSUNTO_NOVO_FUNCIONARIO = "NOVO FUNCIONÁRIO";
 	public static final String ASSUNTO_NOVO_FUNCIONARIO_AREA_TECNICA = "NOVO FUNCIONÁRIO - ANALISE TÉCNICA";

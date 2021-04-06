@@ -40,7 +40,7 @@ public class EmailServices {
 					requisitante, cliente);
 			// mm.setContent(mensagemHtml, "text/html");
 			MimeMessageHelper helper = new MimeMessageHelper(mm, false, "utf-8");
-			helper.setTo(Utils.EMAIL_RH);
+			helper.setTo(Utils.EMAIL_ADM);
 			helper.setCc(Utils.EMAIL_LIDER_RH);
 			helper.setSubject(Utils.ASSUNTO_REQUISICAO_VAGA);
 			helper.setText(mensagemHtml, true);
@@ -57,7 +57,7 @@ public class EmailServices {
 						dataInicio);
 			MimeMessage mm = emailSend.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mm, true, "utf-8");
-			helper.setTo(Utils.EMAIL_RH);
+			helper.setTo(Utils.EMAIL_ADM);
 			helper.setCc(Utils.EMAIL_LIDER_RH);
 			helper.setSubject(Utils.ASSUNTO_NOVO_FUNCIONARIO);
 			helper.setText(mensagemHtml, true);
@@ -72,7 +72,7 @@ public class EmailServices {
 			 String mensagemHtml = TemplateEmailAreaTecnica.criarTemplateEmail(funcionario);
 			MimeMessage mm = emailSend.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mm, true, "utf-8");
-			helper.setTo(Utils.EMAIL_RH);
+			helper.setTo(Utils.EMAIL_ADM);
 			helper.setCc(Utils.EMAIL_RESP_TECNICO);
 			helper.setSubject(Utils.ASSUNTO_NOVO_FUNCIONARIO_AREA_TECNICA);
 			helper.setText(mensagemHtml, true);
