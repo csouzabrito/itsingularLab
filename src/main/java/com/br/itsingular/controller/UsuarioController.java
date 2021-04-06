@@ -16,7 +16,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private LoginService service;
+
 	
+
 	@ResponseBody
 	@PostMapping("/registrar")
 	public Login save( final Login login){
