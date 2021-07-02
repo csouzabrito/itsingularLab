@@ -65,8 +65,15 @@ public class TemplateEmailAreaTecnica {
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">E-mail: "
 						+ funcionario.getEmail() + "</P><BR>");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">E-mail: "
+						+ funcionario.getNumeroCelular() + "</P><BR>");
 		
 		sb.append("---------------------------------------------------------------------------------------------------------------");
+		sb.append(
+				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Logradouro: "
+						+ funcionario.getCep() + "</P><BR>");
+		
 		sb.append(
 				"<P style=\"margin: 0;  font-family: Arial, sans-serif; font-size: 16px; line-height: 140%; color: #3e4049;\">Logradouro: "
 						+ funcionario.getLogradouro() + "</P><BR>");
