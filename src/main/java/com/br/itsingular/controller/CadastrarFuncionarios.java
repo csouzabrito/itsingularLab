@@ -97,7 +97,7 @@ public class CadastrarFuncionarios {
 		ModelAndView model = new ModelAndView("CadastrarFuncionarios");
 		model.addObject("login", session.getAttribute("login"));
 		Optional<Funcionarios> funcionarios = funcionarioServices.findFuncionariosById(id);
-		funcionarios.get().setDataNascimento(funcionarios.get().getDataNascimento().plusDays(1));//problema com a ISO (MongoDB)
+		//funcionarios.get().setDataNascimento(funcionarios.get().getDataNascimento().plusDays(1));//problema com a ISO (MongoDB)
 		model.addObject("funcionarios", funcionarios);
 		return model;
 	}
